@@ -35,8 +35,17 @@ namespace Sound
         private float _directMusicVolume = 0.75f;
         private float _directSfxVolume = 0.75f;
         
+        private float _mixerMasterVolume = 0.75f;
+        private float _mixerMusicVolume = 0.75f;
+        private float _mixerSfxVolume = 0.75f;
+        
+        
+        [field:SerializeField] public bool UseVibration { get; set; } = true;
         
         public bool IsInitialized { get; private set; }
+        public float MasterVolume => useMixerVolume ? _mixerMasterVolume : _directMasterVolume;
+        public float MusicVolume => useMixerVolume ? _mixerMusicVolume : _directMusicVolume;
+        public float SfxVolume => useMixerVolume ? _mixerSfxVolume : _directSfxVolume;
 
         protected override void AfterAwake()
         {
@@ -237,6 +246,7 @@ namespace Sound
             PlayerPrefs.SetFloat("MasterVolume", clampedPercent);
             if (useMixerVolume)
             {
+                _mixerMasterVolume = clampedPercent;
                 audioMixer.SetFloat("MasterVolume", Mathf.Log10(clampedPercent) * 20);
             }
             else
@@ -268,6 +278,7 @@ namespace Sound
             
             if (useMixerVolume)
             {
+                _mixerMusicVolume = clampedPercent;
                 audioMixer.SetFloat("BackgroundVolume", Mathf.Log10(clampedPercent) * 20);
             }
             else
@@ -297,6 +308,7 @@ namespace Sound
             
             if (useMixerVolume)
             {
+                _mixerSfxVolume = clampedPercent;
                 audioMixer.SetFloat("SFXVolume", Mathf.Log10(clampedPercent) * 20);
             }
             else
@@ -723,6 +735,37 @@ namespace Sound
             if (Time.frameCount % 300 == 0) // 60fps 기준 5초
             {
                 CleanupInactiveSfxEmitters();
+            }
+        }
+
+        public void DefaultVibe()
+        {
+            if (UseVibration)
+            {
+                Handheld.Vibrate();   
+            }
+        }
+        public void VibePop()
+        {
+            if (UseVibration)
+            {
+                Vibration.VibratePop();
+            }
+        }
+
+        public void VibePeek()
+        {
+            if (UseVibration)
+            {
+                Vibration.VibratePeek();
+            }
+        }
+
+        public void VibeNope()
+        {
+            if (UseVibration)
+            {
+                Vibration.VibrateNope();
             }
         }
         

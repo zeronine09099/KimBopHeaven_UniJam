@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using Common.Singleton;
+using UI;
 using UI.Encounter;
 using UI.Game;
 using UI.Reward;
@@ -25,9 +26,9 @@ namespace Core
         [field:SerializeField] public RewardUI RewardUI { get; set; }
         [field:SerializeField] public EncounterUI EncounterUI { get; set; }
         [field:SerializeField] public DeckUI DeckUI { get; set; }
-        
-        
-        
+        [field:SerializeField] public SettingUI SettingUI { get; set; }
+
+
         public void GoToTitleUI()
         {
             TitleUI.Show();

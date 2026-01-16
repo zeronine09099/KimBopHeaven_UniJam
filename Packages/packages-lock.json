@@ -1,5 +1,12 @@
 {
   "dependencies": {
+    "com.benoitfreslon.vibration": {
+      "version": "https://github.com/BenoitFreslon/Vibration.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "4f4d39df30999b4c6ebee7fe166a2a8153170497"
+    },
     "com.cysharp.unitask": {
       "version": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask",
       "depth": 0,
