@@ -62,7 +62,10 @@ namespace Game
             baseScore = data.baseScore;
             variable01 = data.variable01;
             variable02 = data.variable02;
-            additionalVariables = new List<string>(data.additionalVariables);
+            if (data.additionalVariables != null)
+            {
+                additionalVariables = new List<string>(data.additionalVariables);
+            }
         }
     }
 }
