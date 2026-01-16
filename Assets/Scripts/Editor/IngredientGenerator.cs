@@ -115,18 +115,19 @@ public static class IngredientGenerator
             UnityEngine.Debug.LogError("File already exists: " + filePath);
             return;
         }
+        
 
         StringBuilder sb = new StringBuilder();
         sb.AppendLine($@"using System.Collections;
-using BandoWare.GameplayTags;
 using BandoWare.GameplayTags;
 using Game.Field;
 
 namespace Game.Ingredients
 {{
-    public class {className} : IngredientSO
+    public class {className}SO : IngredientSO
     {{
-        public override GameplayTag Tag => GameplayTagManager.RequestTag(""{tag}"");
+        public override GameplayTag Tag => AllGameplayTags.{tag}.Get();
+
         public override IEnumerator OnFall(Tile tile)
         {{
             yield break;

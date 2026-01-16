@@ -4,9 +4,9 @@ using Game.Field;
 
 namespace Game.Ingredients
 {
-    public class PickledradishIngredientSO : IngredientSO
+    public class TunaIngredientSO : IngredientSO
     {
-        public override GameplayTag Tag => AllGameplayTags.Ingredient.Essential.PickledRadish.Get();
+        public override GameplayTag Tag => AllGameplayTags.Ingredient.Seafood.Tuna.Get();
 
         public override IEnumerator OnFall(Tile tile)
         {

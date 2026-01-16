@@ -1,13 +1,13 @@
 using System.Collections;
 using BandoWare.GameplayTags;
-using BandoWare.GameplayTags;
 using Game.Field;
 
 namespace Game.Ingredients
 {
-    public class BaconIngredient : IngredientSO
+    public class BaconIngredientSO : IngredientSO
     {
-        public override GameplayTag Tag => GameplayTagManager.RequestTag("Ingredient.Meat.Bacon");
+        public override GameplayTag Tag => AllGameplayTags.Ingredient.Meat.Bacon.Get();
+
         public override IEnumerator OnFall(Tile tile)
         {
             yield break;

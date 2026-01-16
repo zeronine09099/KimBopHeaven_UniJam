@@ -1,13 +1,13 @@
 using System.Collections;
 using BandoWare.GameplayTags;
-using BandoWare.GameplayTags;
 using Game.Field;
 
 namespace Game.Ingredients
 {
-    public class KimchiIngredient : IngredientSO
+    public class KimchiIngredientSO : IngredientSO
     {
-        public override GameplayTag Tag => GameplayTagManager.RequestTag("Ingredient.Vegetable.Kimchi");
+        public override GameplayTag Tag => AllGameplayTags.Ingredient.Vegetable.Kimchi.Get();
+
         public override IEnumerator OnFall(Tile tile)
         {
             yield break;

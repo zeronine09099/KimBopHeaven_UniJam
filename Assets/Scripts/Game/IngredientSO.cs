@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using BandoWare.GameplayTags;
+using Common;
 using Common.Attributes;
 using Database.Generated;
 using Game.Field;
@@ -21,7 +22,7 @@ namespace Game
         
         
         public Sprite icon;
-        
+        public Rarity rarity;
         public string displayName;
         public string description;
         public float baseScore = 10f;
@@ -59,6 +60,7 @@ namespace Game
             // icon = data.icon;
             displayName = data.koreanName;
             description = data.description;
+            rarity = data.rarity;
             baseScore = data.baseScore;
             variable01 = data.variable01;
             variable02 = data.variable02;
