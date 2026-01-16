@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using BandoWare.GameplayTags;
 using Common.Attributes;
 using Database.Generated;
@@ -24,10 +25,18 @@ namespace Game
         public string displayName;
         public string description;
         public float baseScore = 10f;
-        public float scoreMultiplier = 1f;
+        public float variable01 = 0f;
+        public float variable02 = 0f;
+        public List<string> additionalVariables = new List<string>();
         
         public abstract IEnumerator OnFall(Tile tile);
-        public abstract IEnumerator OnExplode(Tile tile);
+
+
+        public abstract IEnumerator OnTrigger(Tile tile);
+        public virtual IEnumerator OnExplode(Tile tile)
+        {
+            yield break;
+        }
 
 
         public void OnEnable()
@@ -45,13 +54,15 @@ namespace Game
         }
         
         
-        public void InitByData(IngredientData data)
+        public virtual void InitByData(IngredientData data)
         {
             // icon = data.icon;
             displayName = data.koreanName;
             description = data.description;
             baseScore = data.baseScore;
-            // scoreMultiplier = data.scoreMultiplier;
+            variable01 = data.variable01;
+            variable02 = data.variable02;
+            additionalVariables = new List<string>(data.additionalVariables);
         }
     }
 }

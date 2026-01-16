@@ -19,5 +19,11 @@ namespace Database.Generated
         public float baseScore;
         /// <summary> 인게임 설명 </summary>
         public string description;
+        /// <summary> 기타 변수 1 </summary>
+        public float variable01;
+        /// <summary> 기타 변수 2 </summary>
+        public float variable02;
+        /// <summary> 기타변수 </summary>
+        public List<string> additionalVariables;
     }
 }

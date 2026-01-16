@@ -13,7 +13,7 @@ namespace Game.Ingredients
             yield break;
         }
 
-        public override IEnumerator OnExplode(Tile tile)
+        public override IEnumerator OnTrigger(Tile tile)
         {
             yield break;
         }
