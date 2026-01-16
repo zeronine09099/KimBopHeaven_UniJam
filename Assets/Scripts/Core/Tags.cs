@@ -39,7 +39,7 @@
 [assembly: GameplayTag("Ingredient.Vegetable.GrilledGarlic", "구운 마늘")]
 [assembly: GameplayTag("Ingredient.Vegetable.PerillaLeaf", "깻잎")]
 [assembly: GameplayTag("Ingredient.Vegetable.Cucumber", "오이")]
-[assembly: GameplayTag("Ingredient.Vegetable.Tofu", "두부 - 채소 재료")]
+[assembly: GameplayTag("Ingredient.Vegetable.Tofu", "두부")]
 
 // 소스
 [assembly: GameplayTag("Ingredient.Sauce.Mayonnaise", "마요네즈")]
@@ -49,8 +49,8 @@
 [assembly: GameplayTag("Ingredient.Sauce.HotSauce", "핫소스")]
 
 // 기타
-[assembly: GameplayTag("Ingredient.Etc.Cheese", "치즈 - 기타 재료")]
-[assembly: GameplayTag("Ingredient.Etc.Fire", "불 - 기타 재료")]
+[assembly: GameplayTag("Ingredient.Etc.Cheese", "치즈")]
+[assembly: GameplayTag("Ingredient.Etc.Fire", "불")]
 [assembly: GameplayTag("Ingredient.Etc.Tofu", "두부")]
 [assembly: GameplayTag("Ingredient.Etc.Egg", "계란")]
 
