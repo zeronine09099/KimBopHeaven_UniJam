@@ -1,0 +1,257 @@
+{
+  "name": "TestIngredientData",
+  "varNames": [
+    "tag",
+    "name",
+    "koreanName",
+    "baseScore",
+    "description"
+  ],
+  "types": [
+    "string",
+    "string",
+    "string",
+    "float",
+    "string"
+  ],
+  "comments": [
+    "태그",
+    "영어이름",
+    "한국어이름",
+    "기본 점수",
+    "인게임 설명"
+  ],
+  "data": [
+    [
+      "Ingredient.Essential.Gim",
+      "Gim",
+      "김",
+      "10",
+      "맛있는 김"
+    ],
+    [
+      "Ingredient.Essential.Rice",
+      "Rice",
+      "밥",
+      "10",
+      "잘 지은 밥"
+    ],
+    [
+      "Ingredient.Essential.PickledRadish",
+      "PickledRadish",
+      "단무지",
+      "10",
+      "밥 옆에 있으면 점수 두배"
+    ],
+    [
+      "Ingredient.Essential.Ham",
+      "Ham",
+      "햄",
+      "20",
+      "단무지 옆에 있으면 점수 20추가"
+    ],
+    [
+      "Ingredient.Meat.CrabStick",
+      "CrapStick",
+      "게맛살",
+      "",
+      ""
+    ],
+    [
+      "Ingredient.Meat.Egg",
+      "Egg",
+      "계란",
+      "",
+      ""
+    ],
+    [
+      "Ingredient.Meat.PorkBelly",
+      "PorkBelly",
+      "삼겹살",
+      "50",
+      "고기류가 있어야 점수 적용"
+    ],
+    [
+      "Ingredient.Meat.Chicken",
+      "Chicken",
+      "치킨",
+      "50",
+      "고기류가 있어야 점수 적용"
+    ],
+    [
+      "Ingredient.Meat.PorkCutlet",
+      "PorkCullet",
+      "돈가스",
+      "50",
+      "고기류가 있어야 점수 적용"
+    ],
+    [
+      "Ingredient.Meat.Bacon",
+      "Bacon",
+      "베이컨",
+      "50",
+      "고기류가 있어야 점수 적용"
+    ],
+    [
+      "Ingredient.Meat.Duck",
+      "Duck",
+      "오리고기",
+      "50",
+      "고기류가 있어야 점수 적용"
+    ],
+    [
+      "Ingredient.Seafood.Salmon",
+      "Salmon",
+      "연어",
+      "30",
+      "한 턴에 다른 김밥이 완성되었다면 덱에 연어 추가"
+    ],
+    [
+      "Ingredient.Seafood.Octopus",
+      "Octopus",
+      "문어",
+      "20",
+      "옆에 문어가 있다면 점수 +10, 점수 계산 이후 양 옆 재료를 문어로 만듦"
+    ],
+    [
+      "Ingredient.Seafood.Shrimp",
+      "Shrimp",
+      "새우",
+      "",
+      ""
+    ],
+    [
+      "Ingredient.Seafood.FishCake",
+      "FishCake",
+      "어묵",
+      "",
+      ""
+    ],
+    [
+      "Ingredient.Vegetable.Tofu",
+      "Tofu",
+      "두부",
+      "",
+      ""
+    ],
+    [
+      "Ingredient.Vegetable.Burdock",
+      "Burdock",
+      "우엉",
+      "20",
+      "김밥의 채소마다 점수 10 추가"
+    ],
+    [
+      "Ingredient.Vegetable.Carrot",
+      "Carrot",
+      "당근",
+      "10",
+      "김 제외 겹치는 재료가 없으면 점수 30 추가"
+    ],
+    [
+      "Ingredient.Vegetable.Spinach",
+      "Spinach",
+      "시금치",
+      "10",
+      "양옆이 채소라면 선택지 리롤 1개 지급"
+    ],
+    [
+      "Ingredient.Vegetable.Kimchi",
+      "Kimchi",
+      "김치",
+      "10",
+      "김밥 재료에 불 하나마다 점수 20 추가"
+    ],
+    [
+      "Ingredient.Vegetable.Mushroom",
+      "Mushroom",
+      "버섯",
+      "10",
+      "옆에 불이 있으면 구운 버섯이 됨"
+    ],
+    [
+      "Ingredient.Vegetable.GrilledMushroom",
+      "GrilledMushroom",
+      "구운버섯",
+      "70",
+      "잘 구운 버섯 하나."
+    ],
+    [
+      "Ingredient.Vegetable.ChiliPepper",
+      "ChiliPepper",
+      "고추",
+      "50",
+      "점수 0인 불 덱에 2개 추가"
+    ],
+    [
+      "Ingredient.Vegetable.Garlic",
+      "Garlic",
+      "마늘",
+      "20",
+      "옆에 고기가 있으면 점수 20 추가"
+    ],
+    [
+      "Ingredient.Vegetable.GrilledGarlic",
+      "GrilledGarlic",
+      "구운마늘",
+      "50",
+      "옆에 고기가 있으면 점수 20 추가"
+    ],
+    [
+      "Ingredient.Vegetable.PerillaLeaf",
+      "PerillaLeaf",
+      "깻잎",
+      "10",
+      "옆에 고기류가 있으면 점수 30 추가"
+    ],
+    [
+      "Ingredient.Vegetable.Cucumber",
+      "Cucumber",
+      "오이",
+      "",
+      ""
+    ],
+    [
+      "Ingredient.Sauce.Mayonnaise",
+      "Mayonnaise",
+      "마요네즈",
+      "10",
+      ""
+    ],
+    [
+      "Ingredient.Sauce.SoySauce",
+      "SoySauce",
+      "간장",
+      "10",
+      ""
+    ],
+    [
+      "Ingredient.Sauce.SesameOil",
+      "SesameOil",
+      "참기름",
+      "10",
+      ""
+    ],
+    [
+      "Ingredient.Sauce.HotSauce",
+      "HotSauce",
+      "핫소스",
+      "10",
+      ""
+    ],
+    [
+      "Ingredient.Etc.Cheese",
+      "Cheese",
+      "치즈",
+      "20",
+      ""
+    ],
+    [
+      "Ingredient.Etc.Fire",
+      "Fire",
+      "불",
+      "0",
+      ""
+    ]
+  ]
+}

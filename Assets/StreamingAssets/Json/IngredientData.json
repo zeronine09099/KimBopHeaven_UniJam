@@ -1,0 +1,233 @@
+[
+  {
+    "tag": "Ingredient.Essential.Gim",
+    "name": "Gim",
+    "koreanName": "김",
+    "baseScore": 10.0,
+    "description": "맛있는 김"
+  },
+  {
+    "tag": "Ingredient.Essential.Rice",
+    "name": "Rice",
+    "koreanName": "밥",
+    "baseScore": 10.0,
+    "description": "잘 지은 밥"
+  },
+  {
+    "tag": "Ingredient.Essential.PickledRadish",
+    "name": "PickledRadish",
+    "koreanName": "단무지",
+    "baseScore": 10.0,
+    "description": "밥 옆에 있으면 점수 두배"
+  },
+  {
+    "tag": "Ingredient.Essential.Ham",
+    "name": "Ham",
+    "koreanName": "햄",
+    "baseScore": 20.0,
+    "description": "단무지 옆에 있으면 점수 20추가"
+  },
+  {
+    "tag": "Ingredient.Meat.CrabStick",
+    "name": "CrapStick",
+    "koreanName": "게맛살",
+    "baseScore": 0.0,
+    "description": ""
+  },
+  {
+    "tag": "Ingredient.Meat.Egg",
+    "name": "Egg",
+    "koreanName": "계란",
+    "baseScore": 0.0,
+    "description": ""
+  },
+  {
+    "tag": "Ingredient.Meat.PorkBelly",
+    "name": "PorkBelly",
+    "koreanName": "삼겹살",
+    "baseScore": 0.0,
+    "description": "다른 종류의 고기류가 없다면 점수 +30"
+  },
+  {
+    "tag": "Ingredient.Meat.Chicken",
+    "name": "Chicken",
+    "koreanName": "치킨",
+    "baseScore": 0.0,
+    "description": "다른 종류의 고기류가 없다면 점수 +30"
+  },
+  {
+    "tag": "Ingredient.Meat.PorkCutlet",
+    "name": "PorkCullet",
+    "koreanName": "돈가스",
+    "baseScore": 0.0,
+    "description": "다른 종류의 고기류가 없다면 점수 +30"
+  },
+  {
+    "tag": "Ingredient.Meat.Bacon",
+    "name": "Bacon",
+    "koreanName": "베이컨",
+    "baseScore": 0.0,
+    "description": "다른 종류의 고기류가 없다면 점수 +30"
+  },
+  {
+    "tag": "Ingredient.Meat.Duck",
+    "name": "Duck",
+    "koreanName": "오리고기",
+    "baseScore": 0.0,
+    "description": "다른 종류의 고기류가 없다면 점수 +30"
+  },
+  {
+    "tag": "Ingredient.Seafood.Salmon",
+    "name": "Salmon",
+    "koreanName": "연어",
+    "baseScore": 30.0,
+    "description": "한 턴에 다른 김밥이 완성되었다면 덱에 연어 추가"
+  },
+  {
+    "tag": "Ingredient.Seafood.Octopus",
+    "name": "Octopus",
+    "koreanName": "문어",
+    "baseScore": 20.0,
+    "description": "옆에 문어가 있다면 점수 +10, 점수 계산 이후 양 옆 재료를 문어로 만듦"
+  },
+  {
+    "tag": "Ingredient.Seafood.Shrimp",
+    "name": "Shrimp",
+    "koreanName": "새우",
+    "baseScore": 0.0,
+    "description": ""
+  },
+  {
+    "tag": "Ingredient.Seafood.FishCake",
+    "name": "FishCake",
+    "koreanName": "어묵",
+    "baseScore": 0.0,
+    "description": ""
+  },
+  {
+    "tag": "Ingredient.Vegetable.Tofu",
+    "name": "Tofu",
+    "koreanName": "두부",
+    "baseScore": 0.0,
+    "description": ""
+  },
+  {
+    "tag": "Ingredient.Vegetable.Burdock",
+    "name": "Burdock",
+    "koreanName": "우엉",
+    "baseScore": 20.0,
+    "description": "김밥의 채소마다 점수 10 추가"
+  },
+  {
+    "tag": "Ingredient.Vegetable.Carrot",
+    "name": "Carrot",
+    "koreanName": "당근",
+    "baseScore": 10.0,
+    "description": "김 제외 겹치는 재료가 없으면 점수 30 추가"
+  },
+  {
+    "tag": "Ingredient.Vegetable.Spinach",
+    "name": "Spinach",
+    "koreanName": "시금치",
+    "baseScore": 10.0,
+    "description": "양옆이 채소라면 선택지 리롤 1개 지급"
+  },
+  {
+    "tag": "Ingredient.Vegetable.Kimchi",
+    "name": "Kimchi",
+    "koreanName": "김치",
+    "baseScore": 10.0,
+    "description": "김밥 재료에 불 하나마다 점수 20 추가"
+  },
+  {
+    "tag": "Ingredient.Vegetable.Mushroom",
+    "name": "Mushroom",
+    "koreanName": "버섯",
+    "baseScore": 10.0,
+    "description": "옆에 불이 있으면 구운 버섯이 됨"
+  },
+  {
+    "tag": "Ingredient.Vegetable.GrilledMushroom",
+    "name": "GrilledMushroom",
+    "koreanName": "구운버섯",
+    "baseScore": 70.0,
+    "description": "잘 구운 버섯 하나."
+  },
+  {
+    "tag": "Ingredient.Vegetable.ChiliPepper",
+    "name": "ChiliPepper",
+    "koreanName": "고추",
+    "baseScore": 50.0,
+    "description": "점수 0인 불 덱에 2개 추가"
+  },
+  {
+    "tag": "Ingredient.Vegetable.Garlic",
+    "name": "Garlic",
+    "koreanName": "마늘",
+    "baseScore": 20.0,
+    "description": "옆에 고기가 있으면 점수 20 추가"
+  },
+  {
+    "tag": "Ingredient.Vegetable.GrilledGarlic",
+    "name": "GrilledGarlic",
+    "koreanName": "구운마늘",
+    "baseScore": 50.0,
+    "description": "옆에 고기가 있으면 점수 20 추가"
+  },
+  {
+    "tag": "Ingredient.Vegetable.PerillaLeaf",
+    "name": "PerillaLeaf",
+    "koreanName": "깻잎",
+    "baseScore": 10.0,
+    "description": "옆에 고기류가 있으면 점수 30 추가"
+  },
+  {
+    "tag": "Ingredient.Vegetable.Cucumber",
+    "name": "Cucumber",
+    "koreanName": "오이",
+    "baseScore": 0.0,
+    "description": ""
+  },
+  {
+    "tag": "Ingredient.Sauce.Mayonnaise",
+    "name": "Mayonnaise",
+    "koreanName": "마요네즈",
+    "baseScore": 10.0,
+    "description": ""
+  },
+  {
+    "tag": "Ingredient.Sauce.SoySauce",
+    "name": "SoySauce",
+    "koreanName": "간장",
+    "baseScore": 10.0,
+    "description": ""
+  },
+  {
+    "tag": "Ingredient.Sauce.SesameOil",
+    "name": "SesameOil",
+    "koreanName": "참기름",
+    "baseScore": 10.0,
+    "description": ""
+  },
+  {
+    "tag": "Ingredient.Sauce.HotSauce",
+    "name": "HotSauce",
+    "koreanName": "핫소스",
+    "baseScore": 10.0,
+    "description": ""
+  },
+  {
+    "tag": "Ingredient.Etc.Cheese",
+    "name": "Cheese",
+    "koreanName": "치즈",
+    "baseScore": 20.0,
+    "description": ""
+  },
+  {
+    "tag": "Ingredient.Etc.Fire",
+    "name": "Fire",
+    "koreanName": "불",
+    "baseScore": 0.0,
+    "description": ""
+  }
+]

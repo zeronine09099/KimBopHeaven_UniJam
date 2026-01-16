@@ -9,6 +9,7 @@ namespace Game.Field
         {
         }
         
+        
         public TileVector Coordinate { get; set; }
     }
 }

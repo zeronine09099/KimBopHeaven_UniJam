@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Common.Singleton;
+using Database;
 using Game;
 using Machamy.Utils;
 using SceneManagement;
@@ -42,14 +43,17 @@ namespace Core
 
         private IEnumerator InitializeCore()
         {
-            _totalToLoad = 2; // 매니저 수에 맞게 설정
+            _totalToLoad = 4; // 매니저 수에 맞게 설정
             _loadedCount = 0;
+            DatabaseManager.Instance.Initialize();
+            
             
             yield return GameManager.Instance.Init();
             _loadedCount++;
             yield return StageManager.Instance.Init();
             _loadedCount++;
-            
+            yield return new WaitWhile(() => DatabaseManager.Instance.IsInitialized);
+            _loadedCount++;
             
             yield return null;
         }
