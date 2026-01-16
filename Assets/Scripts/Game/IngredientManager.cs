@@ -62,5 +62,20 @@ namespace Game
          
             yield break;
         }
+        
+        /// <summary>
+        /// 태그에 해당하는 IngredientSO를 반환합니다.
+        /// </summary>
+        /// <param name="tag"></param>
+        /// <returns></returns>
+        public IngredientSO GetIngredientSO(GameplayTag tag)
+        {
+            if (ingredientDictionary.TryGetValue(tag, out var ingredientSO))
+            {
+                return ingredientSO;
+            }
+            LogEx.LogError($"IngredientSO not found for tag: {tag}");
+            return null;
+        }
     }
 }
