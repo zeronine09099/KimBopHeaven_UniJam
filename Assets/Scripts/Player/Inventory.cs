@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Common.Collections;
 using Common.Extentions;
 using Game;
 using UnityEngine;
@@ -10,42 +11,75 @@ namespace Player
     [Serializable]
     public class Inventory
     {
-        [SerializeField] List<IngredientSO> ingredientList = new List<IngredientSO>();
-        
-        public IReadOnlyList<IngredientSO> IngredientList => ingredientList;
+        [SerializeField] SerializableDictionary<IngredientSO, int> ingredientCountMap = new SerializableDictionary<IngredientSO, int>();
+        // public IReadOnlyList<IngredientSO> IngredientList => ingredientList;
+
+        public Inventory()
+        {
+            if (ingredientCountMap == null)
+            {
+                ingredientCountMap = new SerializableDictionary<IngredientSO, int>();
+            }
+        }
+
+        public void Initialize()
+        {
+            ingredientCountMap.Clear();
+            foreach (var ingredient in IngredientManager.Instance.AllIngredientList)
+            {
+                ingredientCountMap[ingredient] = 0;
+            }
+        }
         
         public void AddIngredient(IngredientSO ingredient)
         {
-            ingredientList.Add(ingredient);
+            if (ingredientCountMap.TryGetValue(ingredient, out var count))
+            {
+                ingredientCountMap[ingredient] = count + 1;
+            }
+            else
+            {
+                ingredientCountMap[ingredient] = 1;
+            }
         }
         
         public void RemoveIngredient(IngredientSO ingredient)
         {
-            ingredientList.Remove(ingredient);
+            if (ingredientCountMap.TryGetValue(ingredient, out var count) && count > 0)
+            {
+                ingredientCountMap[ingredient] = count - 1;
+            }
+        }
+        
+        public void SetIngredientCount(IngredientSO ingredient, int count)
+        {
+            ingredientCountMap[ingredient] = count;
         }
         
         public bool ContainsIngredient(IngredientSO ingredient)
         {
-            return ingredientList.Contains(ingredient);
+            return ingredientCountMap.ContainsKey(ingredient) && ingredientCountMap[ingredient] > 0;
         }
         
         public int GetIngredientCount(IngredientSO ingredient)
         {
-            int count = 0;
-            foreach (var item in ingredientList)
+            if (ingredientCountMap.TryGetValue(ingredient, out var count))
             {
-                if (item == ingredient)
-                {
-                    count++;
-                }
+                return count;
             }
-            return count;
+            return 0;
         }
         
         public IEnumerator<IngredientSO> GetShuffledEnumerator()
         {
             using var handle = ListPool<IngredientSO>.Get(out var shuffledList);
-            shuffledList.AddRange(ingredientList);
+            foreach (var kvp in ingredientCountMap)
+            {
+                if (kvp.Value > 0)
+                {
+                    shuffledList.Add(kvp.Key);
+                }
+            }
             shuffledList.Shuffle();
             foreach (var ingredient in shuffledList)
             {
@@ -55,7 +89,7 @@ namespace Player
         
         public void Clear()
         {
-            ingredientList.Clear();
+            ingredientCountMap.Clear();
         }
     }
 }
