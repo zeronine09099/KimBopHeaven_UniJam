@@ -5,6 +5,7 @@ using Core;
 using Cysharp.Threading.Tasks;
 using Game;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace UI.Game
 {
@@ -16,6 +17,8 @@ namespace UI.Game
         [Header("Setting")]
         [SerializeField] private DeckUIElement deckUIElementPrefab;
         [SerializeField] private Vector2 originalPosition;
+        [SerializeField] private ScrollRect scrollRect;
+        [SerializeField] private Transform contentTransform;
         
         
         private CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
@@ -38,7 +41,7 @@ namespace UI.Game
             
             foreach (var ingredient in IngredientLibrary.Instance.AllIngredientList)
             {
-                var element = Instantiate(deckUIElementPrefab, transform);
+                var element = Instantiate(deckUIElementPrefab, contentTransform);
                 element.Initialize(ingredient);
                 deckUIElements.Add(element);
             }
@@ -46,6 +49,7 @@ namespace UI.Game
         
         public void ShowDeckForm()
         {
+            scrollRect.verticalNormalizedPosition = 1f;
             cancellationTokenSource.Cancel();
             cancellationTokenSource = new CancellationTokenSource();
             foreach (var element in deckUIElements)
@@ -58,6 +62,7 @@ namespace UI.Game
         
         public void ShowDeleteForm()
         {
+            scrollRect.verticalNormalizedPosition = 1f;
             cancellationTokenSource.Cancel();
             cancellationTokenSource = new CancellationTokenSource();
            foreach (var element in deckUIElements)
@@ -86,7 +91,10 @@ namespace UI.Game
         
         public void Hide()
         {
-            
+            cancellationTokenSource.Cancel();
+            cancellationTokenSource.Dispose();
+            cancellationTokenSource = new CancellationTokenSource();
+            gameObject.SetActive(false);
         }
         
     }

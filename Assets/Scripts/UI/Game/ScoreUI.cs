@@ -36,7 +36,7 @@ namespace UI.Game
             get => tempValue;
             set
             {
-                tempValue = value;
+                tempValue = Mathf.Min(value, currentValue);
                 UpdateUI();
             }
         }
@@ -59,7 +59,7 @@ namespace UI.Game
         public void UpdateUI(float newValue, float newTempValue, float newMaxValue)
         {
             currentValue = newValue;
-            tempValue = newTempValue;
+            tempValue = Mathf.Min(newTempValue, newValue);
             maxValue = newMaxValue;
             UpdateUI();
         }
@@ -79,6 +79,8 @@ namespace UI.Game
                 return;
             }
             
+            tempValue = Mathf.Min(tempValue, currentValue);
+            
             float targetFill = Mathf.Clamp01(currentValue / maxValue);
             float targetTempFill = Mathf.Clamp01(tempValue / maxValue);
             
@@ -94,6 +96,9 @@ namespace UI.Game
                 scoreTempFillSlider.value = 0;
                 return;
             }
+            
+            tempValue = Mathf.Min(tempValue, currentValue);
+            
             scoreFillSlider.value = Mathf.Clamp01(currentValue / maxValue);
             scoreTempFillSlider.value = Mathf.Clamp01(tempValue / maxValue);
         }

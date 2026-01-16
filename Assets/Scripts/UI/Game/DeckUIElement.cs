@@ -1,5 +1,6 @@
 ﻿using Game;
 using Player;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,7 +10,8 @@ namespace UI.Game
     {
         [Header("References")]
         [SerializeField] private Image iconImage;
-        [SerializeField] private Text countText;
+        [SerializeField] private TextMeshProUGUI nameText;
+        [SerializeField] private TextMeshProUGUI countText;
         [SerializeField] private Button addButton;
         [SerializeField] private Button deleteButton;
         [Header("Setting")]
