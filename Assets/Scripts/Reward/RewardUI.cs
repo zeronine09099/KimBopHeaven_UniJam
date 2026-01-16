@@ -9,6 +9,7 @@ namespace Reward
         private void Awake()
         {
             UIManager.Instance.RewardUI = this;
+            gameObject.SetActive(false);
         }
 
         private void OnEnable()

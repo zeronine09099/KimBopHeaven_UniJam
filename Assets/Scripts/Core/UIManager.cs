@@ -2,6 +2,7 @@
 using Common.Singleton;
 using Encounter;
 using Game;
+using Game.UI;
 using Reward;
 using Title;
 using UnityEngine;

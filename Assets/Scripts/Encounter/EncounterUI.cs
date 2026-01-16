@@ -9,6 +9,7 @@ namespace Encounter
         private void Awake()
         {
             UIManager.Instance.EncounterUI = this;
+            gameObject.SetActive(false);
         }
 
         private void OnEnable()
