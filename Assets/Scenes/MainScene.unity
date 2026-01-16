@@ -448,10 +448,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: IngameUI
       objectReference: {fileID: 0}
-    - target: {fileID: 5583045097043040663, guid: 4b9720cf95889534285bf1839fc34952, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5847906268522870676, guid: 4b9720cf95889534285bf1839fc34952, type: 3}
       propertyPath: m_Type
       value: 1
