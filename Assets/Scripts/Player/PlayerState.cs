@@ -27,7 +27,10 @@ namespace Player
         public static PlayerState Current => GameManager.Instance.PlayerStatus;
         
         [SerializeField] private VariableContainer variables = new VariableContainer();
-
+        
+        [SerializeField] private Inventory inventory = new Inventory();
+        
+        public Inventory Inventory => inventory;
         
         /// <summary>
         /// 내부 VariableContainer 인스턴스입니다. 외부에서 읽을 수 있고 설정은 이 클래스 내부에서만 가능합니다.
