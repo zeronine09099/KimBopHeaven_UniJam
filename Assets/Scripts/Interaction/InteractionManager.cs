@@ -39,7 +39,6 @@ namespace Interaction
                 // 오래 누르고, 인터랙터블이 동일하면 홀드 이벤트 발생
                 if (heldDuration >= longPressThreshold)
                 {
-                    Physics2D.queriesStartInColliders = false;
                     RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(pointerPosition), Vector2.zero);
                     if (hit.collider != null)
                     {
@@ -62,7 +61,6 @@ namespace Interaction
             pressTime = Time.time;
             pointerPosition = position;
             
-            Physics2D.queriesStartInColliders = false;
             RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(position), Vector2.zero);
             if (hit.collider != null)
             {
@@ -82,7 +80,6 @@ namespace Interaction
             this.pointerPosition = position;
 
             // 인터랙터블이 다르면 드래그 이벤트 발생
-            Physics2D.queriesStartInColliders = false;
             RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(position), Vector2.zero);
             if (hit.collider != null)
             {
@@ -103,8 +100,7 @@ namespace Interaction
             if (pressTime < 0) return;
             float heldDuration = Time.time - pressTime;
             pressTime = -100f;
-
-            Physics2D.queriesStartInColliders = false;
+            
             RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(position), Vector2.zero);
             if (hit.collider != null)
             {
