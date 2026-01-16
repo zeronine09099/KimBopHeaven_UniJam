@@ -1,6 +1,6 @@
 ﻿namespace Interaction
 {
-    public interface IClcikkable
+    public interface IClickable
     {
         void OnClick();
     }
@@ -17,7 +17,7 @@
     {
         void OnHold();
     }
-    public interface IInteractable : IClcikkable, IPressable, ICancellable, IHoldable
+    public interface IInteractable : IClickable, IPressable, ICancellable, IHoldable
     {
         
     }
