@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using Common.Singleton;
 using Core;
+using Machamy.Utils;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEditor.Toolbars;
@@ -46,13 +47,13 @@ public static class MainToolbarStartBootstrapper
     {
         if (Application.isPlaying)
         {
-            Debug.LogWarning($"{LogPrefix} 이미 Play 모드입니다.");
+            LogEx.LogWarning($"이미 Play 모드입니다.");
             return;
         }
 
         if (!EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo())
         {
-            Debug.Log($"{LogPrefix} 씬 저장이 취소되었습니다.");
+            LogEx.Log($"씬 저장이 취소되었습니다.");
             return;
         }
         EditorPrefs.DeleteKey(Bootstrapper.EditorStartSceneNameKey);
@@ -66,7 +67,7 @@ public static class MainToolbarStartBootstrapper
         // 현재 씬이 부트스트랩이면 무시
         if (currentScenePath == BootstrapScenePath)
         {
-            Debug.LogWarning($"{LogPrefix} 현재 씬이 이미 부트스트래퍼 씬입니다. 시작만 합니다");
+            LogEx.LogWarning($"현재 씬이 이미 부트스트래퍼 씬입니다. 시작만 합니다");
             EditorApplication.EnterPlaymode();
             return;
         }
@@ -101,11 +102,11 @@ public static class MainToolbarStartBootstrapper
         
         if (state == PlayModeStateChange.EnteredPlayMode)
         {
-            Debug.Log($"{LogPrefix} Play 모드 진입 - 부트스트래퍼 씬에서 게임 시작됨.");
+            LogEx.Log($"Play 모드 진입 - 부트스트래퍼 씬에서 게임 시작됨.");
             int sessionCount = EditorPrefs.GetInt(EditorSessionCountKey, 0);
             sessionCount++;
             EditorPrefs.SetInt(EditorSessionCountKey, sessionCount);
-            Debug.Log($"{LogPrefix} {previousScenePath}({EditorPrefs.GetString(Bootstrapper.EditorStartSceneNameKey, "Unknown")}) 으로부터 시작됨. 세션 카운트: {sessionCount}");
+            LogEx.Log($"{previousScenePath}({EditorPrefs.GetString(Bootstrapper.EditorStartSceneNameKey, "Unknown")}) 으로부터 시작됨. 세션 카운트: {sessionCount}");
         }
 
         // Play 모드가 완전히 종료된 후
@@ -116,7 +117,7 @@ public static class MainToolbarStartBootstrapper
             if (sceneAsset != null)
             {
                 EditorSceneManager.OpenScene(previousScenePath);
-                Debug.Log($"{LogPrefix} 이전 씬으로 복귀: {previousScenePath}");
+                LogEx.Log($"이전 씬으로 복귀: {previousScenePath}");
             }
             
             // EditorPrefs도 정리
@@ -126,7 +127,7 @@ public static class MainToolbarStartBootstrapper
             {
                 EditorPrefs.DeleteKey(Bootstrapper.EditorStartSceneNameKey);
                 EditorPrefs.DeleteKey(Bootstrapper.EditorStartScenePathKey);
-                Debug.Log($"{LogPrefix} 모든 세션 종료 - 이전 씬 정보 삭제");
+                LogEx.Log($"모든 세션 종료 - 이전 씬 정보 삭제");
             }
             else
             {

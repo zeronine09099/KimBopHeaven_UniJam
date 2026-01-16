@@ -1,6 +1,7 @@
 ﻿
 using System.Collections.Generic;
 using Common.Attributes;
+using Machamy.Attributes;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 #if UNITY_EDITOR

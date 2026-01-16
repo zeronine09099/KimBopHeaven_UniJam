@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using Common.Singleton;
+using Game;
+using Machamy.Utils;
 using SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -22,6 +24,10 @@ namespace Core
         public static bool IsCompleted => _isCompleted;
         
 
+        private int _totalToLoad = 0;
+        private int _loadedCount = 0;
+        public int TotalToLoad => _totalToLoad;
+        public int LoadedCount => _loadedCount;
 
         private void Awake()
         {
@@ -30,9 +36,29 @@ namespace Core
 
         private IEnumerator Start()
         {
+            yield return InitializeCore();
+            yield return InitializeScene();
+        }
+
+        private IEnumerator InitializeCore()
+        {
+            _totalToLoad = 2; // 매니저 수에 맞게 설정
+            _loadedCount = 0;
+            
+            yield return GameManager.Instance.Init();
+            _loadedCount++;
+            yield return StageManager.Instance.Init();
+            _loadedCount++;
+            
+            
+            yield return null;
+        }
+
+        private IEnumerator InitializeScene()
+        {
             SceneManager.sceneLoaded += OnSceneLoaded;
-            #if UNITY_EDITOR
-            Debug.Log($"[Bootstrapper] Editor mode: Loading scene '{ToLoadSceneNameInEditor}' from EditorPrefs.");
+#if UNITY_EDITOR
+            LogEx.Log($"[Editor mode: Loading scene '{ToLoadSceneNameInEditor}' from EditorPrefs.");
             if (!string.IsNullOrEmpty(ToLoadSceneNameInEditor))
             {
                 SceneLoader.LoadSceneLocal(ToLoadSceneNameInEditor);
@@ -41,9 +67,9 @@ namespace Core
             {
                 SceneLoader.LoadSceneLocal(Scenes.MainScene);
             }
-            #else 
+#else 
             SceneLoader.LoadSceneLocal(Scenes.MainTitle);
-            #endif
+#endif
             
             
             yield return new WaitUntil(() => _isCompleted);
