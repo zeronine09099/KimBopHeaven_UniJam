@@ -47,13 +47,18 @@ namespace Core
             _loadedCount = 0;
             DatabaseManager.Instance.Initialize();
             
+            void IncrementLoadedCount()
+            {
+                _loadedCount++;
+                LogEx.Log($"[Bootstrapper] Loaded {_loadedCount}/{_totalToLoad}");
+            }
             
-            yield return GameManager.Instance.Init();
-            _loadedCount++;
-            yield return StageManager.Instance.Init();
-            _loadedCount++;
+            yield return GameManager.Instance.Init(IncrementLoadedCount);
+            yield return StageManager.Instance.Init(IncrementLoadedCount);
+            yield return IngredientManager.Instance.Init(IncrementLoadedCount);
+
             yield return new WaitWhile(() => DatabaseManager.Instance.IsInitialized);
-            _loadedCount++;
+            IncrementLoadedCount();
             
             yield return null;
         }

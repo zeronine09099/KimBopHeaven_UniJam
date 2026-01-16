@@ -2,6 +2,7 @@
 using System.Collections;
 using BandoWare.GameplayTags;
 using Common.Attributes;
+using Database.Generated;
 using Game.Field;
 using Machamy.Attributes;
 using UnityEngine;
@@ -22,6 +23,8 @@ namespace Game
         
         public string displayName;
         public string description;
+        public float baseScore = 10f;
+        public float scoreMultiplier = 1f;
         
         public abstract IEnumerator OnFall(Tile tile);
         public abstract IEnumerator OnExplode(Tile tile);
@@ -39,6 +42,16 @@ namespace Game
             #if UNITY_EDITOR
             debugTag = Tag.ToString();
             #endif
+        }
+        
+        
+        public void InitByData(IngredientData data)
+        {
+            // icon = data.icon;
+            displayName = data.koreanName;
+            description = data.description;
+            baseScore = data.baseScore;
+            // scoreMultiplier = data.scoreMultiplier;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using Common.Singleton;
 using Game;
 using Game.Field;
@@ -17,7 +18,7 @@ namespace Core
             
         }
 
-        public IEnumerator Init()
+        public IEnumerator Init(Action onCompleted = null)
         {
             yield return null;
         }

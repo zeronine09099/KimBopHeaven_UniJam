@@ -22,7 +22,7 @@ MonoBehaviour:
   doSaveCsharp: 1
   dbFindTarget:
   - name
-  - identifier
+  - tag
   xlsxExtension: .xlsx
   autoLoadXlsx: 0
   jsonExtension: .json

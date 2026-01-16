@@ -1,6 +1,8 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Text;
 using Database;
+using Game;
 using Machamy.Utils;
 using UnityEditor;
 using UnityEngine;
@@ -27,6 +29,43 @@ public static class IngredientGenerator
         {
             LogEx.LogError("DatabaseManager 인스턴스를 찾을 수 없습니다. 먼저 데이터베이스를 초기화하세요.");
         }
+    }
+    
+    [MenuItem("Tools/Generate Ingredient ScriptableObject Assets")]
+    public static void GenerateIngredientScriptableObjectAssets()
+    {
+        var ingredientTypes = ReflectionUtil.FindDerivedTypes<IngredientSO>();
+        foreach (var type in ingredientTypes)
+        {
+            GenerateSOFile(type);
+        }
+        AssetDatabase.Refresh();
+        LogEx.Log("Ingredient ScriptableObject asset generation completed.");
+    }
+
+    private static void GenerateSOFile(Type ingredientType)
+    {
+        string folderPath = Path.Combine(Application.dataPath, "Resources", "ScriptableObjects", "Ingredients") + "/";
+        string className = ingredientType.Name;
+        string filePath = folderPath + className + ".asset";
+        if (System.IO.File.Exists(filePath))
+        {
+            UnityEngine.Debug.LogError("File already exists: " + filePath);
+            return;
+        }
+        IngredientSO ingredientSO = ScriptableObject.CreateInstance(ingredientType) as IngredientSO;
+        if (ingredientSO == null)
+        {
+            UnityEngine.Debug.LogError("Failed to create instance of: " + ingredientType.Name);
+            return;
+        }
+
+        if (!Directory.Exists(folderPath))
+        {
+            Directory.CreateDirectory(folderPath);
+        }
+        AssetDatabase.CreateAsset(ingredientSO, "Assets/Resources/ScriptableObjects/Ingredients/" + className + ".asset");
+        AssetDatabase.SaveAssets();
     }
 
 
