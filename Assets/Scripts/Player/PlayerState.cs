@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Common;
 using Core;
+using Database.Generated;
 using Game;
 using Machamy.DeveloperConsole;
 using Machamy.DeveloperConsole.Attributes;
@@ -189,8 +190,12 @@ namespace Player
                 // }
             }
         }
-        
-        
+
+        public StageInfo CurrentStageInfo { get; set; }
+
+        // public StageModel CurrentStageTarget { get; set; }
+
+
         public PlayerState()
         {
            
@@ -370,6 +375,7 @@ namespace Player
             }
         }
     }
+    
 
     // public class CurrentCoinChangedEventArgs : ExecEventArgs<CurrentCoinChangedEventArgs>
     // {

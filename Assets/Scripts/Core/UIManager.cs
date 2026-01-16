@@ -1,10 +1,9 @@
 ﻿using System.Collections;
 using Common.Singleton;
-using Encounter;
-using Game;
-using Game.UI;
-using Reward;
-using Title;
+using UI.Encounter;
+using UI.Game;
+using UI.Reward;
+using UI.Title;
 using UnityEngine;
 
 namespace Core
@@ -26,6 +25,26 @@ namespace Core
         [field:SerializeField] public RewardUI RewardUI { get; set; }
         [field:SerializeField] public EncounterUI EncounterUI { get; set; }
         [field:SerializeField] public DeckUI DeckUI { get; set; }
+        
+        
+        
+        public void GoToTitleUI()
+        {
+            TitleUI.Show();
+            InGameUI.Hide();
+            RewardUI.Hide();
+            EncounterUI.Hide();
+            DeckUI.Hide();
+        }
+        
+        public void GoToInGameUI()
+        {
+            TitleUI.Hide();
+            InGameUI.Show();
+            RewardUI.Hide();
+            EncounterUI.Hide();
+            DeckUI.Hide();
+        }
     }
     
 }

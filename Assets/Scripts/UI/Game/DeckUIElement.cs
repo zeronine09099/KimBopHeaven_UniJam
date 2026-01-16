@@ -1,8 +1,9 @@
-﻿using Player;
+﻿using Game;
+using Player;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Game.UI
+namespace UI.Game
 {
     public class DeckUIElement : MonoBehaviour
     {

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using BandoWare.GameplayTags;
+using Common;
 using Common.Collections;
 using Common.Singleton;
 using Cysharp.Threading.Tasks;
@@ -15,9 +16,9 @@ using UnityEngine;
 namespace Game
 {
     /// <summary>
-    /// 재료 관리를 담당하는 매니저 클래스
+    /// 재료 관리를 담당하는 클래스
     /// </summary>
-    public class IngredientManager : Singleton<IngredientManager>
+    public class IngredientLibrary : Singleton<IngredientLibrary>
     {
         [field:SerializeField] public bool IsInitialized { get; private set; } = false;
 
@@ -91,6 +92,24 @@ namespace Game
             return null;
         }
         
+        
+        public IngredientSO GetRandomIngredientSO()
+        {
+            int randomIndex = Random.Range(0, cachedIngredientList.Count);
+            return cachedIngredientList[randomIndex];
+        }
+        
+        public IngredientSO GetRandomIngredientSOByRarity(Rarity rarity)
+        {
+            var filteredList = cachedIngredientList.Where(ing => ing.rarity == rarity).ToList();
+            if (filteredList.Count == 0)
+            {
+                LogEx.LogWarning($"No ingredients found with rarity: {rarity}. Returning a random ingredient instead.");
+                return GetRandomIngredientSO();
+            }
+            int randomIndex = Random.Range(0, filteredList.Count);
+            return filteredList[randomIndex];
+        }
 
     }
 }

@@ -25,7 +25,7 @@ namespace Player
         public void Initialize()
         {
             ingredientCountMap.Clear();
-            foreach (var ingredient in IngredientManager.Instance.AllIngredientList)
+            foreach (var ingredient in IngredientLibrary.Instance.AllIngredientList)
             {
                 ingredientCountMap[ingredient] = 0;
             }

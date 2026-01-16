@@ -5,7 +5,7 @@ using Machamy.Utils;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Game.UI
+namespace UI.Game
 {
     
     public class IngameUI : MonoBehaviour
@@ -41,6 +41,16 @@ namespace Game.UI
         {
             LogEx.Log("Ingame Deck Clicked");
             
+        }
+
+        public void Hide()
+        {
+            gameObject.SetActive(false);
+        }
+
+        public void Show()
+        {
+            gameObject.SetActive(true);
         }
     }
     

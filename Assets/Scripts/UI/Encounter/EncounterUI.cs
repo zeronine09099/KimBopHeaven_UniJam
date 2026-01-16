@@ -2,13 +2,13 @@
 using Core;
 using UnityEngine;
 
-namespace Reward
+namespace UI.Encounter
 {
-    public class RewardUI : MonoBehaviour
+    public class EncounterUI : MonoBehaviour
     {
         private void Awake()
         {
-            UIManager.Instance.RewardUI = this;
+            UIManager.Instance.EncounterUI = this;
             gameObject.SetActive(false);
         }
 
@@ -21,6 +21,10 @@ namespace Reward
         {
             
         }
+
+        public void Hide()
+        {
+            gameObject.SetActive(false);
+        }
     }
-    
 }

@@ -1,0 +1,58 @@
+﻿using Game;
+using Machamy.Attributes;
+using TMPro;
+using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
+
+namespace UI.Reward
+{
+    public class RewardUIEntry : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerExitHandler
+    {
+
+        [SerializeField] private DescriptionModal modal = null;
+        [SerializeField] private float holdThreshold;
+        [SerializeField] private Image iconImage;
+        [SerializeField] private TextMeshProUGUI nameText;
+        [Header("State")] 
+        [SerializeField,VisibleOnly] private IngredientSO ingredientSo;
+        [SerializeField,VisibleOnly] private float holdTime = 0f;
+        [SerializeField,VisibleOnly] private bool isHolding = false;
+
+        
+        public IngredientSO IngredientSo => ingredientSo;
+
+        public void Initialize(IngredientSO ingredientSo)
+        {
+            iconImage.sprite = ingredientSo.icon;
+            nameText.text = ingredientSo.name;
+        }
+        
+        private void Update()
+        {
+            if (isHolding)
+            {
+                holdTime += Time.deltaTime;
+                modal.Show(ingredientSo);
+            }
+        }
+        
+        public void OnPointerDown(PointerEventData eventData)
+        {
+            isHolding = true;
+            holdTime = 0f;
+        }
+
+        public void OnPointerUp(PointerEventData eventData)
+        {
+            isHolding = false;
+            Debug.Log($"Pointer released after holding for {holdTime} seconds.");
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            isHolding = false;
+            Debug.Log($"Pointer exited after holding for {holdTime} seconds.");
+        }
+    }
+}

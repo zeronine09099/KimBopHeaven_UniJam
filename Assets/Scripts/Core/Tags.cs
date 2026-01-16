@@ -59,3 +59,9 @@
 [assembly: GameplayTag("Category.Seafood", "해산물 카테고리")]
 [assembly: GameplayTag("Category.Vegetable", "채소 카테고리")]
 [assembly: GameplayTag("Category.Sauce", "소스 카테고리")]
+
+
+// 인카운터 태그
+[assembly: GameplayTag("Encounter.MeatSelect", "고기류 선택 인카운터")]
+[assembly: GameplayTag("Encounter.VegetableSelect", "채소 선택 인카운터")]
+[assembly: GameplayTag("Encounter.SeafoodSelect", "해산물 선택 인카운터")]

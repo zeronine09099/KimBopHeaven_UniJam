@@ -72,7 +72,7 @@ namespace Core
             await UniTask.WhenAll(
                 GameManager.Instance.Init(IncrementLoadedCount),
                 StageManager.Instance.Init(IncrementLoadedCount),
-                IngredientManager.Instance.Init(IncrementLoadedCount)
+                IngredientLibrary.Instance.Init(IncrementLoadedCount)
             );
             
             await UniTask.WaitUntil(() => SoundManager.Instance.IsInitialized);

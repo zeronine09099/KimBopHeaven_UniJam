@@ -9,8 +9,10 @@ namespace Database
     [Serializable]
     public class McDatabase
     {
+        public List<StageInfo> StageInfoList = new List<StageInfo>();
         public List<IngredientData> IngredientDataList = new List<IngredientData>();
         public readonly List<string> ClassNames = new List<string> {
+            "StageInfo",
             "IngredientData"
         };
 
@@ -55,6 +57,7 @@ namespace Database
 
         public void ClearAll()
         {
+            StageInfoList.Clear();
             IngredientDataList.Clear();
         }
 
@@ -80,6 +83,9 @@ namespace Database
             {
                 switch (df.name)
                 {
+                    case "StageInfo":
+                        StageInfoList = CreateInstance<StageInfo>(df);
+                        break;
                     case "IngredientData":
                         IngredientDataList = CreateInstance<IngredientData>(df);
                         break;
@@ -95,6 +101,10 @@ namespace Database
         {
             switch (className)
             {
+                case "StageInfo":
+                    var newStageInfoItems = Newtonsoft.Json.JsonConvert.DeserializeObject<List<StageInfo>>(json);
+                    StageInfoList.AddRange(newStageInfoItems);
+                    break;
                 case "IngredientData":
                     var newIngredientDataItems = Newtonsoft.Json.JsonConvert.DeserializeObject<List<IngredientData>>(json);
                     IngredientDataList.AddRange(newIngredientDataItems);
@@ -110,6 +120,8 @@ namespace Database
         {
             switch (className)
             {
+                case "StageInfo":
+                    return typeof(StageInfo);
                 case "IngredientData":
                     return typeof(IngredientData);
                 default:

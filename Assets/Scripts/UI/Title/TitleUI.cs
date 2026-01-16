@@ -4,7 +4,7 @@ using Machamy.Utils;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Title
+namespace UI.Title
 {
     public class TitleUI : MonoBehaviour
     {
@@ -33,5 +33,14 @@ namespace Title
             GameManager.Instance.StartGame();
         }
 
+        public void Show()
+        {
+            gameObject.SetActive(true);
+        }
+
+        public void Hide()
+        {
+            gameObject.SetActive(false);
+        }
     }
 }
