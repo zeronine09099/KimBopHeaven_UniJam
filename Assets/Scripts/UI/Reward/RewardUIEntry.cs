@@ -19,11 +19,12 @@ namespace UI.Reward
         [SerializeField,VisibleOnly] private float holdTime = 0f;
         [SerializeField,VisibleOnly] private bool isHolding = false;
 
-        
+        private RewardUI rewardUI;
         public IngredientSO IngredientSo => ingredientSo;
 
-        public void Initialize(IngredientSO ingredientSo)
+        public void Initialize(RewardUI rewardUI, IngredientSO ingredientSo)
         {
+            this.rewardUI = rewardUI;
             iconImage.sprite = ingredientSo.icon;
             nameText.text = ingredientSo.name;
         }
@@ -47,12 +48,25 @@ namespace UI.Reward
         {
             isHolding = false;
             Debug.Log($"Pointer released after holding for {holdTime} seconds.");
+            if (holdTime >= holdThreshold)
+            {
+                modal.Show(ingredientSo);
+            }
+            else if (holdTime <= 0.2f)
+            {
+                rewardUI.OnEntryClicked(this);
+            }
+            else
+            {
+                modal.Hide();
+            }
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
             isHolding = false;
             Debug.Log($"Pointer exited after holding for {holdTime} seconds.");
+            modal.Hide();
         }
     }
 }

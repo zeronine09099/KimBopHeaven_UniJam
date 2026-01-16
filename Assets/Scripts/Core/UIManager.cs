@@ -36,6 +36,7 @@ namespace Core
             RewardUI.Hide();
             EncounterUI.Hide();
             DeckUI.Hide();
+            SettingUI.Hide();
         }
         
         public void GoToInGameUI()
@@ -45,6 +46,7 @@ namespace Core
             RewardUI.Hide();
             EncounterUI.Hide();
             DeckUI.Hide();
+            SettingUI.Hide();
         }
     }
     

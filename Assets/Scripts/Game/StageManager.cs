@@ -64,9 +64,14 @@ namespace Game
              * 초기화 단계
              */
             
+            var um = UIManager.Instance;
+            var gameUI = um.InGameUI;
+            
             // 스테이지 데이터 초기화
             Root.Field.InitField(6,6);
-            
+
+            // UI 점수 초기화
+            gameUI.InitializeForStage(stage);
             
             /*
              * 연출 단계

@@ -1,5 +1,6 @@
 ﻿using System;
 using DG.Tweening;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,6 +11,8 @@ namespace UI.Game
         [Header("References")] 
         [SerializeField] private Slider scoreFillSlider;
         [SerializeField] private Slider scoreTempFillSlider;
+        [SerializeField] private TextMeshProUGUI scoreText;
+        [SerializeField] private TextMeshProUGUI scoreText2;
 
         [Header("Settings")] 
         [SerializeField] private Ease fillEase = Ease.InQuad;
@@ -20,6 +23,7 @@ namespace UI.Game
         [SerializeField] private float tempValue = 0;
         [SerializeField] private float maxValue = 100f;
 
+        [SerializeField] private int scoreTextValue = 0;
 
         public float CurrentValue
         {
@@ -51,6 +55,17 @@ namespace UI.Game
             }
         }
         
+        public int ScoreTextValue
+        {
+            get => scoreTextValue;
+            set
+            {
+                scoreTextValue = value;
+                scoreText.text = scoreTextValue.ToString("N0");
+                scoreText2.text = scoreTextValue.ToString("N0");
+            }
+        }
+        
         private void Awake()
         {
             
@@ -64,18 +79,22 @@ namespace UI.Game
             UpdateUI();
         }
         
+        
+        Tween _scoreTween;
         private void UpdateUI()
         {
-            if (DOTween.IsTweening(scoreFillSlider) || DOTween.IsTweening(scoreTempFillSlider))
+            if (DOTween.IsTweening(scoreFillSlider) || DOTween.IsTweening(scoreTempFillSlider) || _scoreTween != null && DOTween.IsTweening(_scoreTween))
             {
                 DOTween.Complete(scoreFillSlider);
                 DOTween.Complete(scoreTempFillSlider);
+                DOTween.Complete(_scoreTween);
             }
             
             if (maxValue <= 0)
             {
                 scoreFillSlider.DOValue(0, fillDuration).SetEase(fillEase);
                 scoreTempFillSlider.DOValue(0, fillDuration).SetEase(fillEase);
+                _scoreTween = DOTween.To(() => ScoreTextValue, x => ScoreTextValue = x, 0, fillDuration).SetEase(fillEase);
                 return;
             }
             
@@ -86,9 +105,10 @@ namespace UI.Game
             
             scoreFillSlider.DOValue(targetFill, fillDuration).SetEase(fillEase);
             scoreTempFillSlider.DOValue(targetTempFill, fillDuration).SetEase(fillEase);
+            _scoreTween = DOTween.To(() => ScoreTextValue, x => ScoreTextValue = x, (int)currentValue, fillDuration).SetEase(fillEase);
         }
         
-        private void UpdateUIImmediate()
+        public void UpdateUIImmediate()
         {
             if (maxValue <= 0)
             {
@@ -101,6 +121,7 @@ namespace UI.Game
             
             scoreFillSlider.value = Mathf.Clamp01(currentValue / maxValue);
             scoreTempFillSlider.value = Mathf.Clamp01(tempValue / maxValue);
+            scoreText.text = currentValue.ToString("N0");
         }
 
         private void OnValidate()

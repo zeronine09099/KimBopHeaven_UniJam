@@ -37,7 +37,7 @@ namespace UI.Reward
             {
                 var rarity = GetRarity();
                 var ingredient = IngredientLibrary.Instance.GetRandomIngredientSOByRarity(rarity);
-                entries[i].Initialize(ingredient);
+                entries[i].Initialize(this, ingredient);
             }
         }
 

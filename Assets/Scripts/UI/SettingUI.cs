@@ -61,5 +61,10 @@ namespace UI
         {
             gameObject.SetActive(false);
         }
+
+        public void Show()
+        {
+            gameObject.SetActive(true);
+        }
     }
 }
