@@ -25,6 +25,7 @@ namespace Core
         [field:SerializeField] public IngameUI InGameUI { get; set; }
         [field:SerializeField] public RewardUI RewardUI { get; set; }
         [field:SerializeField] public EncounterUI EncounterUI { get; set; }
+        [field:SerializeField] public DeckUI DeckUI { get; set; }
     }
     
 }

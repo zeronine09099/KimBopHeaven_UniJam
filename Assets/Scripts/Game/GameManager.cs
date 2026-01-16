@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using Common.Singleton;
+using Cysharp.Threading.Tasks;
 using Game;
 using Game.Field;
 using Player;
@@ -19,9 +20,9 @@ namespace Core
             
         }
 
-        public IEnumerator Init(Action onCompleted = null)
+        public async UniTask Init(Action onCompleted = null)
         {
-            yield return null;
+            await UniTask.DelayFrame(1);
             IsInitialized = true;
             onCompleted?.Invoke();
         }

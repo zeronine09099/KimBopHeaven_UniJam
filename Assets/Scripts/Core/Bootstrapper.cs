@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using Common.Singleton;
+using Cysharp.Threading.Tasks;
 using Database;
 using Game;
 using Machamy.Utils;
 using SceneManagement;
-using Unity.VisualScripting;
+using Sound;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -29,42 +28,63 @@ namespace Core
         private int _totalToLoad = 0;
         private int _loadedCount = 0;
         public int TotalToLoad => _totalToLoad;
-        public int LoadedCount => _loadedCount;
+
+        public int LoadedCount
+        {
+            get => _loadedCount;
+            private set => _loadedCount = value;
+        }
 
         private void Awake()
         {
 
         }
 
-        private IEnumerator Start()
+        private void Start()
         {
-            yield return InitializeCore();
-            yield return InitializeScene();
+            Initialize().Forget();
+        }
+        
+        private async UniTaskVoid Initialize()
+        {
+            LogEx.Log("Initializing Bootstrapper...");
+            await InitializeCore();
+            await InitializeScene();
+            LogEx.Log("Bootstrapper initialization completed.");
         }
 
-        private IEnumerator InitializeCore()
+        private async UniTask InitializeCore()
         {
-            _totalToLoad = 4; // 매니저 수에 맞게 설정
-            _loadedCount = 0;
-            DatabaseManager.Instance.Initialize();
-            
             void IncrementLoadedCount()
             {
-                _loadedCount++;
-                LogEx.Log($"[Bootstrapper] Loaded {_loadedCount}/{_totalToLoad}");
+                LoadedCount++;
+                LogEx.Log($"[Bootstrapper] Loaded {LoadedCount}/{_totalToLoad}");
             }
-            
-            yield return GameManager.Instance.Init(IncrementLoadedCount);
-            yield return StageManager.Instance.Init(IncrementLoadedCount);
-            yield return IngredientManager.Instance.Init(IncrementLoadedCount);
 
-            yield return new WaitUntil(() => DatabaseManager.Instance.IsInitialized);
+            LoadedCount = 5; // DatabaseManager, GameManager, StageManager, IngredientManager, SoundManager
+            LoadedCount = 0;
+            
+            // DatabaseManager 초기화
+            DatabaseManager.Instance.Initialize();
+
+            
+            // 나머지 매니저들 병렬로 초기화
+            await UniTask.WhenAll(
+                GameManager.Instance.Init(IncrementLoadedCount),
+                StageManager.Instance.Init(IncrementLoadedCount).ToUniTask(),
+                IngredientManager.Instance.Init(IncrementLoadedCount).ToUniTask()
+            );
+            
+            await UniTask.WaitUntil(() => SoundManager.Instance.IsInitialized);
             IncrementLoadedCount();
             
-            yield return null;
+            await UniTask.WaitUntil(() => DatabaseManager.Instance.IsInitialized);
+            IncrementLoadedCount();
+            
+            await UniTask.Yield();
         }
 
-        private IEnumerator InitializeScene()
+        private async UniTask InitializeScene()
         {
             SceneManager.sceneLoaded += OnSceneLoaded;
 #if UNITY_EDITOR
@@ -82,7 +102,7 @@ namespace Core
 #endif
             
             
-            yield return new WaitUntil(() => _isCompleted);
+            await UniTask.WaitUntil(() => _isCompleted);
         }
         
         
