@@ -7,7 +7,7 @@ namespace Game.Ingredients
 {
     public class HamIngredient : IngredientSO
     {
-        public override GameplayTag Tag => AllGameplayTags.Ingredient.Essential.Ham.Get();
+        public override GameplayTag Tag => GameplayTagManager.RequestTag("Ingredient.Essential.Ham");
         public override IEnumerator OnFall(Tile tile)
         {
             yield break;

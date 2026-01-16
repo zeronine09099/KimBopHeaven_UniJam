@@ -7,7 +7,7 @@ namespace Game.Ingredients
 {
     public class ShrimpIngredient : IngredientSO
     {
-        public override GameplayTag Tag => AllGameplayTags.Ingredient.Seafood.Shrimp.Get();
+        public override GameplayTag Tag => GameplayTagManager.RequestTag("Ingredient.Seafood.Shrimp");
         public override IEnumerator OnFall(Tile tile)
         {
             yield break;

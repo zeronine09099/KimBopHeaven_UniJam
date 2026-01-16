@@ -7,7 +7,7 @@ namespace Game.Ingredients
 {
     public class PickledradishIngredient : IngredientSO
     {
-        public override GameplayTag Tag => AllGameplayTags.Ingredient.Essential.PickledRadish.Get();
+        public override GameplayTag Tag => GameplayTagManager.RequestTag("Ingredient.Essential.PickledRadish");
         public override IEnumerator OnFall(Tile tile)
         {
             yield break;

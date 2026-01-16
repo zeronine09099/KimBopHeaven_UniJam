@@ -7,7 +7,7 @@ namespace Game.Ingredients
 {
     public class MushroomIngredient : IngredientSO
     {
-        public override GameplayTag Tag => AllGameplayTags.Ingredient.Vegetable.Mushroom.Get();
+        public override GameplayTag Tag => GameplayTagManager.RequestTag("Ingredient.Vegetable.Mushroom");
         public override IEnumerator OnFall(Tile tile)
         {
             yield break;

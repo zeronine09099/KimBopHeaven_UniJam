@@ -7,7 +7,7 @@ namespace Game.Ingredients
 {
     public class SesameoilIngredient : IngredientSO
     {
-        public override GameplayTag Tag => AllGameplayTags.Ingredient.Sauce.SesameOil.Get();
+        public override GameplayTag Tag => GameplayTagManager.RequestTag("Ingredient.Sauce.SesameOil");
         public override IEnumerator OnFall(Tile tile)
         {
             yield break;
