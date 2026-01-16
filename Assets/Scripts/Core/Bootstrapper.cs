@@ -2,12 +2,14 @@
 using Common.Singleton;
 using Cysharp.Threading.Tasks;
 using Database;
+using DG.Tweening;
 using Game;
 using Machamy.Utils;
 using SceneManagement;
 using Sound;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 namespace Core
 {
@@ -23,7 +25,7 @@ namespace Core
         private static bool _isCompleted = false;
         
         public static bool IsCompleted => _isCompleted;
-        
+        [SerializeField] Image _progressBar;
 
         private int _totalToLoad = 0;
         private int _loadedCount = 0;
@@ -32,7 +34,12 @@ namespace Core
         public int LoadedCount
         {
             get => _loadedCount;
-            private set => _loadedCount = value;
+            private set
+            {
+                _progressBar.DOComplete();
+            _progressBar.DOFillAmount((float)value / _totalToLoad, 0.2f);
+            _loadedCount = value;
+            }
         }
 
         private void Awake()

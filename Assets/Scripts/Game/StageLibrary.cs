@@ -5,6 +5,7 @@ using Cysharp.Threading.Tasks;
 using Database;
 using Database.Generated;
 using Machamy.Attributes;
+using Machamy.Utils;
 using UnityEngine;
 
 namespace Game
@@ -39,6 +40,7 @@ namespace Game
                 }   
             }
             IsInitialized = true;
+            LogEx.Log($"StageLibrary initialized with {stages.Count} stages.");
             onCompleted?.Invoke();
         }
         
