@@ -1,0 +1,1443 @@
+fileFormatVersion: 2
+guid: 4d869c1b3011b3a4ab3a32401ac44afd
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 6153494312223894440
+    second: dotPattern_0
+  - first:
+      213: -7829029037376779355
+    second: dotPattern_1
+  - first:
+      213: -688608544984037898
+    second: dotPattern_2
+  - first:
+      213: -6829660129776934062
+    second: dotPattern_3
+  - first:
+      213: 2020913496858769972
+    second: dotPattern_4
+  - first:
+      213: -7470079672087689702
+    second: dotPattern_5
+  - first:
+      213: -5472588796485134312
+    second: dotPattern_6
+  - first:
+      213: -6517797202304130533
+    second: dotPattern_7
+  - first:
+      213: 2259744632216002556
+    second: dotPattern_8
+  - first:
+      213: 1905809205104752206
+    second: dotPattern_9
+  - first:
+      213: 5230174145431590660
+    second: dotPattern_10
+  - first:
+      213: -3978609513818563028
+    second: dotPattern_11
+  - first:
+      213: -652397478380198035
+    second: dotPattern_12
+  - first:
+      213: -6282365558018529986
+    second: dotPattern_13
+  - first:
+      213: 85726034611095442
+    second: dotPattern_14
+  - first:
+      213: -9025179135364397589
+    second: dotPattern_15
+  - first:
+      213: -1401830958647056350
+    second: dotPattern_16
+  - first:
+      213: -4072805194254811255
+    second: dotPattern_17
+  - first:
+      213: -2401808829969169277
+    second: dotPattern_18
+  - first:
+      213: 6573051026584257631
+    second: dotPattern_19
+  - first:
+      213: 8833313224514292622
+    second: dotPattern_20
+  - first:
+      213: -2027587014141528590
+    second: dotPattern_21
+  - first:
+      213: -276855072131350706
+    second: dotPattern_22
+  - first:
+      213: 9161497445952306399
+    second: dotPattern_23
+  - first:
+      213: -2005273668346389418
+    second: dotPattern_24
+  - first:
+      213: 4370644377784670197
+    second: dotPattern_25
+  - first:
+      213: 1274066161414801792
+    second: dotPattern_26
+  - first:
+      213: 3500536084024374983
+    second: dotPattern_27
+  - first:
+      213: -5750358453768103989
+    second: dotPattern_28
+  - first:
+      213: 5021528091507774152
+    second: dotPattern_29
+  - first:
+      213: 7189228113047029354
+    second: dotPattern_30
+  - first:
+      213: -9205524207667820268
+    second: dotPattern_31
+  - first:
+      213: -8820076412494799294
+    second: dotPattern_32
+  - first:
+      213: 7691082105263236807
+    second: dotPattern_33
+  - first:
+      213: 7308150053754058278
+    second: dotPattern_34
+  - first:
+      213: -5219902236001896038
+    second: dotPattern_35
+  - first:
+      213: -9193138615907263066
+    second: dotPattern_36
+  - first:
+      213: -646674314902076033
+    second: dotPattern_37
+  - first:
+      213: -3402477353345765209
+    second: dotPattern_38
+  - first:
+      213: -3158759761020352965
+    second: dotPattern_39
+  - first:
+      213: -6216849080750473208
+    second: dotPattern_40
+  - first:
+      213: 3796654736022848712
+    second: dotPattern_41
+  - first:
+      213: -4043720484589810798
+    second: dotPattern_42
+  - first:
+      213: 3066510224411795969
+    second: dotPattern_43
+  - first:
+      213: -6023888294783576178
+    second: dotPattern_44
+  - first:
+      213: -1829064951906167990
+    second: dotPattern_45
+  - first:
+      213: 2591379268022417109
+    second: dotPattern_46
+  - first:
+      213: -5027936845767725252
+    second: dotPattern_47
+  - first:
+      213: -6993349477789494519
+    second: dotPattern_48
+  - first:
+      213: -8796765610628409799
+    second: dotPattern_49
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: dotPattern_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1180
+        width: 61
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8abed7f697a956550800000000000000
+      internalID: 6153494312223894440
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dotPattern_1
+      rect:
+        serializedVersion: 2
+        x: 235
+        y: 1180
+        width: 61
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5ab40fa0293b95390800000000000000
+      internalID: -7829029037376779355
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dotPattern_2
+      rect:
+        serializedVersion: 2
+        x: 471
+        y: 1180
+        width: 62
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6f58dee3d229176f0800000000000000
+      internalID: -688608544984037898
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dotPattern_3
+      rect:
+        serializedVersion: 2
+        x: 707
+        y: 1180
+        width: 61
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2536ffb0c4c2831a0800000000000000
+      internalID: -6829660129776934062
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dotPattern_4
+      rect:
+        serializedVersion: 2
+        x: 944
+        y: 1180
+        width: 61
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 43a3f0e3e1abb0c10800000000000000
+      internalID: 2020913496858769972
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dotPattern_5
+      rect:
+        serializedVersion: 2
+        x: 1180
+        y: 1180
+        width: 59
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a16c85dcd12f45890800000000000000
+      internalID: -7470079672087689702
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dotPattern_6
+      rect:
+        serializedVersion: 2
+        x: 107
+        y: 1039
+        width: 62
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 81898bf0c757d04b0800000000000000
+      internalID: -5472588796485134312
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dotPattern_7
+      rect:
+        serializedVersion: 2
+        x: 343
+        y: 1039
+        width: 61
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b12a0ae2af12c85a0800000000000000
+      internalID: -6517797202304130533
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dotPattern_8
+      rect:
+        serializedVersion: 2
+        x: 579
+        y: 1039
+        width: 61
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cff945635c93c5f10800000000000000
+      internalID: 2259744632216002556
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dotPattern_9
+      rect:
+        serializedVersion: 2
+        x: 816
+        y: 1039
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e4630f7ef5bc27a10800000000000000
+      internalID: 1905809205104752206
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dotPattern_10
+      rect:
+        serializedVersion: 2
+        x: 1052
+        y: 1039
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 407d1e3bcaf459840800000000000000
+      internalID: 5230174145431590660
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dotPattern_11
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 888
+        width: 61
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c2edadc0ab329c8c0800000000000000
+      internalID: -3978609513818563028
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dotPattern_12
+      rect:
+        serializedVersion: 2
+        x: 235
+        y: 888
+        width: 61
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d67a9c033f732f6f0800000000000000
+      internalID: -652397478380198035
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dotPattern_13
+      rect:
+        serializedVersion: 2
+        x: 471
+        y: 888
+        width: 62
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e3528257fcd80d8a0800000000000000
+      internalID: -6282365558018529986
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dotPattern_14
+      rect:
+        serializedVersion: 2
+        x: 707
+        y: 888
+        width: 61
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2974ff0df5f803100800000000000000
+      internalID: 85726034611095442
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dotPattern_15
+      rect:
+        serializedVersion: 2
+        x: 944
+        y: 888
+        width: 61
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: be58652d46f10c280800000000000000
+      internalID: -9025179135364397589
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dotPattern_16
+      rect:
+        serializedVersion: 2
+        x: 1180
+        y: 888
+        width: 59
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 22862ba9b22bb8ce0800000000000000
+      internalID: -1401830958647056350
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dotPattern_17
+      rect:
+        serializedVersion: 2
+        x: 107
+        y: 747
+        width: 62
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 98f7315214d7a77c0800000000000000
+      internalID: -4072805194254811255
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dotPattern_18
+      rect:
+        serializedVersion: 2
+        x: 343
+        y: 747
+        width: 61
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3848a4f289f0baed0800000000000000
+      internalID: -2401808829969169277
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dotPattern_19
+      rect:
+        serializedVersion: 2
+        x: 579
+        y: 747
+        width: 61
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f54421a451b283b50800000000000000
+      internalID: 6573051026584257631
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dotPattern_20
+      rect:
+        serializedVersion: 2
+        x: 816
+        y: 747
+        width: 60
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e8b4fe8a39b369a70800000000000000
+      internalID: 8833313224514292622
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dotPattern_21
+      rect:
+        serializedVersion: 2
+        x: 1052
+        y: 747
+        width: 60
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2f536ee6a509cd3e0800000000000000
+      internalID: -2027587014141528590
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dotPattern_22
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 597
+        width: 61
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e4f785b57c9682cf0800000000000000
+      internalID: -276855072131350706
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dotPattern_23
+      rect:
+        serializedVersion: 2
+        x: 235
+        y: 597
+        width: 61
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fdcb2ac236d242f70800000000000000
+      internalID: 9161497445952306399
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dotPattern_24
+      rect:
+        serializedVersion: 2
+        x: 471
+        y: 597
+        width: 62
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 65cd4c81936db24e0800000000000000
+      internalID: -2005273668346389418
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dotPattern_25
+      rect:
+        serializedVersion: 2
+        x: 707
+        y: 597
+        width: 61
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5f7d969a7e5a7ac30800000000000000
+      internalID: 4370644377784670197
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dotPattern_26
+      rect:
+        serializedVersion: 2
+        x: 944
+        y: 597
+        width: 61
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 089897b6c646ea110800000000000000
+      internalID: 1274066161414801792
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dotPattern_27
+      rect:
+        serializedVersion: 2
+        x: 1180
+        y: 597
+        width: 59
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7c6b5b39507649030800000000000000
+      internalID: 3500536084024374983
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dotPattern_28
+      rect:
+        serializedVersion: 2
+        x: 107
+        y: 456
+        width: 62
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bc7dcf7f37f9230b0800000000000000
+      internalID: -5750358453768103989
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dotPattern_29
+      rect:
+        serializedVersion: 2
+        x: 343
+        y: 456
+        width: 61
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8c257fba13d00b540800000000000000
+      internalID: 5021528091507774152
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dotPattern_30
+      rect:
+        serializedVersion: 2
+        x: 579
+        y: 456
+        width: 61
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a668b6fe0e445c360800000000000000
+      internalID: 7189228113047029354
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dotPattern_31
+      rect:
+        serializedVersion: 2
+        x: 816
+        y: 456
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 41943be81886f3080800000000000000
+      internalID: -9205524207667820268
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dotPattern_32
+      rect:
+        serializedVersion: 2
+        x: 1052
+        y: 456
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 24e127dcb3bc89580800000000000000
+      internalID: -8820076412494799294
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dotPattern_33
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 305
+        width: 61
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7c62496fc663cba60800000000000000
+      internalID: 7691082105263236807
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dotPattern_34
+      rect:
+        serializedVersion: 2
+        x: 235
+        y: 305
+        width: 61
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 626334fe0c3cb6560800000000000000
+      internalID: 7308150053754058278
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dotPattern_35
+      rect:
+        serializedVersion: 2
+        x: 471
+        y: 305
+        width: 62
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a99f6d4929e2f87b0800000000000000
+      internalID: -5219902236001896038
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dotPattern_36
+      rect:
+        serializedVersion: 2
+        x: 707
+        y: 305
+        width: 61
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6addbebd2296b6080800000000000000
+      internalID: -9193138615907263066
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dotPattern_37
+      rect:
+        serializedVersion: 2
+        x: 944
+        y: 305
+        width: 61
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f7584e6032d8607f0800000000000000
+      internalID: -646674314902076033
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dotPattern_38
+      rect:
+        serializedVersion: 2
+        x: 1180
+        y: 305
+        width: 59
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7a0b38dcfd8f7c0d0800000000000000
+      internalID: -3402477353345765209
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dotPattern_39
+      rect:
+        serializedVersion: 2
+        x: 107
+        y: 164
+        width: 62
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b368591bbb4d924d0800000000000000
+      internalID: -3158759761020352965
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dotPattern_40
+      rect:
+        serializedVersion: 2
+        x: 343
+        y: 164
+        width: 61
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 80087a703b059b9a0800000000000000
+      internalID: -6216849080750473208
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dotPattern_41
+      rect:
+        serializedVersion: 2
+        x: 579
+        y: 164
+        width: 61
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8c4427bed5d60b430800000000000000
+      internalID: 3796654736022848712
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dotPattern_42
+      rect:
+        serializedVersion: 2
+        x: 816
+        y: 164
+        width: 60
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 29bcd01d4a1d1e7c0800000000000000
+      internalID: -4043720484589810798
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dotPattern_43
+      rect:
+        serializedVersion: 2
+        x: 1052
+        y: 164
+        width: 60
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1022b225dce6e8a20800000000000000
+      internalID: 3066510224411795969
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dotPattern_44
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 14
+        width: 61
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e879ac60389d66ca0800000000000000
+      internalID: -6023888294783576178
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dotPattern_45
+      rect:
+        serializedVersion: 2
+        x: 235
+        y: 14
+        width: 61
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a431486fd1bdd96e0800000000000000
+      internalID: -1829064951906167990
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dotPattern_46
+      rect:
+        serializedVersion: 2
+        x: 471
+        y: 14
+        width: 62
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5d6b9cce6bd66f320800000000000000
+      internalID: 2591379268022417109
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dotPattern_47
+      rect:
+        serializedVersion: 2
+        x: 707
+        y: 14
+        width: 61
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c3faae2f31e293ab0800000000000000
+      internalID: -5027936845767725252
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dotPattern_48
+      rect:
+        serializedVersion: 2
+        x: 944
+        y: 14
+        width: 61
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 903913ac3b1a2fe90800000000000000
+      internalID: -6993349477789494519
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dotPattern_49
+      rect:
+        serializedVersion: 2
+        x: 1180
+        y: 14
+        width: 59
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9361f1ec84c9be580800000000000000
+      internalID: -8796765610628409799
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      dotPattern_0: 6153494312223894440
+      dotPattern_1: -7829029037376779355
+      dotPattern_10: 5230174145431590660
+      dotPattern_11: -3978609513818563028
+      dotPattern_12: -652397478380198035
+      dotPattern_13: -6282365558018529986
+      dotPattern_14: 85726034611095442
+      dotPattern_15: -9025179135364397589
+      dotPattern_16: -1401830958647056350
+      dotPattern_17: -4072805194254811255
+      dotPattern_18: -2401808829969169277
+      dotPattern_19: 6573051026584257631
+      dotPattern_2: -688608544984037898
+      dotPattern_20: 8833313224514292622
+      dotPattern_21: -2027587014141528590
+      dotPattern_22: -276855072131350706
+      dotPattern_23: 9161497445952306399
+      dotPattern_24: -2005273668346389418
+      dotPattern_25: 4370644377784670197
+      dotPattern_26: 1274066161414801792
+      dotPattern_27: 3500536084024374983
+      dotPattern_28: -5750358453768103989
+      dotPattern_29: 5021528091507774152
+      dotPattern_3: -6829660129776934062
+      dotPattern_30: 7189228113047029354
+      dotPattern_31: -9205524207667820268
+      dotPattern_32: -8820076412494799294
+      dotPattern_33: 7691082105263236807
+      dotPattern_34: 7308150053754058278
+      dotPattern_35: -5219902236001896038
+      dotPattern_36: -9193138615907263066
+      dotPattern_37: -646674314902076033
+      dotPattern_38: -3402477353345765209
+      dotPattern_39: -3158759761020352965
+      dotPattern_4: 2020913496858769972
+      dotPattern_40: -6216849080750473208
+      dotPattern_41: 3796654736022848712
+      dotPattern_42: -4043720484589810798
+      dotPattern_43: 3066510224411795969
+      dotPattern_44: -6023888294783576178
+      dotPattern_45: -1829064951906167990
+      dotPattern_46: 2591379268022417109
+      dotPattern_47: -5027936845767725252
+      dotPattern_48: -6993349477789494519
+      dotPattern_49: -8796765610628409799
+      dotPattern_5: -7470079672087689702
+      dotPattern_6: -5472588796485134312
+      dotPattern_7: -6517797202304130533
+      dotPattern_8: 2259744632216002556
+      dotPattern_9: 1905809205104752206
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
