@@ -47,6 +47,7 @@ namespace Game.Field
         public void InitField()
         {
             InitField(width, height);
+            
         }
         
         public void InitField(int width, int height)
