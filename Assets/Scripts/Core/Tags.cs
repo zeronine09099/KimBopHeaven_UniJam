@@ -23,7 +23,8 @@
 [assembly: GameplayTag("Ingredient.Seafood.Octopus", "문어")]
 [assembly: GameplayTag("Ingredient.Seafood.Shrimp", "새우")]
 [assembly: GameplayTag("Ingredient.Seafood.FishCake", "어묵")]
-[assembly: GameplayTag("Ingredient.Seafood.Tofu", "두부")]
+[assembly: GameplayTag("Ingredient.Seafood.CrabStick", "맛살")]
+[assembly: GameplayTag("Ingredient.Seafood.Tuna", "참치")]
 
 // 채소
 [assembly: GameplayTag("Ingredient.Vegetable.Burdock", "우엉")]
@@ -50,7 +51,8 @@
 // 기타
 [assembly: GameplayTag("Ingredient.Etc.Cheese", "치즈 - 기타 재료")]
 [assembly: GameplayTag("Ingredient.Etc.Fire", "불 - 기타 재료")]
-
+[assembly: GameplayTag("Ingredient.Etc.Tofu", "두부")]
+[assembly: GameplayTag("Ingredient.Etc.Egg", "계란")]
 
 // 카테고리 태그
 [assembly: GameplayTag("Category.Meat", "고기류 카테고리")]
