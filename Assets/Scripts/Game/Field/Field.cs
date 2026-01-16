@@ -104,6 +104,119 @@ namespace Game.Field
         }
         
         
+        public TileVector GetWrappedCoordinate(TileVector tile)
+        {
+            var wrappedI = (tile.i % height + height) % height;
+            var wrappedJ = (tile.j % width + width) % width;
+            return new TileVector(wrappedI, wrappedJ);
+        }
+        public TileVector GetWrappedCoordinate(int i, int j)
+        {
+            var wrappedI = (i % height + height) % height;
+            var wrappedJ = (j % width + width) % width;
+            return new TileVector(wrappedI, wrappedJ);
+        }
+        public Vector3 GetTileCenterWorld(TileVector tile){
+            return _grid.GetCellCenterWorld(new Vector3Int(tile.j, tile.i, 0));
+        }
+        
+        public Vector3 GetCenterPosition()
+        {
+            var LeftBottom = _grid.GetCellCenterWorld(new Vector3Int(0, 0, 0));
+            var RightTop = _grid.GetCellCenterWorld(new Vector3Int(width - 1, height - 1, 0));
+            return (LeftBottom + RightTop) / 2;
+        }
+        
+        public Tile WorldToTile(Vector3 worldPosition)
+        {
+            var localPosition = transform.InverseTransformPoint(worldPosition);
+            var cellPosition = _grid.WorldToCell(localPosition);
+            if (cellPosition.x < 0 || cellPosition.x >= width || cellPosition.y < 0 || cellPosition.y >= height)
+                return null;
+            return _tileContainer[cellPosition.y][cellPosition.x];
+        }
+        
+        public TileVector WorldToCoordinate(Vector3 worldPosition)
+        {
+            var localPosition = transform.InverseTransformPoint(worldPosition);
+            var cellPosition = _grid.WorldToCell(localPosition);
+            return new TileVector(cellPosition.y, cellPosition.x);
+        }
+        
+        public Tile GetTile(TileVector tile)
+        {
+            return GetTile(tile.i, tile.j);
+        }
+        public Tile GetTile(int i, int j)
+        {
+            if (i < 0 || i >= height || j < 0 || j >= width)
+            {
+                LogEx.LogError($"GetTile: Index out of range. ({i}, {j}) is not a valid tile coordinate.");
+                return null;
+            }
+            return _tileContainer[i][j];
+        }
+        public Tile GetTileByDirection(Tile tile, Direction direction, bool wrapAround = false, int distance = 1)
+        {
+            return GetTileByDirectionWrap(tile, direction, out bool _, distance);
+        }
+        
+        public Tile GetTileByDirectionWrap(Tile tile, Direction direction, out bool wrapped, int distance = 1)
+        {
+            wrapped = false;
+            var coordinate = tile.Coordinate;
+            var nextCoordinate = coordinate + direction.ToTileVector() * distance;
+            if (nextCoordinate.i < 0 || nextCoordinate.i >= height ||
+                nextCoordinate.j < 0 || nextCoordinate.j >= width)
+            {
+                wrapped = true;
+                while (nextCoordinate.i < 0)
+                    nextCoordinate.i += height;
+                while (nextCoordinate.i >= height)
+                    nextCoordinate.i -= height;
+
+                while (nextCoordinate.j < 0)
+                    nextCoordinate.j += width;
+                while (nextCoordinate.j >= width)
+                    nextCoordinate.j -= width;
+            }
+            return GetTile(nextCoordinate);
+        }
+        
+        public Tile GetTileByDelta(Tile tile, TileVector delta, bool wrapAround = false)
+        {
+            var coordinate = tile.Coordinate;
+            var nextCoordinate = coordinate + delta;
+            if (wrapAround)
+            {
+                while (nextCoordinate.i < 0)
+                    nextCoordinate.i += height;
+                while (nextCoordinate.i >= height)
+                    nextCoordinate.i -= height;
+
+                while (nextCoordinate.j < 0)
+                    nextCoordinate.j += width;
+                while (nextCoordinate.j >= width)
+                    nextCoordinate.j -= width;
+            }
+            return GetTile(nextCoordinate);
+        }
+        
+        
+        public Vector3 GetTilePosition(TileVector tile)
+        {
+            return GetTilePosition(tile.i, tile.j);
+        }
+        public Vector3 GetTilePosition(int i, int j)
+        {
+            if (i < 0 || i >= height || j < 0 || j >= width)
+            {
+                LogEx.LogError($"GetTilePosition: Index out of range. ({i}, {j}) is not a valid tile coordinate.");
+                return Vector3.zero;
+            }
+            return _tileContainer[i][j].transform.position;
+        }
+        
         [Serializable]
         internal class TileLine : IEnumerable<Tile>
         {
