@@ -21,6 +21,8 @@ namespace Database.Generated
         public string description;
         /// <summary> 희귀도 </summary>
         public Common.Rarity rarity;
+        /// <summary> 초기개수 </summary>
+        public int startAmount;
         /// <summary> 기타 변수 1 </summary>
         public float variable01;
         /// <summary> 기타 변수 2 </summary>

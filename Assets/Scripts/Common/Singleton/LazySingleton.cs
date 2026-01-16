@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Common.Singleton
 {
@@ -8,7 +9,21 @@ namespace Common.Singleton
 
         protected virtual bool DontDestroyOnLoad => true;
         public static bool HasInstance => _instance != null;
-
+        
+        #if UNITY_EDITOR
+        [RuntimeInitializeOnLoadMethod]
+        private static void InitOnLoad()
+        {
+            UnityEditor.EditorApplication.playModeStateChanged += (state) =>
+            {
+                if (state == UnityEditor.PlayModeStateChange.ExitingPlayMode)
+                {
+                    _instance = null;
+                }
+            };
+        }
+        #endif
+        
         public static T Instance
         {
             get

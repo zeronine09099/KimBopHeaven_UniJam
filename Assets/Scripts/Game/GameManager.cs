@@ -5,6 +5,7 @@ using Common.Singleton;
 using Cysharp.Threading.Tasks;
 using Game;
 using Game.Field;
+using Machamy.Utils;
 using Player;
 using UnityEngine;
 
@@ -26,15 +27,17 @@ namespace Core
 
         public async UniTask Init(Action onCompleted = null)
         {
+            LogEx.Log("Initializing GameManager...");
             await UniTask.DelayFrame(1);
             IsInitialized = true;
+            LogEx.Log("GameManager Initialized.");
             onCompleted?.Invoke();
         }
 
         /// <summary>
         /// 플레이어 상태 정보
         /// </summary>
-        public PlayerState PlayerStatus { get; set; }
+        [field:SerializeField]public PlayerState PlayerStatus { get; private set; } = new PlayerState();
 
         public void StartGame()
         {
@@ -61,8 +64,7 @@ namespace Core
             UIManager.Instance.TitleUI.gameObject.SetActive(false);
             
             // 플레이어 상태 초기화
-            PlayerStatus = new PlayerState();
-            PlayerStatus.CurrentStageInfo = StageLibrary.Instance.GetStageInfo(1);
+            PlayerStatus.SetUpNewGame();
             
             // 게임 루프
             await StageManager.Instance.StartStage(PlayerStatus.CurrentStageInfo, cancellationToken);

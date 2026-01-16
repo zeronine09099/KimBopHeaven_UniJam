@@ -6,6 +6,7 @@ using Core;
 using Cysharp.Threading.Tasks;
 using Database.Generated;
 using Machamy.DeveloperConsole.Attributes;
+using Machamy.Utils;
 using Player;
 using UnityEngine;
 
@@ -25,8 +26,10 @@ namespace Game
         
         public async UniTask Init(Action onCompleted = null)
         {
+            LogEx.Log("Initializing StageManager...");
             await UniTask.Yield();
             onCompleted?.Invoke();
+            LogEx.Log("StageManager initialized.");
             IsInitialized = true;
         }
 

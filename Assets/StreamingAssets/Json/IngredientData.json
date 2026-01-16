@@ -6,6 +6,7 @@
     "baseScore": 10.0,
     "description": "맛있는 김",
     "rarity": 2,
+    "startAmount": 6,
     "variable01": 0.0,
     "variable02": 0.0,
     "additionalVariables": []
@@ -17,6 +18,7 @@
     "baseScore": 10.0,
     "description": "잘 지은 밥",
     "rarity": 2,
+    "startAmount": 6,
     "variable01": 0.0,
     "variable02": 0.0,
     "additionalVariables": []
@@ -28,6 +30,7 @@
     "baseScore": 10.0,
     "description": "밥이 인접해 있으면 점수 두배",
     "rarity": 3,
+    "startAmount": 6,
     "variable01": 2.0,
     "variable02": 0.0,
     "additionalVariables": []
@@ -39,6 +42,7 @@
     "baseScore": 20.0,
     "description": "단무지 옆에 있으면 점수 20추가",
     "rarity": 1,
+    "startAmount": 6,
     "variable01": 20.0,
     "variable02": 0.0,
     "additionalVariables": []
@@ -50,6 +54,7 @@
     "baseScore": 10.0,
     "description": "김밥의 해산물 하나당 점수 10 추가",
     "rarity": 1,
+    "startAmount": 0,
     "variable01": 0.0,
     "variable02": 0.0,
     "additionalVariables": []
@@ -61,6 +66,7 @@
     "baseScore": 30.0,
     "description": "달콤짭짤 계란말이",
     "rarity": 3,
+    "startAmount": 0,
     "variable01": 0.0,
     "variable02": 0.0,
     "additionalVariables": []
@@ -72,6 +78,7 @@
     "baseScore": 10.0,
     "description": "인접한 채소류 하나마다 점수 + 20",
     "rarity": 3,
+    "startAmount": 0,
     "variable01": 20.0,
     "variable02": 0.0,
     "additionalVariables": []
@@ -83,6 +90,7 @@
     "baseScore": 10.0,
     "description": "다른 종류의 고기류가 없다면 점수 +30",
     "rarity": 2,
+    "startAmount": 0,
     "variable01": 30.0,
     "variable02": 0.0,
     "additionalVariables": []
@@ -94,6 +102,7 @@
     "baseScore": 20.0,
     "description": "밥이 인접해있다면 점수 20 추가",
     "rarity": 2,
+    "startAmount": 0,
     "variable01": 20.0,
     "variable02": 0.0,
     "additionalVariables": []
@@ -105,6 +114,7 @@
     "baseScore": 0.0,
     "description": "다른 종류의 고기류가 없다면 점수 +50",
     "rarity": 3,
+    "startAmount": 0,
     "variable01": 50.0,
     "variable02": 0.0,
     "additionalVariables": []
@@ -116,6 +126,7 @@
     "baseScore": 20.0,
     "description": "인접한 재료가 모두 채소류라면 점수 + 40",
     "rarity": 2,
+    "startAmount": 0,
     "variable01": 40.0,
     "variable02": 0.0,
     "additionalVariables": []
@@ -127,6 +138,7 @@
     "baseScore": 30.0,
     "description": "한 턴에 다른 김밥이 완성되었다면 덱에 연어 추가",
     "rarity": 3,
+    "startAmount": 0,
     "variable01": 0.0,
     "variable02": 0.0,
     "additionalVariables": []
@@ -138,6 +150,7 @@
     "baseScore": 10.0,
     "description": "인접한 문어가 있다면 점수 +10, 점수 계산 이후 양 옆 재료를 문어로 만듦",
     "rarity": 3,
+    "startAmount": 0,
     "variable01": 10.0,
     "variable02": 0.0,
     "additionalVariables": []
@@ -149,6 +162,7 @@
     "baseScore": 10.0,
     "description": "고기류가 인접해있다면 그 재료 파괴, 덱에 새우 추가",
     "rarity": 1,
+    "startAmount": 0,
     "variable01": 0.0,
     "variable02": 1.0,
     "additionalVariables": []
@@ -160,6 +174,7 @@
     "baseScore": 10.0,
     "description": "인접한 재료가 모두 해산물이면 점수 * 2",
     "rarity": 3,
+    "startAmount": 0,
     "variable01": 2.0,
     "variable02": 0.0,
     "additionalVariables": []
@@ -171,6 +186,7 @@
     "baseScore": 10.0,
     "description": "인접한 소스가 있다면 점수 * 2",
     "rarity": 2,
+    "startAmount": 0,
     "variable01": 2.0,
     "variable02": 0.0,
     "additionalVariables": []
@@ -182,6 +198,7 @@
     "baseScore": 20.0,
     "description": "김밥의 채소마다 점수 10 추가",
     "rarity": 1,
+    "startAmount": 0,
     "variable01": 10.0,
     "variable02": 0.0,
     "additionalVariables": []
@@ -193,6 +210,7 @@
     "baseScore": 10.0,
     "description": "김 제외 겹치는 재료가 없으면 점수 30 추가",
     "rarity": 2,
+    "startAmount": 0,
     "variable01": 30.0,
     "variable02": 0.0,
     "additionalVariables": []
@@ -204,6 +222,7 @@
     "baseScore": 10.0,
     "description": "인접한 재료가 모두 채소라면 선택지 리롤 1개 지급",
     "rarity": 2,
+    "startAmount": 0,
     "variable01": 1.0,
     "variable02": 0.0,
     "additionalVariables": []
@@ -215,6 +234,7 @@
     "baseScore": 10.0,
     "description": "김밥 재료에 불 하나마다 점수 20 추가",
     "rarity": 1,
+    "startAmount": 0,
     "variable01": 20.0,
     "variable02": 0.0,
     "additionalVariables": []
@@ -226,6 +246,7 @@
     "baseScore": 10.0,
     "description": "옆에 불이 있으면 구운 버섯이 됨",
     "rarity": 1,
+    "startAmount": 0,
     "variable01": 0.0,
     "variable02": 1.0,
     "additionalVariables": []
@@ -237,6 +258,7 @@
     "baseScore": 50.0,
     "description": "잘 구운 버섯 하나.",
     "rarity": 0,
+    "startAmount": 0,
     "variable01": 0.0,
     "variable02": 0.0,
     "additionalVariables": []
@@ -248,6 +270,7 @@
     "baseScore": 40.0,
     "description": "점수 0인 불 덱에 2개 추가",
     "rarity": 2,
+    "startAmount": 0,
     "variable01": 0.0,
     "variable02": 2.0,
     "additionalVariables": []
@@ -259,6 +282,7 @@
     "baseScore": 20.0,
     "description": "고기류가 인접해 있다면 점수 20 추가",
     "rarity": 2,
+    "startAmount": 0,
     "variable01": 20.0,
     "variable02": 0.0,
     "additionalVariables": []
@@ -270,6 +294,7 @@
     "baseScore": 40.0,
     "description": "고기류가 인접해 있다면 점수 20 추가",
     "rarity": 0,
+    "startAmount": 0,
     "variable01": 20.0,
     "variable02": 0.0,
     "additionalVariables": []
@@ -281,6 +306,7 @@
     "baseScore": 10.0,
     "description": "고기류가 인접해 있다면 점수 30 추가",
     "rarity": 1,
+    "startAmount": 0,
     "variable01": 30.0,
     "variable02": 0.0,
     "additionalVariables": []
@@ -292,6 +318,7 @@
     "baseScore": 20.0,
     "description": "김밥에 다른 채소류가 없다면 점수 30 추가",
     "rarity": 2,
+    "startAmount": 0,
     "variable01": 30.0,
     "variable02": 0.0,
     "additionalVariables": []
@@ -303,6 +330,7 @@
     "baseScore": 10.0,
     "description": "밥 또는 고기류에 인접해 있다면 점수 20 추가",
     "rarity": 1,
+    "startAmount": 0,
     "variable01": 20.0,
     "variable02": 0.0,
     "additionalVariables": []
@@ -314,6 +342,7 @@
     "baseScore": 10.0,
     "description": "밥이 인접해있고 다른 소스가 없다면 점수 30 추가",
     "rarity": 1,
+    "startAmount": 0,
     "variable01": 30.0,
     "variable02": 0.0,
     "additionalVariables": []
@@ -325,6 +354,7 @@
     "baseScore": 10.0,
     "description": "밥이 인접해있다면 점수 25 추가",
     "rarity": 1,
+    "startAmount": 0,
     "variable01": 25.0,
     "variable02": 0.0,
     "additionalVariables": []
@@ -336,6 +366,7 @@
     "baseScore": 20.0,
     "description": "고기류가 인접해 있다면 점수 30 추가",
     "rarity": 1,
+    "startAmount": 0,
     "variable01": 30.0,
     "variable02": 0.0,
     "additionalVariables": []
@@ -347,6 +378,7 @@
     "baseScore": 10.0,
     "description": "덱에 치즈 추가, 이전 김밥에 치즈가 없었다면 점수 25 추가",
     "rarity": 2,
+    "startAmount": 0,
     "variable01": 20.0,
     "variable02": 0.0,
     "additionalVariables": []
@@ -358,6 +390,7 @@
     "baseScore": 0.0,
     "description": "",
     "rarity": 0,
+    "startAmount": 0,
     "variable01": 0.0,
     "variable02": 0.0,
     "additionalVariables": []
@@ -369,6 +402,7 @@
     "baseScore": 25.0,
     "description": "마요네즈가 인접해있다면 점수 + 30",
     "rarity": 3,
+    "startAmount": 0,
     "variable01": 30.0,
     "variable02": 0.0,
     "additionalVariables": []
@@ -380,6 +414,7 @@
     "baseScore": 0.0,
     "description": "비어있습니다. 재료가 채워지면 재료로 대체",
     "rarity": 0,
+    "startAmount": 12,
     "variable01": 0.0,
     "variable02": 0.0,
     "additionalVariables": []

@@ -38,12 +38,15 @@ namespace Game
         
         public async UniTask Init(System.Action onCompleted = null)
         {
+            LogEx.Log("Initializing IngredientLibrary...");
+            ingredientDictionary.Clear();
             await LoadAndInitializeIngredients();
             var pairs = ingredientDictionary.ToList();
             pairs.Sort((a, b) => a.Value.order.CompareTo(b.Value.order));
             cachedIngredientTagList = pairs.Select(pair => pair.Key).ToList();
             cachedIngredientList = pairs.Select(pair => pair.Value).ToList();
             IsInitialized = true;
+            LogEx.Log("IngredientLibrary initialized.");
             onCompleted?.Invoke();
         }
         private async UniTask LoadAndInitializeIngredients()
@@ -52,7 +55,14 @@ namespace Game
             var ingredientSOList = Resources.LoadAll<IngredientSO>("ScriptableObjects/Ingredients");
             foreach (var ingredientSO in ingredientSOList)
             {
-                ingredientDictionary.Add(ingredientSO.Tag, ingredientSO);
+                if (!ingredientDictionary.ContainsKey(ingredientSO.Tag))
+                {
+                    ingredientDictionary.Add(ingredientSO.Tag, ingredientSO);
+                }
+                else
+                {
+                    LogEx.LogError($"Duplicate IngredientSO for tag: {ingredientSO.Tag} ({ingredientSO.name}");
+                }
             }
             
             // DB매니저에서 초기화

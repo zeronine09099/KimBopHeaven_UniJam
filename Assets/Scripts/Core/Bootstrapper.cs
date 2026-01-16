@@ -61,7 +61,7 @@ namespace Core
                 LogEx.Log($"[Bootstrapper] Loaded {LoadedCount}/{_totalToLoad}");
             }
 
-            _totalToLoad = 5; // DatabaseManager, GameManager, StageManager, IngredientManager, SoundManager
+            _totalToLoad = 6;
             LoadedCount = 0;
             
             // DatabaseManager 초기화
@@ -72,6 +72,7 @@ namespace Core
             await UniTask.WhenAll(
                 GameManager.Instance.Init(IncrementLoadedCount),
                 StageManager.Instance.Init(IncrementLoadedCount),
+                StageLibrary.Instance.Init(IncrementLoadedCount),
                 IngredientLibrary.Instance.Init(IncrementLoadedCount)
             );
             

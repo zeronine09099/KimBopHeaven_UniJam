@@ -53,6 +53,7 @@
 [assembly: GameplayTag("Ingredient.Etc.Fire", "불")]
 [assembly: GameplayTag("Ingredient.Etc.Tofu", "두부")]
 [assembly: GameplayTag("Ingredient.Etc.Egg", "계란")]
+[assembly: GameplayTag("Ingredient.Etc.Air", "공기")]
 
 // 카테고리 태그
 [assembly: GameplayTag("Category.Meat", "고기류 카테고리")]

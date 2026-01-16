@@ -49,7 +49,7 @@ namespace Player
             {
                 Variables.SetInteger(key.ToString(), 0);
             }
-            CurrentCoins = 0;
+            CurrentStageInfo = null;
         }
 
         public enum VariableKey
@@ -169,27 +169,6 @@ namespace Player
         }
 
         // --- Current prefix (실시간 값) ---
-
-        /// <summary>
-        /// 현재 플레이어가 보유한 코인 (실시간 값). (Prefix: Current)
-        /// NOTE: 현재는 VariableContainer에 저장되지만, 필요하면 내부 필드로 이동시킬 수 있습니다.
-        /// </summary>
-        public int CurrentCoins
-        {
-            get { return Variables.GetVariable("CurrentCoins").IntValue; }
-            set
-            {
-                int oldValue = Variables.GetVariable("CurrentCoins").IntValue;
-                Variables.SetInteger("CurrentCoins", value);
-                // if (Current == this)
-                // {
-                //     using var evt = CurrentCoinChangedEventArgs.Get();
-                //     evt.OldCurrentCoin = oldValue;
-                //     evt.NewCurrentCoin = value;
-                //     ExecEventBus<CurrentCoinChangedEventArgs>.InvokeMerged(evt).Forget();
-                // }
-            }
-        }
 
         public StageInfo CurrentStageInfo { get; set; }
 
@@ -372,6 +351,16 @@ namespace Player
                         }
                     }
                 }
+            }
+        }
+
+        public void SetUpNewGame()
+        {
+            Reset();
+            inventory.Clear();
+            foreach (var item in IngredientLibrary.Instance.AllIngredientList)
+            {
+                inventory.SetIngredientCount(item, item.startAmount);
             }
         }
     }

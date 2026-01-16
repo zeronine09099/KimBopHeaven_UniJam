@@ -8,6 +8,7 @@ using Database.Generated;
 using Game.Field;
 using Machamy.Attributes;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Game
 {
@@ -26,10 +27,13 @@ namespace Game
         public string displayName;
         public string description;
         public float baseScore = 10f;
+        public int startAmount = 0;
         public float variable01 = 0f;
         public float variable02 = 0f;
         public List<string> additionalVariables = new List<string>();
         
+        
+        public Color debugColor = Color.white;
         public abstract IEnumerator OnFall(Tile tile);
 
 
@@ -62,12 +66,23 @@ namespace Game
             description = data.description;
             rarity = data.rarity;
             baseScore = data.baseScore;
+            startAmount = data.startAmount;
             variable01 = data.variable01;
             variable02 = data.variable02;
+            
+            var savedState = UnityEngine.Random.state;
+            UnityEngine.Random.InitState(Tag.GetHashCode());
+            debugColor = Random.ColorHSV(0f, 1f, 0.5f, 1f, 0.5f, 1f);
+            UnityEngine.Random.state = savedState;
             if (data.additionalVariables != null)
             {
                 additionalVariables = new List<string>(data.additionalVariables);
             }
+        }
+
+        public static explicit operator IngredientSO(GameplayTag tag)
+        {
+            return IngredientLibrary.Instance.GetIngredientSO(tag);
         }
     }
 }
