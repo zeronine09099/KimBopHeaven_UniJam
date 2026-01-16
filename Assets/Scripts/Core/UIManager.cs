@@ -1,5 +1,8 @@
 ﻿using System.Collections;
 using Common.Singleton;
+using Encounter;
+using Game;
+using Reward;
 using Title;
 using UnityEngine;
 
@@ -18,6 +21,9 @@ namespace Core
         }
 
         [field:SerializeField] public TitleUI TitleUI { get; set; }
-        
+        [field:SerializeField] public IngameUI InGameUI { get; set; }
+        [field:SerializeField] public RewardUI RewardUI { get; set; }
+        [field:SerializeField] public EncounterUI EncounterUI { get; set; }
     }
+    
 }
