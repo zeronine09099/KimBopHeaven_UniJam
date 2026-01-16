@@ -5,6 +5,7 @@ using BandoWare.GameplayTags;
 using Common.Collections;
 using Common.Singleton;
 using Database;
+using Machamy.Attributes;
 using Machamy.Utils;
 using UnityEngine;
 
@@ -16,7 +17,9 @@ namespace Game
     /// </summary>
     public class IngredientManager : Singleton<IngredientManager>
     {
-        [SerializeField] private SerializableDictionary<GameplayTag, IngredientSO> ingredientDictionary = new();
+        [field:SerializeField] public bool IsInitialized { get; private set; } = false;
+
+        [SerializeField,VisibleOnly] private SerializableDictionary<GameplayTag, IngredientSO> ingredientDictionary = new();
         
         protected override void AfterAwake()
         {
@@ -26,6 +29,7 @@ namespace Game
         public IEnumerator Init(System.Action onCompleted = null)
         {
             yield return LoadAndInitializeIngredients();
+            IsInitialized = true;
             onCompleted?.Invoke();
         }
         private IEnumerator LoadAndInitializeIngredients()
@@ -55,6 +59,7 @@ namespace Game
             }
             
             
+         
             yield break;
         }
     }

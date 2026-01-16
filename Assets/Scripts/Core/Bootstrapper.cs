@@ -6,6 +6,7 @@ using Database;
 using Game;
 using Machamy.Utils;
 using SceneManagement;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -57,7 +58,7 @@ namespace Core
             yield return StageManager.Instance.Init(IncrementLoadedCount);
             yield return IngredientManager.Instance.Init(IncrementLoadedCount);
 
-            yield return new WaitWhile(() => DatabaseManager.Instance.IsInitialized);
+            yield return new WaitUntil(() => DatabaseManager.Instance.IsInitialized);
             IncrementLoadedCount();
             
             yield return null;

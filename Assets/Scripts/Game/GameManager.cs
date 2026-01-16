@@ -4,12 +4,13 @@ using Common.Singleton;
 using Game;
 using Game.Field;
 using Player;
+using UnityEngine;
 
 namespace Core
 {
     public class GameManager : Singleton<GameManager>
     {
-        
+        [field:SerializeField] public bool IsInitialized { get; private set; } = false;
         
         public Field Field { get; set; }
         
@@ -21,6 +22,8 @@ namespace Core
         public IEnumerator Init(Action onCompleted = null)
         {
             yield return null;
+            IsInitialized = true;
+            onCompleted?.Invoke();
         }
 
         /// <summary>

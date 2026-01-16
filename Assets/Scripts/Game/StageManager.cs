@@ -2,11 +2,15 @@
 using System.Collections;
 using Common.Singleton;
 using Core;
+using UnityEngine;
 
 namespace Game
 {
     public class StageManager : Singleton<StageManager>
     {
+        [field:SerializeField] public bool IsInitialized { get; private set; } = false;
+
+        
         protected override void AfterAwake()
         {
             
@@ -16,6 +20,7 @@ namespace Game
         {
             yield return null;
             onCompleted?.Invoke();
+            IsInitialized = true;
         }
 
         public IEnumerator StartStage()
