@@ -1,6 +1,7 @@
 ﻿
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using BandoWare.GameplayTags;
 using Common.Collections;
 using Common.Singleton;
@@ -20,6 +21,13 @@ namespace Game
         [field:SerializeField] public bool IsInitialized { get; private set; } = false;
 
         [SerializeField,VisibleOnly] private SerializableDictionary<GameplayTag, IngredientSO> ingredientDictionary = new();
+
+        private List<GameplayTag> cachedIngredientTagList = null;
+        List<IngredientSO> cachedIngredientList = null;
+        
+        public IReadOnlyDictionary<GameplayTag, IngredientSO> AllIngredients => ingredientDictionary;
+        public IReadOnlyList<GameplayTag> AllIngredientTagList => cachedIngredientTagList;
+        public IReadOnlyList<IngredientSO> AllIngredientList => cachedIngredientList;
         
         protected override void AfterAwake()
         {
@@ -29,6 +37,8 @@ namespace Game
         public IEnumerator Init(System.Action onCompleted = null)
         {
             yield return LoadAndInitializeIngredients();
+            cachedIngredientTagList = ingredientDictionary.Keys.ToList();
+            cachedIngredientList = ingredientDictionary.Values.ToList();
             IsInitialized = true;
             onCompleted?.Invoke();
         }
@@ -77,5 +87,7 @@ namespace Game
             LogEx.LogError($"IngredientSO not found for tag: {tag}");
             return null;
         }
+        
+
     }
 }
