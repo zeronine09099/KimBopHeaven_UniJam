@@ -900,6 +900,7 @@ GameObject:
   - component: {fileID: 1322686651049690813}
   - component: {fileID: 6498657609506853070}
   - component: {fileID: 7485254873438266491}
+  - component: {fileID: 542651730471455822}
   m_Layer: 5
   m_Name: MenuBtn
   m_TagString: Untagged
@@ -1039,6 +1040,38 @@ MonoBehaviour:
   animationDuration: 0.2
   easeType: 31
   onMouseIcon: {fileID: 0}
+--- !u!114 &542651730471455822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2775384294942843640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52c162dc854d2f24fa639ba0623de5ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: LeTai.TrueShadow::LeTai.TrueShadow.TrueShadow
+  algorithm: 0
+  size: 8
+  spread: 0
+  useGlobalAngle: 0
+  offsetAngle: 90
+  offsetDistance: 12
+  offset: {x: 0.00000071525574, y: -11.999999}
+  color: {r: 0, g: 0, b: 0, a: 0.6}
+  inset: 0
+  blendMode: 0
+  useCasterAlpha: 1
+  ignoreCasterColor: 0
+  skipTextHashing: 0
+  deallocateOnDisable: 0
+  disableFitCompensation: 0
+  shadowAsSibling: 0
+  cutout: 0
+  baked: 0
+  modifiedFromInspector: 0
+  bakedShadows: []
 --- !u!1 &3079536461104678364
 GameObject:
   m_ObjectHideFlags: 0
@@ -1387,6 +1420,7 @@ GameObject:
   - component: {fileID: 1688042219194657097}
   - component: {fileID: 2114033927540502180}
   - component: {fileID: 8121125460706740266}
+  - component: {fileID: 9152389068695076660}
   m_Layer: 5
   m_Name: checkpoint
   m_TagString: Untagged
@@ -1454,6 +1488,38 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 5
+--- !u!114 &9152389068695076660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4825294756340591276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52c162dc854d2f24fa639ba0623de5ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: LeTai.TrueShadow::LeTai.TrueShadow.TrueShadow
+  algorithm: 0
+  size: 8
+  spread: 0
+  useGlobalAngle: 0
+  offsetAngle: 90
+  offsetDistance: 12
+  offset: {x: 0.00000071525585, y: -12}
+  color: {r: 0, g: 0, b: 0, a: 0.6}
+  inset: 0
+  blendMode: 0
+  useCasterAlpha: 1
+  ignoreCasterColor: 0
+  skipTextHashing: 0
+  deallocateOnDisable: 0
+  disableFitCompensation: 0
+  shadowAsSibling: 0
+  cutout: 0
+  baked: 0
+  modifiedFromInspector: 0
+  bakedShadows: []
 --- !u!1 &4881461707607342495
 GameObject:
   m_ObjectHideFlags: 0
@@ -1467,6 +1533,7 @@ GameObject:
   - component: {fileID: 5415245182578028966}
   - component: {fileID: 7874555494692812539}
   - component: {fileID: 7738010017015401579}
+  - component: {fileID: 371160661214794473}
   m_Layer: 5
   m_Name: DeckBtn
   m_TagString: Untagged
@@ -1593,6 +1660,38 @@ MonoBehaviour:
   animationDuration: 0.2
   easeType: 31
   onMouseIcon: {fileID: 0}
+--- !u!114 &371160661214794473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4881461707607342495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52c162dc854d2f24fa639ba0623de5ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: LeTai.TrueShadow::LeTai.TrueShadow.TrueShadow
+  algorithm: 0
+  size: 8
+  spread: 0
+  useGlobalAngle: 0
+  offsetAngle: 45
+  offsetDistance: 16
+  offset: {x: 11.313707, y: -11.313709}
+  color: {r: 0, g: 0, b: 0, a: 0.6}
+  inset: 0
+  blendMode: 0
+  useCasterAlpha: 1
+  ignoreCasterColor: 0
+  skipTextHashing: 0
+  deallocateOnDisable: 0
+  disableFitCompensation: 0
+  shadowAsSibling: 0
+  cutout: 0
+  baked: 0
+  modifiedFromInspector: 0
+  bakedShadows: []
 --- !u!1 &5179454755935553453
 GameObject:
   m_ObjectHideFlags: 0
@@ -2212,6 +2311,7 @@ GameObject:
   - component: {fileID: 4972563474258858535}
   - component: {fileID: 4407878106936618297}
   - component: {fileID: 2070388326001581996}
+  - component: {fileID: 17503853777897007}
   m_Layer: 5
   m_Name: Checkpoint
   m_TagString: Untagged
@@ -2270,7 +2370,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f55c450001f991645af4d55db53d3ed2, type: 2}
   m_sharedMaterial: {fileID: -3288237565920160978, guid: f55c450001f991645af4d55db53d3ed2, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: -3288237565920160978, guid: f55c450001f991645af4d55db53d3ed2, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -2338,6 +2439,38 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &17503853777897007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6847161791418318305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52c162dc854d2f24fa639ba0623de5ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: LeTai.TrueShadow::LeTai.TrueShadow.TrueShadow
+  algorithm: 0
+  size: 8
+  spread: 0
+  useGlobalAngle: 0
+  offsetAngle: 90
+  offsetDistance: 6
+  offset: {x: 0.00000035762793, y: -6}
+  color: {r: 0, g: 0, b: 0, a: 0.6}
+  inset: 0
+  blendMode: 0
+  useCasterAlpha: 1
+  ignoreCasterColor: 0
+  skipTextHashing: 0
+  deallocateOnDisable: 0
+  disableFitCompensation: 0
+  shadowAsSibling: 0
+  cutout: 0
+  baked: 0
+  modifiedFromInspector: 0
+  bakedShadows: []
 --- !u!1 &6979113982051895007
 GameObject:
   m_ObjectHideFlags: 0
@@ -2534,11 +2667,11 @@ RectTransform:
   - {fileID: 110130380148913339}
   m_Father: {fileID: 2942686445868648430}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 308.1126, y: 597}
-  m_SizeDelta: {x: 415.7748, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -25, y: -525}
+  m_SizeDelta: {x: 415.77478, y: 100}
+  m_Pivot: {x: 1, y: 1}
 --- !u!1 &7770459075201651755
 GameObject:
   m_ObjectHideFlags: 0
@@ -2590,6 +2723,7 @@ GameObject:
   - component: {fileID: 110130380148913339}
   - component: {fileID: 2868221119553929808}
   - component: {fileID: 6044434452372039479}
+  - component: {fileID: 6565909409771162372}
   m_Layer: 5
   m_Name: checkpointIcon
   m_TagString: Untagged
@@ -2654,6 +2788,38 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &6565909409771162372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7903863526204963562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52c162dc854d2f24fa639ba0623de5ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: LeTai.TrueShadow::LeTai.TrueShadow.TrueShadow
+  algorithm: 0
+  size: 8
+  spread: 0
+  useGlobalAngle: 0
+  offsetAngle: 45
+  offsetDistance: 12
+  offset: {x: 8.485281, y: -8.485282}
+  color: {r: 0, g: 0, b: 0, a: 0.6}
+  inset: 0
+  blendMode: 0
+  useCasterAlpha: 1
+  ignoreCasterColor: 0
+  skipTextHashing: 0
+  deallocateOnDisable: 0
+  disableFitCompensation: 0
+  shadowAsSibling: 0
+  cutout: 0
+  baked: 0
+  modifiedFromInspector: 0
+  bakedShadows: []
 --- !u!1 &8175406250295983522
 GameObject:
   m_ObjectHideFlags: 0
