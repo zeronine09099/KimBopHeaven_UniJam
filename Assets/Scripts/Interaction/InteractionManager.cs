@@ -1,6 +1,7 @@
 ﻿using System;
 using Common.Singleton;
 using Game.Field;
+using Machamy.Attributes;
 using UnityEngine;
 
 namespace Interaction
@@ -15,10 +16,10 @@ namespace Interaction
         [SerializeField] private float longPressThreshold = 0.75f;
         [SerializeField] private float clickThreshold = 0.2f;
         
-        private bool isPressing = false;
-        private float pressTime = -100f;
-        private Vector2 pointerPosition = Vector2.zero;
-        private Tile pressedTile = null;
+        [SerializeField,VisibleOnly] private bool isPressing = false;
+        [SerializeField,VisibleOnly] private float pressTime = -100f;
+        [SerializeField,VisibleOnly] private Vector2 pointerPosition = Vector2.zero;
+        [SerializeField,VisibleOnly]  private Tile pressedTile = null;
         
         public event Action<Tile> OnTilePressed;
         public event Action<Tile> OnTileReleased;

@@ -2,6 +2,7 @@
 using System.Collections;
 using Common.Singleton;
 using Core;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace Game
@@ -16,9 +17,9 @@ namespace Game
             
         }
         
-        public IEnumerator Init(Action onCompleted = null)
+        public async UniTask Init(Action onCompleted = null)
         {
-            yield return null;
+            await UniTask.Yield();
             onCompleted?.Invoke();
             IsInitialized = true;
         }

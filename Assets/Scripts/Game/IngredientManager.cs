@@ -5,6 +5,7 @@ using System.Linq;
 using BandoWare.GameplayTags;
 using Common.Collections;
 using Common.Singleton;
+using Cysharp.Threading.Tasks;
 using Database;
 using Machamy.Attributes;
 using Machamy.Utils;
@@ -34,9 +35,9 @@ namespace Game
             
         }
         
-        public IEnumerator Init(System.Action onCompleted = null)
+        public async UniTask Init(System.Action onCompleted = null)
         {
-            yield return LoadAndInitializeIngredients();
+            await LoadAndInitializeIngredients();
             var pairs = ingredientDictionary.ToList();
             pairs.Sort((a, b) => a.Value.order.CompareTo(b.Value.order));
             cachedIngredientTagList = pairs.Select(pair => pair.Key).ToList();
@@ -44,7 +45,7 @@ namespace Game
             IsInitialized = true;
             onCompleted?.Invoke();
         }
-        private IEnumerator LoadAndInitializeIngredients()
+        private async UniTask LoadAndInitializeIngredients()
         {
             // SO 등록
             var ingredientSOList = Resources.LoadAll<IngredientSO>("ScriptableObjects/Ingredients");
@@ -54,7 +55,8 @@ namespace Game
             }
             
             // DB매니저에서 초기화
-            yield return new WaitWhile(() => !DatabaseManager.Instance.IsInitialized);
+            // yield return new WaitWhile(() => !DatabaseManager.Instance.IsInitialized);
+            await new WaitUntil(() => DatabaseManager.Instance.IsInitialized);
 
             var ingredientDBEntries = DatabaseManager.Instance.Database.IngredientDataList;
             int order = 0;
@@ -72,10 +74,6 @@ namespace Game
                 }
                 order++;
             }
-            
-            
-         
-            yield break;
         }
         
         /// <summary>
