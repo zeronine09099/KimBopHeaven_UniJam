@@ -16,10 +16,10 @@ namespace Game
 
         public abstract GameplayTag Tag { get; }
 
+        public int order;
         #if UNITY_EDITOR
         [SerializeField, VisibleOnly,Label("설정된 태그")] private string debugTag;
         #endif
-        
         
         public Sprite icon;
         public Rarity rarity;

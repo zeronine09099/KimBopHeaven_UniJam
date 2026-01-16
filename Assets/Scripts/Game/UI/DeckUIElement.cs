@@ -1,0 +1,43 @@
+﻿using Player;
+using UnityEngine;
+using UnityEngine.UI;
+
+namespace Game.UI
+{
+    public class DeckUIElement : MonoBehaviour
+    {
+        [Header("References")]
+        [SerializeField] private Image iconImage;
+        [SerializeField] private Text countText;
+        [SerializeField] private Button addButton;
+        [SerializeField] private Button deleteButton;
+        [Header("Setting")]
+        [Header("Variables")]
+        public IngredientSO ingredient;
+        
+        public void Initialize(IngredientSO ingredient)
+        {
+            this.ingredient = ingredient;
+        }
+        
+        public void SetDeckForm()
+        {
+            iconImage.sprite = ingredient.icon;
+            addButton.gameObject.SetActive(false);
+            deleteButton.gameObject.SetActive(false);
+        }
+
+        public void SetDeleteForm()
+        {
+            iconImage.sprite = ingredient.icon;
+            addButton.gameObject.SetActive(false);
+            deleteButton.gameObject.SetActive(true);
+        }
+        
+        public void Refresh()
+        {
+            int count = PlayerState.Current.Inventory.GetIngredientCount(ingredient);
+            countText.text = count.ToString();
+        }
+    }
+}

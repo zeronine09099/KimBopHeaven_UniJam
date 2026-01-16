@@ -37,8 +37,10 @@ namespace Game
         public IEnumerator Init(System.Action onCompleted = null)
         {
             yield return LoadAndInitializeIngredients();
-            cachedIngredientTagList = ingredientDictionary.Keys.ToList();
-            cachedIngredientList = ingredientDictionary.Values.ToList();
+            var pairs = ingredientDictionary.ToList();
+            pairs.Sort((a, b) => a.Value.order.CompareTo(b.Value.order));
+            cachedIngredientTagList = pairs.Select(pair => pair.Key).ToList();
+            cachedIngredientList = pairs.Select(pair => pair.Value).ToList();
             IsInitialized = true;
             onCompleted?.Invoke();
         }
@@ -55,17 +57,20 @@ namespace Game
             yield return new WaitWhile(() => !DatabaseManager.Instance.IsInitialized);
 
             var ingredientDBEntries = DatabaseManager.Instance.Database.IngredientDataList;
+            int order = 0;
             foreach (var entry in ingredientDBEntries)
             {
                 GameplayTag tag = GameplayTagManager.RequestTag(entry.tag);
                 if (ingredientDictionary.ContainsKey(tag))
                 {
                     ingredientDictionary[tag].InitByData(entry);
+                    ingredientDictionary[tag].order = order;
                 }
                 else
                 {
                     LogEx.LogError($"IngredientSO not found for tag: {entry.tag}");
                 }
+                order++;
             }
             
             

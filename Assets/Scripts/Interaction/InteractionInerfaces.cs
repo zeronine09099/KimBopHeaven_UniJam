@@ -17,7 +17,11 @@
     {
         void OnHold();
     }
-    public interface IInteractable : IClickable, IPressable, ICancellable, IHoldable
+    public interface IReleasable
+    {
+        void OnRelease();
+    }
+    public interface IInteractable : IClickable, IPressable, ICancellable, IHoldable, IReleasable
     {
         
     }
