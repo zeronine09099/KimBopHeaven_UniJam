@@ -65,6 +65,10 @@ namespace Game
                 }
                 else
                 {
+                    if (scoreText.IsFading || !scoreText.gameObject.activeSelf)
+                    {
+                        scoreText.Show();
+                    }
                     scoreText.Value = score;
                     scoreText.FontSize = fontSizes[Mathf.Clamp(times - 1, 0, fontSizes.Length - 1)];
                 }

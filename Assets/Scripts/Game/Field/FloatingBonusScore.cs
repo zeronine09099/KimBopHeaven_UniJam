@@ -1,4 +1,6 @@
-﻿using TMPro;
+﻿using System.Collections.Generic;
+using DG.Tweening;
+using TMPro;
 using UnityEngine;
 
 namespace Game.Field
@@ -23,6 +25,48 @@ namespace Game.Field
         {
             get => scoreText.fontSize;
             set => scoreText.fontSize = value;
+        }
+        
+        public static HashSet<FloatingBonusScore> ActiveScores = new ();
+
+        public void Show()
+        {
+            isFading = false;
+            gameObject.SetActive(true);
+            this.DOKill();
+            scoreText.DOKill();
+            scoreText.color = new Color(scoreText.color.r, scoreText.color.g, scoreText.color.b, 1f);
+        }
+        public void Hide()
+        {
+            gameObject.SetActive(false);
+            this.DOKill();
+            scoreText.DOKill();
+        }
+        
+        private bool isFading = false;
+        
+        public bool IsFading => isFading;
+        public void FadeOutAndDisable(float duration)
+        {
+            if (isFading) return;
+            isFading = true;
+            this.DOKill();
+            scoreText.DOKill();
+            var seq = DOTween.Sequence();
+            seq.Append(scoreText.DOFade(0f, duration));
+            seq.AppendCallback(Hide);
+            seq.OnComplete(() => isFading = false);
+        }
+        
+        private void OnEnable()
+        {
+            ActiveScores.Add(this);
+        }
+        
+        private void OnDisable()
+        {
+            ActiveScores.Remove(this);
         }
     }
 }

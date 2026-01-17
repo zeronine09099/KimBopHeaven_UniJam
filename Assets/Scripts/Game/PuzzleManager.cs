@@ -571,10 +571,19 @@ namespace Game
                     {
                         await f().AttachExternalCancellation(cancellationToken);
                     }
+                    
 
 
                     LogEx.Log($"Current Stage Score: {PlayerState.Current.CurrentStageScore}");
                 }
+                
+                // 플로팅 UI 페이드아웃
+                foreach (var floatingScore in FloatingBonusScore.ActiveScores)
+                {
+                    floatingScore.FadeOutAndDisable(0.5f);
+                }
+                
+                
                 // toExplodeTiles.AddRange(match);
                 foreach (var tile in match)
                 {
