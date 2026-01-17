@@ -7,6 +7,7 @@ using Common.Attributes;
 using Database.Generated;
 using Game.Field;
 using Machamy.Attributes;
+using Player;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -37,9 +38,15 @@ namespace Game
         public abstract IEnumerator OnFall(Tile tile);
 
 
-        public abstract IEnumerator OnTrigger(Tile tile);
+        public virtual IEnumerator OnTrigger(Tile tile)
+        {
+            PlayerState.Current.CurrentTempScore += (int) baseScore;
+            yield break;
+        }
         public virtual IEnumerator OnExplode(Tile tile)
         {
+            tile.SetIngredient(null);
+            PuzzleManager.Instance.RetrieveIngredient(this);
             yield break;
         }
 
@@ -83,6 +90,20 @@ namespace Game
         public static explicit operator IngredientSO(GameplayTag tag)
         {
             return IngredientLibrary.Instance.GetIngredientSO(tag);
+        }
+    }
+    
+    
+    public static class IngredientSOExtensions
+    {
+        public static bool IsGim(this IngredientSO ingredient)
+        {
+            return ingredient != null && ingredient.Tag == AllGameplayTags.Ingredient.Essential.Gim.Get();
+        }
+        
+        public static bool IsRice(this IngredientSO ingredient)
+        {
+            return ingredient != null && ingredient.Tag == AllGameplayTags.Ingredient.Essential.Rice.Get();
         }
     }
 }

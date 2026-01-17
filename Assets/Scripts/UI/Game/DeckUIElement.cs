@@ -39,7 +39,7 @@ namespace UI.Game
         
         public void Refresh()
         {
-            int count = PlayerState.Current.Inventory.GetIngredientCount(ingredient);
+            int count = PlayerState.Current.GameDeck.GetIngredientCount(ingredient);
             countText.text = count.ToString();
         }
     }

@@ -5,6 +5,7 @@ using Common.Singleton;
 using Core;
 using Cysharp.Threading.Tasks;
 using Database.Generated;
+using Game.Field;
 using Machamy.DeveloperConsole.Attributes;
 using Machamy.Utils;
 using Player;
@@ -74,13 +75,18 @@ namespace Game
                 variable.IntValue = 0;
                 variable.FloatValue = 0f;
             }
-            
+            // 플레이어 스테이지 정보 세팅
+            PlayerState.Current.CurrentRemainingSwipes = stage.moveCount;
+            PlayerState.Current.CurrentStageScore = 0;
+            PlayerState.Current.CurrentTempScore = 0;
+
             // 스테이지 데이터 초기화
-            Root.Field.InitField(6,6);
+            // Root.Field.InitField(6,6);
 
             // UI 점수 초기화
             gameUI.InitializeForStage(stage);
             PuzzleManager.Instance.Initialize(GameManager.Instance.Field);
+            
 
             /*
              * 연출 단계
@@ -96,8 +102,13 @@ namespace Game
             while (true)
             {
                 // 각 턴마다 처리할 로직 작성
-                await UniTask.Yield();
+                PlayerInputData inputData = await PuzzleManager.Instance.GetPlayerInput(cancellationToken);
+                var matches = await PuzzleManager.Instance.ProcessInput(inputData, cancellationToken);
+                await PuzzleManager.Instance.ProcessMatches(matches, cancellationToken);
                 
+                // 임시 점수를 실제 점수에 반영
+                PlayerState.Current.CurrentStageScore = PlayerState.Current.CurrentTempScore;
+                await PuzzleManager.Instance.WrapUpTurn(cancellationToken);
                 
                 // 클리어 체크
                 if(PlayerState.Current.CurrentStageScore >= PlayerState.Current.CurrentStageInfo.goalScore)
@@ -105,6 +116,7 @@ namespace Game
                     await StageSuccess();
                     break;
                 }
+                PlayerState.Current.CurrentRemainingSwipes -= 1;
                 // 실패 체크
                 if(PlayerState.Current.CurrentRemainingSwipes <= 0)
                 {

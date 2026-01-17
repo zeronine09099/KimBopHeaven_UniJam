@@ -8,6 +8,8 @@ using Machamy.DeveloperConsole;
 using Machamy.DeveloperConsole.Attributes;
 using Machamy.DeveloperConsole.Commands;
 using UnityEngine;
+using UnityEngine.Serialization;
+
 // ReSharper disable ArrangeAccessorOwnerBody
 namespace Player
 {
@@ -29,9 +31,12 @@ namespace Player
         
         [SerializeField] private VariableContainer variables = new VariableContainer();
         
-        [SerializeField] private Inventory inventory = new Inventory();
+        [FormerlySerializedAs("inventory")] [SerializeField] private Inventory gameDeck = new Inventory();
         
-        public Inventory Inventory => inventory;
+        /// <summary>
+        /// 게임 시작 시 초기화되는 인벤토리(덱)입니다.
+        /// </summary>
+        public Inventory GameDeck => gameDeck;
         
         /// <summary>
         /// 내부 VariableContainer 인스턴스입니다. 외부에서 읽을 수 있고 설정은 이 클래스 내부에서만 가능합니다.
@@ -65,6 +70,7 @@ namespace Player
             
             CurrentRemainingSwipes, // 현재 남은 스와이프 횟수
             CurrentStageScore, // 현재 스테이지 점수
+            CurrentTempScore, // 현재 임시 점수 (스와이프 중간에 변동되는 점수)
             
         }
         
@@ -76,7 +82,7 @@ namespace Player
         // public static readonly VariableKey StageStart = VariableKey.StageBestPlacement;
         // public static readonly VariableKey StageEnd = VariableKey.StageTempScore;
         public static readonly VariableKey CurrentStart = VariableKey.CurrentRemainingSwipes;
-        public static readonly VariableKey CurrentEnd = VariableKey.CurrentStageScore;
+        public static readonly VariableKey CurrentEnd = VariableKey.CurrentTempScore;
         
         
         // --- PlayerStatus Properties (VariableKey에 매핑된 프로퍼티들) ---
@@ -166,6 +172,15 @@ namespace Player
         {
             get { return Variables.GetVariable(nameof(VariableKey.CurrentStageScore)).IntValue; }
             set { Variables.SetInteger(nameof(VariableKey.CurrentStageScore), value); }
+        }
+        
+        /// <summary>
+        /// 현재 임시 점수입니다. (Prefix: Current)
+        /// </summary>
+        public int CurrentTempScore
+        {
+            get { return Variables.GetVariable(nameof(VariableKey.CurrentTempScore)).IntValue; }
+            set { Variables.SetInteger(nameof(VariableKey.CurrentTempScore), value); }
         }
 
         // --- Current prefix (실시간 값) ---
@@ -357,10 +372,11 @@ namespace Player
         public void SetUpNewGame()
         {
             Reset();
-            inventory.Clear();
+            gameDeck.Clear();
+            CurrentStageInfo = StageLibrary.Instance.GetStageInfo(1);
             foreach (var item in IngredientLibrary.Instance.AllIngredientList)
             {
-                inventory.SetIngredientCount(item, item.startAmount);
+                gameDeck.SetIngredientCount(item, item.startAmount);
             }
         }
     }

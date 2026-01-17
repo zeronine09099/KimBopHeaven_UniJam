@@ -2993,8 +2993,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfe85e2628f24f069c07599c6cc720ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.IngameUI
-  scoreUI: {fileID: 0}
+  scoreUI: {fileID: 7792702586868380207}
   deckUI: {fileID: 0}
+  stageGoalScoreText: {fileID: 713538800499661041}
+  menuButton: {fileID: 6498657609506853070}
+  deckButton: {fileID: 7874555494692812539}
 --- !u!1 &6389410014329138934
 GameObject:
   m_ObjectHideFlags: 0

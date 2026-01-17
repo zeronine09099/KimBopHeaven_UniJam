@@ -121,6 +121,7 @@ public static class IngredientGenerator
         sb.AppendLine($@"using System.Collections;
 using BandoWare.GameplayTags;
 using Game.Field;
+using Cysharp.Threading.Tasks;
 
 namespace Game.Ingredients
 {{
@@ -128,13 +129,15 @@ namespace Game.Ingredients
     {{
         public override GameplayTag Tag => AllGameplayTags.{tag}.Get();
 
-        public override IEnumerator OnFall(Tile tile)
-        {{
+        public override async UniTask OnFall(Tile tile)
+        {{ 
+            base.OnFall(tile);
             yield break;
         }}
 
-        public override IEnumerator OnTrigger(Tile tile)
+        public override async UniTask OnTrigger(Tile tile)
         {{
+            base.OnTrigger(tile);
             yield break;
         }}
     }}

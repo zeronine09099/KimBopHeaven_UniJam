@@ -56,7 +56,7 @@ namespace UI.Reward
         public void OnEntryClicked(RewardUIEntry entry)
         {
             Debug.Log($"RewardUI: OnEntryClicked - {entry.IngredientSo.name}");
-            PlayerState.Current.Inventory.AddIngredient(entry.IngredientSo);
+            PlayerState.Current.GameDeck.AddIngredient(entry.IngredientSo);
             buttonClicked = true;
             Hide();
         }

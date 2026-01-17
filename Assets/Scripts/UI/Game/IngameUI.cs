@@ -43,7 +43,7 @@ namespace UI.Game
         
         public void InitializeForStage(StageInfo stageInfo)
         {
-            stageGoalScoreText.text =((int)stageInfo.goalScore).ToString();
+            stageGoalScoreText.text = $"{stageInfo.goalScore:N0}pt";
             
             ScoreUI.CurrentValue = 0;
             ScoreUI.TempValue = 0;

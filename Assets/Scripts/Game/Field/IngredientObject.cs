@@ -1,4 +1,5 @@
-﻿using Game;
+﻿using BandoWare.GameplayTags;
+using Game;
 using UnityEngine;
 
 /// <summary>
@@ -14,6 +15,8 @@ public class IngredientObject : MonoBehaviour
     /// 현재 이 오브젝트가 표현하고 있는 데이터
     /// </summary>
     public IngredientSO Data { get; private set; }
+    
+    public GameplayTag IngredientTag => Data != null ? Data.Tag : GameplayTag.None;
 
     private void Awake()
     {

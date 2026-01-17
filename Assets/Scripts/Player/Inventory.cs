@@ -70,12 +70,13 @@ namespace Player
             return 0;
         }
         
-        public IEnumerator<IngredientSO> GetShuffledEnumerator()
+        public IEnumerable<IngredientSO> GetShuffledSOEnumerator()
         {
             using var handle = ListPool<IngredientSO>.Get(out var shuffledList);
             foreach (var kvp in ingredientCountMap)
             {
-                if (kvp.Value > 0)
+                int count = kvp.Value;
+                for (int i = 0; i < count; i++)
                 {
                     shuffledList.Add(kvp.Key);
                 }
@@ -87,9 +88,31 @@ namespace Player
             }
         }
         
+        public IEnumerable<IngredientSO> GetSOEnumerator()
+        {
+            foreach (var kvp in ingredientCountMap)
+            {
+                int count = kvp.Value;
+                for (int i = 0; i < count; i++)
+                {
+                    yield return kvp.Key;
+                }
+            }
+        }
+        
         public void Clear()
         {
             ingredientCountMap.Clear();
+        }
+        
+        public Inventory Clone()
+        {
+            var newInventory = new Inventory();
+            foreach (var kvp in ingredientCountMap)
+            {
+                newInventory.ingredientCountMap[kvp.Key] = kvp.Value;
+            }
+            return newInventory;
         }
     }
 }
