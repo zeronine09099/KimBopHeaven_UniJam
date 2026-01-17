@@ -2,161 +2,161 @@
   {
     "Stage": 1,
     "goalScore": 100,
-    "moveCount": 7,
-    "normalPercentage": 90.0,
-    "rarePercentage": 9.5,
-    "epicPercentage": 0.5
-  },
-  {
-    "Stage": 2,
-    "goalScore": 200,
-    "moveCount": 7,
-    "normalPercentage": 85.0,
-    "rarePercentage": 12.0,
-    "epicPercentage": 3.0
-  },
-  {
-    "Stage": 3,
-    "goalScore": 300,
-    "moveCount": 7,
-    "normalPercentage": 80.0,
-    "rarePercentage": 15.0,
-    "epicPercentage": 5.0
-  },
-  {
-    "Stage": 4,
-    "goalScore": 500,
-    "moveCount": 7,
-    "normalPercentage": 75.0,
-    "rarePercentage": 20.0,
-    "epicPercentage": 5.0
-  },
-  {
-    "Stage": 5,
-    "goalScore": 1000,
-    "moveCount": 8,
+    "moveCount": 10,
     "normalPercentage": 70.0,
     "rarePercentage": 25.0,
     "epicPercentage": 5.0
   },
   {
+    "Stage": 2,
+    "goalScore": 200,
+    "moveCount": 20,
+    "normalPercentage": 70.0,
+    "rarePercentage": 25.0,
+    "epicPercentage": 5.0
+  },
+  {
+    "Stage": 3,
+    "goalScore": 300,
+    "moveCount": 20,
+    "normalPercentage": 70.0,
+    "rarePercentage": 25.0,
+    "epicPercentage": 5.0
+  },
+  {
+    "Stage": 4,
+    "goalScore": 400,
+    "moveCount": 20,
+    "normalPercentage": 70.0,
+    "rarePercentage": 25.0,
+    "epicPercentage": 5.0
+  },
+  {
+    "Stage": 5,
+    "goalScore": 500,
+    "moveCount": 30,
+    "normalPercentage": 65.0,
+    "rarePercentage": 25.0,
+    "epicPercentage": 10.0
+  },
+  {
     "Stage": 6,
-    "goalScore": 1500,
-    "moveCount": 8,
+    "goalScore": 700,
+    "moveCount": 30,
     "normalPercentage": 65.0,
     "rarePercentage": 25.0,
     "epicPercentage": 10.0
   },
   {
     "Stage": 7,
-    "goalScore": 2000,
-    "moveCount": 8,
+    "goalScore": 900,
+    "moveCount": 30,
+    "normalPercentage": 65.0,
+    "rarePercentage": 25.0,
+    "epicPercentage": 10.0
+  },
+  {
+    "Stage": 8,
+    "goalScore": 1200,
+    "moveCount": 30,
     "normalPercentage": 60.0,
     "rarePercentage": 25.0,
     "epicPercentage": 15.0
   },
   {
-    "Stage": 8,
+    "Stage": 9,
+    "goalScore": 1500,
+    "moveCount": 35,
+    "normalPercentage": 60.0,
+    "rarePercentage": 25.0,
+    "epicPercentage": 15.0
+  },
+  {
+    "Stage": 10,
+    "goalScore": 1800,
+    "moveCount": 35,
+    "normalPercentage": 60.0,
+    "rarePercentage": 25.0,
+    "epicPercentage": 15.0
+  },
+  {
+    "Stage": 11,
+    "goalScore": 2000,
+    "moveCount": 35,
+    "normalPercentage": 60.0,
+    "rarePercentage": 25.0,
+    "epicPercentage": 15.0
+  },
+  {
+    "Stage": 12,
     "goalScore": 2500,
-    "moveCount": 8,
+    "moveCount": 40,
+    "normalPercentage": 60.0,
+    "rarePercentage": 25.0,
+    "epicPercentage": 15.0
+  },
+  {
+    "Stage": 13,
+    "goalScore": 3000,
+    "moveCount": 40,
     "normalPercentage": 55.0,
     "rarePercentage": 30.0,
     "epicPercentage": 15.0
   },
   {
-    "Stage": 9,
-    "goalScore": 3000,
-    "moveCount": 9,
-    "normalPercentage": 50.0,
-    "rarePercentage": 30.0,
-    "epicPercentage": 20.0
-  },
-  {
-    "Stage": 10,
-    "goalScore": 5000,
-    "moveCount": 9,
-    "normalPercentage": 50.0,
-    "rarePercentage": 30.0,
-    "epicPercentage": 20.0
-  },
-  {
-    "Stage": 11,
-    "goalScore": 7000,
-    "moveCount": 9,
-    "normalPercentage": 50.0,
-    "rarePercentage": 27.5,
-    "epicPercentage": 22.5
-  },
-  {
-    "Stage": 12,
-    "goalScore": 10000,
-    "moveCount": 9,
-    "normalPercentage": 50.0,
-    "rarePercentage": 25.0,
-    "epicPercentage": 25.0
-  },
-  {
-    "Stage": 13,
-    "goalScore": 13000,
-    "moveCount": 10,
-    "normalPercentage": 50.0,
-    "rarePercentage": 22.5,
-    "epicPercentage": 27.5
-  },
-  {
     "Stage": 14,
-    "goalScore": 16000,
-    "moveCount": 10,
-    "normalPercentage": 50.0,
-    "rarePercentage": 20.0,
-    "epicPercentage": 30.0
+    "goalScore": 4000,
+    "moveCount": 40,
+    "normalPercentage": 55.0,
+    "rarePercentage": 30.0,
+    "epicPercentage": 15.0
   },
   {
     "Stage": 15,
-    "goalScore": 20000,
-    "moveCount": 10,
-    "normalPercentage": 50.0,
-    "rarePercentage": 20.0,
-    "epicPercentage": 30.0
+    "goalScore": 5000,
+    "moveCount": 40,
+    "normalPercentage": 55.0,
+    "rarePercentage": 30.0,
+    "epicPercentage": 15.0
   },
   {
     "Stage": 16,
-    "goalScore": 25000,
-    "moveCount": 10,
-    "normalPercentage": 50.0,
-    "rarePercentage": 20.0,
-    "epicPercentage": 30.0
+    "goalScore": 6000,
+    "moveCount": 50,
+    "normalPercentage": 55.0,
+    "rarePercentage": 30.0,
+    "epicPercentage": 15.0
   },
   {
     "Stage": 17,
-    "goalScore": 30000,
-    "moveCount": 10,
+    "goalScore": 7000,
+    "moveCount": 50,
     "normalPercentage": 50.0,
-    "rarePercentage": 20.0,
-    "epicPercentage": 30.0
+    "rarePercentage": 30.0,
+    "epicPercentage": 20.0
   },
   {
     "Stage": 18,
-    "goalScore": 40000,
-    "moveCount": 10,
-    "normalPercentage": 40.0,
-    "rarePercentage": 25.0,
-    "epicPercentage": 35.0
+    "goalScore": 8000,
+    "moveCount": 50,
+    "normalPercentage": 50.0,
+    "rarePercentage": 30.0,
+    "epicPercentage": 20.0
   },
   {
     "Stage": 19,
-    "goalScore": 50000,
-    "moveCount": 10,
-    "normalPercentage": 40.0,
-    "rarePercentage": 22.5,
-    "epicPercentage": 37.5
+    "goalScore": 9000,
+    "moveCount": 60,
+    "normalPercentage": 50.0,
+    "rarePercentage": 30.0,
+    "epicPercentage": 20.0
   },
   {
     "Stage": 20,
-    "goalScore": 100000,
-    "moveCount": 11,
-    "normalPercentage": 40.0,
-    "rarePercentage": 20.0,
-    "epicPercentage": 40.0
+    "goalScore": 10000,
+    "moveCount": 60,
+    "normalPercentage": 50.0,
+    "rarePercentage": 30.0,
+    "epicPercentage": 20.0
   }
 ]

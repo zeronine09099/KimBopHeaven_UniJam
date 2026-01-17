@@ -44,9 +44,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e3349bba95066040a5e34be0146b003, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.PuzzleManager
+  shuffleInitials: 1
+  shuffleSummons: 1
+  MinimumGimCount: 4
+  MinimumRiceCount: 2
+  GimCount: 0
+  RiceCount: 0
   swapDuration: 0.3
+  fallDuration: 0.4
+  triggerInterval: 0.4
+  matchInterval: 0.2
+  explodeDelay: 0
+  ease: 5
+  fallEase: 2
   ingredientPrefab: {fileID: 1038684630511699383, guid: 363f5f06be7992445bdc22f10028d76e, type: 3}
-  testIngredients:
-  - {fileID: 11400000, guid: 3d80c557dbdfd564899b84365abda1f0, type: 2}
-  - {fileID: 11400000, guid: 14dc45a5a51d73c47af5d08599ea7a37, type: 2}
-  - {fileID: 11400000, guid: 13515debf38b34a4ba5532bfb35cf4a0, type: 2}
