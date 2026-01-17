@@ -187,9 +187,13 @@ namespace Player
             get { return Variables.GetVariable(nameof(VariableKey.CurrentTempScore)).IntValue; }
             set
             {
+                bool isIncreased = value > CurrentTempScore;
                 Variables.SetInteger(nameof(VariableKey.CurrentTempScore), value);
                 UIManager.Instance.InGameUI.ScoreUI.TempValue = value;
-                SoundManager.Instance.PlayScoreSfx();
+                if (isIncreased)
+                {
+                    SoundManager.Instance.PlayScoreSfx();
+                }
             }
         }
 
