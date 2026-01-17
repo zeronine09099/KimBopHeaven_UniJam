@@ -740,11 +740,15 @@ namespace Sound
 
         private int _scoreSfxPitchIndex = 0;
         private int _scoreSfxPitchMidIndex = 3;
-        private readonly float[] _scoreSfxPitchValues = new float[] {1.0f, 1.1f, 1.2f, 1.3f, 1.4f, 1.5f};
+        [SerializeField]private float[] _scoreSfxPitchValues = new float[] {1.0f, 1.1f, 1.2f, 1.3f, 1.4f, 1.5f};
+        
+        [ContextMenu("Reset Score SFX Pitch Index")]
         public void ResetScoreSfxPitchIndex()
         {
             _scoreSfxPitchIndex = 0;
         }
+        
+        [ContextMenu("Play Score SFX")]
         public void PlayScoreSfx()
         {
             float GetPitch()
