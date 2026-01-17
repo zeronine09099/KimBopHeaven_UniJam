@@ -131,9 +131,19 @@ namespace UI.Reward
 
         public void SkipButton()
         {
-            // 다음 스테이지 시작 로직
-            rewardSelectEnded = true;
-            Hide();
+
+            if (remainSelectCnt > 0)
+            {
+                remainSelectCnt--;
+                if(remainSelectCnt == 0)
+                {
+                    // 다음 스테이지 시작 로직
+                    rewardSelectEnded = true;
+                    Hide();
+                }
+                Show(PlayerState.Current.CurrentStageInfo);
+                return;
+            }
         }
 
         public void Hide()
