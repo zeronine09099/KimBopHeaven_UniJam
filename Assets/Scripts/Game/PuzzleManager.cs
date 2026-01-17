@@ -289,7 +289,8 @@ namespace Game
                 Debug.LogWarning("puzzlemanager: 테스트재료나 프리팹이 비어있음");
                 return;
             }
-
+            List<IngredientObject> allIngredients = new List<IngredientObject>();
+            List<IngredientSO> allIngredientSOs = new List<IngredientSO>();
             GimCount = 0;
             RiceCount = 0;
 
@@ -314,6 +315,21 @@ namespace Game
                     newIngredientObject.transform.SetParent(tile.transform);
                     newIngredientObject.transform.localPosition = Vector3.zero;
                     tile.SetIngredient(newIngredientObject);
+                    
+                    allIngredients.Add(newIngredientObject);
+                    allIngredientSOs.Add(randomData);
+                    
+                }
+            }
+            
+            if (shuffleInitials)
+            {
+                allIngredientSOs.Shuffle();
+                for (int index = 0; index < allIngredients.Count; index++)
+                {
+                    IngredientObject ingredientObject = allIngredients[index];
+                    IngredientSO ingredientSO = allIngredientSOs[index];
+                    ingredientObject.Initialize(ingredientSO);
                 }
             }
             int attempt = 0;
@@ -329,9 +345,8 @@ namespace Game
                 }
                 GimCount = 0;
                 RiceCount = 0;
-                
-                List<IngredientObject> allIngredients = new List<IngredientObject>();
-                List<IngredientSO> allIngredientSOs = new List<IngredientSO>();
+                allIngredientSOs.Clear();
+
                 for (int i = 0; i < field.Height; i++)
                 {
                     for (int j = 0; j < field.Width; j++)
@@ -339,7 +354,6 @@ namespace Game
                         Tile tile = field.GetTile(i, j);
                         IngredientSO randomData = GetNextIngredientData();
                         IngredientObject ingredientObject = tile.CurrentIngredient;
-                        allIngredients.Add(ingredientObject);
                         allIngredientSOs.Add(randomData);
                         ingredientObject.Initialize(randomData);
                         if (randomData.IsGim())
