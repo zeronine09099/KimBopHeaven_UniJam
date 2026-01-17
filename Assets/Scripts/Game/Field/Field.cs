@@ -20,7 +20,7 @@ namespace Game.Field
     /// 게임 필드를 나타내는 클래스
     /// </summary>
     [RequireComponent(typeof(Grid))]
-    public class Field : MonoBehaviour
+    public class Field : MonoBehaviour, IEnumerable<Tile>
     {
         [Header("Settings")]
         [SerializeField] private FieldConfigurationSO fieldConfiguration;
@@ -259,7 +259,18 @@ namespace Game.Field
             }
             return _tileContainer[i][j].transform.position;
         }
-
+        public void DestroyIngredients()
+        {
+            for (int i = 0; i < height; i++)
+            {
+                for (int j = 0; j < width; j++)
+                {
+                    var tile = GetTile(i, j);
+                    Destroy(tile.CurrentIngredient?.gameObject);
+                    tile.CurrentIngredient = null;
+                }
+            }
+        }
         private void OnValidate()
         {
             if (_grid == null)
@@ -337,5 +348,20 @@ namespace Game.Field
             }
         }
 
+        public IEnumerator<Tile> GetEnumerator()
+        {
+            for (int i = 0; i < height; i++)
+            {
+                for (int j = 0; j < width; j++)
+                {
+                    yield return _tileContainer[i][j];
+                }
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
     }
 }

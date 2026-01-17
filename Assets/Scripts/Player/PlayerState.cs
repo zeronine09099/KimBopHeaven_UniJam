@@ -7,6 +7,7 @@ using Game;
 using Machamy.DeveloperConsole;
 using Machamy.DeveloperConsole.Attributes;
 using Machamy.DeveloperConsole.Commands;
+using Sound;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -188,6 +189,7 @@ namespace Player
             {
                 Variables.SetInteger(nameof(VariableKey.CurrentTempScore), value);
                 UIManager.Instance.InGameUI.ScoreUI.TempValue = value;
+                SoundManager.Instance.PlayScoreSfx();
             }
         }
 

@@ -60,6 +60,7 @@ namespace Game
             _stageCts?.Dispose();
             _stageCts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, _forceStopCts.Token);
             var linkedToken = _stageCts.Token;
+            GameManager.Instance.Field.DestroyIngredients();
             PlayerState.Current.CurrentStageInfo = stage;
             /*
              * 초기화 단계
@@ -160,6 +161,7 @@ namespace Game
             // 이벤트
             
             // 다음 스테이지로
+            GameManager.Instance.Field.DestroyIngredients();
             StartStage(StageLibrary.Instance.GetNextStageInfo(CurrentStageId), _forceStopCts.Token).Forget();
         }
         

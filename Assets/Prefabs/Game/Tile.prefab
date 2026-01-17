@@ -141,8 +141,8 @@ MonoBehaviour:
     _i: 0
     _j: 0
   <CurrentIngredient>k__BackingField: {fileID: 0}
-  scoreTextPrefab: {fileID: 0}
-  scoreText: {fileID: 0}
+  scoreTextPrefab: {fileID: 8549790812939031617, guid: a073156d472724a46bde29901f5f7188, type: 3}
+  <scoreText>k__BackingField: {fileID: 0}
 --- !u!61 &6118268652051028041
 BoxCollider2D:
   m_ObjectHideFlags: 0

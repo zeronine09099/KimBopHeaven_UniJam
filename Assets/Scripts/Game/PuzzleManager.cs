@@ -505,6 +505,8 @@ namespace Game
             // 트리거
             HashSet<Tile> toExplodeTiles = new ();
             
+            SoundManager.Instance.ResetScoreSfxPitchIndex();
+            
             foreach (var match in matchGroups)
             {
                 foreach (var tile in match)
