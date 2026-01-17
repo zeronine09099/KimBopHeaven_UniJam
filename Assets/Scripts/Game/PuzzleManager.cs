@@ -121,6 +121,7 @@ namespace Game
         {
         }
         [Header("제한 설정")]
+        [SerializeField, Label("소환된 재료 섞기"), Tooltip("낙하하는 재료들을 섞어서 배치합니다. 제한설정과 관련있습니다.")] private bool shuffleSummons = true;
         [SerializeField, Label("최소 김 개수")] private int MinimumGimCount = 2;
         [SerializeField, Label("최소 밥 개수")] private int MinimumRiceCount = 1;
         [SerializeField,VisibleOnly] private int GimCount = 0;
@@ -605,6 +606,7 @@ namespace Game
         {
             float tileDelta = - field.GetTile(0,0).transform.position.y + field.GetTile(1,0).transform.position.y;
             List<Tile> fallingIngredients = new ();
+            List<IngredientSO> newlyAddedIngredients = new ();
             List<Sequence> fallSequences = new ();
             int start = 0;
            for(int j = 0; j < field.Width; j++)
@@ -645,6 +647,7 @@ namespace Game
                           {
                             // 위에 재료가 없는 경우 새로 생성
                             IngredientSO randomData = GetNextIngredientData();
+                            
                             IngredientObject newIngredientObject = Instantiate(ingredientPrefab);
                             newIngredientObject.Initialize(randomData);
                             newIngredientObject.transform.SetParent(tile.transform);
@@ -666,12 +669,34 @@ namespace Game
                             fallSequence.Append(newIngredientObject.transform.DOLocalMove(Vector3.zero, fallDuration).SetEase(fallEase));
                             fallSequences.Add(fallSequence);
                             fallingIngredients.Add(tile);
+                            newlyAddedIngredients.Add(randomData);
                           }
                    }
                    
                }
 
            }
+
+           if (shuffleSummons)
+           {
+               newlyAddedIngredients.Shuffle();
+               if (newlyAddedIngredients.Count != fallingIngredients.Count)
+               {
+                   LogEx.LogError(("낙하 재료 수와 새로 추가된 재료 수가 일치하지 않음"));
+               }
+           
+               for (int index = 0; index < fallingIngredients.Count; index++)
+               {
+                   Tile tile = fallingIngredients[index];
+                   IngredientSO ingredientSO = newlyAddedIngredients.Count > index ? newlyAddedIngredients[index] : null;
+                   if (ingredientSO != null && tile.CurrentIngredient != null && tile.CurrentIngredient.Data != ingredientSO)
+                   {
+                       tile.CurrentIngredient.Initialize(ingredientSO);
+                   }
+               }
+           }
+           
+           
               // 모든 낙하 애니메이션 대기 
                 await UniTask.WhenAll(fallSequences.ConvertAll(seq => seq.ToUniTask(cancellationToken: cancellationToken,
                     tweenCancelBehaviour: TweenCancelBehaviour.Complete)));
