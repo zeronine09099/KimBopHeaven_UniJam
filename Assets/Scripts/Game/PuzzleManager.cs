@@ -48,6 +48,32 @@ namespace Game
         private Field.Field field;
         private Tile firstSelectedTile;
         private Tile secondSelectedTile;
+
+        private Tile FirstSelectedTile
+        {
+            get => firstSelectedTile;
+            set
+            {
+                firstSelectedTile = value;
+                if (firstSelectedTile != null)
+                {
+                    Debug.Log($"FirstSelectedTile set: {firstSelectedTile}");
+                }
+            }
+        }
+
+        private Tile SecondSelectedTile
+        {
+            get => secondSelectedTile;
+            set
+            {
+                secondSelectedTile = value;
+                if (secondSelectedTile != null)
+                {
+                    Debug.Log($"SecondSelectedTile set: {secondSelectedTile}");
+                }
+            }
+        }
         private bool isSwapping = false;
 
         public void Start()
@@ -67,6 +93,8 @@ namespace Game
             //
             //     firstSelectedTile.CurrentIngredient.transform.position = targetPos;
             // }
+            
+            
         }
 
         public void SetPlayerTurn(bool isPlayerTurn)
@@ -83,13 +111,13 @@ namespace Game
             {
                 return;
             }
-            if (firstSelectedTile != null)
+            if (FirstSelectedTile != null)
             {
-                secondSelectedTile = pressedTile;
+                SecondSelectedTile = pressedTile;
                 
                 return;
             }
-            firstSelectedTile = pressedTile;
+            FirstSelectedTile = pressedTile;
         }
 
         public void OnTileReleased(Tile releasedTile)
@@ -102,14 +130,14 @@ namespace Game
                 return; 
             }
 
-            if(releasedTile != firstSelectedTile)
+            if(releasedTile != FirstSelectedTile)
             {
                 if (!isPlayerTurn || isSwapping)
                 {
                     ResetFirstSelection();
                     return;
                 }
-                secondSelectedTile = releasedTile;
+                SecondSelectedTile = releasedTile;
                 
             }
             else
@@ -124,11 +152,11 @@ namespace Game
         /// </summary>
         private void ResetFirstSelection()
         {
-            if (firstSelectedTile != null && firstSelectedTile.CurrentIngredient != null)
+            if (FirstSelectedTile != null && FirstSelectedTile.CurrentIngredient != null)
             {
-                firstSelectedTile.CurrentIngredient.transform.localPosition = Vector3.zero;
+                FirstSelectedTile.CurrentIngredient.transform.localPosition = Vector3.zero;
             }
-            firstSelectedTile = null;
+            FirstSelectedTile = null;
         }
 
         /// <summary>
@@ -214,16 +242,16 @@ namespace Game
         public async UniTask<PlayerInputData> GetPlayerInput(CancellationToken cancellationToken)
         {
             isPlayerTurn = true;
-            firstSelectedTile = null;
-            secondSelectedTile = null;
+            FirstSelectedTile = null;
+            SecondSelectedTile = null;
 
             // 플레이어가 두 타일을 선택할 때까지 대기
-            await UniTask.WaitUntil(() => secondSelectedTile != null, cancellationToken: cancellationToken);
+            await UniTask.WaitUntil(() => SecondSelectedTile != null, cancellationToken: cancellationToken);
             isPlayerTurn = false;
             return new PlayerInputData
             {
-                firstTile = firstSelectedTile,
-                secondTile = secondSelectedTile
+                firstTile = FirstSelectedTile,
+                secondTile = SecondSelectedTile
             };
         }
         
@@ -241,8 +269,8 @@ namespace Game
             await SwapTile(tileA, tileB, cancellationToken);
             List<MatchData> matchGroups = FindWrapperMatches();
             
-            firstSelectedTile = null;
-            secondSelectedTile = null;
+            FirstSelectedTile = null;
+            SecondSelectedTile = null;
             isSwapping = false;
             return matchGroups;
         }
@@ -285,45 +313,66 @@ namespace Game
         /// <param name="cancellationToken"></param>
         public async UniTask WrapUpTurn(CancellationToken cancellationToken)
         {
-            
+            float tileDelta = - field.GetTile(0,0).transform.position.y + field.GetTile(1,0).transform.position.y;
             List<Tile> fallingIngredients = new ();
             int start = 0;
            for(int j = 0; j < field.Width; j++)
            {
-               int maxFallDistance = 2;
-               for (int i = field.Height - 1; i >= 0; i--)
+               for (int i = 0; i < field.Height; i++)
                {
+                   bool foundIngredient = false;
+                   int upDelta = 1;
                    Tile tile = field.GetTile(i, j);
                    if (tile.CurrentIngredient == null)
                    {
-                       IngredientSO newIngredientData = GetNextIngredientData();
-                       IngredientObject newIngredientObject = Instantiate(ingredientPrefab);
-                       newIngredientObject.Initialize(newIngredientData);
-                       newIngredientObject.transform.SetParent(tile.transform);
-                       maxFallDistance = Mathf.Max(maxFallDistance, field.Height - i + 1);
-                       fallingIngredients.Add(tile);
-                       tile.SetIngredient(newIngredientObject);
+                       // 빈 타일 발견, 위에서부터 재료를 찾아서 떨어뜨림
+                       for (int k = 1; k <= field.Height; k++)
+                       {
+                           int sourceRow = i + k;
+                           if (sourceRow >= field.Height)
+                               break;
+
+                           Tile sourceTile = field.GetTile(sourceRow, j);
+                           if (sourceTile.CurrentIngredient != null)
+                           {
+                               // 재료 발견, 떨어뜨리기
+                               foundIngredient = true;
+                               IngredientObject fallingIngredient = sourceTile.CurrentIngredient;
+                               sourceTile.SetIngredient(null);
+                               tile.SetIngredient(fallingIngredient);
+                               
+                               // 애니메이션 처리
+                               fallingIngredient.transform.SetParent(tile.transform);
+                               Sequence fallSequence = DOTween.Sequence();
+                               fallSequence.Append(fallingIngredient.transform.DOLocalMove(Vector3.zero, fallDuration).SetEase(fallEase));
+                               
+                               fallingIngredients.Add(tile);
+                               break; // 다음 빈 타일로 이동
+                           }
+                       }
+                          if (!foundIngredient)
+                          {
+                            // 위에 재료가 없는 경우 새로 생성
+                            IngredientSO randomData = GetNextIngredientData();
+                            IngredientObject newIngredientObject = Instantiate(ingredientPrefab);
+                            newIngredientObject.Initialize(randomData);
+                            newIngredientObject.transform.SetParent(tile.transform);
+                            newIngredientObject.transform.position = field.GetTile(field.Height - 1, j).transform.position + new Vector3(0, tileDelta * upDelta, 0);
+                            upDelta++;
+                            tile.SetIngredient(newIngredientObject);
+                            
+                            // 애니메이션 처리
+                            Sequence fallSequence = DOTween.Sequence();
+                            fallSequence.Append(newIngredientObject.transform.DOLocalMove(Vector3.zero, fallDuration).SetEase(fallEase));
+                            
+                            fallingIngredients.Add(tile);
+                          }
                    }
-               }
-               for(int i = start; i < fallingIngredients.Count; i++)
-               {
-                   TileVector delta = TileVector.Up * maxFallDistance;
-                   Vector2 startPos = field.GetTileCenterWorld(fallingIngredients[i].Coordinate + delta);
-                    fallingIngredients[i].CurrentIngredient.transform.localPosition = startPos;
+                   
                }
 
-               start = fallingIngredients.Count;
            }
-           List<UniTask> fallTasks = new List<UniTask>();
-           foreach (var ingredientTransform in fallingIngredients)
-           {
- 
-               fallTasks.Add(
-               ingredientTransform.CurrentIngredient.transform.DOLocalMove(Vector3.zero, fallDuration)
-                   .SetEase(fallEase).ToUniTask(cancellationToken: cancellationToken,
-                   tweenCancelBehaviour: TweenCancelBehaviour.Complete));
-           }
-            await UniTask.WhenAll(fallTasks);
+           
         }
         
         /// <summary>
@@ -492,5 +541,18 @@ namespace Game
         }
 
 
+        public bool IsValidSwap(Tile inputDataFirstTile, Tile inputDataSecondTile)
+        {
+            TileVector a = inputDataFirstTile.Coordinate;
+            TileVector b = inputDataSecondTile.Coordinate;
+            if ((Math.Abs(a.i - b.i) == 1 && a.j == b.j) || (Math.Abs(a.j - b.j) == 1 && a.i == b.i))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

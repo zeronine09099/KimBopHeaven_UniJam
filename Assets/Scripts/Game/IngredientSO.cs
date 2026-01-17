@@ -5,6 +5,7 @@ using BandoWare.GameplayTags;
 using Common;
 using Common.Attributes;
 using Database.Generated;
+using DG.Tweening;
 using Game.Field;
 using Machamy.Attributes;
 using Player;
@@ -41,12 +42,20 @@ namespace Game
         public virtual IEnumerator OnTrigger(Tile tile)
         {
             PlayerState.Current.CurrentTempScore += (int) baseScore;
+            yield return tile.GetComponent<SpriteRenderer>().DOColor(Color.yellow, 0.2f).OnComplete(() =>
+            {
+                tile.GetComponentInChildren<SpriteRenderer>().DOColor(Color.white, 0.2f);
+            });
             yield break;
         }
         public virtual IEnumerator OnExplode(Tile tile)
         {
             tile.SetIngredient(null);
             PuzzleManager.Instance.RetrieveIngredient(this);
+            yield return tile.GetComponent<SpriteRenderer>().DOColor(Color.red, 0.2f).OnComplete(() =>
+            {
+                tile.GetComponentInChildren<SpriteRenderer>().DOColor(Color.white, 0.2f);
+            });
             yield break;
         }
 

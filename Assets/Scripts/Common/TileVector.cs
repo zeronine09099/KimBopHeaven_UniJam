@@ -16,7 +16,8 @@ namespace Common
         
         [SerializeField] private int _i;
         [SerializeField] private int _j;
-        
+        public int sqrMagnitude => i * i + j * j;
+
         // ReSharper disable InconsistentNaming
         public int i
         {

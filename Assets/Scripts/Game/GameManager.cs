@@ -42,6 +42,7 @@ namespace Core
         public void StartGame()
         {
             _gameCancellationTokenSource = new CancellationTokenSource();
+            UIManager.Instance.GoToInGameUI();
             GameRoutine(_gameCancellationTokenSource.Token).Forget();
         }
 

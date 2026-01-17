@@ -102,14 +102,25 @@ namespace Game
             while (true)
             {
                 // 각 턴마다 처리할 로직 작성
+                LogEx.Log($"Starting new turn. Remaining Swipes: {PlayerState.Current.CurrentRemainingSwipes}");
                 PlayerInputData inputData = await PuzzleManager.Instance.GetPlayerInput(cancellationToken);
+                LogEx.Log($"Player input received: {inputData.firstTile} <-> {inputData.secondTile}");
+                if (!PuzzleManager.Instance.IsValidSwap(inputData.firstTile, inputData.secondTile))
+                {
+                    // 유효하지 않은 스왑인 경우, 다시 입력 받기
+                    LogEx.Log("Invalid swap. Requesting input again.");
+                    continue;
+                }
+                LogEx.Log("Processing player input...");
                 var matches = await PuzzleManager.Instance.ProcessInput(inputData, cancellationToken);
+                LogEx.Log($"Matches found: {matches.Count}");
                 await PuzzleManager.Instance.ProcessMatches(matches, cancellationToken);
-                
+                LogEx.Log("Turn processing complete.");
                 // 임시 점수를 실제 점수에 반영
                 PlayerState.Current.CurrentStageScore = PlayerState.Current.CurrentTempScore;
+                LogEx.Log($"Current Stage Score: {PlayerState.Current.CurrentStageScore}");
                 await PuzzleManager.Instance.WrapUpTurn(cancellationToken);
-                
+                LogEx.Log("Turn wrapped up.");
                 // 클리어 체크
                 if(PlayerState.Current.CurrentStageScore >= PlayerState.Current.CurrentStageInfo.goalScore)
                 {
