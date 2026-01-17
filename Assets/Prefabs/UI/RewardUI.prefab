@@ -725,6 +725,7 @@ GameObject:
   - component: {fileID: 930293632316871131}
   - component: {fileID: 1800182268347877171}
   - component: {fileID: 6405877746688810321}
+  - component: {fileID: 3288330139682470586}
   m_Layer: 5
   m_Name: RerollButton
   m_TagString: Untagged
@@ -893,6 +894,24 @@ MonoBehaviour:
   baked: 0
   modifiedFromInspector: 0
   bakedShadows: []
+--- !u!114 &3288330139682470586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3283527213905521124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fbf2e8ef97db5d41b5501f31d73daf2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ButtonController
+  hoverScale: 1.1
+  enableShake: 0
+  shakeStrength: 1
+  animationDuration: 0.2
+  easeType: 25
+  onMouseIcon: {fileID: 0}
 --- !u!1 &4419376488725449622
 GameObject:
   m_ObjectHideFlags: 0
@@ -1209,6 +1228,7 @@ GameObject:
   - component: {fileID: 5613529877199609486}
   - component: {fileID: 1878839179338155705}
   - component: {fileID: 361485842159377781}
+  - component: {fileID: 2636407767553135322}
   m_Layer: 5
   m_Name: SkipButton
   m_TagString: Untagged
@@ -1330,6 +1350,24 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &2636407767553135322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4604174344816472798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fbf2e8ef97db5d41b5501f31d73daf2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ButtonController
+  hoverScale: 1.1
+  enableShake: 0
+  shakeStrength: 1
+  animationDuration: 0.2
+  easeType: 25
+  onMouseIcon: {fileID: 0}
 --- !u!1 &4680109002807438526
 GameObject:
   m_ObjectHideFlags: 0
@@ -1980,6 +2018,7 @@ GameObject:
   - component: {fileID: 6542550135771521797}
   - component: {fileID: 3457543938570647772}
   - component: {fileID: 2048614310788682456}
+  - component: {fileID: 7445857901728117323}
   m_Layer: 5
   m_Name: ViewDeckButton
   m_TagString: Untagged
@@ -2147,6 +2186,24 @@ MonoBehaviour:
   baked: 0
   modifiedFromInspector: 0
   bakedShadows: []
+--- !u!114 &7445857901728117323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8219379346885907234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fbf2e8ef97db5d41b5501f31d73daf2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ButtonController
+  hoverScale: 1.1
+  enableShake: 0
+  shakeStrength: 1
+  animationDuration: 0.2
+  easeType: 25
+  onMouseIcon: {fileID: 0}
 --- !u!1 &8237303514453531307
 GameObject:
   m_ObjectHideFlags: 0
@@ -2236,6 +2293,7 @@ GameObject:
   - component: {fileID: 391176817292002879}
   - component: {fileID: 6248982231682768935}
   - component: {fileID: 4467492202028033863}
+  - component: {fileID: 4291353678995297855}
   m_Layer: 5
   m_Name: SelectionButton
   m_TagString: Untagged
@@ -2404,6 +2462,24 @@ MonoBehaviour:
   baked: 0
   modifiedFromInspector: 0
   bakedShadows: []
+--- !u!114 &4291353678995297855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8483828963859499143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fbf2e8ef97db5d41b5501f31d73daf2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ButtonController
+  hoverScale: 1.1
+  enableShake: 0
+  shakeStrength: 1
+  animationDuration: 0.2
+  easeType: 25
+  onMouseIcon: {fileID: 0}
 --- !u!1001 &1553284903363581426
 PrefabInstance:
   m_ObjectHideFlags: 0
