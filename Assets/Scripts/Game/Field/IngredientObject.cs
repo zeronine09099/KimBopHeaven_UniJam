@@ -20,9 +20,11 @@ public class IngredientObject : MonoBehaviour
     
     public GameplayTag IngredientTag => Data != null ? Data.Tag : GameplayTag.None;
 
+    private Vector2 worldScale;
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        worldScale = transform.localScale;
     }
 
     /// <summary>
@@ -54,6 +56,12 @@ public class IngredientObject : MonoBehaviour
     public void SetIngredientIcon (Sprite icon)
     {
         spriteRenderer.sprite = icon;
+    }
+    
+    
+    public void RestoreWorldScale()
+    {
+        transform.localScale = worldScale;
     }
 
     private void OnDisable()

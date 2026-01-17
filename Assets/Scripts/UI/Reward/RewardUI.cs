@@ -32,6 +32,11 @@ namespace UI.Reward
             remainSelectBtnText.text = $"{remainSelectCnt}";
             rerollBtnText.text = $"리롤 ({remainRerollCnt})";
 
+            foreach(var e in entries)
+            {
+                e.DeselectVisualEffect();
+            }
+            
             Rarity GetRarity()
             {
                 Rarity[] rarities = new[] { Rarity.None, Rarity.Normal, Rarity.Rare, Rarity.Epic };

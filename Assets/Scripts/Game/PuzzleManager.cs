@@ -185,6 +185,32 @@ namespace Game
         public int ThisTurnCompletedKimbapCount { get; set; }
 
 
+        private IngredientObject _highlightedIngredient;
+        private float _originalScale = 1f;
+        public IngredientObject HighlightedIngredient
+        {
+            get => _highlightedIngredient;
+            set
+            {
+                if (value == _highlightedIngredient)
+                    return;
+                
+                if (_highlightedIngredient != null)
+                {
+                    _highlightedIngredient.transform.localScale = Vector3.one * _originalScale;
+                }
+
+
+                _highlightedIngredient = value;
+
+                if (_highlightedIngredient != null)
+                {
+                    _originalScale = _highlightedIngredient.transform.localScale.x;
+                    _highlightedIngredient.transform.localScale = Vector3.one * _originalScale * 1.2f;
+                }
+            }
+        }
+        
 
         public void Start()
         {
@@ -206,6 +232,8 @@ namespace Game
         {
   
         }
+        
+        HashSet<IngredientObject> highlightedIngredients = new ();
 
         public void OnTileClicked(Tile clickedTile)
         {
@@ -215,7 +243,7 @@ namespace Game
             if (FirstSelectedTile == null)
             {
                 FirstSelectedTile = clickedTile;
-                FirstSelectedTile.SetHighlighted(true);
+                HighlightedIngredient = FirstSelectedTile.CurrentIngredient;
             }
             else if (FirstSelectedTile == clickedTile)
             {
@@ -235,6 +263,7 @@ namespace Game
                     // 유효하지 않은 스왑, 첫 번째 선택을 새로 설정
                     ResetSelection();
                     FirstSelectedTile = clickedTile;
+                    HighlightedIngredient = FirstSelectedTile.CurrentIngredient;
                 }
             }
         }
@@ -250,7 +279,7 @@ namespace Game
             {
                 if (draggingTile == null) return;
                 FirstSelectedTile = draggingTile;
-                FirstSelectedTile.SetHighlighted(true); // 시각적 피드백
+                HighlightedIngredient = FirstSelectedTile.CurrentIngredient;
             }
 
             Vector3 worldPosition = Camera.main.ScreenToWorldPoint(new Vector3(pointerPosition.x, pointerPosition.y, 0)); 
@@ -424,10 +453,10 @@ namespace Game
         {
             ResetFirstSelectionVisual();
             ResetSecondSelectionVisual();
-            FirstSelectedTile?.SetHighlighted(false);
-            SecondSelectedTile?.SetHighlighted(false);
+            
             FirstSelectedTile = null;
             SecondSelectedTile = null;
+            HighlightedIngredient = null;
         }
 
         /// <summary>
@@ -678,8 +707,7 @@ namespace Game
                 secondTile = SecondSelectedTile
             };
             DecidedSwap = false;
-            FirstSelectedTile?.SetHighlighted(false);
-            SecondSelectedTile?.SetHighlighted(false);
+            HighlightedIngredient = null;
             FirstSelectedTile = null;
             SecondSelectedTile = null;
             return res;

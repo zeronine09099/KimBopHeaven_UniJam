@@ -100,21 +100,6 @@ namespace Game.Field
         {
             
         }
-        
-        public void SetHighlighted(bool highlighted)
-        {
-            if (highlighted)
-            {
-                transform.DOKill();
-                transform.DOScale(1.1f, 0.2f).SetEase(Ease.OutQuad);
-            }
-            else
-            {
-                transform.DOKill();
-                transform.DOScale(1f, 0.2f).SetEase(Ease.OutQuad);
-            }
-            
-        }
-        
+
     }
 }
