@@ -34,8 +34,10 @@ namespace Core
             LogEx.Log("GameManager Initialized.");
             onCompleted?.Invoke();
 
-            await UniTask.WaitUntil(() => Bootstrapper.IsCompleted);
-            SoundManager.Instance.PlayBackgroundMusic(SoundReference.BackgroundMusic);
+            UniTask.WaitUntil(() => Bootstrapper.IsCompleted).ContinueWith(
+                    () => SoundManager.Instance.PlayBackgroundMusic(SoundReference.BackgroundMusic)
+                    ).Forget();
+            
         }
 
         /// <summary>
