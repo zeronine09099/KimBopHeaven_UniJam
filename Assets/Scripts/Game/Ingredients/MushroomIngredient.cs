@@ -29,7 +29,8 @@ namespace Game.Ingredients
             {
                 IngredientSO grilledMushroom = IngredientLibrary.Instance.GetIngredientSO(AllGameplayTags.Ingredient.Vegetable.GrilledMushroom.Get());
                 args.Tile.CurrentIngredient.Initialize(grilledMushroom);
-                DefaultTriggerEffect(args, 2, 0);
+                AddIngredientToPlayer(grilledMushroom,1);
+                await DefaultTriggerEffect(args, 2, 0);
             }
          
         }

@@ -39,9 +39,10 @@ namespace Game.Ingredients
             
             if(args.CountAdjacentExactTag(AllGameplayTags.Ingredient.Etc.Fire.Get()) > 0)
             {
-                IngredientSO grilledMushroom = IngredientLibrary.Instance.GetIngredientSO(AllGameplayTags.Ingredient.Vegetable.GrilledMushroom.Get());
-                args.Tile.CurrentIngredient.Initialize(grilledMushroom);
-                DefaultTriggerEffect(args, ++count, 0);
+                IngredientSO grilledGarlic = IngredientLibrary.Instance.GetIngredientSO(AllGameplayTags.Ingredient.Vegetable.GrilledGarlic.Get());
+                args.Tile.CurrentIngredient.Initialize(grilledGarlic);
+                AddIngredientToPlayer(grilledGarlic,1);
+                await DefaultTriggerEffect(args, ++count, 0);
             }
         }
     }
