@@ -72,7 +72,8 @@ namespace Game
 
             // UI 점수 초기화
             gameUI.InitializeForStage(stage);
-            
+            PuzzleManager.Instance.Initialize(GameManager.Instance.Field);
+
             /*
              * 연출 단계
              */

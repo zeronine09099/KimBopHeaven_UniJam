@@ -20,7 +20,10 @@ namespace Interaction
         [SerializeField,VisibleOnly] private float pressTime = -100f;
         [SerializeField,VisibleOnly] private Vector2 pointerPosition = Vector2.zero;
         [SerializeField,VisibleOnly]  private Tile pressedTile = null;
-        
+
+        // 외부에서 현재 포인터의 월드 좌표를 가져오는 프로퍼티
+        public Vector3 CurrentWorldPosition => Camera.main.ScreenToWorldPoint(pointerPosition);
+
         public event Action<Tile> OnTilePressed;
         public event Action<Tile> OnTileReleased;
         public event Action<Tile> OnTileClicked;
