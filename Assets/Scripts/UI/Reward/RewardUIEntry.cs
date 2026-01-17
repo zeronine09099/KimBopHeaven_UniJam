@@ -13,15 +13,31 @@ namespace UI.Reward
 
         [SerializeField] private DescriptionModal modal = null;
         [SerializeField] private float holdThreshold;
+
+        [Space(10)]
+        [Header("Selection")]
+        [SerializeField] private Image baseImage;
         [SerializeField] private Image iconImage;
+        [SerializeField] private Color selectedColor;
+
+
         [SerializeField] private TextMeshProUGUI nameText;
         [SerializeField] private TextMeshProUGUI descriptionText;
         [SerializeField] private TextMeshProUGUI baseScore;
         [SerializeField] private TextMeshProUGUI rarity;
+
+        [Space(10)]
         [Header("State")] 
         [SerializeField,VisibleOnly] private IngredientSO ingredientSo;
         [SerializeField,VisibleOnly] private float holdTime = 0f;
         [SerializeField,VisibleOnly] private bool isHolding = false;
+
+        [Space(10)]
+        [Header("TMP")]
+        [SerializeField] TMP_FontAsset font_none;
+        [SerializeField] TMP_FontAsset font_normal;
+        [SerializeField] TMP_FontAsset font_rare;
+        [SerializeField] TMP_FontAsset font_epic;
 
         private RewardUI rewardUI;
         public IngredientSO IngredientSo => ingredientSo;
@@ -35,6 +51,21 @@ namespace UI.Reward
             descriptionText.text = ingredientSo.description;
             baseScore.text = ingredientSo.ReinforcedBaseScore.ToString();
             rarity.text = $"<{ingredientSo.rarity.ToString()}>";
+            switch(ingredientSo.rarity)
+            {
+                case Common.Rarity.None:
+                    rarity.font = font_none;
+                    break;
+                case Common.Rarity.Normal:
+                    rarity.font = font_normal;
+                    break;
+                case Common.Rarity.Rare:
+                    rarity.font = font_rare;
+                    break;
+                case Common.Rarity.Epic:
+                    rarity.font = font_epic;
+                    break;
+            }
         }
         
         private void Update()
@@ -45,7 +76,17 @@ namespace UI.Reward
                 //modal.Show(ingredientSo);
             }
         }
-        
+
+        public void SelectedVisualEffect()
+        {
+            baseImage.color = selectedColor;
+        }
+
+        public void DeselectVisualEffect()
+        {
+            baseImage.color = Color.white;
+        }
+
         public void OnPointerDown(PointerEventData eventData)
         {
             isHolding = true;

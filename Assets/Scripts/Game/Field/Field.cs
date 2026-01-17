@@ -271,35 +271,35 @@ namespace Game.Field
                 }
             }
         }
-        private void OnValidate()
-        {
-            if (_grid == null)
-                _grid = GetComponent<Grid>();
-            _grid.cellSize = tileScale;
-            _grid.cellGap = tileGap;
-            
-            if (_tileContainer != null)
-            {
-                for (int i = 0; i < _tileContainer.Length; i++)
-                {
-                    for (int j = 0; j < _tileContainer[i].Length; j++)
-                    {
-                        var tile = _tileContainer[i][j];
-                        if (tile != null)
-                        {
-                            // tile.transform.localScale = tileScale;
-                            tile.transform.position = _grid.GetCellCenterWorld(new Vector3Int(j, i, 0));
-                        }
-                    }
-                }
-            }
-            
-            // // 6*6의 중심이 0,0이 되도록 그리드 위치 조정
-            // var rightUp = _grid.GetCellCenterWorld(new Vector3Int(0,0,0));;
-            // var leftDown = _grid.GetCellCenterWorld(new Vector3Int(5,5,0));;
-            // var centerOffset = (rightUp + leftDown) / 2;
-            // _grid.transform.localPosition = -centerOffset;
-        }
+        // private void OnValidate()
+        // {
+        //     if (_grid == null)
+        //         _grid = GetComponent<Grid>();
+        //     _grid.cellSize = tileScale;
+        //     _grid.cellGap = tileGap;
+        //     
+        //     if (_tileContainer != null)
+        //     {
+        //         for (int i = 0; i < _tileContainer.Length; i++)
+        //         {
+        //             for (int j = 0; j < _tileContainer[i].Length; j++)
+        //             {
+        //                 var tile = _tileContainer[i][j];
+        //                 if (tile != null)
+        //                 {
+        //                     // tile.transform.localScale = tileScale;
+        //                     tile.transform.position = _grid.GetCellCenterWorld(new Vector3Int(j, i, 0));
+        //                 }
+        //             }
+        //         }
+        //     }
+        //     
+        //     // // 6*6의 중심이 0,0이 되도록 그리드 위치 조정
+        //     // var rightUp = _grid.GetCellCenterWorld(new Vector3Int(0,0,0));;
+        //     // var leftDown = _grid.GetCellCenterWorld(new Vector3Int(5,5,0));;
+        //     // var centerOffset = (rightUp + leftDown) / 2;
+        //     // _grid.transform.localPosition = -centerOffset;
+        // }
 
         [Serializable]
         internal class TileLine : IEnumerable<Tile>

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using DG.Tweening;
 
-public class ButtonController : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class ButtonController : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler
 {
     private RectTransform buttonRect;
 
@@ -93,5 +93,23 @@ public class ButtonController : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
         //buttonRect.DOShakeRotation(animationDuration, 10 * shakeStrength, (int)(50 * shakeStrength), 90, false).SetUpdate(true);
         buttonRect.rotation = originalRotation;
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        buttonRect.DOKill(); // 기존 애니메이션 초기화
+        buttonRect.DOScale(originalScale * 0.9f, animationDuration).SetEase(easeType).SetUpdate(true);
+
+
+    }
+
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        buttonRect.DOKill(); // 기존 애니메이션 초기화
+        buttonRect.DOPunchScale(Vector3.one * 0.1f, animationDuration).SetEase(easeType).SetUpdate(true).OnComplete(() =>
+        {
+            buttonRect.DOScale(hoverScale, animationDuration).SetEase(easeType).SetUpdate(true);
+        });
+
     }
 }
