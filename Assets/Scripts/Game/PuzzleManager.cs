@@ -288,20 +288,18 @@ namespace Game
             {
                 foreach (var tile in match)
                 {
-                    var onTrigger = tile.CurrentIngredient.Data.OnTrigger(tile);
-                    await onTrigger.ToUniTask();
-                    await UniTask.Delay(TimeSpan.FromSeconds(triggerInterval));
+                    await tile.CurrentIngredient.Data.OnTrigger(tile).AttachExternalCancellation(cancellationToken);
+                    await UniTask.Delay(TimeSpan.FromSeconds(triggerInterval), cancellationToken: cancellationToken);
                 }
                 toExplodeTiles.AddRange(match);
-                await UniTask.Delay(TimeSpan.FromSeconds(matchInterval));
+                await UniTask.Delay(TimeSpan.FromSeconds(matchInterval), cancellationToken: cancellationToken);
             }
             
             // 폭발
             foreach (var tile in toExplodeTiles)
             {
-                var onExplode = tile.CurrentIngredient.Data.OnExplode(tile);
-                await onExplode.ToUniTask();
-                await UniTask.Delay(TimeSpan.FromSeconds(explodeDelay));
+                await tile.CurrentIngredient.Data.OnExplode(tile).AttachExternalCancellation(cancellationToken);
+                await UniTask.Delay(TimeSpan.FromSeconds(explodeDelay), cancellationToken: cancellationToken);
             }
             
         }

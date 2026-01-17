@@ -81,7 +81,7 @@ namespace Game
             PlayerState.Current.CurrentTempScore = 0;
 
             // 스테이지 데이터 초기화
-            // Root.Field.InitField(6,6);
+            Root.Field.InitField();
 
             // UI 점수 초기화
             gameUI.InitializeForStage(stage);

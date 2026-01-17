@@ -9,6 +9,10 @@ using Machamy.Utils;
 using UnityEngine;
 using UnityEngine.Serialization;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 namespace Game.Field
 {
     
@@ -45,12 +49,20 @@ namespace Game.Field
             GameManager.Instance.Field = this;
         }
 
-        // [ContextMenu("Init Field")]
-        // public void InitField()
-        // {
-        //     InitField(width, height);
-        //     
-        // }
+        [ContextMenu("Init Field")]
+        public void InitField()
+        {
+            for(int i = 0; i < height; i++)
+            {
+                for(int j = 0; j < width; j++)
+                {
+                    var tile = GetTile(i, j);
+                    tile.Initialize(this, new TileVector(i, j));
+                    tile.name = $"Tile_({i},{j})";
+                }
+            }
+            
+        }
         //
         // public void InitField(int width, int height)
         // {
@@ -104,6 +116,35 @@ namespace Game.Field
                 }
             }
         }
+        
+        #if UNITY_EDITOR
+        [ContextMenu("Refresh Prefab Tiles")]
+        public void RefreshPrefabTiles()
+        {
+            ClearTiles();
+            // 프리팹 유틸리티 이용
+            for (int i = 0; i < height; i++)
+            {
+                for (int j = 0; j < width; j++)
+                {
+                    Tile tile = (Tile)PrefabUtility.InstantiatePrefab(_tilePrefab, tileParent != null ? tileParent : transform);
+                    tile.Initialize(this, new TileVector(i, j));
+                    tile.name = $"Tile_({i},{j})";
+                    tile.transform.position = Grid.GetCellCenterWorld(new Vector3Int(j,i, 0));
+                    tile.transform.localScale = Vector3.one;
+                    if (_tileContainer == null)
+                    {
+                        _tileContainer = new TileLine[height];
+                    }
+                    if (_tileContainer[i] == null)
+                    {
+                        _tileContainer[i] = new TileLine(width);
+                    }
+                    _tileContainer[i][j] = tile;
+                }
+            }
+        }
+        #endif
         
         
         public TileVector GetWrappedCoordinate(TileVector tile)

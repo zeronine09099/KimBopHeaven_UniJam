@@ -131,14 +131,14 @@ namespace Game.Ingredients
 
         public override async UniTask OnFall(Tile tile)
         {{ 
-            base.OnFall(tile);
-            yield break;
+            await base.OnFall(tile);
+          
         }}
 
         public override async UniTask OnTrigger(Tile tile)
         {{
-            base.OnTrigger(tile);
-            yield break;
+            await base.OnTrigger(tile);
+         
         }}
     }}
 }}

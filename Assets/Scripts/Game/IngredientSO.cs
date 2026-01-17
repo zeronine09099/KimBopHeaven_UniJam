@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using BandoWare.GameplayTags;
 using Common;
 using Common.Attributes;
+using Cysharp.Threading.Tasks;
 using Database.Generated;
 using DG.Tweening;
 using Game.Field;
@@ -36,27 +37,30 @@ namespace Game
         
         
         public Color debugColor = Color.white;
-        public abstract IEnumerator OnFall(Tile tile);
+
+        public async virtual UniTask OnFall(Tile tile)
+        {
+            await UniTask.CompletedTask;
+        }
 
 
-        public virtual IEnumerator OnTrigger(Tile tile)
+        public async virtual UniTask OnTrigger(Tile tile)
         {
             PlayerState.Current.CurrentTempScore += (int) baseScore;
-            yield return tile.GetComponent<SpriteRenderer>().DOColor(Color.yellow, 0.2f).OnComplete(() =>
+            await tile.GetComponentInChildren<SpriteRenderer>().DOColor(Color.yellow, 0.2f).OnComplete(() =>
             {
                 tile.GetComponentInChildren<SpriteRenderer>().DOColor(Color.white, 0.2f);
-            });
-            yield break;
+            }).ToUniTask();
+
         }
-        public virtual IEnumerator OnExplode(Tile tile)
+        public async virtual UniTask OnExplode(Tile tile)
         {
             tile.SetIngredient(null);
             PuzzleManager.Instance.RetrieveIngredient(this);
-            yield return tile.GetComponent<SpriteRenderer>().DOColor(Color.red, 0.2f).OnComplete(() =>
+            await tile.GetComponentInChildren<SpriteRenderer>().DOColor(Color.red, 0.2f).OnComplete(() =>
             {
                 tile.GetComponentInChildren<SpriteRenderer>().DOColor(Color.white, 0.2f);
-            });
-            yield break;
+            }).ToUniTask();
         }
 
 

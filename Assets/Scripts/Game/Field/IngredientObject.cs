@@ -1,4 +1,5 @@
-﻿using BandoWare.GameplayTags;
+﻿using System;
+using BandoWare.GameplayTags;
 using Game;
 using UnityEngine;
 
@@ -52,5 +53,10 @@ public class IngredientObject : MonoBehaviour
     public void SetIngredientIcon (Sprite icon)
     {
         spriteRenderer.sprite = icon;
+    }
+
+    private void OnDisable()
+    {
+        StopAllCoroutines();
     }
 }
