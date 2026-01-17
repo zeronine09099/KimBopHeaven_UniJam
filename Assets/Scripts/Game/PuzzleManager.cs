@@ -386,6 +386,8 @@ namespace Game
 
         }
 
+
+        #region 덱 관련... TODO 나중에 분리하기
         private List<IngredientSO> possibleIngredients = new List<IngredientSO>();
         private List<IngredientSO> retrivedIngredients = new List<IngredientSO>();
         
@@ -499,7 +501,7 @@ namespace Game
             retrivedIngredients.Clear();
             possibleIngredients.Shuffle();
         }
-
+        #endregion
         public async UniTask<PlayerInputData> GetPlayerInput(CancellationToken cancellationToken)
         {
             isPlayerTurn = true;
@@ -653,10 +655,11 @@ namespace Game
             int start = 0;
            for(int j = 0; j < field.Width; j++)
            {
+               int upDelta = 1;
                for (int i = 0; i < field.Height; i++)
                {
                    bool foundIngredient = false;
-                   int upDelta = 1;
+
                    Tile tile = field.GetTile(i, j);
                    if (tile.CurrentIngredient == null)
                    {
@@ -684,34 +687,34 @@ namespace Game
                                break; // 다음 빈 타일로 이동
                            }
                        }
-                          if (!foundIngredient)
-                          {
-                            // 위에 재료가 없는 경우 새로 생성
-                            IngredientSO randomData = GetNextIngredientData();
-                            
-                            IngredientObject newIngredientObject = Instantiate(ingredientPrefab);
-                            newIngredientObject.Initialize(randomData);
-                            newIngredientObject.transform.SetParent(tile.transform);
-                            newIngredientObject.transform.position = field.GetTile(field.Height - 1, j).transform.position + new Vector3(0, tileDelta * upDelta, 0);
-                            upDelta++;
-                            tile.SetIngredient(newIngredientObject);
-                            
-                            if (randomData.IsGim())
-                            {
-                                GimCount++;
-                            }
-                            else if (randomData.IsRice())
-                            {
-                                RiceCount++;
-                            }
-                            
-                            // 애니메이션 처리
-                            Sequence fallSequence = DOTween.Sequence();
-                            fallSequence.Append(newIngredientObject.transform.DOLocalMove(Vector3.zero, fallDuration).SetEase(fallEase));
-                            fallSequences.Add(fallSequence);
-                            summoningIngredients.Add(newIngredientObject);
-                            newlyAddedIngredients.Add(randomData);
-                          }
+                       if (!foundIngredient)
+                       {
+                           // 위에 재료가 없는 경우 새로 생성
+                           IngredientSO randomData = GetNextIngredientData();
+                        
+                           IngredientObject newIngredientObject = Instantiate(ingredientPrefab);
+                           newIngredientObject.Initialize(randomData);
+                           newIngredientObject.transform.SetParent(tile.transform);
+                           newIngredientObject.transform.position = field.GetTile(field.Height - 1, j).transform.position + new Vector3(0, tileDelta * upDelta, 0);
+                           upDelta++;
+                           tile.SetIngredient(newIngredientObject);
+                        
+                           if (randomData.IsGim())
+                           {
+                               GimCount++;
+                           }
+                           else if (randomData.IsRice())
+                           {
+                               RiceCount++;
+                           }
+                        
+                           // 애니메이션 처리
+                           Sequence fallSequence = DOTween.Sequence();
+                           fallSequence.Append(newIngredientObject.transform.DOLocalMove(Vector3.zero, fallDuration).SetEase(fallEase));
+                           fallSequences.Add(fallSequence);
+                           summoningIngredients.Add(newIngredientObject);
+                           newlyAddedIngredients.Add(randomData);
+                       }
                    }
                    
                }

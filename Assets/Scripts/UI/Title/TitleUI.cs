@@ -33,6 +33,20 @@ namespace UI.Title
             SoundManager.Instance.PlaySfx(SoundReference.ButtonClickSFX);
             GameManager.Instance.StartGame();
         }
+        
+        public void OnTutorialButtonClicked()
+        {
+            LogEx.Log("Tutorial Button Clicked");
+            SoundManager.Instance.PlaySfx(SoundReference.ButtonClickSFX);
+            // GameManager.Instance.StartTutorial();
+        }
+        
+        public void OnSettingsButtonClicked()
+        {
+            LogEx.Log("Settings Button Clicked");
+            SoundManager.Instance.PlaySfx(SoundReference.ButtonClickSFX);
+            UIManager.Instance.SettingUI.Show();
+        }
 
         public void Show()
         {

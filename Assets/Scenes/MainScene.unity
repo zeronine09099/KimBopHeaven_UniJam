@@ -319,6 +319,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 4687017458925087929, guid: a2e1c5bbf9512bd4184b51c39719797b, type: 3}
+      propertyPath: useUnscaledTime
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7934401779092375619, guid: a2e1c5bbf9512bd4184b51c39719797b, type: 3}
       propertyPath: m_Name
       value: BG Particle
@@ -5407,7 +5411,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6749198128194358887, guid: 7ea0934fddad82e4f9bc49618aa168a4, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: 0.00012207031
       objectReference: {fileID: 0}
     - target: {fileID: 6762863231502320743, guid: 7ea0934fddad82e4f9bc49618aa168a4, type: 3}
       propertyPath: offset.x
@@ -6026,10 +6030,6 @@ PrefabInstance:
     - target: {fileID: 9180280849331328080, guid: ceb6fb4c33f92af438b497b2bc723e4f, type: 3}
       propertyPath: m_Name
       value: TitleUI
-      objectReference: {fileID: 0}
-    - target: {fileID: 9180280849331328080, guid: ceb6fb4c33f92af438b497b2bc723e4f, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
