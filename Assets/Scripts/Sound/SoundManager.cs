@@ -347,9 +347,9 @@ namespace Sound
             }
             
             // 웹 빌드 디버깅용 로그
-            Debug.Log($"[SoundManager] Loading audio: Audio/{name}");
+            Debug.Log($"[SoundManager] Loading audio: {name}");
             
-            resource = Resources.Load<AudioResource>($"Audio/{name}");
+            resource = Resources.Load<AudioResource>($"{name}");
             if (resource != null)
             {
                 _cachedAudioClips.Add(name, resource);
@@ -357,7 +357,7 @@ namespace Sound
                 return resource;
             }
             
-            Debug.LogError($"[SoundManager] Audio clip not found: Audio/{name}");
+            Debug.LogError($"[SoundManager] Audio clip not found: {name}");
             return null;
         }
         

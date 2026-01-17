@@ -3,10 +3,17 @@
     public class SoundReference
     {
         // BGM
-        // public static readonly SoundReference MainTitleBGM = new SoundReference("BGM/MainTitleBGM_V1");
+        public static readonly SoundReference BackgroundMusic = new SoundReference("Sound/BackgroundMusic");
+        public static readonly SoundReference BamBoo = new SoundReference("Sound/BamBoo");
         
         // SFX
+        public static readonly SoundReference BillSFX = new SoundReference("Sound/BillSFX");
+        public static readonly SoundReference ButtonClickSFX = new SoundReference("Sound/ButtonClickSFX");
+        public static readonly SoundReference GameOverSFX = new SoundReference("Sound/GameOverSFX");
+        public static readonly SoundReference ScoreSFX = new SoundReference("Sound/ScoreSFX");
+        public static readonly SoundReference SwipeSFX = new SoundReference("Sound/SwipeSFX");
 
+        // Legacy
         public static readonly SoundReference GameOver = new SoundReference("SFX/GameOver");
 
         
