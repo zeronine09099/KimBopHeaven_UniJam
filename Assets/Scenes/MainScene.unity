@@ -1087,6 +1087,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: IngameUI
       objectReference: {fileID: 0}
+    - target: {fileID: 8706518491578245402, guid: 4b9720cf95889534285bf1839fc34952, type: 3}
+      propertyPath: deckUI
+      value: 
+      objectReference: {fileID: 5337087028622114880}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4072,6 +4076,34 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3313560496880282045, guid: a8cedf9e7dfc7f04e94ce035932b1832, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3313560496880282045, guid: a8cedf9e7dfc7f04e94ce035932b1832, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3313560496880282045, guid: a8cedf9e7dfc7f04e94ce035932b1832, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4228867445488587120, guid: a8cedf9e7dfc7f04e94ce035932b1832, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4228867445488587120, guid: a8cedf9e7dfc7f04e94ce035932b1832, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4228867445488587120, guid: a8cedf9e7dfc7f04e94ce035932b1832, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4228867445488587120, guid: a8cedf9e7dfc7f04e94ce035932b1832, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4584558988359114534, guid: a8cedf9e7dfc7f04e94ce035932b1832, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -4152,9 +4184,41 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4914845883745261897, guid: a8cedf9e7dfc7f04e94ce035932b1832, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914845883745261897, guid: a8cedf9e7dfc7f04e94ce035932b1832, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914845883745261897, guid: a8cedf9e7dfc7f04e94ce035932b1832, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914845883745261897, guid: a8cedf9e7dfc7f04e94ce035932b1832, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4966150482011114127, guid: a8cedf9e7dfc7f04e94ce035932b1832, type: 3}
       propertyPath: m_Name
       value: SettingUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 7455200686372571324, guid: a8cedf9e7dfc7f04e94ce035932b1832, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7455200686372571324, guid: a8cedf9e7dfc7f04e94ce035932b1832, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7455200686372571324, guid: a8cedf9e7dfc7f04e94ce035932b1832, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7455200686372571324, guid: a8cedf9e7dfc7f04e94ce035932b1832, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5719,6 +5783,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2679950139080011995, guid: 7ea0934fddad82e4f9bc49618aa168a4, type: 3}
   m_PrefabInstance: {fileID: 5337087028622114878}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5337087028622114880 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5444659061129667813, guid: 7ea0934fddad82e4f9bc49618aa168a4, type: 3}
+  m_PrefabInstance: {fileID: 5337087028622114878}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28443e367d8e4977828457af3a6b61b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UI.Game.DeckUI
 --- !u!1001 &6583760864937041564
 PrefabInstance:
   m_ObjectHideFlags: 0

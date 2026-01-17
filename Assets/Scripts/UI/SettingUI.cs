@@ -11,11 +11,20 @@ namespace UI
         [SerializeField] private Slider musicSlider;
         [SerializeField] private Slider sfxSlider;
         [SerializeField] private Toggle toggle;
-        
+
+        [SerializeField] private Button closeButton;
+
         private void Awake()
         {
             UIManager.Instance.SettingUI = this;
             gameObject.SetActive(false);
+
+            closeButton.onClick.RemoveAllListeners();
+            closeButton.onClick.AddListener(() =>
+            {
+                SoundManager.Instance.PlaySfx(SoundReference.ButtonClickSFX);
+                Hide();
+            });
         }
 
         private void OnEnable()

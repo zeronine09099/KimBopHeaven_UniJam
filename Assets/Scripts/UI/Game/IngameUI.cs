@@ -34,7 +34,11 @@ namespace UI.Game
 
         private void OnEnable()
         {
-       
+            menuButton.onClick.RemoveAllListeners();
+            menuButton.onClick.AddListener(OnMenuClicked);
+
+            deckButton.onClick.RemoveAllListeners();
+            deckButton.onClick.AddListener(OnDeckClicked);
         }
 
         private void OnDisable()
