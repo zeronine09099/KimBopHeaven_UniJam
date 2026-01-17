@@ -72,7 +72,7 @@ namespace Game
             if (currentIndex > 0)
             {
                 var leftIngredient = MatchData[currentIndex - 1].CurrentIngredient;
-                if (leftIngredient != null && leftIngredient.Data.Tag.IsChildOf(parentTag))
+                if (leftIngredient != null && leftIngredient.Data.Tag.IsChildOf(parentTag) || leftIngredient.Data.Tag == parentTag)
                 {
                     count++;
                 }
@@ -81,7 +81,7 @@ namespace Game
             if (currentIndex < MatchData.Count - 1)
             {
                 var rightIngredient = MatchData[currentIndex + 1].CurrentIngredient;
-                if (rightIngredient != null && rightIngredient.Data.Tag.IsChildOf(parentTag))
+                if (rightIngredient != null && rightIngredient.Data.Tag.IsChildOf(parentTag) || rightIngredient.Data.Tag == parentTag)
                 {
                     count++;
                 }
