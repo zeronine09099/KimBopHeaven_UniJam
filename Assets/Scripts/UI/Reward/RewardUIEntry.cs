@@ -1,6 +1,7 @@
 ﻿using Game;
 using Machamy.Attributes;
 using TMPro;
+using UnityEditor.Callbacks;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -14,6 +15,9 @@ namespace UI.Reward
         [SerializeField] private float holdThreshold;
         [SerializeField] private Image iconImage;
         [SerializeField] private TextMeshProUGUI nameText;
+        [SerializeField] private TextMeshProUGUI descriptionText;
+        [SerializeField] private TextMeshProUGUI baseScore;
+        [SerializeField] private TextMeshProUGUI rarity;
         [Header("State")] 
         [SerializeField,VisibleOnly] private IngredientSO ingredientSo;
         [SerializeField,VisibleOnly] private float holdTime = 0f;
@@ -25,8 +29,12 @@ namespace UI.Reward
         public void Initialize(RewardUI rewardUI, IngredientSO ingredientSo)
         {
             this.rewardUI = rewardUI;
+            this.ingredientSo = ingredientSo;
             iconImage.sprite = ingredientSo.icon;
-            nameText.text = ingredientSo.name;
+            nameText.text = ingredientSo.displayName;
+            descriptionText.text = ingredientSo.description;
+            baseScore.text = ingredientSo.baseScore.ToString();
+            rarity.text = $"<{ingredientSo.rarity.ToString()}>";
         }
         
         private void Update()
@@ -34,7 +42,7 @@ namespace UI.Reward
             if (isHolding)
             {
                 holdTime += Time.deltaTime;
-                modal.Show(ingredientSo);
+                //modal.Show(ingredientSo);
             }
         }
         
@@ -58,7 +66,7 @@ namespace UI.Reward
             }
             else
             {
-                modal.Hide();
+                //modal.Hide();
             }
         }
 
@@ -66,7 +74,7 @@ namespace UI.Reward
         {
             isHolding = false;
             Debug.Log($"Pointer exited after holding for {holdTime} seconds.");
-            modal.Hide();
+            //modal.Hide();
         }
     }
 }
