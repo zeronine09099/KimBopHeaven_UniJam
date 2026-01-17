@@ -16,7 +16,8 @@ namespace Game.Field
         [field:SerializeField]public IngredientObject CurrentIngredient { get; set; }
         private Field field;
         [SerializeField] FloatingBonusScore scoreTextPrefab;
-        [field:SerializeField, VisibleOnly(EditableIn.EditMode)] FloatingBonusScore scoreText;
+        [field:SerializeField, VisibleOnly(EditableIn.EditMode)]
+        public FloatingBonusScore scoreText { get; private set; }
 
         public void Initialize(Field field, TileVector tileVector)
         {

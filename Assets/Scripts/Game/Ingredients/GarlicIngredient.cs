@@ -3,9 +3,15 @@ using BandoWare.GameplayTags;
 using Game.Field;
 using Cysharp.Threading.Tasks;
 using Game;
+using Player;
 
 namespace Game.Ingredients
 {
+    /// <summary>
+    /// 마늘 재료
+    /// 트리거 시: 고기류가 인접해 있다면 점수 20 추가
+    /// variable01: 추가 점수 (기본값: 20)
+    /// </summary>
     public class GarlicIngredientSO : IngredientSO
     {
         public override GameplayTag Tag => AllGameplayTags.Ingredient.Vegetable.Garlic.Get();
@@ -18,9 +24,27 @@ namespace Game.Ingredients
 
         public override async UniTask OnTrigger(TriggerArguments args)
         {
-            await base.OnTrigger(args);
-         
+            // 인접한 타일이 고기류인지 확인
+            bool hasAdjacentMeat = args.CountAdjacentHasTag(AllGameplayTags.Ingredient.Meat.Get()) > 0;
+
+            PlayerState.Current.CurrentTempScore += (int) baseScore;
+
+            int count = 1;
+            await DefaultTriggerEffect(args, 1, (int)baseScore);
+            if (hasAdjacentMeat)
+            {
+                PlayerState.Current.CurrentTempScore += (int)variable01;
+                await DefaultTriggerEffect(args, ++count, (int)variable01);
+            }
+            
+            if(args.CountAdjacentExactTag(AllGameplayTags.Ingredient.Etc.Fire.Get()) > 0)
+            {
+                IngredientSO grilledMushroom = IngredientLibrary.Instance.GetIngredientSO(AllGameplayTags.Ingredient.Vegetable.GrilledMushroom.Get());
+                args.Tile.CurrentIngredient.Initialize(grilledMushroom);
+                DefaultTriggerEffect(args, ++count, 0);
+            }
         }
     }
 }
+
 

@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using BandoWare.GameplayTags;
 using Common.Collections;
 using Common.Extentions;
 using Game;
+using Machamy.DeveloperConsole.Attributes;
+using Machamy.DeveloperConsole.Commands;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -31,15 +34,15 @@ namespace Player
             }
         }
         
-        public void AddIngredient(IngredientSO ingredient)
+        public void AddIngredient(IngredientSO ingredient, int count = 1)
         {
-            if (ingredientCountMap.TryGetValue(ingredient, out var count))
+            if (ingredientCountMap.TryGetValue(ingredient, out var existingCount))
             {
-                ingredientCountMap[ingredient] = count + 1;
+                ingredientCountMap[ingredient] = existingCount + count;
             }
             else
             {
-                ingredientCountMap[ingredient] = 1;
+                ingredientCountMap[ingredient] = count;
             }
         }
         
@@ -115,4 +118,8 @@ namespace Player
             return newInventory;
         }
     }
+
+
+
+    
 }

@@ -30,6 +30,86 @@ namespace Game
         public Tile Tile;
         public IngredientObject Ingredient;
         public PuzzleManager.MatchData MatchData;
+        public List<(Tile, Func<UniTask>)> AfterMatchActions = new ();
+        
+        public Tile PreviousTile => MatchData.IndexOf(Tile) > 0 ? MatchData[MatchData.IndexOf(Tile) - 1] : null;
+        public Tile NextTile => MatchData.IndexOf(Tile) < MatchData.Count - 1 ? MatchData[MatchData.IndexOf(Tile) + 1] : null;
+        
+        public int CountExectTag(GameplayTag tag)
+        {
+            int count = 0;
+            foreach (var tile in MatchData)
+            {
+                if (tile.CurrentIngredient != null && tile.CurrentIngredient.Data.Tag == tag)
+                {
+                    count++;
+                }
+            }
+            return count;
+        }
+        
+        public int CountHasTag(GameplayTag parentTag)
+        {
+            int count = 0;
+            foreach (var tile in MatchData)
+            {
+                if (tile.CurrentIngredient != null && tile.CurrentIngredient.Data.Tag.IsChildOf(parentTag))
+                {
+                    count++;
+                }
+            }
+            return count;
+        }
+        
+        public int CountAdjacentHasTag(GameplayTag parentTag)
+        {
+            int count = 0;
+            int currentIndex = MatchData.IndexOf(Tile);
+            // 왼쪽
+            if (currentIndex > 0)
+            {
+                var leftIngredient = MatchData[currentIndex - 1].CurrentIngredient;
+                if (leftIngredient != null && leftIngredient.Data.Tag.IsChildOf(parentTag))
+                {
+                    count++;
+                }
+            }
+            // 오른쪽
+            if (currentIndex < MatchData.Count - 1)
+            {
+                var rightIngredient = MatchData[currentIndex + 1].CurrentIngredient;
+                if (rightIngredient != null && rightIngredient.Data.Tag.IsChildOf(parentTag))
+                {
+                    count++;
+                }
+            }
+            return count;
+        }
+        
+        public int CountAdjacentExactTag(GameplayTag tag)
+        {
+            int count = 0;
+            int currentIndex = MatchData.IndexOf(Tile);
+            // 왼쪽
+            if (currentIndex > 0)
+            {
+                var leftIngredient = MatchData[currentIndex - 1].CurrentIngredient;
+                if (leftIngredient != null && leftIngredient.Data.Tag == tag)
+                {
+                    count++;
+                }
+            }
+            // 오른쪽
+            if (currentIndex < MatchData.Count - 1)
+            {
+                var rightIngredient = MatchData[currentIndex + 1].CurrentIngredient;
+                if (rightIngredient != null && rightIngredient.Data.Tag == tag)
+                {
+                    count++;
+                }
+            }
+            return count;
+        }
     }
     
     public class PuzzleManager : Singleton<PuzzleManager>
@@ -90,6 +170,11 @@ namespace Game
                 }
             }
         }
+
+        public List<MatchData> CurrentMatches { get; set; } = new List<MatchData>();
+        
+        public int ThisTurnCompletedKimbapCount { get; set; }
+
         private bool isSwapping = false;
 
         public void Start()
@@ -344,7 +429,26 @@ namespace Game
         {
             retrivedIngredients.Add(ingredientSO);
         }
-        
+
+        public void AddIngredientToRetrieved(IngredientSO ingredientSO, int count)
+        {
+            for (int i = 0; i < count; i++)
+            {
+                retrivedIngredients.Add(ingredientSO);
+            }
+        }
+
+        /// <summary>
+        /// possibleIngredients에 직접 재료를 추가합니다 (즉시 적용)
+        /// </summary>
+        public void AddToPossibleIngredients(IngredientSO ingredientSO, int count = 1)
+        {
+            for (int i = 0; i < count; i++)
+            {
+                possibleIngredients.Add(ingredientSO);
+            }
+        }
+
         public void ShuffleRetrievedIngredients()
         {
             possibleIngredients.AddRange(retrivedIngredients);
@@ -412,6 +516,8 @@ namespace Game
                     await tile.CurrentIngredient.Data.OnTrigger(args).AttachExternalCancellation(cancellationToken);
                     await UniTask.Delay(TimeSpan.FromSeconds(triggerInterval), cancellationToken: cancellationToken);
                     // 임시 점수를 실제 점수에 반영
+                    CurrentMatches.Add(match);
+                    ThisTurnCompletedKimbapCount++;
                     PlayerState.Current.CurrentStageScore = PlayerState.Current.CurrentTempScore;
                     LogEx.Log($"Current Stage Score: {PlayerState.Current.CurrentStageScore}");
                 }
@@ -691,7 +797,6 @@ namespace Game
 
         public class MatchData : List<Tile>
         {
-            public List<Tile> MatchedTiles = new List<Tile>();
             public List<IngredientSO> MatchedIngredients = new List<IngredientSO>();
             
             
@@ -702,6 +807,7 @@ namespace Game
                 foreach (var tile in tiles)
                 {
                     matchData.Add(tile);
+                    matchData.MatchedIngredients.Add(tile.CurrentIngredient.Data);
                 }
                 return matchData;
             }
@@ -712,8 +818,21 @@ namespace Game
                 for (int i = tiles.Count - 1; i >= 0; i--)
                 {
                     matchData.Add(tiles[i]);
+                    matchData.MatchedIngredients.Add(tiles[i].CurrentIngredient.Data);
                 }
                 return matchData;
+            }
+
+            public bool HasIngredientTag(GameplayTag get)
+            {
+                foreach (var ingredient in MatchedIngredients)
+                {
+                    if (ingredient.Tag == get)
+                    {
+                        return true;
+                    }
+                }
+                return false;
             }
         }
 

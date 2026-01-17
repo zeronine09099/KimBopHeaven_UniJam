@@ -3,9 +3,14 @@ using BandoWare.GameplayTags;
 using Game.Field;
 using Cysharp.Threading.Tasks;
 using Game;
+using Player;
 
 namespace Game.Ingredients
 {
+    /// <summary>
+    /// 계란 재료
+    /// 트리거 시: 기본 점수만 제공 (잘 삶은 계란)
+    /// </summary>
     public class EggIngredientSO : IngredientSO
     {
         public override GameplayTag Tag => AllGameplayTags.Ingredient.Etc.Egg.Get();
@@ -23,4 +28,5 @@ namespace Game.Ingredients
         }
     }
 }
+
 

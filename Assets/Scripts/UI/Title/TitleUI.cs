@@ -2,18 +2,18 @@
 using Core;
 using Machamy.Utils;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace UI.Title
 {
     public class TitleUI : MonoBehaviour
     {
-        [SerializeField] private Button startButton;
 
         private void Awake()
         {
             UIManager.Instance.TitleUI = this;
-            startButton.onClick.AddListener(OnStartButtonClicked);
+
         }
 
         private void OnEnable()
@@ -26,7 +26,7 @@ namespace UI.Title
 
         }
 
-        private void OnStartButtonClicked()
+        public void OnStartButtonClicked()
         {
             LogEx.Log("Start Button Clicked");
 

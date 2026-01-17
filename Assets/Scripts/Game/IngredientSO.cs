@@ -9,9 +9,12 @@ using Database.Generated;
 using DG.Tweening;
 using Game.Field;
 using Machamy.Attributes;
+using Machamy.Utils;
 using Player;
+using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using Sequence = DG.Tweening.Sequence;
 
 namespace Game
 {
@@ -29,12 +32,14 @@ namespace Game
         public Rarity rarity;
         public string displayName;
         public string description;
-        public float baseScore = 10f;
+        public int baseScore = 10;
         public int startAmount = 0;
         public float variable01 = 0f;
         public float variable02 = 0f;
         public List<string> additionalVariables = new List<string>();
         
+        
+        public float DefaultTriggerInterval = 0.2f;
         
         public Color debugColor = Color.white;
 
@@ -43,17 +48,38 @@ namespace Game
             await UniTask.CompletedTask;
         }
 
-        private Tween DefaultTriggerEffect(TriggerArguments args, int times, int score = -1)
+        protected Tween DefaultTriggerEffect(TriggerArguments args, int times, int score = -1)
         {
             var obj = args.Ingredient;
             float[] punchScales = {1.05f, 1.1f, 1.15f, 1.2f, 1.25f};
+            float[] fontSizes = {72f,80f,88f,96f,104f};
             float punchScale = punchScales[Mathf.Clamp(times - 1, 0, punchScales.Length - 1)];
-            
+            if(score > 0)
+            {
+                var tile = args.Tile;
+                var scoreText = tile.scoreText;
+                if (scoreText == null)
+                {
+                    LogEx.LogError($"Score Text가 널");
+                }
+                else
+                {
+                    scoreText.Value = score;
+                    scoreText.FontSize = fontSizes[Mathf.Clamp(times - 1, 0, fontSizes.Length - 1)];
+                }
+            }
             Sequence seq = DOTween.Sequence();
             seq.Append(obj.transform.DOScale(Vector3.one * punchScale, 0.1f).SetEase(Ease.OutQuad));
             seq.Append(obj.transform.DOScale(Vector3.one, 0.1f).SetEase(Ease.OutQuad));
 
             return seq;
+        }
+        
+        public static void AddIngredientToPlayer(IngredientSO ingredient, int amount)
+        {
+            if (ingredient == null) return;
+            PlayerState.Current.GameDeck.AddIngredient(ingredient, amount);
+            PuzzleManager.Instance.AddIngredientToRetrieved(ingredient, amount);
         }
 
         
@@ -95,7 +121,7 @@ namespace Game
             displayName = data.koreanName;
             description = data.description;
             rarity = data.rarity;
-            baseScore = data.baseScore;
+            baseScore = (int) data.baseScore;
             startAmount = data.startAmount;
             variable01 = data.variable01;
             variable02 = data.variable02;

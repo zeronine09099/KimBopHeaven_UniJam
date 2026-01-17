@@ -194,6 +194,7 @@ namespace Player
         // --- Current prefix (실시간 값) ---
 
         public StageInfo CurrentStageInfo { get; set; }
+        public int CurrentRerollRemain { get; set; }
 
         // public StageModel CurrentStageTarget { get; set; }
 
@@ -386,6 +387,11 @@ namespace Player
             {
                 gameDeck.SetIngredientCount(item, item.startAmount);
             }
+        }
+
+        public int GetKimbapScore()
+        {
+            return CurrentTempScore - CurrentStageScore;
         }
     }
     

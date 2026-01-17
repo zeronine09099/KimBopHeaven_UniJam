@@ -79,6 +79,7 @@ namespace Game
             PlayerState.Current.CurrentRemainingSwipes = stage.moveCount;
             PlayerState.Current.CurrentStageScore = 0;
             PlayerState.Current.CurrentTempScore = 0;
+            PlayerState.Current.CurrentRerollRemain = 3;
 
             // 스테이지 데이터 초기화
             Root.Field.InitField();
@@ -86,6 +87,7 @@ namespace Game
             // UI 점수 초기화
             gameUI.InitializeForStage(stage);
             PuzzleManager.Instance.Initialize(GameManager.Instance.Field);
+            PuzzleManager.Instance.CurrentMatches.Clear();
             
 
             /*
@@ -102,6 +104,7 @@ namespace Game
             while (true)
             {
                 // 각 턴마다 처리할 로직 작성
+                PuzzleManager.Instance.ThisTurnCompletedKimbapCount = 0;
                 LogEx.Log($"Starting new turn. Remaining Swipes: {PlayerState.Current.CurrentRemainingSwipes}");
                 PlayerInputData inputData = await PuzzleManager.Instance.GetPlayerInput(cancellationToken);
                 LogEx.Log($"Player input received: {inputData.firstTile} <-> {inputData.secondTile}");

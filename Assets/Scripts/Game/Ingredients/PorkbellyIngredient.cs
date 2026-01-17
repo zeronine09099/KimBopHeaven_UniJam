@@ -3,9 +3,14 @@ using BandoWare.GameplayTags;
 using Game.Field;
 using Cysharp.Threading.Tasks;
 using Game;
+using Player;
 
 namespace Game.Ingredients
 {
+    /// <summary>
+    /// 삼겹살 재료
+    /// 인접 채소당 추가점수
+    /// </summary>
     public class PorkbellyIngredientSO : IngredientSO
     {
         public override GameplayTag Tag => AllGameplayTags.Ingredient.Meat.PorkBelly.Get();
@@ -18,9 +23,19 @@ namespace Game.Ingredients
 
         public override async UniTask OnTrigger(TriggerArguments args)
         {
-            await base.OnTrigger(args);
-         
+            int vegetableCount = args.CountAdjacentHasTag(AllGameplayTags.Ingredient.Vegetable.Get());
+
+            PlayerState.Current.CurrentTempScore += (int) baseScore;
+            await DefaultTriggerEffect(args, 1, (int)baseScore);
+            int count = 1;
+            while (vegetableCount-- > 0)
+            {
+                int bonusScore = (int)variable01;
+                PlayerState.Current.CurrentTempScore += bonusScore;
+                await DefaultTriggerEffect(args, ++count, bonusScore);
+            }
         }
     }
 }
+
 

@@ -3,9 +3,14 @@ using BandoWare.GameplayTags;
 using Game.Field;
 using Cysharp.Threading.Tasks;
 using Game;
+using Player;
 
 namespace Game.Ingredients
 {
+    /// <summary>
+    /// 불 재료
+    /// 트리거 시: 점수 없음 (다른 재료에 영향을 주는 특수 재료)
+    /// </summary>
     public class FireIngredientSO : IngredientSO
     {
         public override GameplayTag Tag => AllGameplayTags.Ingredient.Etc.Fire.Get();
@@ -23,4 +28,5 @@ namespace Game.Ingredients
         }
     }
 }
+
 

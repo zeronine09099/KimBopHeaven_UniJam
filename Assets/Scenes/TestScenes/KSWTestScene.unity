@@ -248,8 +248,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6749198128194358887, guid: 7ea0934fddad82e4f9bc49618aa168a4, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6749198128194358887, guid: 7ea0934fddad82e4f9bc49618aa168a4, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.0000019669533
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6807277214573265663, guid: 7ea0934fddad82e4f9bc49618aa168a4, type: 3}
       propertyPath: m_Name
@@ -261,6 +265,30 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7729500391165901342, guid: 7ea0934fddad82e4f9bc49618aa168a4, type: 3}
       propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8682243845699891555, guid: 7ea0934fddad82e4f9bc49618aa168a4, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8682243845699891555, guid: 7ea0934fddad82e4f9bc49618aa168a4, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8682243845699891555, guid: 7ea0934fddad82e4f9bc49618aa168a4, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8682243845699891555, guid: 7ea0934fddad82e4f9bc49618aa168a4, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8682243845699891555, guid: 7ea0934fddad82e4f9bc49618aa168a4, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8682243845699891555, guid: 7ea0934fddad82e4f9bc49618aa168a4, type: 3}
+      propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -440,6 +468,8 @@ MonoBehaviour:
   width: 6
   height: 6
   _tilePrefab: {fileID: 4638865004088108757, guid: 546782e20e34c614fae8a2db644f25df, type: 3}
+  tileScale: {x: 1, y: 1, z: 1}
+  tileGap: {x: 0, y: 0, z: 0}
   _grid: {fileID: 529670897}
   tileParent: {fileID: 2016038565}
   _tileContainer:
@@ -494,7 +524,7 @@ Grid:
   m_GameObject: {fileID: 529670895}
   m_Enabled: 1
   m_CellSize: {x: 1, y: 1, z: 1}
-  m_CellGap: {x: 1, y: 0, z: 0}
+  m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 0
   m_CellSwizzle: 0
 --- !u!4 &529670898

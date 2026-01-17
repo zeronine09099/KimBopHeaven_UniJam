@@ -18,5 +18,11 @@ namespace Game.Field
                 scoreText.text = $"+{value}";
             }
         }
+
+        public float FontSize
+        {
+            get => scoreText.fontSize;
+            set => scoreText.fontSize = value;
+        }
     }
 }

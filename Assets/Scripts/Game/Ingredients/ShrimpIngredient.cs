@@ -3,9 +3,14 @@ using BandoWare.GameplayTags;
 using Game.Field;
 using Cysharp.Threading.Tasks;
 using Game;
+using Player;
 
 namespace Game.Ingredients
 {
+    /// <summary>
+    /// 새우 재료
+    /// 고기 파괴 후 새우 추가
+    /// </summary>
     public class ShrimpIngredientSO : IngredientSO
     {
         public override GameplayTag Tag => AllGameplayTags.Ingredient.Seafood.Shrimp.Get();
@@ -18,9 +23,46 @@ namespace Game.Ingredients
 
         public override async UniTask OnTrigger(TriggerArguments args)
         {
-            await base.OnTrigger(args);
-         
+            PlayerState.Current.CurrentTempScore += (int)baseScore;
+            await DefaultTriggerEffect(args, 1, (int)baseScore);
+
+            async UniTask ConvertToShrimp(Tile tile)
+            {
+                if (tile?.CurrentIngredient?.Data != null)
+                {
+                    PlayerState.Current.GameDeck.RemoveIngredient(tile.CurrentIngredient.Data);
+                    tile.CurrentIngredient.Initialize(this);
+                    PlayerState.Current.GameDeck.AddIngredient(this);
+                }
+            }
+            
+            bool IsMeat(Tile tile)
+            {
+                if (tile?.CurrentIngredient?.Data != null)
+                {
+                    var Data = tile.CurrentIngredient.Data;
+                    return Data.Tag.IsChildOf(AllGameplayTags.Ingredient.Meat.Get());
+                }
+                return false;
+            }
+
+            bool triggerTwice = false;
+            if (IsMeat(args.PreviousTile)){
+                triggerTwice = true;
+                args.AfterMatchActions.Add((args.Tile, async () => await ConvertToShrimp(args.PreviousTile)));
+            }   
+            if (IsMeat(args.NextTile)){
+                triggerTwice = true;
+                args.AfterMatchActions.Add((args.Tile, async () => await ConvertToShrimp(args.NextTile)));
+            }
+            
+            if (triggerTwice)
+            {
+                args.AfterMatchActions.Add((args.Tile, async () => await DefaultTriggerEffect(args, 2)));
+            }
+
         }
     }
 }
+
 
