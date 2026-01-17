@@ -1154,6 +1154,7 @@ MonoBehaviour:
   originalPosition: {x: 0, y: 0}
   scrollRect: {fileID: 4909778651813405967}
   contentTransform: {fileID: 6749198128194358887}
+  closeButton: {fileID: 5377357261594043169}
 --- !u!225 &5032053349852173738
 CanvasGroup:
   m_ObjectHideFlags: 0

@@ -19,14 +19,24 @@ namespace UI.Game
         [SerializeField] private Vector2 originalPosition;
         [SerializeField] private ScrollRect scrollRect;
         [SerializeField] private Transform contentTransform;
-        
-        
+
+        [SerializeField] private Button closeButton;
+
+
         private CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
         
         private void Awake()
         {
             UIManager.Instance.DeckUI = this;
             originalPosition = transform.position;
+
+            closeButton.onClick.RemoveAllListeners();
+            closeButton.onClick.AddListener(() =>
+            {
+                Sound.SoundManager.Instance.PlaySfx(Sound.SoundReference.ButtonClickSFX);
+                Hide();
+            });
+
             Initialize();
             gameObject.SetActive(false);
         }

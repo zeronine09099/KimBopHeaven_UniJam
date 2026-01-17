@@ -1765,7 +1765,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 5ab7bc852b35a224c815c3ef4758e09a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d4f66751d42ce3d429245e2edce97181, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3124,6 +3124,8 @@ MonoBehaviour:
   scoreTempFillSlider: {fileID: 3880293611409741099}
   scoreText: {fileID: 8977461414080504002}
   scoreText2: {fileID: 5521066686627964164}
+  tempFillEase: 6
+  tempFillDuration: 0.2
   fillEase: 5
   fillDuration: 0.5
   currentValue: 34.82
