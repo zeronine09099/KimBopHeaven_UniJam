@@ -740,7 +740,7 @@ namespace Sound
 
         private int _scoreSfxPitchIndex = 0;
         // private int _scoreSfxPitchMidIndex = 3;
-        [SerializeField] private float[] scoreSfxPitchValues = new float[]
+        private float[] scoreSfxPitchValues = new float[]
             { 1.0f, 1.1f, 1.2f, 1.3f, 1.4f, 1.5f, 1.6f, 1.7f, 1.75f, 1.8f, 1.95f, 2.00f };
         
         [ContextMenu("Reset Score SFX Pitch Index")]
@@ -754,13 +754,15 @@ namespace Sound
         {
             float GetPitch()
             {
-                float pitch = scoreSfxPitchValues[_scoreSfxPitchIndex];
                 _scoreSfxPitchIndex++;
                 if (_scoreSfxPitchIndex >= scoreSfxPitchValues.Length)
                 {
                     return scoreSfxPitchValues[scoreSfxPitchValues.Length - 1] + 0.01f * (_scoreSfxPitchIndex - scoreSfxPitchValues.Length + 1);
                 }
-                return pitch;
+                else
+                {
+                    return  scoreSfxPitchValues[_scoreSfxPitchIndex];
+                }
             }
             PlaySfx(SoundReference.ScoreSFX,pitch: GetPitch());
         }
