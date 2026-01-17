@@ -39,6 +39,7 @@ namespace Game.Ingredients
             {
                 // 리롤 횟수 추가
                 PlayerState.Current.CurrentRerollRemain += (int) variable01;
+                DefaultTriggerEffect(args, 2);
             }
          
         }

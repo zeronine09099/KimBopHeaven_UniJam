@@ -86,8 +86,9 @@ namespace Game
         public async virtual UniTask OnTrigger(TriggerArguments args)
         {
             var tile = args.Tile;
-            PlayerState.Current.CurrentTempScore += (int) baseScore;
-            DefaultTriggerEffect(args, 1, (int) baseScore);
+            PlayerState.Current.CurrentTempScore += (int)(baseScore * PlayerState.Current.CurrentTempMultiplier);
+            
+            DefaultTriggerEffect(args, 1, (int)(baseScore * PlayerState.Current.CurrentTempMultiplier));
 
         }
         public async virtual UniTask OnExplode(Tile tile)

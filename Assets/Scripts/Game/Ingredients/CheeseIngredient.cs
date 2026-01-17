@@ -35,7 +35,7 @@ namespace Game.Ingredients
             bool previousKimbapHadCheese = PuzzleManager.Instance.CurrentMatches[^1].HasIngredientTag(AllGameplayTags.Ingredient.Etc.Cheese.Get());
             if (previousKimbapHadCheese)
             {
-                PlayerState.Current.CurrentTempScore +=(int) variable01;
+                PlayerState.Current.CurrentTempScore +=(int)(variable01 * PlayerState.Current.CurrentTempMultiplier);
                 DefaultTriggerEffect(args, 3,25);
             }
         }

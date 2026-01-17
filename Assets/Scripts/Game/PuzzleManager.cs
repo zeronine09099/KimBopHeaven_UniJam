@@ -506,7 +506,7 @@ namespace Game
             HashSet<Tile> toExplodeTiles = new ();
             
             SoundManager.Instance.ResetScoreSfxPitchIndex();
-            
+            PlayerState.Current.CurrentTempMultiplier = 1;
             foreach (var match in matchGroups)
             {
                 foreach (var tile in match)
@@ -528,7 +528,8 @@ namespace Game
                     {
                         await f().AttachExternalCancellation(cancellationToken);
                     }
-                    
+
+
                     LogEx.Log($"Current Stage Score: {PlayerState.Current.CurrentStageScore}");
                 }
                 // toExplodeTiles.AddRange(match);
@@ -536,6 +537,8 @@ namespace Game
                 {
                     toExplodeTiles.Add(tile);
                 }
+                // 점수 곱배수 적용
+                PlayerState.Current.CurrentTempMultiplier *= 1.5f;
                 await UniTask.Delay(TimeSpan.FromSeconds(matchInterval), cancellationToken: cancellationToken);
             }
             

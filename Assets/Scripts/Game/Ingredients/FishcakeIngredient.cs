@@ -33,12 +33,12 @@ namespace Game.Ingredients
             int seafoodCount = args.CountAdjacentHasTag(AllGameplayTags.Ingredient.Seafood.Get());
             bool allSeafood = (adjacentCount > 0 && seafoodCount == adjacentCount);
 
-            PlayerState.Current.CurrentTempScore += (int) baseScore;
-            await DefaultTriggerEffect(args, 1, (int)baseScore);
+            PlayerState.Current.CurrentTempScore += (int)(baseScore * PlayerState.Current.CurrentTempMultiplier);
+            await DefaultTriggerEffect(args, 1, (int)(baseScore * PlayerState.Current.CurrentTempMultiplier));
             if (allSeafood)
             {
                 int kimbapScore = PlayerState.Current.GetKimbapScore();
-                int bonusScore = kimbapScore * ((int)variable01 - 1);
+                int bonusScore = (int)(kimbapScore * ((int)variable01 - 1) * PlayerState.Current.CurrentTempMultiplier);
                 PlayerState.Current.CurrentTempScore += bonusScore;
                 await DefaultTriggerEffect(args, 2, bonusScore);
             }

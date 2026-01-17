@@ -72,6 +72,7 @@ namespace Player
             CurrentRemainingSwipes, // 현재 남은 스와이프 횟수
             CurrentStageScore, // 현재 스테이지 점수
             CurrentTempScore, // 현재 임시 점수 (스와이프 중간에 변동되는 점수)
+            CurrentTempMultiplier, // 현재 임시 멀티플라이어 (스와이프 중간에 변동되는 멀티플라이어)
             
         }
         
@@ -194,6 +195,15 @@ namespace Player
                 {
                     SoundManager.Instance.PlayScoreSfx();
                 }
+            }
+        }
+        
+        public float CurrentTempMultiplier
+        {
+            get { return Variables.GetVariable(nameof(VariableKey.CurrentTempMultiplier)).FloatValue; }
+            set
+            {
+                Variables.SetFloat(nameof(VariableKey.CurrentTempMultiplier), value);
             }
         }
 

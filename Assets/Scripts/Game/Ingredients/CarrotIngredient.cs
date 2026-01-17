@@ -36,18 +36,18 @@ namespace Game.Ingredients
                     if (!ingredientTags.Add(ingredient.Tag))
                     {
                         // 중복 발견
-                        PlayerState.Current.CurrentTempScore += (int)baseScore;
-                        await DefaultTriggerEffect(args, 1, (int)baseScore);
+                        PlayerState.Current.CurrentTempScore += (int)(baseScore * PlayerState.Current.CurrentTempMultiplier);
+                        await DefaultTriggerEffect(args, 1, (int)(baseScore * PlayerState.Current.CurrentTempMultiplier));
                         return;
                     }
                 }
             }
             
             // 겹치는 재료가 없음
-            PlayerState.Current.CurrentTempScore += (int) baseScore;
-            await DefaultTriggerEffect(args, 1, (int)baseScore);
-            PlayerState.Current.CurrentTempScore += (int)variable01;
-            await DefaultTriggerEffect(args, 2, (int)variable01);
+            PlayerState.Current.CurrentTempScore += (int)(baseScore * PlayerState.Current.CurrentTempMultiplier);
+            await DefaultTriggerEffect(args, 1, (int)(baseScore * PlayerState.Current.CurrentTempMultiplier));
+            PlayerState.Current.CurrentTempScore += (int)(variable01 * PlayerState.Current.CurrentTempMultiplier);
+            await DefaultTriggerEffect(args, 2, (int)(variable01 * PlayerState.Current.CurrentTempMultiplier));
         }
     }
 }

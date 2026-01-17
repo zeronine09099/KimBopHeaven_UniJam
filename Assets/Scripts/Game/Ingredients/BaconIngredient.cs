@@ -28,12 +28,12 @@ namespace Game.Ingredients
             int meatCount = args.CountHasTag(AllGameplayTags.Ingredient.Meat.Get());
             bool hasOtherMeat = meatCount > 1;
 
-            PlayerState.Current.CurrentTempScore += (int) baseScore;
-            await DefaultTriggerEffect(args, 1, (int)baseScore);
+            PlayerState.Current.CurrentTempScore += (int)(baseScore * PlayerState.Current.CurrentTempMultiplier);
+            await DefaultTriggerEffect(args, 1, (int)(baseScore * PlayerState.Current.CurrentTempMultiplier));
             if (!hasOtherMeat)
             {
-                PlayerState.Current.CurrentTempScore += (int)variable01;
-                await DefaultTriggerEffect(args, 2, (int)variable01);
+                PlayerState.Current.CurrentTempScore += (int)(variable01 * PlayerState.Current.CurrentTempMultiplier);
+                await DefaultTriggerEffect(args, 2, (int)(variable01 * PlayerState.Current.CurrentTempMultiplier));
             }
         }
     }

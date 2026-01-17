@@ -27,12 +27,12 @@ namespace Game.Ingredients
             // 김밥의 채소 개수 세기 (자기 자신 제외)
             int vegetableCount = args.CountHasTag(AllGameplayTags.Ingredient.Vegetable.Get()) - 1;
 
-            PlayerState.Current.CurrentTempScore += (int) baseScore;
-            await DefaultTriggerEffect(args, 1, (int)baseScore);
+            PlayerState.Current.CurrentTempScore += (int)(baseScore * PlayerState.Current.CurrentTempMultiplier);
+            await DefaultTriggerEffect(args, 1, (int)(baseScore * PlayerState.Current.CurrentTempMultiplier));
             int count = 1;
             while (vegetableCount-- > 0)
             {
-                int bonusScore = (int)variable01;
+                int bonusScore = (int)(variable01 * PlayerState.Current.CurrentTempMultiplier);
                 PlayerState.Current.CurrentTempScore += bonusScore;
                 await DefaultTriggerEffect(args, ++count, bonusScore);
             }

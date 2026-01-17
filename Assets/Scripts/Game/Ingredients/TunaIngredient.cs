@@ -27,12 +27,12 @@ namespace Game.Ingredients
             
             bool hasAdjacentMayonnaise = args.CountAdjacentExactTag(AllGameplayTags.Ingredient.Sauce.Mayonnaise.Get()) > 0;
 
-            PlayerState.Current.CurrentTempScore += (int) baseScore;
-            await DefaultTriggerEffect(args, 1, (int)baseScore);
+            PlayerState.Current.CurrentTempScore += (int)(baseScore * PlayerState.Current.CurrentTempMultiplier);
+            await DefaultTriggerEffect(args, 1, (int)(baseScore * PlayerState.Current.CurrentTempMultiplier));
             if (hasAdjacentMayonnaise)
             {
-                PlayerState.Current.CurrentTempScore += (int)variable01;
-                await DefaultTriggerEffect(args, 2, (int)variable01);
+                PlayerState.Current.CurrentTempScore += (int)(variable01 * PlayerState.Current.CurrentTempMultiplier);
+                await DefaultTriggerEffect(args, 2, (int)(variable01 * PlayerState.Current.CurrentTempMultiplier));
             }
         }
     }

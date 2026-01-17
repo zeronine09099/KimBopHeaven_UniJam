@@ -27,12 +27,12 @@ namespace Game.Ingredients
             // 인접한 타일이 고기류인지 확인
             bool hasAdjacentMeat = args.CountAdjacentHasTag(AllGameplayTags.Ingredient.Meat.Get()) > 0;
 
-            PlayerState.Current.CurrentTempScore += (int) baseScore;
-            await DefaultTriggerEffect(args, 1, (int)baseScore);
+            PlayerState.Current.CurrentTempScore += (int)(baseScore * PlayerState.Current.CurrentTempMultiplier);
+            await DefaultTriggerEffect(args, 1, (int)(baseScore * PlayerState.Current.CurrentTempMultiplier));
             if (hasAdjacentMeat)
             {
-                PlayerState.Current.CurrentTempScore += (int)variable01;
-                await DefaultTriggerEffect(args, 2, (int)variable01);
+                PlayerState.Current.CurrentTempScore += (int)(variable01 * PlayerState.Current.CurrentTempMultiplier);
+                await DefaultTriggerEffect(args, 2, (int)(variable01 * PlayerState.Current.CurrentTempMultiplier));
             }
         }
     }

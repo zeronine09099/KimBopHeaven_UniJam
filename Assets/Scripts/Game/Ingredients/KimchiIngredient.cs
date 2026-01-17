@@ -27,12 +27,12 @@ namespace Game.Ingredients
             // 김밥의 불 개수 카운트
             int fireCount = args.CountExectTag(AllGameplayTags.Ingredient.Etc.Fire.Get());
 
-            PlayerState.Current.CurrentTempScore += (int) baseScore;
-            await DefaultTriggerEffect(args, 1, (int)baseScore);
+            PlayerState.Current.CurrentTempScore += (int)(baseScore * PlayerState.Current.CurrentTempMultiplier);
+            await DefaultTriggerEffect(args, 1, (int)(baseScore * PlayerState.Current.CurrentTempMultiplier));
             int count = 1;
             while (fireCount-- > 0)
             {
-                int bonusScore = (int)variable01;
+                int bonusScore = (int)(variable01 * PlayerState.Current.CurrentTempMultiplier);
                 PlayerState.Current.CurrentTempScore += bonusScore;
                 await DefaultTriggerEffect(args, ++count, bonusScore);
             }

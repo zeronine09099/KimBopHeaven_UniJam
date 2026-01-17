@@ -23,8 +23,8 @@ namespace Game.Ingredients
 
         public override async UniTask OnTrigger(TriggerArguments args)
         {
-            PlayerState.Current.CurrentTempScore += (int)baseScore;
-            await DefaultTriggerEffect(args, 1, (int)baseScore);
+            PlayerState.Current.CurrentTempScore += (int)(baseScore * PlayerState.Current.CurrentTempMultiplier);
+            await DefaultTriggerEffect(args, 1, (int)(baseScore * PlayerState.Current.CurrentTempMultiplier));
 
             async UniTask ConvertToShrimp(Tile tile)
             {

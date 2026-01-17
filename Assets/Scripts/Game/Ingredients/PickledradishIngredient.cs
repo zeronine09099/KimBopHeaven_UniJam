@@ -27,12 +27,12 @@ namespace Game.Ingredients
             // 인접한 타일이 밥인지 확인
             bool hasAdjacentRice = args.CountAdjacentExactTag(AllGameplayTags.Ingredient.Essential.Rice.Get()) > 0;
 
-            PlayerState.Current.CurrentTempScore += (int) baseScore;
-            await DefaultTriggerEffect(args, 1, (int)baseScore);
+            PlayerState.Current.CurrentTempScore += (int)(baseScore * PlayerState.Current.CurrentTempMultiplier);
+            await DefaultTriggerEffect(args, 1, (int)(baseScore * PlayerState.Current.CurrentTempMultiplier));
             if (hasAdjacentRice)
             {
                 int kimbapScore = PlayerState.Current.GetKimbapScore();
-                int bonusScore = kimbapScore * (int)(variable01 - 1);
+                int bonusScore = (int)(kimbapScore * ((int)variable01 - 1) * PlayerState.Current.CurrentTempMultiplier);
                 PlayerState.Current.CurrentTempScore += bonusScore;
                 await DefaultTriggerEffect(args, 2, bonusScore);
             }
