@@ -122,6 +122,7 @@ public static class IngredientGenerator
 using BandoWare.GameplayTags;
 using Game.Field;
 using Cysharp.Threading.Tasks;
+using Game;
 
 namespace Game.Ingredients
 {{
@@ -135,9 +136,9 @@ namespace Game.Ingredients
           
         }}
 
-        public override async UniTask OnTrigger(Tile tile)
+        public override async UniTask OnTrigger(TriggerArguments args)
         {{
-            await base.OnTrigger(tile);
+            await base.OnTrigger(args);
          
         }}
     }}

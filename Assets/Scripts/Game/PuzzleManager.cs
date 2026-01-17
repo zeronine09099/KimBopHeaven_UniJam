@@ -25,6 +25,13 @@ namespace Game
         public Tile secondTile;
     }
     
+    public class TriggerArguments
+    {
+        public Tile Tile;
+        public IngredientObject Ingredient;
+        public PuzzleManager.MatchData MatchData;
+    }
+    
     public class PuzzleManager : Singleton<PuzzleManager>
     {
         protected override void AfterAwake()
@@ -48,6 +55,15 @@ namespace Game
         private Field.Field field;
         private Tile firstSelectedTile;
         private Tile secondSelectedTile;
+        
+        /// <summary>
+        /// 최소 2개 보장
+        /// </summary>
+        private int GimCount = 0;
+        /// <summary>
+        /// 최소 1개 보장
+        /// </summary>
+        private int RiceCount = 0;
 
         private Tile FirstSelectedTile
         {
@@ -106,11 +122,12 @@ namespace Game
         
         public void OnTilePressed(Tile pressedTile)
         {
-            LogEx.Log($"Pressed Tile: {pressedTile}");
+
             if (!isPlayerTurn || isSwapping)
             {
                 return;
             }
+            LogEx.Log($"Pressed Tile: {pressedTile}");
             if (FirstSelectedTile != null)
             {
                 SecondSelectedTile = pressedTile;
@@ -122,6 +139,10 @@ namespace Game
 
         public void OnTileReleased(Tile releasedTile)
         {
+            if (FirstSelectedTile == null)
+            {
+                return;
+            }
             Debug.Log($"Released Tile: {releasedTile}");
             if(releasedTile == null)
             {
@@ -173,25 +194,76 @@ namespace Game
         private void SpawnInitialIngredients()
         {
             Debug.Log("spawnInitial 진입");
-            if(ingredientPrefab == null){
+            if (ingredientPrefab == null)
+            {
                 Debug.LogWarning("puzzlemanager: 테스트재료나 프리팹이 비어있음");
                 return;
             }
 
-            for(int i = 0; i < field.Height ; i++)
+            GimCount = 0;
+            RiceCount = 0;
+
+            for (int i = 0; i < field.Height; i++)
             {
-                for (int j = 0; j < field.Width ; j++) 
+                for (int j = 0; j < field.Width; j++)
                 {
                     Tile tile = field.GetTile(i, j);
 
                     IngredientSO randomData = GetNextIngredientData();
                     IngredientObject newIngredientObject = Instantiate(ingredientPrefab);
                     newIngredientObject.Initialize(randomData);
+                    if (randomData.IsGim())
+                    {
+                        GimCount++;
+                    }
+                    else if (randomData.IsRice())
+                    {
+                        RiceCount++;
+                    }
+
                     newIngredientObject.transform.SetParent(tile.transform);
                     newIngredientObject.transform.localPosition = Vector3.zero;
                     tile.SetIngredient(newIngredientObject);
                 }
             }
+            int attempt = 0;
+            while(FindWrapperMatches().Count > 0 || GimCount < 2 || RiceCount < 1)
+            {
+                InitializePossibleIngredients();
+                LogEx.Log($"초기 매치 발견, 재배치 시도 {attempt + 1}회");
+                attempt++;
+                if (attempt > 100)
+                {
+                    LogEx.LogError("초기 매치 재배치 시도 100회 초과, 무한루프 방지 종료");
+                    break;
+                }
+                GimCount = 0;
+                RiceCount = 0;
+                for (int i = 0; i < field.Height; i++)
+                {
+                    for (int j = 0; j < field.Width; j++)
+                    {
+                        Tile tile = field.GetTile(i, j);
+                        IngredientSO randomData = GetNextIngredientData();
+                        IngredientObject ingredientObject = tile.CurrentIngredient;
+                        ingredientObject.Initialize(randomData);
+                        if (randomData.IsGim())
+                        {
+                            GimCount++;
+                        }
+                        else if (randomData.IsRice())
+                        {
+                            RiceCount++;
+                        }
+
+                        ingredientObject.transform.SetParent(tile.transform);
+                        ingredientObject.transform.localPosition = Vector3.zero;
+                        tile.SetIngredient(ingredientObject);
+                    }
+                }
+            }
+
+
         }
 
         private List<IngredientSO> possibleIngredients = new List<IngredientSO>();
@@ -216,6 +288,46 @@ namespace Game
             {
                 return IngredientLibrary.Instance.GetIngredientSO(AllGameplayTags.Ingredient.Etc.Air.Get());
             }
+            IngredientSO FindAndPop(GameplayTag tag)
+            {
+                for (int i = 0; i < possibleIngredients.Count; i++)
+                {
+                    if (possibleIngredients[i].Tag == tag)
+                    {
+                        IngredientSO ingredientSo = possibleIngredients[i];
+                        possibleIngredients.RemoveAt(i);
+                        return ingredientSo;
+                    }
+                }
+                return null;
+            }
+            
+            // 최소 김 2개, 밥 1개 보장
+            if (GimCount < 2)
+            {
+                IngredientSO gimSo = FindAndPop(AllGameplayTags.Ingredient.Essential.Gim.Get());
+                if (gimSo != null)
+                {
+                    return gimSo;
+                }
+                else
+                {
+                    LogEx.LogWarning("김 재료가 부족합니다!");
+                }
+            }
+            if (RiceCount < 1)
+            {
+                IngredientSO riceSo = FindAndPop(AllGameplayTags.Ingredient.Essential.Rice.Get());
+                if (riceSo != null)
+                {
+                    return riceSo;
+                }
+                else
+                {
+                    LogEx.LogWarning("밥 재료가 부족합니다!");
+                }
+            }
+            
             var ingredientSo = possibleIngredients[possibleIngredients.Count - 1];
             possibleIngredients.RemoveAt(possibleIngredients.Count - 1);
             return ingredientSo;
@@ -237,6 +349,7 @@ namespace Game
         {
             possibleIngredients.AddRange(retrivedIngredients);
             retrivedIngredients.Clear();
+            possibleIngredients.Shuffle();
         }
 
         public async UniTask<PlayerInputData> GetPlayerInput(CancellationToken cancellationToken)
@@ -275,6 +388,8 @@ namespace Game
             return matchGroups;
         }
         
+        
+
         /// <summary>
         /// 매치 처리
         /// </summary>
@@ -288,8 +403,17 @@ namespace Game
             {
                 foreach (var tile in match)
                 {
-                    await tile.CurrentIngredient.Data.OnTrigger(tile).AttachExternalCancellation(cancellationToken);
+                    var args = new TriggerArguments
+                    {
+                        Tile = tile,
+                        Ingredient = tile.CurrentIngredient,
+                        MatchData = match
+                    };
+                    await tile.CurrentIngredient.Data.OnTrigger(args).AttachExternalCancellation(cancellationToken);
                     await UniTask.Delay(TimeSpan.FromSeconds(triggerInterval), cancellationToken: cancellationToken);
+                    // 임시 점수를 실제 점수에 반영
+                    PlayerState.Current.CurrentStageScore = PlayerState.Current.CurrentTempScore;
+                    LogEx.Log($"Current Stage Score: {PlayerState.Current.CurrentStageScore}");
                 }
                 // toExplodeTiles.AddRange(match);
                 foreach (var tile in match)
@@ -312,7 +436,16 @@ namespace Game
 
                 // 2. 태스크 생성 및 캔슬레이션 연결
                 // ContinueWith()가 특별한 로직 없이 사용되었다면 불필요하므로 제거
-                var task = targetIngredient.Data.OnExplode(tile)
+                var data = targetIngredient.Data;
+                if (data.IsGim())
+                {
+                    GimCount--;
+                }
+                else if (data.IsRice())
+                {
+                    RiceCount--;
+                }
+                var task = data.OnExplode(tile)
                     .ContinueWith(() =>
                     {
                         var targetObj = targetIngredient.gameObject;
@@ -391,6 +524,15 @@ namespace Game
                             upDelta++;
                             tile.SetIngredient(newIngredientObject);
                             
+                            if (randomData.IsGim())
+                            {
+                                GimCount++;
+                            }
+                            else if (randomData.IsRice())
+                            {
+                                RiceCount++;
+                            }
+                            
                             // 애니메이션 처리
                             Sequence fallSequence = DOTween.Sequence();
                             fallSequence.Append(newIngredientObject.transform.DOLocalMove(Vector3.zero, fallDuration).SetEase(fallEase));
@@ -445,7 +587,7 @@ namespace Game
         /// Field의 모든 행과 열을 검사하여 김밥을 만들 수있는 리스트를 찾는다
         /// </summary>
         /// <returns>존재하는 모든 김밥리스트의 리스트</returns>
-        private List<MatchData> FindWrapperMatches()
+        public List<MatchData> FindWrapperMatches()
         {
             List<MatchData> allMatches = new();
 
@@ -464,7 +606,7 @@ namespace Game
             for (int j = 0; j < field.Width; j++ )
             {
                 List<Tile> col = new List<Tile>(); 
-                for(int i = 0; i< field.Height; i++)
+                for(int i = field.Height - 1; i >= 0; i--)
                 {
                     col.Add(field.GetTile(i, j));
                 }
@@ -550,7 +692,9 @@ namespace Game
         public class MatchData : List<Tile>
         {
             public List<Tile> MatchedTiles = new List<Tile>();
-
+            public List<IngredientSO> MatchedIngredients = new List<IngredientSO>();
+            
+            
 
             public static MatchData FromList(List<Tile> tiles)
             {

@@ -43,14 +43,25 @@ namespace Game
             await UniTask.CompletedTask;
         }
 
-
-        public async virtual UniTask OnTrigger(Tile tile)
+        private Tween DefaultTriggerEffect(TriggerArguments args, int times, int score = -1)
         {
+            var obj = args.Ingredient;
+            float[] punchScales = {1.05f, 1.1f, 1.15f, 1.2f, 1.25f};
+            float punchScale = punchScales[Mathf.Clamp(times - 1, 0, punchScales.Length - 1)];
+            
+            Sequence seq = DOTween.Sequence();
+            seq.Append(obj.transform.DOScale(Vector3.one * punchScale, 0.1f).SetEase(Ease.OutQuad));
+            seq.Append(obj.transform.DOScale(Vector3.one, 0.1f).SetEase(Ease.OutQuad));
+
+            return seq;
+        }
+
+        
+        public async virtual UniTask OnTrigger(TriggerArguments args)
+        {
+            var tile = args.Tile;
             PlayerState.Current.CurrentTempScore += (int) baseScore;
-            await tile.GetComponentInChildren<SpriteRenderer>().DOColor(Color.yellow, 0.2f).OnComplete(() =>
-            {
-                tile.GetComponentInChildren<SpriteRenderer>().DOColor(Color.white, 0.2f);
-            }).ToUniTask();
+            DefaultTriggerEffect(args, 1, (int) baseScore);
 
         }
         public async virtual UniTask OnExplode(Tile tile)
@@ -88,6 +99,7 @@ namespace Game
             startAmount = data.startAmount;
             variable01 = data.variable01;
             variable02 = data.variable02;
+            icon = Resources.Load<Sprite>("Sprites/Ingredients/" + data.name);
             
             var savedState = UnityEngine.Random.state;
             UnityEngine.Random.InitState(Tag.GetHashCode());

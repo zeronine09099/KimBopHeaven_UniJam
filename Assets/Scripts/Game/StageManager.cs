@@ -114,13 +114,17 @@ namespace Game
                 LogEx.Log("Processing player input...");
                 var matches = await PuzzleManager.Instance.ProcessInput(inputData, cancellationToken);
                 LogEx.Log($"Matches found: {matches.Count}");
-                await PuzzleManager.Instance.ProcessMatches(matches, cancellationToken);
-                LogEx.Log("Turn processing complete.");
-                // 임시 점수를 실제 점수에 반영
-                PlayerState.Current.CurrentStageScore = PlayerState.Current.CurrentTempScore;
-                LogEx.Log($"Current Stage Score: {PlayerState.Current.CurrentStageScore}");
-                await PuzzleManager.Instance.WrapUpTurn(cancellationToken);
-                LogEx.Log("Turn wrapped up.");
+                while (matches.Count > 0){
+                    
+                    await PuzzleManager.Instance.ProcessMatches(matches, cancellationToken);
+                    LogEx.Log("Turn processing complete.");
+
+                    await PuzzleManager.Instance.WrapUpTurn(cancellationToken);
+                    LogEx.Log("Turn wrapped up.");
+                    
+                    matches = PuzzleManager.Instance.FindWrapperMatches();
+                    LogEx.Log($"New matches found: {matches.Count}");
+                }
                 // 클리어 체크
                 if(PlayerState.Current.CurrentStageScore >= PlayerState.Current.CurrentStageInfo.goalScore)
                 {

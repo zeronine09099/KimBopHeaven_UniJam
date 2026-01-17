@@ -171,7 +171,11 @@ namespace Player
         public int CurrentStageScore
         {
             get { return Variables.GetVariable(nameof(VariableKey.CurrentStageScore)).IntValue; }
-            set { Variables.SetInteger(nameof(VariableKey.CurrentStageScore), value); }
+            set
+            {
+                Variables.SetInteger(nameof(VariableKey.CurrentStageScore), value);
+                UIManager.Instance.InGameUI.ScoreUI.CurrentValue = value;
+            }
         }
         
         /// <summary>
@@ -180,7 +184,11 @@ namespace Player
         public int CurrentTempScore
         {
             get { return Variables.GetVariable(nameof(VariableKey.CurrentTempScore)).IntValue; }
-            set { Variables.SetInteger(nameof(VariableKey.CurrentTempScore), value); }
+            set
+            {
+                Variables.SetInteger(nameof(VariableKey.CurrentTempScore), value);
+                UIManager.Instance.InGameUI.ScoreUI.TempValue = value;
+            }
         }
 
         // --- Current prefix (실시간 값) ---

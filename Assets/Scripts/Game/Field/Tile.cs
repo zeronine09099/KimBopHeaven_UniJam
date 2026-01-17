@@ -1,4 +1,5 @@
-﻿using Common;
+﻿using System;
+using Common;
 using Interaction;
 using Machamy.Attributes;
 using UnityEngine;
@@ -14,11 +15,22 @@ namespace Game.Field
         [field:SerializeField,VisibleOnly]public TileVector Coordinate { get; set; }
         [field:SerializeField]public IngredientObject CurrentIngredient { get; set; }
         private Field field;
+        [SerializeField] FloatingBonusScore scoreTextPrefab;
+        [field:SerializeField, VisibleOnly(EditableIn.EditMode)] FloatingBonusScore scoreText;
 
         public void Initialize(Field field, TileVector tileVector)
         {
             this.field = field;
             Coordinate = tileVector;
+        }
+
+        private void Start()
+        {
+            if(scoreText == null)
+            {
+                scoreText = Instantiate(scoreTextPrefab, transform);
+                scoreText.gameObject.SetActive(false);
+            }
         }
 
         /// <summary>
@@ -63,7 +75,8 @@ namespace Game.Field
 
         public void OnRelease()
         {
-            throw new System.NotImplementedException();
+            
         }
+        
     }
 }

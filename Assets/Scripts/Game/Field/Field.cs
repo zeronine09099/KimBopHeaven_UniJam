@@ -276,7 +276,7 @@ namespace Game.Field
                         var tile = _tileContainer[i][j];
                         if (tile != null)
                         {
-                            tile.transform.localScale = tileScale;
+                            // tile.transform.localScale = tileScale;
                             tile.transform.position = _grid.GetCellCenterWorld(new Vector3Int(j, i, 0));
                         }
                     }
