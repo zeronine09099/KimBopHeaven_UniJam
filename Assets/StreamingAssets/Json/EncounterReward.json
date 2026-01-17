@@ -1,1 +1,20 @@
-[]
+[
+  {
+    "tag": "Encounter.MeatSelect",
+    "target": "Ingredient.Meat",
+    "value": 10,
+    "koreanName": "고기"
+  },
+  {
+    "tag": "Encounter.VegetableSelect",
+    "target": "Ingredient.Vegetable",
+    "value": 10,
+    "koreanName": "채소"
+  },
+  {
+    "tag": "Encounter.SeafoodSelect",
+    "target": "Ingredient.Seafood",
+    "value": 10,
+    "koreanName": "해산물"
+  }
+]

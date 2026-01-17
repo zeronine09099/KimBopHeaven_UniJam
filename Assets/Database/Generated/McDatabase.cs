@@ -43,6 +43,13 @@ namespace Database
             if (typeof(T) == null) return null;
             switch (typeof(T).Name)
             {
+                case "EncounterReward":
+                    foreach (var instance in EncounterRewardList)
+                    {
+                        if (instance.tag == tag)
+                            return instance as T;
+                    }
+                    break;
                 case "IngredientData":
                     foreach (var instance in IngredientDataList)
                     {

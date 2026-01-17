@@ -23,19 +23,19 @@
       "Encounter.MeatSelect",
       "Ingredient.Meat",
       "10",
-      "a"
+      "고기"
     ],
     [
       "Encounter.VegetableSelect",
       "Ingredient.Vegetable",
       "10",
-      "b"
+      "채소"
     ],
     [
       "Encounter.SeafoodSelect",
       "Ingredient.Seafood",
       "10",
-      "c"
+      "해산물"
     ]
   ]
 }
