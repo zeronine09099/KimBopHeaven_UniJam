@@ -44,7 +44,7 @@ namespace Core
             TitleUI.Hide();
             InGameUI.Show();
             RewardUI.Hide();
-            EncounterUI.Hide();
+            EncounterUI.Show();
             DeckUI.Hide();
             SettingUI.Hide();
         }

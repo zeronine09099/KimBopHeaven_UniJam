@@ -5,6 +5,7 @@ using BandoWare.GameplayTags;
 using Core;
 using Cysharp.Threading.Tasks;
 using Database.Generated;
+using Machamy.Editor.Attributes;
 using Player;
 using UnityEngine;
 
@@ -16,7 +17,8 @@ namespace UI.Encounter
         [SerializeField] DeliveryEncounterPanel blackCookEncounterPanel;
 
         private bool encounterEnded = false;
-        private bool selectTrashEnded = false;
+        public bool SelectTrashEnded { get; set; }
+
         private void Awake()
         {
             UIManager.Instance.EncounterUI = this;
@@ -42,19 +44,22 @@ namespace UI.Encounter
 
         private void ShowBlackCook()
         {
+            Debug.Log("showblackcook 들어옴");
             blackCookEncounterPanel.gameObject.SetActive(true);
         }
 
         public async UniTask ShowAsync(StageInfo stageInfo, CancellationToken cancellationToken = default)
         {
-            if (stageInfo.Stage == 5 || stageInfo.Stage == 15)
+            gameObject.SetActive(true);
+            if (stageInfo.Stage == 20 || stageInfo.Stage == 15)
             {
                 // 납품 강화 이벤트
                 ShowDelivery(); 
             }
-            else if(stageInfo.Stage == 10 || stageInfo.Stage == 20)
+            else if(stageInfo.Stage == 3 || stageInfo.Stage == 9 || stageInfo.Stage == 15)
             {
                 // 흑종원 이벤트
+                Debug.Log("흑종원들어옴");
                 ShowBlackCook();
             }
 
@@ -62,17 +67,22 @@ namespace UI.Encounter
             {
                 await UniTask.Yield(cancellationToken); 
             }
+            Debug.Log("showasync 끝남");
 
         }
 
         public async UniTask destroyIngredientAsync(CancellationToken cancellationToken = default)
         {
 
+            //remove 버튼 활성화
+            UIManager.Instance.DeckUI.ActivateRemoveMode(); 
 
-            while (selectTrashEnded == false) 
+
+            while (SelectTrashEnded == false) 
             {
                 await UniTask.Yield(cancellationToken);
             }
+            Debug.Log("destroyINgredient 끝남");
         }
 
         private void OnEnable()
@@ -102,15 +112,24 @@ namespace UI.Encounter
             // 가방열고 가방버리는 로직
             // 다음 스테이지로 넘어가기
             UIManager.Instance.DeckUI.ShowDeckForm();
-            destroyIngredientAsync().Forget();
-            encounterEnded = true;
-            Hide();
+            UIManager.Instance.EncounterUI.gameObject.SetActive(true);
+            destroyIngredientAsync().ContinueWith(Callback).Forget();   // callback 이 유니테스크가 끝난 뒤에 실행
+            void Callback()
+            {
+                encounterEnded = true;
+                Hide();
+            }
             return;
         }
 
         public void Hide()
         {
             gameObject.SetActive(false);
+        }
+
+        public void Show()
+        {
+            gameObject.SetActive(true);
         }
     }
 }

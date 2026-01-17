@@ -190,8 +190,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 683acec054834cd79cf7eea0e4368fc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Encounter.EncounterUI
-  deliveryEncounterPanel: {fileID: 0}
-  blackCookEncounterPanel: {fileID: 0}
+  deliveryEncounterPanel: {fileID: 3681472384830528015}
+  blackCookEncounterPanel: {fileID: 2730775742726103542}
 --- !u!223 &503819840987042124
 Canvas:
   m_ObjectHideFlags: 0
@@ -1424,13 +1424,14 @@ GameObject:
   - component: {fileID: 5042218544042906120}
   - component: {fileID: 7561994090186719485}
   - component: {fileID: 6496069119558772204}
+  - component: {fileID: 2730775742726103542}
   m_Layer: 5
   m_Name: BlackCookPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5042218544042906120
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1489,6 +1490,25 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &2730775742726103542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5455502073214947548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3bea088de00da641a0af14f752b91fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DeliveryEncounterPanel
+  meatShopImage: {fileID: 0}
+  fishShopImage: {fileID: 0}
+  vegetableShopImage: {fileID: 0}
+  upgradeTargetTag:
+    m_Name: 
+  deliveryEncounterResult: {fileID: 0}
+  upgradeValue: 0
 --- !u!1 &5685998367249067449
 GameObject:
   m_ObjectHideFlags: 0
@@ -1507,7 +1527,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &9077355562677530139
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2427,4 +2447,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9b15ad77d5e501439ae09661b51fcd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DelliveryEncounterResult
-  deliveryResultDescription: {fileID: 0}
+  deliveryResultDescription: {fileID: 7860754960163358984}

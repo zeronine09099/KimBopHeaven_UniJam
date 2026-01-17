@@ -157,7 +157,12 @@ namespace Game
             pl.TotalScore += pl.CurrentStageScore;
             
             await UIManager.Instance.RewardUI.ShowAsync(CurrentStageInfo);
-            
+
+            if(CurrentStageInfo.Stage % 3 == 0)
+            {
+                Debug.Log("stagemanager 인카운터 분기 들어옴");
+                await UIManager.Instance.EncounterUI.ShowAsync(CurrentStageInfo);
+            }
             // 이벤트
             
             // 다음 스테이지로

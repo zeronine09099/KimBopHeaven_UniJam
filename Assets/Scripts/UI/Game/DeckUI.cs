@@ -1,9 +1,11 @@
-﻿using System;
+﻿using Core;
+using Cysharp.Threading.Tasks;
+using DG.Tweening;
+using Game;
+using System;
 using System.Collections.Generic;
 using System.Threading;
-using Core;
-using Cysharp.Threading.Tasks;
-using Game;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,6 +21,16 @@ namespace UI.Game
         [SerializeField] private Vector2 originalPosition;
         [SerializeField] private ScrollRect scrollRect;
         [SerializeField] private Transform contentTransform;
+
+
+        [Space(10)]
+        [Header("Description")]
+        [SerializeField] private DeckUIElement selectedElement = null;
+        [SerializeField] private GameObject descriptionObject;
+        [SerializeField] private TextMeshProUGUI descriptionText;
+        [SerializeField] private Ease descriptionEase = Ease.OutBack;
+
+
 
         [SerializeField] private Button closeButton;
 
@@ -82,6 +94,22 @@ namespace UI.Game
            }
            ShowTask(cancellationTokenSource.Token).Forget();
         }
+
+        /// <summary>
+        /// 흑종원 인카운터를 위해서 마이너스 버튼을 활성화시키는 함수
+        /// </summary>
+        public void ActivateRemoveMode()
+        {
+            scrollRect.verticalNormalizedPosition = 1f;
+            cancellationTokenSource.Cancel();
+            cancellationTokenSource = new CancellationTokenSource();
+            foreach (var element in deckUIElements)
+            {
+                element.ActivateMinusButton();
+                element.Refresh();
+            }
+            ShowTask(cancellationTokenSource.Token).Forget();
+        }
         
         public async UniTask ShowTask(CancellationToken cancellationToken = default)
         {
@@ -106,6 +134,27 @@ namespace UI.Game
             cancellationTokenSource = new CancellationTokenSource();
             gameObject.SetActive(false);
         }
-        
+
+
+        public void SwitchDesc(DeckUIElement element)
+        {
+            if (selectedElement == element)
+            {
+                selectedElement = null;
+                descriptionText.text = null;
+                descriptionObject.transform.DOScale(Vector3.zero, 0.3f).From(Vector3.one).SetEase(descriptionEase).OnComplete(() =>
+                {
+                    descriptionObject.SetActive(false);
+                });
+                return;
+            }
+
+            selectedElement = element;
+            descriptionText.text = element.ingredient.description;
+            descriptionObject.transform.localScale = Vector3.zero;
+            descriptionObject.SetActive(true);
+            descriptionObject.transform.DOScale(Vector3.one, 0.3f).From(Vector3.zero).SetEase(descriptionEase);
+        }
+
     }
 }
