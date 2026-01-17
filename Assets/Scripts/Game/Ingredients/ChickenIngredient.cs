@@ -32,8 +32,9 @@ namespace Game.Ingredients
             await DefaultTriggerEffect(args, 1, (int)(ReinforcedBaseScore * PlayerState.Current.CurrentTempMultiplier));
             if (!hasOtherMeat)
             {
-                PlayerState.Current.CurrentTempScore += (int)(variable01 * PlayerState.Current.CurrentTempMultiplier);
-                await DefaultTriggerEffect(args, 2, (int)(variable01 * PlayerState.Current.CurrentTempMultiplier));
+                // 다른 고기류가 없으면 기본점수 추가
+                PlayerState.Current.Reinforcements.AddReinforcement(AllGameplayTags.Ingredient.Meat.Chicken.Get(), (int)variable01);
+                await DefaultTriggerEffect(args, 2);
             }
         }
     }

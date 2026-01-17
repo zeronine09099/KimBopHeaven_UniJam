@@ -24,7 +24,7 @@ namespace Game.Ingredients
 
         public override async UniTask OnTrigger(TriggerArguments args)
         {
-            // ?�접???�?�이 밥인지 ?�인
+
             bool hasAdjacentRice = args.CountAdjacentExactTag(AllGameplayTags.Ingredient.Essential.Rice.Get()) > 0;
 
             PlayerState.Current.CurrentTempScore += (int)(ReinforcedBaseScore * PlayerState.Current.CurrentTempMultiplier);

@@ -10,7 +10,7 @@ namespace Game.Field
         public Tile tile;
         [SerializeField] TMP_Text scoreText;
         private int value;
-
+        [SerializeField] public readonly float[] FontSizes = {30f, 40f, 50f, 60f, 70f};
         public int Value
         {
             get => value;

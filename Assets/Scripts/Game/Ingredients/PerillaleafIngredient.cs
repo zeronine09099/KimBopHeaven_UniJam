@@ -31,8 +31,9 @@ namespace Game.Ingredients
             await DefaultTriggerEffect(args, 1, (int)(ReinforcedBaseScore * PlayerState.Current.CurrentTempMultiplier));
             if (hasAdjacentMeat)
             {
-                PlayerState.Current.CurrentTempScore += (int)(variable01 * PlayerState.Current.CurrentTempMultiplier);
-                await DefaultTriggerEffect(args, 2, (int)(variable01 * PlayerState.Current.CurrentTempMultiplier));
+                // 기본 점수 추가
+                PlayerState.Current.CurrentTempScore += (int)(variable01);
+                await DefaultTriggerEffect(args, 2);
             }
         }
     }

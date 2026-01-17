@@ -53,7 +53,7 @@ namespace Game
         {
             var obj = args.Ingredient;
             float[] punchScales = {1.05f, 1.1f, 1.15f, 1.2f, 1.25f};
-            float[] fontSizes = {72f,80f,88f,96f,104f};
+            
             float punchScale = punchScales[Mathf.Clamp(times - 1, 0, punchScales.Length - 1)];
             if(score > 0)
             {
@@ -69,6 +69,7 @@ namespace Game
                     {
                         scoreText.Show();
                     }
+                    var fontSizes = scoreText.FontSizes;
                     scoreText.Value = score;
                     scoreText.FontSize = fontSizes[Mathf.Clamp(times - 1, 0, fontSizes.Length - 1)];
                 }
