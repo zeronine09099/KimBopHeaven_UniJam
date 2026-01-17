@@ -2211,6 +2211,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Game.IngameUI
   scoreUI: {fileID: 7792702586868380207}
   deckUI: {fileID: 0}
+  stageIdText: {fileID: 6581003306240803429}
+  remainingMovesText: {fileID: 6084868021291256225}
   stageGoalScoreText: {fileID: 713538800499661041}
   menuButton: {fileID: 6498657609506853070}
   deckButton: {fileID: 7874555494692812539}

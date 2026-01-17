@@ -25,7 +25,7 @@ namespace Game.Ingredients
         public override async UniTask OnTrigger(TriggerArguments args)
         {
             
-            bool hasAdjacentMayonnaise = args.CountAdjacentExactTag(AllGameplayTags.Ingredient.Sauce.Mayonnaise.Get()) > 0;
+            bool hasAdjacentMayonnaise = args.CountAdjacentExactTag(AllGameplayTags.Ingredient.Sauce.Get()) > 0;
 
             PlayerState.Current.CurrentTempScore += (int)(ReinforcedBaseScore * PlayerState.Current.CurrentTempMultiplier);
             await DefaultTriggerEffect(args, 1, (int)(ReinforcedBaseScore * PlayerState.Current.CurrentTempMultiplier));

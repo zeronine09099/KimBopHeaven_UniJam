@@ -171,7 +171,11 @@ namespace Player
         public int CurrentRemainingSwipes
         {
             get { return Variables.GetVariable(nameof(VariableKey.CurrentRemainingSwipes)).IntValue; }
-            set { Variables.SetInteger(nameof(VariableKey.CurrentRemainingSwipes), value); }
+            set
+            {
+                Variables.SetInteger(nameof(VariableKey.CurrentRemainingSwipes), value);
+                UIManager.Instance.InGameUI.OnRemainingMovesChanged(value);
+            }
         }
 
         /// <summary>

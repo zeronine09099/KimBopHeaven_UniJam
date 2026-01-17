@@ -17,7 +17,8 @@ namespace UI.Game
         [SerializeField,VisibleOnly(EditableIn.EditMode)] private ScoreUI scoreUI;
         [SerializeField,VisibleOnly(EditableIn.EditMode)] private DeckUI deckUI;
         
-        
+        [SerializeField] TextMeshProUGUI stageIdText;
+        [SerializeField] TextMeshProUGUI remainingMovesText;
         [SerializeField] TextMeshProUGUI stageGoalScoreText;
         
         [SerializeField] Button menuButton;
@@ -54,7 +55,15 @@ namespace UI.Game
             ScoreUI.TempValue = 0;
             ScoreUI.MaxValue = stageInfo.goalScore;
             ScoreUI.UpdateUIImmediate();
+            
+            stageIdText.text = $"{stageInfo.Stage}";
         }
+        
+        public void OnRemainingMovesChanged(int remainingMoves)
+        {
+            remainingMovesText.text = $"{remainingMoves}";
+        }
+        
         
         public void OnMenuClicked()
         {

@@ -33,15 +33,24 @@ namespace Game.Field
             {
                 scoreText = Instantiate(scoreTextPrefab, transform);
                 scoreText.gameObject.SetActive(false);
-                if (FloatingUICanvas.HasInstance)
+                if(scoreText.GetComponent<RectTransform>())
                 {
-                    scoreText.transform.SetParent(FloatingUICanvas.Instance.transform, true);
-                    Vector2 screenPos = RectTransformUtility.WorldToScreenPoint(Camera.main, scoreTextAnchor.transform.position);
-                    scoreText.transform.position = screenPos;
+                    if (FloatingUICanvas.HasInstance)
+                    {
+                        scoreText.transform.SetParent(FloatingUICanvas.Instance.transform, true);
+                        Vector2 screenPos =
+                            RectTransformUtility.WorldToScreenPoint(Camera.main, scoreTextAnchor.transform.position);
+                        scoreText.transform.position = screenPos;
+                    }
+                    else
+                    {
+                        LogEx.LogWarning("FloatingUICanvas instance not found. Score text may not display correctly.");
+                    }
                 }
                 else
                 {
-                    LogEx.LogWarning("FloatingUICanvas instance not found. Score text may not display correctly.");
+                    scoreText.transform.SetParent(transform, true);
+                    scoreText.transform.position = scoreTextAnchor.position;
                 }
             }
         }
