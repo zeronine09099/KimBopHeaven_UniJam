@@ -4160,6 +4160,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameOverUI
       objectReference: {fileID: 0}
+    - target: {fileID: 2232558796926279908, guid: 3d11df694e066ff4695be54814c329ed, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 8669062896728036390, guid: 3d11df694e066ff4695be54814c329ed, type: 3}
@@ -4267,6 +4271,10 @@ PrefabInstance:
     - target: {fileID: 8547507648816948739, guid: cc1ac3218e4929c47939dd7fb128129f, type: 3}
       propertyPath: m_Name
       value: TutorialUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 8547507648816948739, guid: cc1ac3218e4929c47939dd7fb128129f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
