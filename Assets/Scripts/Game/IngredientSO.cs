@@ -33,7 +33,7 @@ namespace Game
         public string displayName;
         public string description;
         public int baseScore;
-        public int reinforcedBaseScore => (int)(baseScore * PlayerState.Current.CurrentTempMultiplier);
+        public int ReinforcedBaseScore => PlayerState.Current.Reinforcements.ProcessBaseValue(Tag, baseScore);
         public int startAmount = 0;
         public float variable01 = 0f;
         public float variable02 = 0f;
@@ -87,9 +87,9 @@ namespace Game
         public async virtual UniTask OnTrigger(TriggerArguments args)
         {
             var tile = args.Tile;
-            PlayerState.Current.CurrentTempScore += (int)(reinforcedBaseScore * PlayerState.Current.CurrentTempMultiplier);
+            PlayerState.Current.CurrentTempScore += (int)(ReinforcedBaseScore * PlayerState.Current.CurrentTempMultiplier);
             
-            DefaultTriggerEffect(args, 1, (int)(reinforcedBaseScore * PlayerState.Current.CurrentTempMultiplier));
+            DefaultTriggerEffect(args, 1, (int)(ReinforcedBaseScore * PlayerState.Current.CurrentTempMultiplier));
 
         }
         public async virtual UniTask OnExplode(Tile tile)

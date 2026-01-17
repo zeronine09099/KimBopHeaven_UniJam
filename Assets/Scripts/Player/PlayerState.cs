@@ -42,6 +42,8 @@ namespace Player
         /// </summary>
         public Inventory GameDeck => gameDeck;
         
+        public ReinforcementContainer Reinforcements => reinforcementContainer;
+        
         
         
         /// <summary>
@@ -403,6 +405,7 @@ namespace Player
         {
             Reset();
             gameDeck.Clear();
+            reinforcementContainer.Initialize();
             CurrentStageInfo = StageLibrary.Instance.GetStageInfo(1);
             foreach (var item in IngredientLibrary.Instance.AllIngredientList)
             {

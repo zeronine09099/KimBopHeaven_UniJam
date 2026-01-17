@@ -27,8 +27,8 @@ namespace Game.Ingredients
             // 김밥의 다른 해산물 재료 개수 확인
             int seafoodCount = args.CountHasTag(AllGameplayTags.Ingredient.Seafood.Get()) - 1;
 
-            PlayerState.Current.CurrentTempScore += (int)(reinforcedBaseScore * PlayerState.Current.CurrentTempMultiplier);
-            await DefaultTriggerEffect(args, 1, (int)(reinforcedBaseScore * PlayerState.Current.CurrentTempMultiplier));
+            PlayerState.Current.CurrentTempScore += (int)(ReinforcedBaseScore * PlayerState.Current.CurrentTempMultiplier);
+            await DefaultTriggerEffect(args, 1, (int)(ReinforcedBaseScore * PlayerState.Current.CurrentTempMultiplier));
             int count = 1;
             while (seafoodCount-- > 0)
             {

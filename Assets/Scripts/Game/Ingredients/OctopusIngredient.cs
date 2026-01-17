@@ -27,8 +27,8 @@ namespace Game.Ingredients
             // 인접한 문어 수 계산
             int adjacentOctopusCount = args.CountAdjacentExactTag(Tag);
 
-            PlayerState.Current.CurrentTempScore += (int)(reinforcedBaseScore * PlayerState.Current.CurrentTempMultiplier);
-            await DefaultTriggerEffect(args, 1, (int)(reinforcedBaseScore * PlayerState.Current.CurrentTempMultiplier));
+            PlayerState.Current.CurrentTempScore += (int)(ReinforcedBaseScore * PlayerState.Current.CurrentTempMultiplier);
+            await DefaultTriggerEffect(args, 1, (int)(ReinforcedBaseScore * PlayerState.Current.CurrentTempMultiplier));
             int count = 1;
             while (adjacentOctopusCount-- > 0)
             {

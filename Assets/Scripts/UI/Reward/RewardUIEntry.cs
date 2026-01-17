@@ -33,7 +33,7 @@ namespace UI.Reward
             iconImage.sprite = ingredientSo.icon;
             nameText.text = ingredientSo.displayName;
             descriptionText.text = ingredientSo.description;
-            baseScore.text = ingredientSo.reinforcedBaseScore.ToString();
+            baseScore.text = ingredientSo.ReinforcedBaseScore.ToString();
             rarity.text = $"<{ingredientSo.rarity.ToString()}>";
         }
         

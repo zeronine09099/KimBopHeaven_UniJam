@@ -9,7 +9,7 @@ namespace Game
     [System.Serializable]
     public class ReinforcementContainer
     {
-        private SerializableDictionary<GameplayTag, int> reinforcementValues = new ();
+        [SerializeField] private SerializableDictionary<GameplayTag, int> reinforcementValues = new ();
 
         public void Initialize()
         {
