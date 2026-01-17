@@ -11,6 +11,13 @@ namespace UI
 {
     public class BillingUI : MonoBehaviour
     {
+        [SerializeField] private Ease showEase = Ease.OutBack;
+        [SerializeField] private float showDuration = 0.5f;
+
+        [SerializeField] private RectTransform startRect;
+        [SerializeField] private RectTransform endRect;
+
+        [Space(10)]
         [Header("실패")]
         [SerializeField] private CanvasGroup failPanel;
         [Header("성공")]
@@ -50,7 +57,9 @@ namespace UI
             // 중앙에서 확대되면서 나타나는 애니메이션
             Sequence seq = DOTween.Sequence();
             successBackground.transform.localScale = Vector3.zero;
-            seq.Append(successBackground.transform.DOScale(Vector3.one, 0.5f).SetEase(Ease.OutBack));
+            failPanel.transform.position = startRect.position;
+            seq.Append(failPanel.GetComponent<RectTransform>().DOAnchorPosX(endRect.position.x, showDuration).SetEase(showEase));
+            seq.Append(successBackground.transform.DOScale(Vector3.one, showDuration).SetEase(showEase));
             await seq.Play().ToUniTask(cancellationToken: cancellationToken,tweenCancelBehaviour: TweenCancelBehaviour.Kill);
             
         }
@@ -72,12 +81,16 @@ namespace UI
             
             // 중앙에서 확대되면서 나타나는 애니메이션
             Sequence seq = DOTween.Sequence();
-            successPanel.transform.localScale = Vector3.zero;
-            seq.Append(successPanel.transform.DOScale(Vector3.one, 0.5f).SetEase(Ease.OutBack));
+            //successPanel.transform.localScale = Vector3.zero;
+            successPanel.transform.position = startRect.position;   
+            seq.Append(successPanel.GetComponent<RectTransform>().DOAnchorPosX(endRect.position.x, showDuration).SetEase(showEase));
+            seq.AppendInterval(1f);
+
+            //seq.Append(successPanel.transform.DOScale(Vector3.one, 0.5f).SetEase(Ease.OutBack));
             seq.Append(successPanel.DOFade(0f, 0.3f));
             seq.Join(successBackground.DOFade(1f, 0.75f));
             // succesPanel 끝난후, (0.3초 뒤) 빌링 컨텐츠 아래에서 올라옴
-            seq.AppendInterval(0.3f);
+            seq.AppendInterval(1f);
             billingRect.anchoredPosition = new Vector2(0, -Screen.height);
             seq.Append(billingRect.DOAnchorPosY(0, 0.5f).SetEase(Ease.OutCubic));
             // 이후 점수 증가
