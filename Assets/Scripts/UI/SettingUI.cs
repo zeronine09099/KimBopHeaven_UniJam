@@ -26,16 +26,16 @@ namespace UI
             toggle.isOn = Sound.SoundManager.Instance.UseVibration;
             
             masterSlider.onValueChanged.AddListener(OnMasterVolumeChanged);
-            musicSlider.onValueChanged.AddListener(OnMusicVolumeChanged);
-            sfxSlider.onValueChanged.AddListener(OnSfxVolumeChanged);
+            musicSlider?.onValueChanged.AddListener(OnMusicVolumeChanged);
+            sfxSlider?.onValueChanged.AddListener(OnSfxVolumeChanged);
             toggle.onValueChanged.AddListener(OnVibrationToggled);
         }
         
         private void OnDisable()
         {
             masterSlider.onValueChanged.RemoveListener(OnMasterVolumeChanged);
-            musicSlider.onValueChanged.RemoveListener(OnMusicVolumeChanged);
-            sfxSlider.onValueChanged.RemoveListener(OnSfxVolumeChanged);
+            musicSlider?.onValueChanged.RemoveListener(OnMusicVolumeChanged);
+            sfxSlider?.onValueChanged.RemoveListener(OnSfxVolumeChanged);
             toggle.onValueChanged.RemoveListener(OnVibrationToggled);
         }
         

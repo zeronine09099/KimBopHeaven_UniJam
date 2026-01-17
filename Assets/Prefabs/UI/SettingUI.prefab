@@ -1053,10 +1053,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5c040fceed048db8ab962e82de3deb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UI.SettingUI
-  masterSlider: {fileID: 0}
+  masterSlider: {fileID: 1651472545942461112}
   musicSlider: {fileID: 0}
   sfxSlider: {fileID: 0}
-  toggle: {fileID: 0}
+  toggle: {fileID: 7124690818306635436}
 --- !u!1 &6160905927005505302
 GameObject:
   m_ObjectHideFlags: 0
@@ -1152,7 +1152,7 @@ MonoBehaviour:
   useGlobalAngle: 0
   offsetAngle: 90
   offsetDistance: 12
-  offset: {x: 0.00000071525574, y: -11.999999}
+  offset: {x: 0.00000071525585, y: -12}
   color: {r: 0, g: 0, b: 0, a: 0.6}
   inset: 0
   blendMode: 0
