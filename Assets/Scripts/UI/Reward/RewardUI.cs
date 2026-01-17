@@ -29,7 +29,7 @@ namespace UI.Reward
 
         public void Show(StageInfo stageInfo)
         {
-            remainSelectBtnText.text = $"남은 선택 수 {remainSelectCnt}";
+            remainSelectBtnText.text = $"{remainSelectCnt}";
             rerollBtnText.text = $"리롤 ({remainRerollCnt})";
 
             Rarity GetRarity()
@@ -66,8 +66,21 @@ namespace UI.Reward
         private bool rewardSelectEnded = false;
         public void OnEntryClicked(RewardUIEntry entry)
         {
+            foreach(var e in entries)
+            {
+                e.DeselectVisualEffect();
+            }
+
+            if (entry == selectedRewardUIEntry)
+            {
+                selectedRewardUIEntry = null;
+                rewardSelectEnded = true;
+                return;
+            }
+
             //Debug.Log($"RewardUI: OnEntryClicked - {entry.IngredientSo.name}");
             selectedRewardUIEntry = entry;
+            entry.SelectedVisualEffect();
         }
 
         public void OnRemainSelectionCntButton()
