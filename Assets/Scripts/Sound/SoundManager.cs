@@ -738,7 +738,29 @@ namespace Sound
             }
         }
 
-        public void DefaultVibe()
+        private int _scoreSfxPitchIndex = 0;
+        private int _scoreSfxPitchMidIndex = 3;
+        private readonly float[] _scoreSfxPitchValues = new float[] {1.0f, 1.1f, 1.2f, 1.3f, 1.4f, 1.5f};
+        public void ResetScoreSfxPitchIndex()
+        {
+            _scoreSfxPitchIndex = 0;
+        }
+        public void PlayScoreSfx()
+        {
+            float GetPitch()
+            {
+                float pitch = _scoreSfxPitchValues[_scoreSfxPitchIndex];
+                _scoreSfxPitchIndex++;
+                if (_scoreSfxPitchIndex >= _scoreSfxPitchValues.Length)
+                {
+                    _scoreSfxPitchIndex = _scoreSfxPitchMidIndex;
+                }
+                return pitch;
+            }
+            PlaySfx(SoundReference.ScoreSFX,pitch: GetPitch());
+        }
+
+        public void Vibe()
         {
             if (UseVibration)
             {

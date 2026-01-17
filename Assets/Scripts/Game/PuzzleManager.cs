@@ -14,6 +14,7 @@ using Common.Extentions;
 using Cysharp.Threading.Tasks;
 using Machamy.Utils;
 using Player;
+using Sound;
 using UnityEngine;
 
 
@@ -483,6 +484,7 @@ namespace Game
             isSwapping = true; 
             Tile tileA = input.firstTile;
             Tile tileB = input.secondTile;
+            SoundManager.Instance.PlaySfx(SoundReference.SwipeSFX);
             await SwapTile(tileA, tileB, cancellationToken);
             List<MatchData> matchGroups = FindWrapperMatches();
             

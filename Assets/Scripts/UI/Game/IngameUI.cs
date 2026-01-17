@@ -3,6 +3,7 @@ using Core;
 using Database.Generated;
 using Machamy.Attributes;
 using Machamy.Utils;
+using Sound;
 using TMPro;
 using UnityEditor.SceneManagement;
 using UnityEngine;
@@ -54,12 +55,14 @@ namespace UI.Game
         public void OnMenuClicked()
         {
             LogEx.Log("Ingame Menu Clicked");
+            SoundManager.Instance.PlaySfx(SoundReference.ButtonClickSFX);
             UIManager.Instance.SettingUI.Show();
         }
         
         public void OnDeckClicked()
         {
             LogEx.Log("Ingame Deck Clicked");
+            SoundManager.Instance.PlaySfx(SoundReference.ButtonClickSFX);
             DeckUI.ShowDeckForm();
         }
 

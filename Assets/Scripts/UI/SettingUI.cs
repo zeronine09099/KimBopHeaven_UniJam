@@ -1,4 +1,5 @@
 ﻿using Core;
+using Sound;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -55,6 +56,11 @@ namespace UI
         private void OnVibrationToggled(bool isOn)
         {
             Sound.SoundManager.Instance.UseVibration = isOn;
+            SoundManager.Instance.PlaySfx(SoundReference.ButtonClickSFX);
+            if (isOn)
+            {
+                Sound.SoundManager.Instance.VibePop();
+            }
         }
 
         public void Hide()

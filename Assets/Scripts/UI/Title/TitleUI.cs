@@ -1,6 +1,7 @@
 ﻿using System;
 using Core;
 using Machamy.Utils;
+using Sound;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -29,7 +30,7 @@ namespace UI.Title
         public void OnStartButtonClicked()
         {
             LogEx.Log("Start Button Clicked");
-
+            SoundManager.Instance.PlaySfx(SoundReference.ButtonClickSFX);
             GameManager.Instance.StartGame();
         }
 
