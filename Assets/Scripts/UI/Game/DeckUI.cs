@@ -31,6 +31,7 @@ namespace UI.Game
         [SerializeField] private Ease descriptionEase = Ease.OutBack;
 
 
+        [SerializeField] private Vector3 descriptionOffset = new Vector3(20f, 0f, 0f);
 
         [SerializeField] private Button closeButton;
 
@@ -138,6 +139,8 @@ namespace UI.Game
 
         public void SwitchDesc(DeckUIElement element)
         {
+            descriptionObject.GetComponent<RectTransform>().position = element.GetComponent<RectTransform>().position + descriptionOffset;
+
             if (selectedElement == element)
             {
                 selectedElement = null;

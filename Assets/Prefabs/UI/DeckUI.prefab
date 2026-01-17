@@ -1417,6 +1417,7 @@ MonoBehaviour:
   descriptionObject: {fileID: 4174308959751275111}
   descriptionText: {fileID: 2445793356604345058}
   descriptionEase: 25
+  descriptionOffset: {x: 60, y: 0, z: 0}
   closeButton: {fileID: 5377357261594043169}
 --- !u!225 &5032053349852173738
 CanvasGroup:
