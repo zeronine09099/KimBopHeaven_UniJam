@@ -31,10 +31,16 @@ namespace Interaction
         public event Action<Tile> OnTileLongReleased;
         public event Action<Tile, Tile> OnTileDragging;
         public event Action<Tile, Tile> OnTileDragReleased;
+        
+        
+        public bool IsOnUI => UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject();
 
         private void LateUpdate()
         {
-            
+            if (IsOnUI)
+            {
+                return;
+            }
 
             if (isPressing && pressTime >= 0)
             {
@@ -60,6 +66,10 @@ namespace Interaction
 
         public void OnPress(Vector2 position)
         {
+            if (IsOnUI)
+            {
+                return;
+            }
             isPressing = true;
             pressTime = Time.time;
             pointerPosition = position;
@@ -80,6 +90,11 @@ namespace Interaction
         {
             if (pressTime < 0) return;
 
+            if (IsOnUI)
+            {
+                return;
+            }
+            
             this.pointerPosition = position;
 
             // 인터랙터블이 다르면 드래그 이벤트 발생
@@ -99,6 +114,10 @@ namespace Interaction
 
         public void OnRelease(Vector2 position)
         {
+            if (IsOnUI)
+            {
+                return;
+            }
             isPressing = false;
             if (pressTime < 0) return;
             float heldDuration = Time.time - pressTime;
