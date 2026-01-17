@@ -182,9 +182,11 @@ namespace Game
             // 스테이지 실패 처리, 타이틀로
             LogEx.Log("Stage Failed!");
             await UIManager.Instance.BillingUI.ShowFailAsync(cancellationToken);
-            
-            
-            GameManager.Instance.CancelGameAndReturnToTitle();
+
+
+            //GameManager.Instance.CancelGameAndReturnToTitle();
+            UIManager.Instance.GoToGameoverUI();
+
         }
         
         

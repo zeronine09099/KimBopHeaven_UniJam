@@ -90,7 +90,7 @@ namespace UI
             seq.Append(successPanel.DOFade(0f, 0.3f));
             seq.Join(successBackground.DOFade(1f, 0.75f));
             // succesPanel 끝난후, (0.3초 뒤) 빌링 컨텐츠 아래에서 올라옴
-            seq.AppendInterval(1f);
+            seq.AppendInterval(0.4f);
             billingRect.anchoredPosition = new Vector2(0, -Screen.height);
             seq.Append(billingRect.DOAnchorPosY(0, 0.5f).SetEase(Ease.OutCubic));
             // 이후 점수 증가
