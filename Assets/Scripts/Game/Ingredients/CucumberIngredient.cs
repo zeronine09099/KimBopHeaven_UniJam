@@ -28,8 +28,8 @@ namespace Game.Ingredients
             int vegetableCount = args.CountHasTag(AllGameplayTags.Ingredient.Vegetable.Get());
             bool hasOtherVegetable = vegetableCount > 1;
 
-            PlayerState.Current.CurrentTempScore += (int)(baseScore * PlayerState.Current.CurrentTempMultiplier);
-            await DefaultTriggerEffect(args, 1, (int)(baseScore * PlayerState.Current.CurrentTempMultiplier));
+            PlayerState.Current.CurrentTempScore += (int)(reinforcedBaseScore * PlayerState.Current.CurrentTempMultiplier);
+            await DefaultTriggerEffect(args, 1, (int)(reinforcedBaseScore * PlayerState.Current.CurrentTempMultiplier));
             if (!hasOtherVegetable)
             {
                 PlayerState.Current.CurrentTempScore += (int)(variable01 * PlayerState.Current.CurrentTempMultiplier);

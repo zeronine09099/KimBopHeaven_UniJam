@@ -26,8 +26,8 @@ namespace Game.Ingredients
         {
             bool hasAdjacentSauce = args.CountAdjacentHasTag(AllGameplayTags.Ingredient.Sauce.Get()) > 0;
 
-            PlayerState.Current.CurrentTempScore += (int)(baseScore * PlayerState.Current.CurrentTempMultiplier);
-            await DefaultTriggerEffect(args, 1, (int)(baseScore * PlayerState.Current.CurrentTempMultiplier));
+            PlayerState.Current.CurrentTempScore += (int)(reinforcedBaseScore * PlayerState.Current.CurrentTempMultiplier);
+            await DefaultTriggerEffect(args, 1, (int)(reinforcedBaseScore * PlayerState.Current.CurrentTempMultiplier));
             if (hasAdjacentSauce)
             {
                 int kimbapScore = PlayerState.Current.GetKimbapScore();
