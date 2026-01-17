@@ -1502,6 +1502,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3bea088de00da641a0af14f752b91fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DeliveryEncounterPanel
+  displayImage1: {fileID: 0}
+  displayImage2: {fileID: 0}
+  leftButtonText: {fileID: 0}
+  rightButtonText: {fileID: 0}
   meatShopImage: {fileID: 0}
   fishShopImage: {fileID: 0}
   vegetableShopImage: {fileID: 0}
@@ -1598,6 +1602,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3bea088de00da641a0af14f752b91fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DeliveryEncounterPanel
+  displayImage1: {fileID: 7497930758616809332}
+  displayImage2: {fileID: 8224170304000069666}
+  leftButtonText: {fileID: 7564914738357727671}
+  rightButtonText: {fileID: 8746007107550189285}
   meatShopImage: {fileID: 0}
   fishShopImage: {fileID: 0}
   vegetableShopImage: {fileID: 0}

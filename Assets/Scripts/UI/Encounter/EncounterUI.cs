@@ -27,13 +27,14 @@ namespace UI.Encounter
 
         private void ShowDelivery()
         {
+            Debug.Log("showdelivery 들어옴"); 
             int temp1, temp2;
 
             while(true)
             {
                 temp1 = UnityEngine.Random.Range(0, 3);
                 temp2 = UnityEngine.Random.Range(0, 3);
-                if(temp1 == temp2)
+                if(temp1 != temp2)
                 {
                     break;
                 }
@@ -51,12 +52,12 @@ namespace UI.Encounter
         public async UniTask ShowAsync(StageInfo stageInfo, CancellationToken cancellationToken = default)
         {
             gameObject.SetActive(true);
-            if (stageInfo.Stage == 20 || stageInfo.Stage == 15)
+            if (stageInfo.Stage == 3 || stageInfo.Stage == 9 || stageInfo.Stage == 15)
             {
                 // 납품 강화 이벤트
                 ShowDelivery(); 
             }
-            else if(stageInfo.Stage == 3 || stageInfo.Stage == 9 || stageInfo.Stage == 15)
+            else if(stageInfo.Stage == 6 || stageInfo.Stage == 12 || stageInfo.Stage == 18)
             {
                 // 흑종원 이벤트
                 Debug.Log("흑종원들어옴");
@@ -73,10 +74,8 @@ namespace UI.Encounter
 
         public async UniTask destroyIngredientAsync(CancellationToken cancellationToken = default)
         {
-
             //remove 버튼 활성화
             UIManager.Instance.DeckUI.ActivateRemoveMode(); 
-
 
             while (SelectTrashEnded == false) 
             {
