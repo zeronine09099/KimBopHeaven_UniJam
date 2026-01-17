@@ -385,6 +385,15 @@ namespace Game
                         return ingredientSo;
                     }
                 }
+                for (int i = 0; i < retrivedIngredients.Count; i++)
+                {
+                    if (retrivedIngredients[i].Tag == tag)
+                    {
+                        IngredientSO ingredientSo = retrivedIngredients[i];
+                        retrivedIngredients.RemoveAt(i);
+                        return ingredientSo;
+                    }
+                }
                 return null;
             }
             
