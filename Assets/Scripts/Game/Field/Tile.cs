@@ -1,5 +1,6 @@
 ﻿using Common;
 using Interaction;
+using Machamy.Attributes;
 using UnityEngine;
 
 namespace Game.Field
@@ -10,8 +11,8 @@ namespace Game.Field
     /// </summary>
     public class Tile : MonoBehaviour, IInteractable
     {
-        public TileVector Coordinate { get; set; }
-        public IngredientObject CurrentIngredient { get; set; }
+        [field:SerializeField,VisibleOnly]public TileVector Coordinate { get; set; }
+        [field:SerializeField]public IngredientObject CurrentIngredient { get; set; }
         private Field field;
 
         public void Initialize(Field field, TileVector tileVector)

@@ -39,7 +39,7 @@ namespace Game
         
         [SerializeField] private float triggerInterval = 0.1f;
         [SerializeField] private float matchInterval = 0.2f;
-        [SerializeField] private float explodeDelay = 0.2f;
+        [SerializeField] private float explodeDelay = 0.0f;
 
         [SerializeField] private Ease ease = Ease.InQuad;   // 애니메이션 효과 종류
         [SerializeField] private Ease fallEase = Ease.InSine;
@@ -282,7 +282,7 @@ namespace Game
         public async UniTask ProcessMatches(List<MatchData> matchGroups, CancellationToken cancellationToken)
         {
             // 트리거
-            List<Tile> toExplodeTiles = new List<Tile>();
+            HashSet<Tile> toExplodeTiles = new ();
             
             foreach (var match in matchGroups)
             {
@@ -291,16 +291,47 @@ namespace Game
                     await tile.CurrentIngredient.Data.OnTrigger(tile).AttachExternalCancellation(cancellationToken);
                     await UniTask.Delay(TimeSpan.FromSeconds(triggerInterval), cancellationToken: cancellationToken);
                 }
-                toExplodeTiles.AddRange(match);
+                // toExplodeTiles.AddRange(match);
+                foreach (var tile in match)
+                {
+                    toExplodeTiles.Add(tile);
+                }
                 await UniTask.Delay(TimeSpan.FromSeconds(matchInterval), cancellationToken: cancellationToken);
             }
             
-            // 폭발
+            List<UniTask> explodeTasks = new(toExplodeTiles.Count);
+
             foreach (var tile in toExplodeTiles)
             {
-                await tile.CurrentIngredient.Data.OnExplode(tile).AttachExternalCancellation(cancellationToken);
-                await UniTask.Delay(TimeSpan.FromSeconds(explodeDelay), cancellationToken: cancellationToken);
+                // 1. 참조 캐싱 (매우 중요)
+                // tile.CurrentIngredient가 나중에 null이 되어도 이 변수는 객체를 가리킴
+                var targetIngredient = tile.CurrentIngredient;
+
+                if (targetIngredient == null) 
+                    continue;
+
+                // 2. 태스크 생성 및 캔슬레이션 연결
+                // ContinueWith()가 특별한 로직 없이 사용되었다면 불필요하므로 제거
+                var task = targetIngredient.Data.OnExplode(tile)
+                    .ContinueWith(() =>
+                    {
+                        var targetObj = targetIngredient.gameObject;
+                        targetObj.SetActive(false);
+                
+                        Destroy(targetObj, 2f); 
+                    })
+                    .AttachExternalCancellation(cancellationToken);
+                explodeTasks.Add(task);
+
+                // 3. 데이터 로직 처리
+                RetrieveIngredient(targetIngredient.Data);
+                tile.SetIngredient(null); // 타일에서 논리적 연결 해제
+                
+
             }
+
+            await UniTask.WhenAll(explodeTasks);
+            
             
         }
 
@@ -313,6 +344,7 @@ namespace Game
         {
             float tileDelta = - field.GetTile(0,0).transform.position.y + field.GetTile(1,0).transform.position.y;
             List<Tile> fallingIngredients = new ();
+            List<Sequence> fallSequences = new ();
             int start = 0;
            for(int j = 0; j < field.Width; j++)
            {
@@ -343,7 +375,7 @@ namespace Game
                                fallingIngredient.transform.SetParent(tile.transform);
                                Sequence fallSequence = DOTween.Sequence();
                                fallSequence.Append(fallingIngredient.transform.DOLocalMove(Vector3.zero, fallDuration).SetEase(fallEase));
-                               
+                               fallSequences.Add(fallSequence);
                                fallingIngredients.Add(tile);
                                break; // 다음 빈 타일로 이동
                            }
@@ -362,7 +394,7 @@ namespace Game
                             // 애니메이션 처리
                             Sequence fallSequence = DOTween.Sequence();
                             fallSequence.Append(newIngredientObject.transform.DOLocalMove(Vector3.zero, fallDuration).SetEase(fallEase));
-                            
+                            fallSequences.Add(fallSequence);
                             fallingIngredients.Add(tile);
                           }
                    }
@@ -370,6 +402,9 @@ namespace Game
                }
 
            }
+              // 모든 낙하 애니메이션 대기 
+                await UniTask.WhenAll(fallSequences.ConvertAll(seq => seq.ToUniTask(cancellationToken: cancellationToken,
+                    tweenCancelBehaviour: TweenCancelBehaviour.Complete)));
            
         }
         

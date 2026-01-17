@@ -55,8 +55,7 @@ namespace Game
         }
         public async virtual UniTask OnExplode(Tile tile)
         {
-            tile.SetIngredient(null);
-            PuzzleManager.Instance.RetrieveIngredient(this);
+
             await tile.GetComponentInChildren<SpriteRenderer>().DOColor(Color.red, 0.2f).OnComplete(() =>
             {
                 tile.GetComponentInChildren<SpriteRenderer>().DOColor(Color.white, 0.2f);

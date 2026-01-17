@@ -143,6 +143,7 @@ namespace Game
         public async UniTask StageSuccess()
         {
             // 스테이지 성공 처리, 리워드로
+            LogEx.Log("Stage Cleared!");
             await UniTask.Yield();
             PlayerState pl = PlayerState.Current;
             pl.TotalScore += pl.CurrentStageScore;
@@ -158,6 +159,7 @@ namespace Game
         public async UniTask StageFail()
         {
             // 스테이지 실패 처리, 타이틀로
+            LogEx.Log("Stage Failed!");
             await UniTask.Yield();
             
             
