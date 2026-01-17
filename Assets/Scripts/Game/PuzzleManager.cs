@@ -413,6 +413,14 @@ namespace Game
                     await UniTask.Delay(TimeSpan.FromSeconds(triggerInterval), cancellationToken: cancellationToken);
                     // 임시 점수를 실제 점수에 반영
                     PlayerState.Current.CurrentStageScore = PlayerState.Current.CurrentTempScore;
+                    foreach (var ui in FloatingBonusScore.activeFloatingBonusScores)
+                    {
+                        if (ui == null) 
+                            continue;
+                        if (!ui.IsActive)
+                            continue;
+                        ui.ScoreText.DOFade(0, 0.2f).OnComplete(() => ui.gameObject.SetActive(false));
+                    }
                     LogEx.Log($"Current Stage Score: {PlayerState.Current.CurrentStageScore}");
                 }
                 // toExplodeTiles.AddRange(match);

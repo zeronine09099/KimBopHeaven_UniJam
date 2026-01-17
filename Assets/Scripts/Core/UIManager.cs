@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using Common.Singleton;
+using Game.Field;
 using UI;
 using UI.Encounter;
 using UI.Game;
