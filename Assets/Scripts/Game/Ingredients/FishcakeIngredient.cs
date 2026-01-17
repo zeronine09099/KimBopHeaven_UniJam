@@ -31,7 +31,7 @@ namespace Game.Ingredients
             if (currentIndex < args.MatchData.Count - 1 && args.MatchData[currentIndex + 1].CurrentIngredient != null) adjacentCount++;
             
             int seafoodCount = args.CountAdjacentHasTag(AllGameplayTags.Ingredient.Seafood.Get());
-            bool seafoodCheck = (adjacentCount > 0);
+            bool seafoodCheck = (seafoodCount > 0);
 
             PlayerState.Current.CurrentTempScore += (int)(ReinforcedBaseScore * PlayerState.Current.CurrentTempMultiplier);
             await DefaultTriggerEffect(args, 1, (int)(ReinforcedBaseScore * PlayerState.Current.CurrentTempMultiplier));
