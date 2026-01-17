@@ -2,6 +2,8 @@
 using Common;
 using Interaction;
 using Machamy.Attributes;
+using Machamy.Utils;
+using UI;
 using UnityEngine;
 
 namespace Game.Field
@@ -18,7 +20,7 @@ namespace Game.Field
         [SerializeField] FloatingBonusScore scoreTextPrefab;
         [field:SerializeField, VisibleOnly(EditableIn.EditMode)]
         public FloatingBonusScore scoreText { get; private set; }
-
+[SerializeField] private Transform scoreTextAnchor;
         public void Initialize(Field field, TileVector tileVector)
         {
             this.field = field;
@@ -31,6 +33,16 @@ namespace Game.Field
             {
                 scoreText = Instantiate(scoreTextPrefab, transform);
                 scoreText.gameObject.SetActive(false);
+                if (FloatingUICanvas.HasInstance)
+                {
+                    scoreText.transform.SetParent(FloatingUICanvas.Instance.transform, true);
+                    Vector2 screenPos = RectTransformUtility.WorldToScreenPoint(Camera.main, scoreTextAnchor.transform.position);
+                    scoreText.transform.position = screenPos;
+                }
+                else
+                {
+                    LogEx.LogWarning("FloatingUICanvas instance not found. Score text may not display correctly.");
+                }
             }
         }
 

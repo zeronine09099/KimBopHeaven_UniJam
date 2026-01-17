@@ -1,5 +1,4 @@
-﻿using System;
-using DG.Tweening;
+﻿using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,7 +14,9 @@ namespace UI.Game
         [SerializeField] private TextMeshProUGUI scoreText2;
 
         [Header("Settings")] 
-        [SerializeField] private Ease fillEase = Ease.InQuad;
+        [SerializeField] private Ease tempFillEase = Ease.OutQuad;
+        [SerializeField] private float tempFillDuration = 0.2f;
+        [SerializeField] private Ease fillEase = Ease.OutQuad;
         [SerializeField] private float fillDuration = 0.5f;
 
         [Header("Current Values")] 
@@ -23,15 +24,24 @@ namespace UI.Game
         [SerializeField] private float tempValue = 0;
         [SerializeField] private float maxValue = 100f;
 
-        [SerializeField] private int scoreTextValue = 0;
+        private Tween _scoreTextTween;
+        private int _displayScore;
 
         public float CurrentValue
         {
             get => currentValue;
             set
             {
+                // 값이 같으면 무시
+                if (Mathf.Approximately(currentValue, value)) return;
                 currentValue = value;
-                UpdateUI();
+                if (currentValue > tempValue)
+                {
+                    // Current가 Temp보다 커지면 Temp도 같이 올려줌
+                    tempValue = currentValue;
+                    UpdateTempUI();
+                }
+                UpdateCurrentUI(); // Current만 갱신
             }
         }
         
@@ -40,8 +50,9 @@ namespace UI.Game
             get => tempValue;
             set
             {
-                tempValue = Mathf.Min(value, currentValue);
-                UpdateUI();
+                if (Mathf.Approximately(tempValue, value)) return;
+                tempValue = value;
+                UpdateTempUI(); // Temp만 갱신
             }
         }
         
@@ -50,89 +61,86 @@ namespace UI.Game
             get => maxValue;
             set
             {
+                if (Mathf.Approximately(maxValue, value)) return;
                 maxValue = value;
-                UpdateUI();
-            }
-        }
-        
-        public int ScoreTextValue
-        {
-            get => scoreTextValue;
-            set
-            {
-                scoreTextValue = value;
-                scoreText.text = scoreTextValue.ToString("N0");
-                scoreText2.text = scoreTextValue.ToString("N0");
+                // Max가 바뀌면 비율이 달라지므로 둘 다 갱신
+                UpdateCurrentUI();
+                UpdateTempUI();
             }
         }
         
         private void Awake()
         {
-            
+            _displayScore = (int)currentValue;
         }
 
-        public void UpdateUI(float newValue, float newTempValue, float newMaxValue)
+        // Current 관련 UI만 업데이트 (슬라이더 + 텍스트)
+        private void UpdateCurrentUI()
         {
-            currentValue = newValue;
-            tempValue = Mathf.Min(newTempValue, newValue);
-            maxValue = newMaxValue;
-            UpdateUI();
-        }
-        
-        
-        Tween _scoreTween;
-        private void UpdateUI()
-        {
-            if (DOTween.IsTweening(scoreFillSlider) || DOTween.IsTweening(scoreTempFillSlider) || _scoreTween != null && DOTween.IsTweening(_scoreTween))
-            {
-                DOTween.Complete(scoreFillSlider);
-                DOTween.Complete(scoreTempFillSlider);
-                DOTween.Complete(_scoreTween);
-            }
-            
             if (maxValue <= 0)
             {
                 scoreFillSlider.DOValue(0, fillDuration).SetEase(fillEase);
-                scoreTempFillSlider.DOValue(0, fillDuration).SetEase(fillEase);
-                _scoreTween = DOTween.To(() => ScoreTextValue, x => ScoreTextValue = x, 0, fillDuration).SetEase(fillEase);
+                UpdateScoreText(0);
                 return;
             }
-            
-            tempValue = Mathf.Min(tempValue, currentValue);
-            
+
             float targetFill = Mathf.Clamp01(currentValue / maxValue);
-            float targetTempFill = Mathf.Clamp01(tempValue / maxValue);
-            
             scoreFillSlider.DOValue(targetFill, fillDuration).SetEase(fillEase);
+
+            // 텍스트 애니메이션
+            if (_scoreTextTween != null && _scoreTextTween.IsActive()) _scoreTextTween.Kill();
+            
+            _scoreTextTween = DOTween.To(() => _displayScore, x => 
+            {
+                _displayScore = x;
+                UpdateScoreText(_displayScore);
+            }, (int)currentValue, fillDuration).SetEase(fillEase);
+        }
+
+        // Temp 관련 UI만 업데이트 (슬라이더)
+        private void UpdateTempUI()
+        {
+            if (maxValue <= 0)
+            {
+                scoreTempFillSlider.DOValue(0, fillDuration).SetEase(fillEase);
+                return;
+            }
+
+            float targetTempFill = Mathf.Clamp01(tempValue / maxValue);
             scoreTempFillSlider.DOValue(targetTempFill, fillDuration).SetEase(fillEase);
-            _scoreTween = DOTween.To(() => ScoreTextValue, x => ScoreTextValue = x, (int)currentValue, fillDuration).SetEase(fillEase);
+        }
+
+        private void UpdateScoreText(int value)
+        {
+            if (scoreText != null) scoreText.text = value.ToString("N0");
+            if (scoreText2 != null) scoreText2.text = value.ToString("N0");
         }
         
+        // 에디터 확인용 및 즉시 갱신
         public void UpdateUIImmediate()
         {
-            if(DOTween.IsTweening(scoreFillSlider) || DOTween.IsTweening(scoreTempFillSlider) || _scoreTween != null && DOTween.IsTweening(_scoreTween))
-            {
-                DOTween.Complete(scoreFillSlider);
-                DOTween.Complete(scoreTempFillSlider);
-                DOTween.Complete(_scoreTween);
-            }
+            scoreFillSlider.DOKill();
+            scoreTempFillSlider.DOKill();
+            if (_scoreTextTween != null) _scoreTextTween.Kill();
             
             if (maxValue <= 0)
             {
                 scoreFillSlider.value = 0;
                 scoreTempFillSlider.value = 0;
+                UpdateScoreText(0);
                 return;
             }
-            
-            tempValue = Mathf.Min(tempValue, currentValue);
-            
+
             scoreFillSlider.value = Mathf.Clamp01(currentValue / maxValue);
             scoreTempFillSlider.value = Mathf.Clamp01(tempValue / maxValue);
-            scoreText.text = currentValue.ToString("N0");
+            
+            _displayScore = (int)currentValue;
+            UpdateScoreText(_displayScore);
         }
 
         private void OnValidate()
         {
+            if (scoreFillSlider == null) return;
             UpdateUIImmediate();
         }
     }
