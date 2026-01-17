@@ -110,6 +110,13 @@ namespace UI.Game
         
         public void UpdateUIImmediate()
         {
+            if(DOTween.IsTweening(scoreFillSlider) || DOTween.IsTweening(scoreTempFillSlider) || _scoreTween != null && DOTween.IsTweening(_scoreTween))
+            {
+                DOTween.Complete(scoreFillSlider);
+                DOTween.Complete(scoreTempFillSlider);
+                DOTween.Complete(_scoreTween);
+            }
+            
             if (maxValue <= 0)
             {
                 scoreFillSlider.value = 0;
