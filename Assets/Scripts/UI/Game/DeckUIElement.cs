@@ -2,7 +2,9 @@
 using Player;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using DG.Tweening;
 
 namespace UI.Game
 {
@@ -17,7 +19,7 @@ namespace UI.Game
         [Header("Setting")]
         [Header("Variables")]
         public IngredientSO ingredient;
-        
+
         public void Initialize(IngredientSO ingredient)
         {
             this.ingredient = ingredient;
@@ -41,6 +43,11 @@ namespace UI.Game
         {
             int count = PlayerState.Current.GameDeck.GetIngredientCount(ingredient);
             countText.text = count.ToString();
+        }
+
+        public void SwitchDescActivation()
+        {
+            FindAnyObjectByType<DeckUI>().SwitchDesc(this);
         }
     }
 }
