@@ -1,5 +1,6 @@
 ﻿using System;
 using Common;
+using DG.Tweening;
 using Interaction;
 using Machamy.Attributes;
 using Machamy.Utils;
@@ -97,6 +98,21 @@ namespace Game.Field
 
         public void OnRelease()
         {
+            
+        }
+        
+        public void SetHighlighted(bool highlighted)
+        {
+            if (highlighted)
+            {
+                transform.DOKill();
+                transform.DOScale(1.1f, 0.2f).SetEase(Ease.OutQuad);
+            }
+            else
+            {
+                transform.DOKill();
+                transform.DOScale(1f, 0.2f).SetEase(Ease.OutQuad);
+            }
             
         }
         

@@ -24,13 +24,15 @@ namespace Interaction
         // 외부에서 현재 포인터의 월드 좌표를 가져오는 프로퍼티
         public Vector3 CurrentWorldPosition => Camera.main.ScreenToWorldPoint(pointerPosition);
 
-        public event Action<Tile> OnTilePressed;
-        public event Action<Tile> OnTileReleased;
+        // public event Action<Tile> OnTilePressed;
+        public event Action<Vector2> OnPointerPressed;
+        // public event Action<Tile> OnTileReleased;
+        public event Action<Vector2,bool> OnPointerReleased;
         public event Action<Tile> OnTileClicked;
-        public event Action<Tile> OnTileLongPressed;
-        public event Action<Tile> OnTileLongReleased;
+        // public event Action<Tile> OnTileLongPressed;
+        // public event Action<Tile> OnTileLongReleased;
         public event Action<Tile, Vector2> OnTileDragging;
-        public event Action<Tile, Tile> OnTileDragReleased;
+        // public event Action<Tile, Tile> OnTileDragReleased;
         
         
         public bool IsOnUI { get; private set; }
@@ -43,26 +45,26 @@ namespace Interaction
                 return;
             }
 
-            if (isPressing && pressTime >= 0)
-            {
-                float heldDuration = Time.time - pressTime;
-                // 오래 누르고, 인터랙터블이 동일하면 홀드 이벤트 발생
-                if (heldDuration >= longPressThreshold)
-                {
-                    RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(pointerPosition), Vector2.zero);
-                    if (hit.collider != null)
-                    {
-                        var interactable = hit.collider.GetComponent<Tile>();
-                        if (interactable != null)
-                        {
-                            if (pressedTile != null && pressedTile == interactable)
-                            {
-                                OnTileLongPressed?.Invoke(interactable);
-                            }
-                        }
-                    }
-                }
-            }
+            // if (isPressing && pressTime >= 0)
+            // {
+            //     float heldDuration = Time.time - pressTime;
+            //     // 오래 누르고, 인터랙터블이 동일하면 홀드 이벤트 발생
+            //     if (heldDuration >= longPressThreshold)
+            //     {
+            //         RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(pointerPosition), Vector2.zero);
+            //         if (hit.collider != null)
+            //         {
+            //             var interactable = hit.collider.GetComponent<Tile>();
+            //             if (interactable != null)
+            //             {
+            //                 if (pressedTile != null && pressedTile == interactable)
+            //                 {
+            //                     OnTileLongPressed?.Invoke(interactable);
+            //                 }
+            //             }
+            //         }
+            //     }
+            // }
         }
 
         public void OnPress(Vector2 position)
@@ -75,6 +77,8 @@ namespace Interaction
             pressTime = Time.time;
             pointerPosition = position;
             
+            OnPointerPressed?.Invoke(position);
+            
             RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(position), Vector2.zero);
             if (hit.collider != null)
             {
@@ -82,7 +86,7 @@ namespace Interaction
                 if (interactable != null)
                 {
                     pressedTile = interactable;
-                    OnTilePressed?.Invoke(interactable);
+                    // OnTilePressed?.Invoke(interactable);
                 }
             }
         }
@@ -111,7 +115,11 @@ namespace Interaction
                 return;
             }
             float heldDuration = Time.time - pressTime;
+            
+            
             pressTime = -100f;
+            
+            
             
             RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(position), Vector2.zero);
             if (hit.collider != null)
@@ -119,20 +127,24 @@ namespace Interaction
                 var interactable = hit.collider.GetComponent<Tile>();
                 if (interactable != null)
                 {
-                    OnTileReleased?.Invoke(interactable);
+                    // OnTileReleased?.Invoke(interactable);
                     if (heldDuration <= clickThreshold)
                     {
-                        OnTileClicked?.Invoke(interactable);
+                        OnPointerReleased?.Invoke(position,true);
                     }
-                    if (heldDuration >= longPressThreshold)
+                    else
                     {
-                        OnTileLongReleased?.Invoke(interactable);
-                    }
-                    if (pressedTile != null && pressedTile != interactable)
-                    {
-                        OnTileDragReleased?.Invoke(pressedTile, interactable);
+                        OnPointerReleased?.Invoke(position, false);
                     }
                 }
+                else
+                {
+                    OnPointerReleased?.Invoke(position, false);
+                }
+            }
+            else
+            {
+                OnPointerReleased?.Invoke(position, false);
             }
             
         }

@@ -184,14 +184,14 @@ namespace Game
         
         public int ThisTurnCompletedKimbapCount { get; set; }
 
-        private bool isSwapping = false;
+
 
         public void Start()
         {
             Debug.Log("Start 진입");
-            InteractionManager.Instance.OnTilePressed += OnTilePressed;
-            InteractionManager.Instance.OnTileReleased += OnTileReleased;
-            InteractionManager.Instance.OnTileClicked += OnTileClicked;
+            InteractionManager.Instance.OnPointerPressed += OnPointPressed;
+            InteractionManager.Instance.OnPointerReleased += OnPointReleased;
+            // InteractionManager.Instance.OnTileClicked += OnTileClicked;
             InteractionManager.Instance.OnTileDragging += OnTileDragging;
         }
 
@@ -202,24 +202,25 @@ namespace Game
         
         private bool isPlayerTurn = true;
         
-        public void OnTilePressed(Tile pressedTile)
+        public void OnPointPressed(Vector2 pointerPosition)
         {
-
+  
         }
-        
+
         public void OnTileClicked(Tile clickedTile)
         {
-            if (!isPlayerTurn || isSwapping)
+            if (!isPlayerTurn)
                 return;
 
             if (FirstSelectedTile == null)
             {
                 FirstSelectedTile = clickedTile;
+                FirstSelectedTile.SetHighlighted(true);
             }
             else if (FirstSelectedTile == clickedTile)
             {
                 // 같은 타일 클릭 시 선택 취소
-                ResetFirstSelection();
+                ResetSelection();
             }
             else
             {
@@ -232,19 +233,25 @@ namespace Game
                 else
                 {
                     // 유효하지 않은 스왑, 첫 번째 선택을 새로 설정
-                    ResetFirstSelection();
+                    ResetSelection();
                     FirstSelectedTile = clickedTile;
                 }
             }
         }
         public void OnTileDragging(Tile draggingTile, Vector2 pointerPosition)
         {
-            if (!isPlayerTurn || isSwapping)
+            if (!isPlayerTurn)
                 return;
 
             if (draggingTile == null)
                 return;
-            FirstSelectedTile = draggingTile;
+
+            if (FirstSelectedTile == null)
+            {
+                if (draggingTile == null) return;
+                FirstSelectedTile = draggingTile;
+                FirstSelectedTile.SetHighlighted(true); // 시각적 피드백
+            }
 
             Vector3 worldPosition = Camera.main.ScreenToWorldPoint(new Vector3(pointerPosition.x, pointerPosition.y, 0)); 
             worldPosition.z = FirstSelectedTile.transform.position.z; 
@@ -258,17 +265,41 @@ namespace Game
                 SecondSelectedTile = null;
                 return;
             }
-
-            // 방향 판별
-            TileVector direction = TileVector.Zero;
-            if (Mathf.Abs(diff.x) > Mathf.Abs(diff.y))
+            
+            
+            if (diff.magnitude < 0.1f) 
             {
-                direction = diff.x > 0 ? TileVector.Left : TileVector.Right;
+                ResetSecondSelectionVisual();
+                SecondSelectedTile = null;
+                return;
+            }
+
+            Vector2 norm = diff.normalized;
+            TileVector direction;
+            if (Mathf.Abs(norm.x) > Mathf.Abs(norm.y))
+            {
+                if (norm.x > 0)
+                {
+                    direction = TileVector.Right;
+                }
+                else
+                {
+                    direction = TileVector.Left;
+                }
             }
             else
             {
-                direction = diff.y > 0 ? TileVector.Down : TileVector.Up;
+                if (norm.y > 0)
+                {
+                    direction = TileVector.Up;
+                }
+                else
+                {
+                    direction = TileVector.Down;
+                }
             }
+            
+            // LogEx.Log($"드래그 방향: {direction} ({norm})");
             
             Tile desiredTile = field.GetTileByDelta(FirstSelectedTile, direction);
 
@@ -278,6 +309,8 @@ namespace Game
                 ResetSecondSelectionVisual(); // 이전에 잡고 있던 녀석 원위치
                 SecondSelectedTile = desiredTile; // 타겟 갱신
             }
+            
+            // LogEx.Log($"드래그 타겟 타일: {SecondSelectedTile}");
 
             // 유효한 타겟이 있을 때만 시각적 이동 처리
             if (SecondSelectedTile != null)
@@ -288,7 +321,7 @@ namespace Game
                 
                 float dot = Vector3.Dot(diff, directionVec.normalized);
                 dragT = Mathf.Clamp01(dot / maxDistance); 
-                
+                // LogEx.Log($"dragT: {dragT}, firstPos: {FirstSelectedTile.transform.position}, secondPos: {SecondSelectedTile.transform.position}, diff: {diff}, dot: {dot}, maxDistance: {maxDistance}");
                 if (FirstSelectedTile.CurrentIngredient != null)
                 {
                     FirstSelectedTile.CurrentIngredient.transform.position = 
@@ -307,25 +340,62 @@ namespace Game
             }
         }
 
-        public void OnTileReleased(Tile releasedTile)
+        public void OnPointReleased(Vector2 pointerPosition, bool isClick)
         {
-            if (!isPlayerTurn || isSwapping)
-                return;
-
-            if (FirstSelectedTile == null || releasedTile != FirstSelectedTile)
-                return;
             
-            if (SecondSelectedTile != null && dragT > 0.6f)
+
+            if (!isPlayerTurn)
+            {
+                ResetSelection();
+                return;
+            }
+            
+            RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(pointerPosition), Vector2.zero);
+            Tile hitTile = null;
+            if (hit.collider != null)
+            { 
+                var interactable = hit.collider.GetComponent<Tile>();
+                if (interactable != null)
+                {
+                    hitTile = interactable;
+                }
+                if (isClick)
+                {
+                    OnTileClicked(hitTile);
+                    return;
+                }
+                if(FirstSelectedTile == null) 
+                {
+                    ResetSelection();
+                    return;
+                }
+                if (hitTile == FirstSelectedTile) 
+                {
+                    // 같은 타일에서 릴리즈한 경우 선택 취소
+                    ResetSelection();
+                    return;
+                }
+            }
+            
+            if(FirstSelectedTile == null)
+            {
+                ResetSelection();
+                return;
+            }
+            if (SecondSelectedTile != null && dragT > 0.5f)
             {
                 DecidedSwap = true;
             }
             else
             {
-                // 유효하지 않은 드래그였다면 원위치
-                ResetFirstSelectionVisual();
-                ResetSecondSelectionVisual();
-                ResetFirstSelection();
+                ResetSelection();
             }
+        }
+        
+        private void ResetSelectionVisuals()
+        {
+            ResetFirstSelectionVisual();
+            ResetSecondSelectionVisual();
         }
         
         /// <summary>
@@ -350,10 +420,12 @@ namespace Game
             }
         }
 
-        private void ResetFirstSelection()
+        private void ResetSelection()
         {
             ResetFirstSelectionVisual();
             ResetSecondSelectionVisual();
+            FirstSelectedTile?.SetHighlighted(false);
+            SecondSelectedTile?.SetHighlighted(false);
             FirstSelectedTile = null;
             SecondSelectedTile = null;
         }
@@ -599,11 +671,18 @@ namespace Game
             // 플레이어가 두 타일을 선택할 때까지 대기
             await UniTask.WaitUntil(() => SecondSelectedTile != null && DecidedSwap, cancellationToken: cancellationToken);
             isPlayerTurn = false;
-            return new PlayerInputData
+            
+            var res = new PlayerInputData
             {
                 firstTile = FirstSelectedTile,
                 secondTile = SecondSelectedTile
             };
+            DecidedSwap = false;
+            FirstSelectedTile?.SetHighlighted(false);
+            SecondSelectedTile?.SetHighlighted(false);
+            FirstSelectedTile = null;
+            SecondSelectedTile = null;
+            return res;
         }
         
         /// <summary>
@@ -614,16 +693,12 @@ namespace Game
         /// <returns></returns>
         public async UniTask<List<MatchData>> ProcessInput(PlayerInputData input, CancellationToken cancellationToken)
         {
-            isSwapping = true; 
             Tile tileA = input.firstTile;
             Tile tileB = input.secondTile;
             SoundManager.Instance.PlaySfx(SoundReference.SwipeSFX);
             await SwapTile(tileA, tileB, cancellationToken);
             List<MatchData> matchGroups = FindWrapperMatches();
-            
-            FirstSelectedTile = null;
-            SecondSelectedTile = null;
-            isSwapping = false;
+            ResetSelection();
             return matchGroups;
         }
         
@@ -839,6 +914,7 @@ namespace Game
         private async UniTask SwapTile(Tile tileA, Tile tileB, CancellationToken cancellationToken) 
         {
             Debug.Log("SwapTile 진입");
+            
 
             IngredientObject tempIngredient = tileA.CurrentIngredient;
             tileA.SetIngredient(tileB.CurrentIngredient);
@@ -849,12 +925,12 @@ namespace Game
             // 데이터 교환 후 비중러 위치도 교환된 부모에 맞춰 정렬
             if (tileA.CurrentIngredient != null)
             {
-                tileA.CurrentIngredient.transform.SetParent(tileA.transform);
+                tileA.CurrentIngredient.transform.SetParent(tileA.transform, true);
                 swapSequence.Append(tileA.CurrentIngredient.transform.DOLocalMove(Vector3.zero, swapDuration).SetEase(ease));
             }
             if (tileB.CurrentIngredient != null)
             {
-                tileB.CurrentIngredient.transform.SetParent(tileB.transform);
+                tileB.CurrentIngredient.transform.SetParent(tileB.transform, true);
                 swapSequence.Join(tileB.CurrentIngredient.transform.DOLocalMove(Vector3.zero, swapDuration).SetEase(ease));
             }
 
