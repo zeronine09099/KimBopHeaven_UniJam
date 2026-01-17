@@ -760,7 +760,7 @@ namespace Game
                 IngredientObject currentIngredient = line[i].CurrentIngredient;
                 
                 // 현재 타일의 재료가 김인 경우
-                if (currentIngredient.Data.IsGim() == true)
+                if (currentIngredient.Data.IsGim())
                 {
                     if (startGim == -1)
                     {
@@ -768,6 +768,9 @@ namespace Game
                     }
                     else
                     {
+                        // 두번째 김임
+                        
+                        // 밥 유효성 확인
                         if(lastRiceIndex + 1 == i)
                         {
                             lastRiceOk = true;
@@ -783,6 +786,13 @@ namespace Game
                         {
                             candidateMatches.Add(line[i]);
                             matches.Add(MatchData.FromListReversed(candidateMatches));
+                            ResetCandidate();
+                            startGim = i;
+                        }
+                        
+                        // 유효한 김밥 조합이 아님
+                        else
+                        {
                             ResetCandidate();
                             startGim = i;
                         }
