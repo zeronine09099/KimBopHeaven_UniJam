@@ -523,6 +523,12 @@ namespace Game
                     CurrentMatches.Add(match);
                     ThisTurnCompletedKimbapCount++;
                     PlayerState.Current.CurrentStageScore = PlayerState.Current.CurrentTempScore;
+
+                    foreach (var (t,f) in args.AfterMatchActions)
+                    {
+                        await f().AttachExternalCancellation(cancellationToken);
+                    }
+                    
                     LogEx.Log($"Current Stage Score: {PlayerState.Current.CurrentStageScore}");
                 }
                 // toExplodeTiles.AddRange(match);
