@@ -67,6 +67,14 @@ namespace Game
             var um = UIManager.Instance;
             var gameUI = um.InGameUI;
             
+            // 플레이어 현재 스테이지 정보 초기화
+            for(PlayerState.VariableKey key = PlayerState.CurrentStart; key <= PlayerState.CurrentEnd; key++)
+            {
+                var variable = PlayerState.Current.Variables[key.ToString()];
+                variable.IntValue = 0;
+                variable.FloatValue = 0f;
+            }
+            
             // 스테이지 데이터 초기화
             Root.Field.InitField(6,6);
 
@@ -92,11 +100,11 @@ namespace Game
                 
                 
                 // 클리어 체크
-                // if(PlayerState.Current.CurrentStageTarget.IsCleared())
-                // {
-                //     await StageSuccess();
-                //     break;
-                // }
+                if(PlayerState.Current.CurrentStageScore >= PlayerState.Current.CurrentStageInfo.goalScore)
+                {
+                    await StageSuccess();
+                    break;
+                }
                 // 실패 체크
                 if(PlayerState.Current.CurrentRemainingSwipes <= 0)
                 {
@@ -113,6 +121,8 @@ namespace Game
         {
             // 스테이지 성공 처리, 리워드로
             await UniTask.Yield();
+            PlayerState pl = PlayerState.Current;
+            pl.TotalScore += pl.CurrentStageScore;
             
             await UIManager.Instance.RewardUI.ShowAsync(CurrentStageInfo);
             
