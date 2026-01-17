@@ -176,6 +176,10 @@ namespace Game
             }
         }
 
+        private float dragT = 0f;
+        
+        private bool DecidedSwap = false;
+
         public List<MatchData> CurrentMatches { get; set; } = new List<MatchData>();
         
         public int ThisTurnCompletedKimbapCount { get; set; }
@@ -187,20 +191,8 @@ namespace Game
             Debug.Log("Start 진입");
             InteractionManager.Instance.OnTilePressed += OnTilePressed;
             InteractionManager.Instance.OnTileReleased += OnTileReleased;
-        }
-
-        public void Update()
-        {
-            // // 스와이프 중이 아닐 때만 마우스 따라가기 설정
-            // if ( isSwapping == false && firstSelectedTile != null && firstSelectedTile.CurrentIngredient != null)
-            // {
-            //     Vector3 targetPos = InteractionManager.Instance.CurrentWorldPosition;
-            //     targetPos.z = 0; // 2d 평면 유지
-            //
-            //     firstSelectedTile.CurrentIngredient.transform.position = targetPos;
-            // }
-            
-            
+            InteractionManager.Instance.OnTileClicked += OnTileClicked;
+            InteractionManager.Instance.OnTileDragging += OnTileDragging;
         }
 
         public void SetPlayerTurn(bool isPlayerTurn)
@@ -213,61 +205,157 @@ namespace Game
         public void OnTilePressed(Tile pressedTile)
         {
 
+        }
+        
+        public void OnTileClicked(Tile clickedTile)
+        {
             if (!isPlayerTurn || isSwapping)
+                return;
+
+            if (FirstSelectedTile == null)
             {
+                FirstSelectedTile = clickedTile;
+            }
+            else if (FirstSelectedTile == clickedTile)
+            {
+                // 같은 타일 클릭 시 선택 취소
+                ResetFirstSelection();
+            }
+            else
+            {
+                // 두 번째 타일 선택
+                if (IsValidSwap(FirstSelectedTile, clickedTile))
+                {
+                    SecondSelectedTile = clickedTile;
+                    DecidedSwap = true;
+                }
+                else
+                {
+                    // 유효하지 않은 스왑, 첫 번째 선택을 새로 설정
+                    ResetFirstSelection();
+                    FirstSelectedTile = clickedTile;
+                }
+            }
+        }
+        public void OnTileDragging(Tile draggingTile, Vector2 pointerPosition)
+        {
+            if (!isPlayerTurn || isSwapping)
+                return;
+
+            if (draggingTile == null)
+                return;
+            FirstSelectedTile = draggingTile;
+
+            Vector3 worldPosition = Camera.main.ScreenToWorldPoint(new Vector3(pointerPosition.x, pointerPosition.y, 0)); 
+            worldPosition.z = FirstSelectedTile.transform.position.z; 
+
+            Vector3 diff = (worldPosition - FirstSelectedTile.transform.position);
+
+            // 드래그 감도
+            if (diff.magnitude < 0.2f)
+            {
+                ResetSecondSelectionVisual();
+                SecondSelectedTile = null;
                 return;
             }
-            LogEx.Log($"Pressed Tile: {pressedTile}");
-            if (FirstSelectedTile != null)
+
+            // 방향 판별
+            TileVector direction = TileVector.Zero;
+            if (Mathf.Abs(diff.x) > Mathf.Abs(diff.y))
             {
-                SecondSelectedTile = pressedTile;
+                direction = diff.x > 0 ? TileVector.Left : TileVector.Right;
+            }
+            else
+            {
+                direction = diff.y > 0 ? TileVector.Down : TileVector.Up;
+            }
+            
+            Tile desiredTile = field.GetTileByDelta(FirstSelectedTile, direction);
+
+            // 타겟이 변경되었거나 유효하지 않은 경우, 기존 타겟 복구
+            if (desiredTile != SecondSelectedTile)
+            {
+                ResetSecondSelectionVisual(); // 이전에 잡고 있던 녀석 원위치
+                SecondSelectedTile = desiredTile; // 타겟 갱신
+            }
+
+            // 유효한 타겟이 있을 때만 시각적 이동 처리
+            if (SecondSelectedTile != null)
+            {
+                // 두 타일 사이의 거리 벡터
+                Vector3 directionVec = SecondSelectedTile.transform.position - FirstSelectedTile.transform.position;
+                float maxDistance = directionVec.magnitude;
                 
-                return;
+                float dot = Vector3.Dot(diff, directionVec.normalized);
+                dragT = Mathf.Clamp01(dot / maxDistance); 
+                
+                if (FirstSelectedTile.CurrentIngredient != null)
+                {
+                    FirstSelectedTile.CurrentIngredient.transform.position = 
+                        Vector3.Lerp(FirstSelectedTile.transform.position, SecondSelectedTile.transform.position, dragT);
+                }
+                
+                if (SecondSelectedTile.CurrentIngredient != null)
+                {
+                    SecondSelectedTile.CurrentIngredient.transform.position = 
+                        Vector3.Lerp(SecondSelectedTile.transform.position, FirstSelectedTile.transform.position, dragT);
+                }
             }
-            FirstSelectedTile = pressedTile;
+            else
+            {
+               ResetFirstSelectionVisual();
+            }
         }
 
         public void OnTileReleased(Tile releasedTile)
         {
-            if (FirstSelectedTile == null)
-            {
+            if (!isPlayerTurn || isSwapping)
                 return;
-            }
-            Debug.Log($"Released Tile: {releasedTile}");
-            if(releasedTile == null)
-            {
-                // 필드 밖에서 놓았을때도 원래 위치로 복귀
-                ResetFirstSelection();
-                return; 
-            }
 
-            if(releasedTile != FirstSelectedTile)
+            if (FirstSelectedTile == null || releasedTile != FirstSelectedTile)
+                return;
+            
+            if (SecondSelectedTile != null && dragT > 0.6f)
             {
-                if (!isPlayerTurn || isSwapping)
-                {
-                    ResetFirstSelection();
-                    return;
-                }
-                SecondSelectedTile = releasedTile;
-                
+                DecidedSwap = true;
             }
             else
             {
-                // 제자리에 놓았을때 스왑x, 위치 초기화
+                // 유효하지 않은 드래그였다면 원위치
+                ResetFirstSelectionVisual();
+                ResetSecondSelectionVisual();
                 ResetFirstSelection();
             }
         }
-
+        
         /// <summary>
-        /// 드래그 취소 혹은 완료 후 재료 위치 복귀 함수
+        /// 첫 번째 선택된 타일의 재료만 시각적으로 원위치
         /// </summary>
-        private void ResetFirstSelection()
+        private void ResetFirstSelectionVisual()
         {
             if (FirstSelectedTile != null && FirstSelectedTile.CurrentIngredient != null)
             {
                 FirstSelectedTile.CurrentIngredient.transform.localPosition = Vector3.zero;
             }
+        }
+
+        /// <summary>
+        /// 두 번째 선택된(스왑 대상) 타일의 재료를 시각적으로 원위치
+        /// </summary>
+        private void ResetSecondSelectionVisual()
+        {
+            if (SecondSelectedTile != null && SecondSelectedTile.CurrentIngredient != null)
+            {
+                SecondSelectedTile.CurrentIngredient.transform.localPosition = Vector3.zero;
+            }
+        }
+
+        private void ResetFirstSelection()
+        {
+            ResetFirstSelectionVisual();
+            ResetSecondSelectionVisual();
             FirstSelectedTile = null;
+            SecondSelectedTile = null;
         }
 
         /// <summary>
@@ -509,7 +597,7 @@ namespace Game
             SecondSelectedTile = null;
 
             // 플레이어가 두 타일을 선택할 때까지 대기
-            await UniTask.WaitUntil(() => SecondSelectedTile != null, cancellationToken: cancellationToken);
+            await UniTask.WaitUntil(() => SecondSelectedTile != null && DecidedSwap, cancellationToken: cancellationToken);
             isPlayerTurn = false;
             return new PlayerInputData
             {

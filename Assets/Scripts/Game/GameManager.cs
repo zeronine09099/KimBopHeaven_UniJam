@@ -49,6 +49,7 @@ namespace Core
         {
             _gameCancellationTokenSource = new CancellationTokenSource();
             UIManager.Instance.GoToInGameUI();
+            ResetTimeScale();
             GameRoutine(_gameCancellationTokenSource.Token).Forget();
         }
 
@@ -76,6 +77,40 @@ namespace Core
             // 게임 루프
             await StageManager.Instance.StartStage(PlayerStatus.CurrentStageInfo, cancellationToken);
             
+        }
+
+        static int timeScaleCount = 0;
+        static float savedTimeScale = 1f;
+        public static void AccelerateTimeScale(int count = 1, float step = 0.1f)
+        {
+            timeScaleCount += count;
+            savedTimeScale += step * count;
+            Time.timeScale = savedTimeScale;
+        }
+        public static void DecelerateTimeScale(int count = 1, float step = 0.1f)
+        {
+            timeScaleCount -= count;
+            timeScaleCount = Math.Max(0, timeScaleCount);
+            savedTimeScale -= step * count;
+            savedTimeScale = Math.Max(1f, savedTimeScale);
+            Time.timeScale = savedTimeScale;
+        }
+        
+        public static void ResetTimeScale()
+        {
+            timeScaleCount = 0;
+            savedTimeScale = 1f;
+            Time.timeScale = savedTimeScale;
+        }
+        
+        public static void PauseGame()
+        {
+            Time.timeScale = 0f;
+        }
+        
+        public static void ResumeGame()
+        {
+            Time.timeScale = savedTimeScale;
         }
 
         public void ReturnToMainMenu()

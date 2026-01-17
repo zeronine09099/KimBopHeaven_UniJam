@@ -194,7 +194,7 @@ namespace Game.Field
         {
             if (i < 0 || i >= height || j < 0 || j >= width)
             {
-                LogEx.LogError($"GetTile: Index out of range. ({i}, {j}) is not a valid tile coordinate.");
+                // LogEx.LogError($"GetTile: Index out of range. ({i}, {j}) is not a valid tile coordinate.");
                 return null;
             }
             return _tileContainer[i][j];

@@ -29,14 +29,15 @@ namespace Interaction
         public event Action<Tile> OnTileClicked;
         public event Action<Tile> OnTileLongPressed;
         public event Action<Tile> OnTileLongReleased;
-        public event Action<Tile, Tile> OnTileDragging;
+        public event Action<Tile, Vector2> OnTileDragging;
         public event Action<Tile, Tile> OnTileDragReleased;
         
         
-        public bool IsOnUI => UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject();
+        public bool IsOnUI { get; private set; }
 
         private void LateUpdate()
         {
+            IsOnUI = UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject();
             if (IsOnUI)
             {
                 return;
@@ -97,29 +98,18 @@ namespace Interaction
             
             this.pointerPosition = position;
 
-            // 인터랙터블이 다르면 드래그 이벤트 발생
-            RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(position), Vector2.zero);
-            if (hit.collider != null)
-            {
-                var interactable = hit.collider.GetComponent<Tile>();
-                if (interactable != null)
-                {
-                    if (pressedTile != null && pressedTile != interactable)
-                    {
-                        OnTileDragging?.Invoke(pressedTile, interactable);
-                    }
-                }
-            }
+            OnTileDragging?.Invoke(pressedTile, position);
         }
 
         public void OnRelease(Vector2 position)
         {
+
+            isPressing = false;
+            if (pressTime < 0) return;
             if (IsOnUI)
             {
                 return;
             }
-            isPressing = false;
-            if (pressTime < 0) return;
             float heldDuration = Time.time - pressTime;
             pressTime = -100f;
             

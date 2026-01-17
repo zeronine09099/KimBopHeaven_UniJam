@@ -122,7 +122,8 @@ namespace Game
                     
                     await PuzzleManager.Instance.ProcessMatches(matches, cancellationToken);
                     LogEx.Log("Turn processing complete.");
-
+                    GameManager.ResetTimeScale();
+                    
                     await PuzzleManager.Instance.WrapUpTurn(cancellationToken);
                     LogEx.Log("Turn wrapped up.");
                     

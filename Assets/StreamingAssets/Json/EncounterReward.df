@@ -1,0 +1,41 @@
+{
+  "name": "EncounterReward",
+  "varNames": [
+    "tag",
+    "target",
+    "value",
+    "koreanName"
+  ],
+  "types": [
+    "string",
+    "string",
+    "int",
+    "string"
+  ],
+  "comments": [
+    "인카운터 태그",
+    "보상 적용 대상",
+    "보상 수치",
+    "한국어이름"
+  ],
+  "data": [
+    [
+      "Encounter.MeatSelect",
+      "Ingredient.Meat",
+      "10",
+      "a"
+    ],
+    [
+      "Encounter.VegetableSelect",
+      "Ingredient.Vegetable",
+      "10",
+      "b"
+    ],
+    [
+      "Encounter.SeafoodSelect",
+      "Ingredient.Seafood",
+      "10",
+      "c"
+    ]
+  ]
+}

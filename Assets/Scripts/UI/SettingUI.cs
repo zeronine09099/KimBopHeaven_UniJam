@@ -34,7 +34,7 @@ namespace UI
             sfxSlider.value = Sound.SoundManager.Instance.SfxVolume;
             toggle.isOn = Sound.SoundManager.Instance.UseVibration;
 
-            Time.timeScale = 0f;
+            GameManager.PauseGame();
             
             masterSlider.onValueChanged.AddListener(OnMasterVolumeChanged);
             musicSlider?.onValueChanged.AddListener(OnMusicVolumeChanged);
@@ -44,7 +44,7 @@ namespace UI
         
         private void OnDisable()
         {
-            Time.timeScale = 1f;
+            GameManager.ResumeGame();
             
             masterSlider.onValueChanged.RemoveListener(OnMasterVolumeChanged);
             musicSlider?.onValueChanged.RemoveListener(OnMusicVolumeChanged);

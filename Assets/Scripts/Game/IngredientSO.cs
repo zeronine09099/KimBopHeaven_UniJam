@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using BandoWare.GameplayTags;
 using Common;
 using Common.Attributes;
+using Core;
 using Cysharp.Threading.Tasks;
 using Database.Generated;
 using DG.Tweening;
@@ -78,6 +79,7 @@ namespace Game
             seq.Append(obj.transform.DOScale(Vector3.one * punchScale, 0.1f).SetEase(Ease.OutQuad));
             seq.Append(obj.transform.DOScale(Vector3.one, 0.1f).SetEase(Ease.OutQuad));
 
+            GameManager.AccelerateTimeScale();
             return seq;
         }
         
