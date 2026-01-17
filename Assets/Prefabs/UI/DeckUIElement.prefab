@@ -476,7 +476,7 @@ MonoBehaviour:
   nameText: {fileID: 6860155930433105279}
   countText: {fileID: 7046868037076473550}
   addButton: {fileID: 1617082072257777532}
-  deleteButton: {fileID: 1779166027303844134}
+  MinusButton: {fileID: 1779166027303844134}
   ingredient: {fileID: 0}
 --- !u!114 &260758688224630320
 MonoBehaviour:
@@ -991,7 +991,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4866836874056996700}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7905482351918684008}
+        m_TargetAssemblyTypeName: UI.Game.DeckUIElement, Assembly-CSharp
+        m_MethodName: OnClickMinusButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &6749658277347634415
 MonoBehaviour:
   m_ObjectHideFlags: 0

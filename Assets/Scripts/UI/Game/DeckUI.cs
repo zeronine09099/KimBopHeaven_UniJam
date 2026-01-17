@@ -94,6 +94,22 @@ namespace UI.Game
            }
            ShowTask(cancellationTokenSource.Token).Forget();
         }
+
+        /// <summary>
+        /// 흑종원 인카운터를 위해서 마이너스 버튼을 활성화시키는 함수
+        /// </summary>
+        public void ActivateRemoveMode()
+        {
+            scrollRect.verticalNormalizedPosition = 1f;
+            cancellationTokenSource.Cancel();
+            cancellationTokenSource = new CancellationTokenSource();
+            foreach (var element in deckUIElements)
+            {
+                element.ActivateMinusButton();
+                element.Refresh();
+            }
+            ShowTask(cancellationTokenSource.Token).Forget();
+        }
         
         public async UniTask ShowTask(CancellationToken cancellationToken = default)
         {
