@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Security.Cryptography;
 using System.Threading;
+using BandoWare.GameplayTags;
 using Core;
 using Cysharp.Threading.Tasks;
 using Database.Generated;
+using Player;
 using UnityEngine;
 
 namespace UI.Encounter
@@ -88,6 +90,9 @@ namespace UI.Encounter
             // 강화로직 적용
             // 다음 스테이지로 넘어가기
             encounterEnded = true;
+            GameplayTag upgradeTargetTag = deliveryEncounterPanel.UpgradeTargetTag;
+            int upgradeValue = deliveryEncounterPanel.UpgradeValue;
+            PlayerState.Current.Reinforcements.AddReinforcement(upgradeTargetTag, upgradeValue);
             Hide();
             return;
         }

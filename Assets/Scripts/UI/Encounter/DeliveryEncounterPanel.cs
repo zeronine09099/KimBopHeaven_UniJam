@@ -1,5 +1,6 @@
 ﻿using BandoWare.GameplayTags;
 using System.Collections.Generic;
+using Player;
 using UI.Encounter;
 using UnityEngine;
 using UnityEngine.UI;
@@ -33,6 +34,9 @@ public class DeliveryEncounterPanel : MonoBehaviour
     private int leftIndex;
     private int rightIndex;
     bool upgradeSelected = false;
+    
+    public GameplayTag UpgradeTargetTag => upgradeTargetTag;
+    public int UpgradeValue => upgradeValue;
 
     public void Initialize(EncounterUI encounterUI, int selectedA, int selectedB)
     {
@@ -75,6 +79,8 @@ public class DeliveryEncounterPanel : MonoBehaviour
 
         deliveryEncounterResult.Initialize(upgradeValue, upgradeTargetTag);
         // 가기전에 확인 이미지 판넬 띄우기
+        
+     
     }
 
 }
