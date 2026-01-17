@@ -34,10 +34,15 @@ namespace Player
         
         [FormerlySerializedAs("inventory")] [SerializeField] private Inventory gameDeck = new Inventory();
         
+        [SerializeField] ReinforcementContainer reinforcementContainer = new ReinforcementContainer();
+        
+        
         /// <summary>
         /// 게임 시작 시 초기화되는 인벤토리(덱)입니다.
         /// </summary>
         public Inventory GameDeck => gameDeck;
+        
+        
         
         /// <summary>
         /// 내부 VariableContainer 인스턴스입니다. 외부에서 읽을 수 있고 설정은 이 클래스 내부에서만 가능합니다.

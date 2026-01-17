@@ -10,8 +10,10 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Common;
+using Common.Attributes;
 using Common.Extentions;
 using Cysharp.Threading.Tasks;
+using Machamy.Attributes;
 using Machamy.Utils;
 using Player;
 using Sound;
@@ -118,7 +120,12 @@ namespace Game
         protected override void AfterAwake()
         {
         }
-
+        [Header("제한 설정")]
+        [SerializeField, Label("최소 김 개수")] private int MinimumGimCount = 2;
+        [SerializeField, Label("최소 밥 개수")] private int MinimumRiceCount = 1;
+        [SerializeField,VisibleOnly] private int GimCount = 0;
+        [SerializeField,VisibleOnly] private int RiceCount = 0;
+        [Header("애니메이션 설정")]
         [Tooltip("타일이 교체되는 애니메이션 시간")]
         [SerializeField] private float swapDuration = 0.3f;
 
@@ -137,14 +144,7 @@ namespace Game
         private Tile firstSelectedTile;
         private Tile secondSelectedTile;
         
-        /// <summary>
-        /// 최소 2개 보장
-        /// </summary>
-        private int GimCount = 0;
-        /// <summary>
-        /// 최소 1개 보장
-        /// </summary>
-        private int RiceCount = 0;
+
 
         private Tile FirstSelectedTile
         {
@@ -313,7 +313,7 @@ namespace Game
                 }
             }
             int attempt = 0;
-            while(FindWrapperMatches().Count > 0 || GimCount < 2 || RiceCount < 1)
+            while(FindWrapperMatches().Count > 0 || GimCount < MinimumGimCount || RiceCount < MinimumRiceCount)
             {
                 InitializePossibleIngredients();
                 LogEx.Log($"초기 매치 발견, 재배치 시도 {attempt + 1}회");
@@ -398,7 +398,7 @@ namespace Game
             }
             
             // 최소 김 2개, 밥 1개 보장
-            if (GimCount < 2)
+            if (GimCount < MinimumGimCount)
             {
                 IngredientSO gimSo = FindAndPop(AllGameplayTags.Ingredient.Essential.Gim.Get());
                 if (gimSo != null)
@@ -410,7 +410,7 @@ namespace Game
                     LogEx.LogWarning("김 재료가 부족합니다!");
                 }
             }
-            if (RiceCount < 1)
+            if (RiceCount < MinimumRiceCount)
             {
                 IngredientSO riceSo = FindAndPop(AllGameplayTags.Ingredient.Essential.Rice.Get());
                 if (riceSo != null)
