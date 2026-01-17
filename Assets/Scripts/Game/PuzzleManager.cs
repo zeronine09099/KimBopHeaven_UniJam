@@ -624,7 +624,7 @@ namespace Game
         public async UniTask WrapUpTurn(CancellationToken cancellationToken)
         {
             float tileDelta = - field.GetTile(0,0).transform.position.y + field.GetTile(1,0).transform.position.y;
-            List<Tile> fallingIngredients = new ();
+            List<IngredientObject> summoningIngredients = new ();
             List<IngredientSO> newlyAddedIngredients = new ();
             List<Sequence> fallSequences = new ();
             int start = 0;
@@ -658,7 +658,6 @@ namespace Game
                                Sequence fallSequence = DOTween.Sequence();
                                fallSequence.Append(fallingIngredient.transform.DOLocalMove(Vector3.zero, fallDuration).SetEase(fallEase));
                                fallSequences.Add(fallSequence);
-                               fallingIngredients.Add(tile);
                                break; // 다음 빈 타일로 이동
                            }
                        }
@@ -687,7 +686,7 @@ namespace Game
                             Sequence fallSequence = DOTween.Sequence();
                             fallSequence.Append(newIngredientObject.transform.DOLocalMove(Vector3.zero, fallDuration).SetEase(fallEase));
                             fallSequences.Add(fallSequence);
-                            fallingIngredients.Add(tile);
+                            summoningIngredients.Add(newIngredientObject);
                             newlyAddedIngredients.Add(randomData);
                           }
                    }
@@ -699,19 +698,16 @@ namespace Game
            if (shuffleSummons)
            {
                newlyAddedIngredients.Shuffle();
-               if (newlyAddedIngredients.Count != fallingIngredients.Count)
+               if (newlyAddedIngredients.Count != summoningIngredients.Count)
                {
                    LogEx.LogError(("낙하 재료 수와 새로 추가된 재료 수가 일치하지 않음"));
                }
            
-               for (int index = 0; index < fallingIngredients.Count; index++)
+               for (int index = 0; index < summoningIngredients.Count; index++)
                {
-                   Tile tile = fallingIngredients[index];
-                   IngredientSO ingredientSO = newlyAddedIngredients.Count > index ? newlyAddedIngredients[index] : null;
-                   if (ingredientSO != null && tile.CurrentIngredient != null && tile.CurrentIngredient.Data != ingredientSO)
-                   {
-                       tile.CurrentIngredient.Initialize(ingredientSO);
-                   }
+                     IngredientObject ingredientObject = summoningIngredients[index];
+                     IngredientSO ingredientSO = newlyAddedIngredients[index];
+                     ingredientObject.Initialize(ingredientSO);
                }
            }
            
