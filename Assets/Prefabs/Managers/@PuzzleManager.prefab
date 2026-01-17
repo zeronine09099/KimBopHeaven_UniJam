@@ -53,7 +53,7 @@ MonoBehaviour:
   swapDuration: 0.3
   fallDuration: 0.4
   triggerInterval: 0.4
-  matchInterval: 0.2
+  matchInterval: 0.3
   explodeDelay: 0
   ease: 5
   fallEase: 2
