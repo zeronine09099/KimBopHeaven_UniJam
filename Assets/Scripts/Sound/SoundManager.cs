@@ -11,40 +11,37 @@ namespace Sound
 {
     public class SoundManager : Singleton<SoundManager>
     {
-
+       
         [SerializeField] private AudioMixer audioMixer;
         [SerializeField] private AudioMixerGroup masterGroup;
         [SerializeField] private AudioMixerGroup musicGroup;
         [SerializeField] private AudioMixerGroup sfxGroup;
-
+        
         [SerializeField] private float defaultVolume = 0.75f;
         [SerializeField] private bool useMixerVolume = true; // AudioMixer 사용 여부
-
+        
         private Dictionary<string, AudioResource> _cachedAudioClips = new Dictionary<string, AudioResource>();
-
-        private Dictionary<string, SoundEmitter>
-            _cachedBackgroundSoundEmitters = new Dictionary<string, SoundEmitter>();
-
+        private Dictionary<string, SoundEmitter> _cachedBackgroundSoundEmitters = new Dictionary<string, SoundEmitter>();
         private string _currentPlayingBackgroundMusicPath = string.Empty;
-
+        
         [SerializeField] private SoundEmitter _soundEmitterPrefab;
         private ObjectPool<SoundEmitter> _soundEmitterPool;
-
+        
         // 모든 활성 SoundEmitter 추적
         private List<SoundEmitter> _activeSfxEmitters = new List<SoundEmitter>();
-
+        
         // AudioSource 직접 제어용 볼륨 저장
         private float _directMasterVolume = 0.75f;
         private float _directMusicVolume = 0.75f;
         private float _directSfxVolume = 0.75f;
-
+        
         private float _mixerMasterVolume = 0.75f;
         private float _mixerMusicVolume = 0.75f;
         private float _mixerSfxVolume = 0.75f;
-
-
-        [field: SerializeField] public bool UseVibration { get; set; } = true;
-
+        
+        
+        [field:SerializeField] public bool UseVibration { get; set; } = true;
+        
         public bool IsInitialized { get; private set; }
         public float MasterVolume => useMixerVolume ? _mixerMasterVolume : _directMasterVolume;
         public float MusicVolume => useMixerVolume ? _mixerMusicVolume : _directMusicVolume;
@@ -52,10 +49,10 @@ namespace Sound
 
         protected override void AfterAwake()
         {
-#if UNITY_WEBGL
+            #if UNITY_WEBGL
             // 웹 빌드에서는 AudioMixer 사용 안함
             useMixerVolume = false;
-#endif
+            #endif
         }
 
         private void Start()
@@ -64,35 +61,40 @@ namespace Sound
             {
                 var emitter = Instantiate(_soundEmitterPrefab, transform, true);
                 return emitter;
-            }, emitter => { emitter.gameObject.SetActive(true); }, emitter =>
+            }, emitter =>
+            {
+                emitter.gameObject.SetActive(true);
+            }, emitter =>
             {
                 emitter.gameObject.SetActive(false);
                 emitter.transform.SetParent(null);
-            }, emitter => { Destroy(emitter.gameObject); }, false, 10, 100);
+            }, emitter =>
+            {
+                Destroy(emitter.gameObject);
+            }, false, 10, 100);
 
             InitializeAudioMixer();
 
             float savedMasterVolume = PlayerPrefs.GetFloat("MasterVolume", defaultVolume);
             float savedMusicVolume = PlayerPrefs.GetFloat("BackgroundVolume", defaultVolume);
             float savedSfxVolume = PlayerPrefs.GetFloat("SFXVolume", defaultVolume);
-
+            
             // direct 변수들을 저장된 값으로 초기화
             _directMasterVolume = savedMasterVolume;
             _directMusicVolume = savedMusicVolume;
             _directSfxVolume = savedSfxVolume;
-
-            print(
-                $"savedMasterVolume: {savedMasterVolume}, savedMusicVolume: {savedMusicVolume}, savedSfxVolume: {savedSfxVolume}");
-
+            
+            print($"savedMasterVolume: {savedMasterVolume}, savedMusicVolume: {savedMusicVolume}, savedSfxVolume: {savedSfxVolume}");
+            
             SetMasterVolume(savedMasterVolume);
             SetMusicVolume(savedMusicVolume);
             SetSfxVolume(savedSfxVolume);
             IsInitialized = true;
-            // #if UNITY_EDITOR
-            //     debugMasterVolume = savedMasterVolume;
-            //     debugMusicVolume = savedMusicVolume;
-            //     debugSfxVolume = savedSfxVolume;
-            // #endif
+        // #if UNITY_EDITOR
+        //     debugMasterVolume = savedMasterVolume;
+        //     debugMusicVolume = savedMusicVolume;
+        //     debugSfxVolume = savedSfxVolume;
+        // #endif
         }
 
         private void InitializeAudioMixer()
@@ -114,22 +116,19 @@ namespace Sound
                 masterGroup = audioMixer.FindMatchingGroups("Master")[0];
                 printLog = true;
             }
-
             if (musicGroup == null)
             {
                 musicGroup = audioMixer.FindMatchingGroups("Background")[0];
                 printLog = true;
             }
-
             if (sfxGroup == null)
             {
                 sfxGroup = audioMixer.FindMatchingGroups("SFX")[0];
                 printLog = true;
             }
-
+                
             if (printLog)
-                Debug.Log(
-                    $"[SoundManager] AudioMixer initialized. Master: {masterGroup != null}, Music: {musicGroup != null}, SFX: {sfxGroup != null}");
+                Debug.Log($"[SoundManager] AudioMixer initialized. Master: {masterGroup != null}, Music: {musicGroup != null}, SFX: {sfxGroup != null}");
         }
 
         private void OnValidate()
@@ -141,7 +140,6 @@ namespace Sound
                 musicGroup = audioMixer.FindMatchingGroups("Background")[0];
                 sfxGroup = audioMixer.FindMatchingGroups("SFX")[0];
             }
-
             // #if UNITY_EDITOR
             // SetMasterVolume(debugMasterVolume);
             // SetMusicVolume(debugMusicVolume);
@@ -161,7 +159,6 @@ namespace Sound
             {
                 Resources.UnloadAsset(clip.Value);
             }
-
             _cachedAudioClips.Clear();
             PlayerPrefs.Save();
         }
@@ -180,7 +177,7 @@ namespace Sound
             {
                 PlayerPrefs.Save();
             }
-
+            
             // 모든 오디오 일시 정지 또는 재개
             foreach (var kvp in _cachedBackgroundSoundEmitters)
             {
@@ -238,13 +235,13 @@ namespace Sound
         public void SetMasterVolume(float percent)
         {
             InitializeAudioMixer(); // audioMixer가 null이면 로드
-
+            
             if (audioMixer == null)
             {
                 Debug.LogError("[SoundManager] Cannot set master volume: audioMixer is null");
                 return;
             }
-
+            
             var clampedPercent = Mathf.Clamp(percent, 0.0001f, 1f);
             PlayerPrefs.SetFloat("MasterVolume", clampedPercent);
             if (useMixerVolume)
@@ -258,28 +255,27 @@ namespace Sound
                 // 이미 재생 중인 모든 오디오의 볼륨 업데이트
                 UpdateAllActiveAudioVolumes();
             }
-
+            
 // #if UNITY_EDITOR
 //             print($"Setting Master Volume: {clampedPercent}");
 //             debugMasterVolume = clampedPercent;
 // #endif
             PlayerPrefs.Save();
         }
-
         /// <param name="percent"> 0.0001 ~ 1의 값.</param>
         public void SetMusicVolume(float percent)
         {
             InitializeAudioMixer(); // audioMixer가 null이면 로드
-
+            
             if (audioMixer == null)
             {
                 Debug.LogError("[SoundManager] Cannot set music volume: audioMixer is null");
                 return;
             }
-
+            
             var clampedPercent = Mathf.Clamp(percent, 0.0001f, 1f);
             PlayerPrefs.SetFloat("BackgroundVolume", clampedPercent);
-
+            
             if (useMixerVolume)
             {
                 _mixerMusicVolume = clampedPercent;
@@ -291,27 +287,25 @@ namespace Sound
                 // 이미 재생 중인 배경음악의 볼륨 업데이트
                 UpdateBackgroundMusicVolumes();
             }
-
 // #if UNITY_EDITOR
 //             debugMusicVolume = clampedPercent;
 // #endif
             PlayerPrefs.Save();
         }
-
         /// <param name="percent"> 0.0001 ~ 1의 값.</param>
         public void SetSfxVolume(float percent)
         {
             InitializeAudioMixer(); // audioMixer가 null이면 로드
-
+            
             if (audioMixer == null)
             {
                 Debug.LogError("[SoundManager] Cannot set SFX volume: audioMixer is null");
                 return;
             }
-
+            
             var clampedPercent = Mathf.Clamp(percent, 0.0001f, 1f);
             PlayerPrefs.SetFloat("SFXVolume", clampedPercent);
-
+            
             if (useMixerVolume)
             {
                 _mixerSfxVolume = clampedPercent;
@@ -323,18 +317,16 @@ namespace Sound
                 // 이미 재생 중인 SFX의 볼륨 업데이트는 UpdateAllActiveAudioVolumes에서 처리
                 UpdateAllActiveAudioVolumes();
             }
-
 // #if UNITY_EDITOR
 //             debugSfxVolume = clampedPercent;
 // #endif
             PlayerPrefs.Save();
         }
-
+        
         public float GetMasterVolume()
         {
             return PlayerPrefs.GetFloat("MasterVolume", defaultVolume);
         }
-
         public float GetMusicVolume()
         {
             return PlayerPrefs.GetFloat("BackgroundVolume", defaultVolume);
@@ -344,8 +336,8 @@ namespace Sound
         {
             return PlayerPrefs.GetFloat("SFXVolume", defaultVolume);
         }
-
-
+        
+        
         private AudioResource GetAudioSource(string name)
         {
             AudioResource resource;
@@ -353,22 +345,22 @@ namespace Sound
             {
                 return resource;
             }
-
+            
             // 웹 빌드 디버깅용 로그
-            Debug.Log($"[SoundManager] Loading audio: {name}");
-
-            resource = Resources.Load<AudioResource>($"{name}");
+            Debug.Log($"[SoundManager] Loading audio: Audio/{name}");
+            
+            resource = Resources.Load<AudioResource>($"Audio/{name}");
             if (resource != null)
             {
                 _cachedAudioClips.Add(name, resource);
                 Debug.Log($"[SoundManager] Audio loaded successfully: {name}");
                 return resource;
             }
-
-            Debug.LogError($"[SoundManager] Audio clip not found: {name}");
+            
+            Debug.LogError($"[SoundManager] Audio clip not found: Audio/{name}");
             return null;
         }
-
+        
         public bool IsBackgroundMusicPlaying(string path)
         {
             if (string.IsNullOrEmpty(path))
@@ -378,23 +370,20 @@ namespace Sound
                 AudioSource audioSource = soundEmitter.GetComponent<AudioSource>();
                 return audioSource.isPlaying;
             }
-
             return false;
         }
-
+        
         public SoundEmitter GetCurrentBackgroundMusicEmitter()
         {
             if (string.IsNullOrEmpty(_currentPlayingBackgroundMusicPath))
                 return null;
-            if (_cachedBackgroundSoundEmitters.TryGetValue(_currentPlayingBackgroundMusicPath,
-                    out SoundEmitter soundEmitter) && soundEmitter)
+            if (_cachedBackgroundSoundEmitters.TryGetValue(_currentPlayingBackgroundMusicPath, out SoundEmitter soundEmitter) && soundEmitter)
             {
                 return soundEmitter;
             }
-
             return null;
         }
-
+        
         /// <summary>
         /// 배경음악 재생.
         /// 이미 재생중인 배경음악이 있다면 일시정지한다.
@@ -407,12 +396,11 @@ namespace Sound
             if (clip == null)
                 return null;
             SoundEmitter soundEmitter;
-
+            
             // 이미 재생중인 배경음악이 있다면 일시정지한다.
-            if (string.IsNullOrEmpty(_currentPlayingBackgroundMusicPath) == false)
+            if(string.IsNullOrEmpty(_currentPlayingBackgroundMusicPath) == false)
             {
-                if (_cachedBackgroundSoundEmitters.TryGetValue(_currentPlayingBackgroundMusicPath, out soundEmitter) &&
-                    soundEmitter)
+                if (_cachedBackgroundSoundEmitters.TryGetValue(_currentPlayingBackgroundMusicPath, out soundEmitter) && soundEmitter)
                 {
                     AudioSource audioSource = soundEmitter.GetComponent<AudioSource>();
                     if (audioSource.isPlaying)
@@ -421,9 +409,8 @@ namespace Sound
                     }
                 }
             }
-
             _currentPlayingBackgroundMusicPath = path;
-
+            
             // 배경음악이 이전에 일시정지 된 적 있는지 확인.
             if (_cachedBackgroundSoundEmitters.TryGetValue(path, out soundEmitter) && soundEmitter != null)
             {
@@ -450,7 +437,7 @@ namespace Sound
                 soundEmitter.transform.SetParent(transform);
                 soundEmitter.transform.position = Vector3.zero;
                 AudioSource audioSource = soundEmitter.GetComponent<AudioSource>();
-
+                
                 if (useMixerVolume)
                 {
                     audioSource.outputAudioMixerGroup = musicGroup;
@@ -461,7 +448,7 @@ namespace Sound
                     audioSource.outputAudioMixerGroup = null;
                     audioSource.volume = _directMasterVolume * _directMusicVolume;
                 }
-
+                
                 audioSource.resource = clip;
                 audioSource.loop = true;
                 audioSource.Play();
@@ -469,10 +456,9 @@ namespace Sound
 
                 _cachedBackgroundSoundEmitters.Add(path, soundEmitter);
             }
-
             return soundEmitter;
         }
-
+        
         /// <summary>
         /// 해당 Transform을 따라다니는 사운드 재생
         /// </summary>
@@ -480,8 +466,7 @@ namespace Sound
         /// <param name="target"></param>
         /// <param name="stopOnTargetNull"> 해당 타겟 transform이 사라지면 재생 멈춤</param>
         /// <param name="isLoop"></param>
-        public void PlaySfxTo(string path, Transform target, bool stopOnTargetNull = true, bool isLoop = false,
-            bool isSpatial = true)
+        public void PlaySfxTo(string path, Transform target, bool stopOnTargetNull = true, bool isLoop = false,bool isSpatial = true)
         {
             AudioResource clip = GetAudioSource(path);
             if (clip == null)
@@ -495,7 +480,7 @@ namespace Sound
             soundEmitter.SetTarget(target);
             soundEmitter.doStopOnTargetNull = stopOnTargetNull;
             AudioSource audioSource = soundEmitter.GetComponent<AudioSource>();
-
+            
             if (useMixerVolume)
             {
                 if (sfxGroup != null)
@@ -506,7 +491,6 @@ namespace Sound
                 {
                     Debug.LogWarning("[SoundManager] sfxGroup is null! Audio may not play correctly.");
                 }
-
                 audioSource.volume = 1f;
             }
             else
@@ -514,21 +498,21 @@ namespace Sound
                 audioSource.outputAudioMixerGroup = null;
                 audioSource.volume = _directMasterVolume * _directSfxVolume;
             }
-
+            
             // List에 추가
             _activeSfxEmitters.Add(soundEmitter);
-
+            
             audioSource.spatialize = isSpatial;
             soundEmitter.SimplePlayAudioSource(clip, isLoop);
         }
-
+        
         /// <summary>
         /// 해당 위치에서 사운드 재생
         /// </summary>
         /// <param name="path"></param>
         /// <param name="position"></param>
         /// <param name="isLoop"></param>
-        public void PlaySfxAt(string path, Vector3 position, bool isLoop = false, bool isSpatial = true)
+        public void PlaySfxAt(string path, Vector3 position, bool isLoop = false,bool isSpatial = true)
         {
             AudioResource clip = GetAudioSource(path);
             if (clip == null)
@@ -536,12 +520,12 @@ namespace Sound
                 Debug.LogWarning($"[SoundManager] PlaySfxAt failed: clip is null for path: {path}");
                 return;
             }
-
+            
             SoundEmitter soundEmitter = GetSoundEmitterFromPool();
             soundEmitter.transform.SetParent(transform);
             soundEmitter.transform.position = position;
             AudioSource audioSource = soundEmitter.GetComponent<AudioSource>();
-
+            
             if (useMixerVolume)
             {
                 if (sfxGroup != null)
@@ -552,7 +536,6 @@ namespace Sound
                 {
                     Debug.LogWarning("[SoundManager] sfxGroup is null! Audio may not play correctly.");
                 }
-
                 audioSource.volume = 1f;
             }
             else
@@ -560,14 +543,14 @@ namespace Sound
                 audioSource.outputAudioMixerGroup = null;
                 audioSource.volume = _directMasterVolume * _directSfxVolume;
             }
-
+            
             // List에 추가
             _activeSfxEmitters.Add(soundEmitter);
-
+            
             audioSource.spatialize = isSpatial;
             soundEmitter.SimplePlayAudioSource(clip, isLoop);
         }
-
+        
         /// <summary>
         /// 전역 사운드 재생
         /// </summary>
@@ -575,7 +558,7 @@ namespace Sound
         /// <param name="isLoop"></param>
         /// <param name="isSpatial"></param>
         /// <param name="pitch"></param>
-        public SoundEmitter PlaySfx(string path, bool isLoop = false, bool isSpatial = false, float pitch = 1f)
+        public SoundEmitter PlaySfx(string path, bool isLoop = false,bool isSpatial = false, float pitch = 1f)
         {
             AudioResource clip = GetAudioSource(path);
             if (clip == null)
@@ -583,12 +566,12 @@ namespace Sound
                 Debug.LogWarning($"[SoundManager] PlaySfx failed: clip is null for path: {path}");
                 return null;
             }
-
+            
             SoundEmitter soundEmitter = GetSoundEmitterFromPool();
             soundEmitter.transform.SetParent(transform);
             soundEmitter.transform.position = Vector3.zero;
             AudioSource audioSource = soundEmitter.GetComponent<AudioSource>();
-
+            
             if (useMixerVolume)
             {
                 if (sfxGroup != null)
@@ -599,7 +582,6 @@ namespace Sound
                 {
                     Debug.LogWarning("[SoundManager] sfxGroup is null! Audio may not play correctly.");
                 }
-
                 audioSource.volume = 1f;
             }
             else
@@ -607,13 +589,13 @@ namespace Sound
                 audioSource.outputAudioMixerGroup = null;
                 audioSource.volume = _directMasterVolume * _directSfxVolume;
             }
-
+            
             // List에 추가
             _activeSfxEmitters.Add(soundEmitter);
-
+            
             audioSource.spatialize = isSpatial;
             audioSource.pitch = pitch;
-
+            
             soundEmitter.SimplePlayAudioSource(clip, isLoop);
             return soundEmitter;
         }
@@ -639,26 +621,24 @@ namespace Sound
                     }
                 }
             }
-
+            
             // 정리
             CleanupInactiveSfxEmitters();
         }
-
+        
         public void FadeOutBackgroundMusic(float fadeOutTime)
         {
             if (string.IsNullOrEmpty(_currentPlayingBackgroundMusicPath) == false)
             {
-                if (_cachedBackgroundSoundEmitters.TryGetValue(_currentPlayingBackgroundMusicPath,
-                        out SoundEmitter soundEmitter) && soundEmitter)
+                if (_cachedBackgroundSoundEmitters.TryGetValue(_currentPlayingBackgroundMusicPath, out SoundEmitter soundEmitter) && soundEmitter)
                 {
                     soundEmitter.FadeOutAndStop(fadeOutTime);
                     soundEmitter.transform.SetParent(null);
                 }
-
                 _currentPlayingBackgroundMusicPath = string.Empty;
             }
         }
-
+        
         public void StopBackgroundMusic()
         {
             if (string.IsNullOrEmpty(_currentPlayingBackgroundMusicPath) == false)
@@ -671,11 +651,10 @@ namespace Sound
                     soundEmitter.transform.SetParent(null);
                     GetSoundEmitterFromPool();
                 }
-
                 _currentPlayingBackgroundMusicPath = string.Empty;
             }
         }
-
+        
         public void StopCleanEmitter(SoundEmitter soundEmitter)
         {
             if (soundEmitter != null)
@@ -685,15 +664,15 @@ namespace Sound
                 GetSoundEmitterFromPool();
             }
         }
-
-
+        
+        
         /// <summary>
         /// 이미 재생 중인 배경음악의 볼륨을 업데이트합니다.
         /// </summary>
         private void UpdateBackgroundMusicVolumes()
         {
             if (useMixerVolume) return;
-
+            
             foreach (var kvp in _cachedBackgroundSoundEmitters)
             {
                 if (kvp.Value != null)
@@ -706,7 +685,7 @@ namespace Sound
                 }
             }
         }
-
+        
         /// <summary>
         /// 이미 재생 중인 모든 오디오의 볼륨을 업데이트합니다.
         /// (배경음악 + SFX 모두)
@@ -714,13 +693,13 @@ namespace Sound
         private void UpdateAllActiveAudioVolumes()
         {
             if (useMixerVolume) return;
-
+            
             // 배경음악 업데이트
             UpdateBackgroundMusicVolumes();
-
+            
             // SFX 업데이트 - List를 사용하여 효율적으로 처리
             CleanupInactiveSfxEmitters(); // 재생 끝난 emitter 제거
-
+            
             foreach (var emitter in _activeSfxEmitters)
             {
                 if (emitter != null)
@@ -733,20 +712,20 @@ namespace Sound
                 }
             }
         }
-
+        
         /// <summary>
         /// 재생이 끝났거나 null인 SoundEmitter를 리스트에서 제거합니다.
         /// </summary>
         private void CleanupInactiveSfxEmitters()
         {
-            _activeSfxEmitters.RemoveAll(emitter =>
+            _activeSfxEmitters.RemoveAll(emitter => 
             {
                 if (emitter == null) return true;
                 AudioSource audioSource = emitter.GetComponent<AudioSource>();
                 return audioSource == null || !audioSource.isPlaying;
             });
         }
-
+        
         /// <summary>
         /// Update에서 주기적으로 리스트를 정리합니다.
         /// </summary>
@@ -763,10 +742,9 @@ namespace Sound
         {
             if (UseVibration)
             {
-                Handheld.Vibrate();
+                Handheld.Vibrate();   
             }
         }
-
         public void VibePop()
         {
             if (UseVibration)
@@ -790,32 +768,11 @@ namespace Sound
                 Vibration.VibrateNope();
             }
         }
-
-
+        
+        
         public SoundEmitter GetSoundEmitterFromPool()
         {
             return _soundEmitterPool.Get();
-        }
-
-
-        public static void PlayBamBoo()
-        {
-            SoundManager.Instance.PlaySfx(SoundReference.BamBoo);
-        }
-
-        public static void PlayBill()
-        {
-            SoundManager.Instance.PlaySfx(SoundReference.Bill);
-        }
-
-        public static void PlayButtonClick()
-        {
-            SoundManager.Instance.PlaySfx(SoundReference.ButtonClick);
-        }
-
-        public static void PlayGameOverSound()
-        {
-            SoundManager.Instance.PlaySfx(SoundReference.GameOver);
         }
     }
 }

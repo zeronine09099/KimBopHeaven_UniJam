@@ -2,7 +2,6 @@
 using Common;
 using Interaction;
 using Machamy.Attributes;
-using UI;
 using UnityEngine;
 
 namespace Game.Field
@@ -17,11 +16,7 @@ namespace Game.Field
         [field:SerializeField]public IngredientObject CurrentIngredient { get; set; }
         private Field field;
         [SerializeField] FloatingBonusScore scoreTextPrefab;
-
-        [field: SerializeField, VisibleOnly(EditableIn.EditMode)]
-        public FloatingBonusScore scoreText { get; set; }
-
-        [SerializeField] Transform floatingUIAnchor;
+        [field:SerializeField, VisibleOnly(EditableIn.EditMode)] FloatingBonusScore scoreText;
 
         public void Initialize(Field field, TileVector tileVector)
         {
@@ -33,10 +28,7 @@ namespace Game.Field
         {
             if(scoreText == null)
             {
-                scoreText = Instantiate(scoreTextPrefab, FloatingUICanvas.Instance.transform, true);
-                scoreText.tile = this;
-                scoreText.GetComponent<RectTransform>().anchoredPosition =
-                    FloatingUICanvas.GetCanvasPosition(floatingUIAnchor.position);
+                scoreText = Instantiate(scoreTextPrefab, transform);
                 scoreText.gameObject.SetActive(false);
             }
         }

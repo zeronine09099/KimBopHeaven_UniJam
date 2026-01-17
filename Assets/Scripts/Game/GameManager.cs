@@ -7,7 +7,6 @@ using Game;
 using Game.Field;
 using Machamy.Utils;
 using Player;
-using Sound;
 using UnityEngine;
 
 namespace Core
@@ -33,8 +32,6 @@ namespace Core
             IsInitialized = true;
             LogEx.Log("GameManager Initialized.");
             onCompleted?.Invoke();
-
-            SoundManager.Instance.PlayBackgroundMusic(SoundReference.BackgroundMusic);
         }
 
         /// <summary>

@@ -46,30 +46,13 @@ namespace Game
         private Tween DefaultTriggerEffect(TriggerArguments args, int times, int score = -1)
         {
             var obj = args.Ingredient;
-            var tile = args.Tile;
-            // var floating = tile.score
             float[] punchScales = {1.05f, 1.1f, 1.15f, 1.2f, 1.25f};
-            float[] fontSizes = {72f, 80f, 88f, 96f, 100f};
             float punchScale = punchScales[Mathf.Clamp(times - 1, 0, punchScales.Length - 1)];
-            float fontSize = fontSizes[Mathf.Clamp(times - 1, 0, fontSizes.Length - 1)];
-            if (score > 0)
-            {
-                var floating = tile.scoreText;
-                // if (floating.IsActive)
-                // {
-                //     var seqFloating = DOTween.Sequence();
-                //     seqFloating.Append(DOTween.To(() => fl))
-                // }
-                floating.Value = score;
-                floating.FontSize = fontSize;
-                floating.gameObject.SetActive(true);
-            }
+            
             Sequence seq = DOTween.Sequence();
             seq.Append(obj.transform.DOScale(Vector3.one * punchScale, 0.1f).SetEase(Ease.OutQuad));
             seq.Append(obj.transform.DOScale(Vector3.one, 0.1f).SetEase(Ease.OutQuad));
-            
-            
-            
+
             return seq;
         }
 
@@ -78,7 +61,7 @@ namespace Game
         {
             var tile = args.Tile;
             PlayerState.Current.CurrentTempScore += (int) baseScore;
-            await DefaultTriggerEffect(args, 1, (int) baseScore);
+            DefaultTriggerEffect(args, 1, (int) baseScore);
 
         }
         public async virtual UniTask OnExplode(Tile tile)
