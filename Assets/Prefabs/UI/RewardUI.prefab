@@ -595,7 +595,7 @@ MonoBehaviour:
   - {fileID: 5128464219345238270}
   - {fileID: 2941568343180555332}
   rerollBtnText: {fileID: 5144022973976589690}
-  remainSelectBtnText: {fileID: 0}
+  remainSelectBtnText: {fileID: 1362768280109302221}
 --- !u!223 &1417234103436339297
 Canvas:
   m_ObjectHideFlags: 0
@@ -2343,7 +2343,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 2714155140022560389}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:

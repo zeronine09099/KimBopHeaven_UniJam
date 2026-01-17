@@ -94,6 +94,12 @@ namespace UI.Reward
             {
                 PlayerState.Current.GameDeck.AddIngredient(selectedRewardUIEntry.IngredientSo);
                 remainSelectCnt--;
+                if(remainSelectCnt == 0)
+                {
+                    rewardSelectEnded = true;
+                    Hide();
+                    return;
+                }
                 Show(PlayerState.Current.CurrentStageInfo);
                 return;
             }

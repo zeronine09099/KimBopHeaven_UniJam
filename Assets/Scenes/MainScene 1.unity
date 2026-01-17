@@ -4138,7 +4138,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 872102164153792698, guid: 3d11df694e066ff4695be54814c329ed, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -3251
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 872102164153792698, guid: 3d11df694e066ff4695be54814c329ed, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -4160,8 +4160,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameOverUI
       objectReference: {fileID: 0}
+    - target: {fileID: 2232558796926279908, guid: 3d11df694e066ff4695be54814c329ed, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 8669062896728036390, guid: 3d11df694e066ff4695be54814c329ed, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3d11df694e066ff4695be54814c329ed, type: 3}
@@ -4266,6 +4271,10 @@ PrefabInstance:
     - target: {fileID: 8547507648816948739, guid: cc1ac3218e4929c47939dd7fb128129f, type: 3}
       propertyPath: m_Name
       value: TutorialUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 8547507648816948739, guid: cc1ac3218e4929c47939dd7fb128129f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4481,6 +4490,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EncounterUI
       objectReference: {fileID: 0}
+    - target: {fileID: 1398120449646381641, guid: 5ff0ae3d38001504fb60f524d20b7bf6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1741170489469143282, guid: 5ff0ae3d38001504fb60f524d20b7bf6, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -4585,6 +4598,10 @@ PrefabInstance:
     - target: {fileID: 2428383259733488617, guid: cd6f8d83f9f9eb746b686f1baf06520e, type: 3}
       propertyPath: m_Name
       value: BillUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 2428383259733488617, guid: cd6f8d83f9f9eb746b686f1baf06520e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2581519653834617079, guid: cd6f8d83f9f9eb746b686f1baf06520e, type: 3}
       propertyPath: m_TextStyleHashCode
