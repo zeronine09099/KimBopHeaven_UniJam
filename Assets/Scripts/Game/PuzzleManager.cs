@@ -121,7 +121,10 @@ namespace Game
         {
         }
         [Header("제한 설정")]
-        [SerializeField, Label("소환된 재료 섞기"), Tooltip("낙하하는 재료들을 섞어서 배치합니다. 제한설정과 관련있습니다.")] private bool shuffleSummons = true;
+        [SerializeField, Label("초기 재료 섞기"), Tooltip("게임 시작 시 필드에 배치되는 재료들을 섞어서 배치합니다. 제한설정과 관련있습니다.")] 
+        private bool shuffleInitials = true;
+        [SerializeField, Label("소환된 재료 섞기"), Tooltip("낙하하는 재료들을 섞어서 배치합니다. 제한설정과 관련있습니다.")] 
+        private bool shuffleSummons = true;
         [SerializeField, Label("최소 김 개수")] private int MinimumGimCount = 2;
         [SerializeField, Label("최소 밥 개수")] private int MinimumRiceCount = 1;
         [SerializeField,VisibleOnly] private int GimCount = 0;
@@ -326,6 +329,9 @@ namespace Game
                 }
                 GimCount = 0;
                 RiceCount = 0;
+                
+                List<IngredientObject> allIngredients = new List<IngredientObject>();
+                List<IngredientSO> allIngredientSOs = new List<IngredientSO>();
                 for (int i = 0; i < field.Height; i++)
                 {
                     for (int j = 0; j < field.Width; j++)
@@ -333,6 +339,8 @@ namespace Game
                         Tile tile = field.GetTile(i, j);
                         IngredientSO randomData = GetNextIngredientData();
                         IngredientObject ingredientObject = tile.CurrentIngredient;
+                        allIngredients.Add(ingredientObject);
+                        allIngredientSOs.Add(randomData);
                         ingredientObject.Initialize(randomData);
                         if (randomData.IsGim())
                         {
@@ -346,6 +354,17 @@ namespace Game
                         ingredientObject.transform.SetParent(tile.transform);
                         ingredientObject.transform.localPosition = Vector3.zero;
                         tile.SetIngredient(ingredientObject);
+                    }
+                }
+
+                if (shuffleInitials)
+                {
+                    allIngredientSOs.Shuffle();
+                    for (int index = 0; index < allIngredients.Count; index++)
+                    {
+                        IngredientObject ingredientObject = allIngredients[index];
+                        IngredientSO ingredientSO = allIngredientSOs[index];
+                        ingredientObject.Initialize(ingredientSO);
                     }
                 }
             }
