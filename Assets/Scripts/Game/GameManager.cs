@@ -76,6 +76,11 @@ namespace Core
             // 게임 루프
             await StageManager.Instance.StartStage(PlayerStatus.CurrentStageInfo, cancellationToken);
             
-        }   
+        }
+
+        public void ReturnToMainMenu()
+        {
+            CancelGameAndReturnToTitle();
+        }
     }
 }

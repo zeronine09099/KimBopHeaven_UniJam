@@ -27,6 +27,7 @@ namespace Core
         [field:SerializeField] public EncounterUI EncounterUI { get; set; }
         [field:SerializeField] public DeckUI DeckUI { get; set; }
         [field:SerializeField] public SettingUI SettingUI { get; set; }
+        [field:SerializeField] public BillingUI BillingUI { get; set; }
 
 
         public void GoToTitleUI()
@@ -37,6 +38,7 @@ namespace Core
             EncounterUI.Hide();
             DeckUI.Hide();
             SettingUI.Hide();
+            BillingUI.Hide();
         }
         
         public void GoToInGameUI()
@@ -47,6 +49,7 @@ namespace Core
             EncounterUI.Show();
             DeckUI.Hide();
             SettingUI.Hide();
+            BillingUI.Hide();
         }
     }
     

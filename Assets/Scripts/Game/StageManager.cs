@@ -76,7 +76,7 @@ namespace Game
                 variable.IntValue = 0;
                 variable.FloatValue = 0f;
             }
-            // 플레이어 스테이지 정보 세팅
+            // 플레이어 스테이지 정보 세팅(이벤트 호출용)
             PlayerState.Current.CurrentRemainingSwipes = stage.moveCount;
             PlayerState.Current.CurrentStageScore = 0;
             PlayerState.Current.CurrentTempScore = 0;
@@ -132,14 +132,14 @@ namespace Game
                 // 클리어 체크
                 if(PlayerState.Current.CurrentStageScore >= PlayerState.Current.CurrentStageInfo.goalScore)
                 {
-                    await StageSuccess();
+                    await StageSuccess(cancellationToken);
                     break;
                 }
                 PlayerState.Current.CurrentRemainingSwipes -= 1;
                 // 실패 체크
                 if(PlayerState.Current.CurrentRemainingSwipes <= 0)
                 {
-                    await StageFail();
+                    await StageFail(cancellationToken);
                     break;
                 }
                 
@@ -148,7 +148,7 @@ namespace Game
         
         
         
-        public async UniTask StageSuccess()
+        public async UniTask StageSuccess(CancellationToken cancellationToken = default)
         {
             // 스테이지 성공 처리, 리워드로
             LogEx.Log("Stage Cleared!");
@@ -156,7 +156,11 @@ namespace Game
             PlayerState pl = PlayerState.Current;
             pl.TotalScore += pl.CurrentStageScore;
             
-            await UIManager.Instance.RewardUI.ShowAsync(CurrentStageInfo);
+            await UIManager.Instance.BillingUI.ShowSuccessAsync(cancellationToken);
+            
+            await UIManager.Instance.BillingUI.WaitForSkip(cancellationToken);
+            
+            await UIManager.Instance.RewardUI.ShowAsync(CurrentStageInfo,cancellationToken);
 
             if(CurrentStageInfo.Stage % 3 == 0)
             {
@@ -167,14 +171,14 @@ namespace Game
             
             // 다음 스테이지로
             GameManager.Instance.Field.DestroyIngredients();
-            StartStage(StageLibrary.Instance.GetNextStageInfo(CurrentStageId), _forceStopCts.Token).Forget();
+            StartStage(StageLibrary.Instance.GetNextStageInfo(CurrentStageId), cancellationToken).Forget();
         }
         
-        public async UniTask StageFail()
+        public async UniTask StageFail(CancellationToken cancellationToken = default)
         {
             // 스테이지 실패 처리, 타이틀로
             LogEx.Log("Stage Failed!");
-            await UniTask.Yield();
+            await UIManager.Instance.BillingUI.ShowFailAsync(cancellationToken);
             
             
             GameManager.Instance.CancelGameAndReturnToTitle();

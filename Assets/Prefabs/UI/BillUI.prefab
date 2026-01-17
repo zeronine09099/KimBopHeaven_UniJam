@@ -12,13 +12,14 @@ GameObject:
   - component: {fileID: 5323798617638176939}
   - component: {fileID: 90816357588973420}
   - component: {fileID: 1059181250250982727}
+  - component: {fileID: 182373339281870790}
   m_Layer: 5
   m_Name: Bill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7459741638842644325
 RectTransform:
   m_ObjectHideFlags: 0
@@ -102,7 +103,7 @@ MonoBehaviour:
   useGlobalAngle: 0
   offsetAngle: 90
   offsetDistance: 12
-  offset: {x: 0.00000071525574, y: -11.999999}
+  offset: {x: 0.00000071525585, y: -12}
   color: {r: 0, g: 0, b: 0, a: 0.6}
   inset: 0
   blendMode: 0
@@ -116,6 +117,18 @@ MonoBehaviour:
   baked: 0
   modifiedFromInspector: 0
   bakedShadows: []
+--- !u!225 &182373339281870790
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 531897232006310204}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1490105956498968903
 GameObject:
   m_ObjectHideFlags: 0
@@ -189,6 +202,7 @@ MonoBehaviour:
   m_sharedMaterial: {fileID: -3288237565920160978, guid: a15069c581da9a64eac4575fe775d5ef, type: 2}
   m_fontSharedMaterials:
   - {fileID: -3288237565920160978, guid: a15069c581da9a64eac4575fe775d5ef, type: 2}
+  - {fileID: 0}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -470,6 +484,7 @@ GameObject:
   - component: {fileID: 8362950054971264177}
   - component: {fileID: 2279040665820695375}
   - component: {fileID: 3440148528388873566}
+  - component: {fileID: 6730121514142043038}
   m_Layer: 5
   m_Name: BillUI
   m_TagString: Untagged
@@ -540,6 +555,25 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &6730121514142043038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2428383259733488617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c057ec4125964731967e68436fdaaa31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UI.BillingUI
+  failPanel: {fileID: 2097691097588337927}
+  successPanel: {fileID: 8200408746099070127}
+  successBackground: {fileID: 7685624926936781761}
+  billingContent: {fileID: 182373339281870790}
+  targetScore: {fileID: 8928779626803486526}
+  achievedScore: {fileID: 7174310936927826378}
+  remainedScore: {fileID: 522362088966342267}
 --- !u!1 &2491022421007714196
 GameObject:
   m_ObjectHideFlags: 0
@@ -552,6 +586,7 @@ GameObject:
   - component: {fileID: 1083804813100161710}
   - component: {fileID: 7472330253855079306}
   - component: {fileID: 5020569694378013560}
+  - component: {fileID: 522362088966342267}
   m_Layer: 5
   m_Name: pointText (6)
   m_TagString: Untagged
@@ -606,7 +641,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "111,111 \uC6D0"
+  m_text: "0 \uC6D0"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a15069c581da9a64eac4575fe775d5ef, type: 2}
   m_sharedMaterial: {fileID: -3288237565920160978, guid: a15069c581da9a64eac4575fe775d5ef, type: 2}
@@ -711,6 +746,21 @@ MonoBehaviour:
   baked: 0
   modifiedFromInspector: 0
   bakedShadows: []
+--- !u!114 &522362088966342267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2491022421007714196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2655b36d9c58449abcdeb602547b8863, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UI.SimpleNumberText
+  number: 0
+  textComponent: {fileID: 7472330253855079306}
+  <FormatString>k__BackingField: "{0:#,##0} \uC6D0"
 --- !u!1 &2920021967687839677
 GameObject:
   m_ObjectHideFlags: 0
@@ -968,7 +1018,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1933895570537863837}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6730121514142043038}
+        m_TargetAssemblyTypeName: UI.BillingUI, Assembly-CSharp
+        m_MethodName: RequestSkip
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4430718686638281873
 GameObject:
   m_ObjectHideFlags: 0
@@ -1487,6 +1549,7 @@ MonoBehaviour:
   m_sharedMaterial: {fileID: -3288237565920160978, guid: a15069c581da9a64eac4575fe775d5ef, type: 2}
   m_fontSharedMaterials:
   - {fileID: -3288237565920160978, guid: a15069c581da9a64eac4575fe775d5ef, type: 2}
+  - {fileID: 0}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -1597,6 +1660,7 @@ GameObject:
   - component: {fileID: 1675223455312919084}
   - component: {fileID: 1340792454154618251}
   - component: {fileID: 8109788256040783892}
+  - component: {fileID: 7685624926936781761}
   m_Layer: 5
   m_Name: BG
   m_TagString: Untagged
@@ -1661,6 +1725,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!225 &7685624926936781761
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6094340505468942181}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &6119577295532999106
 GameObject:
   m_ObjectHideFlags: 0
@@ -1960,6 +2036,7 @@ MonoBehaviour:
   m_sharedMaterial: {fileID: -3288237565920160978, guid: a15069c581da9a64eac4575fe775d5ef, type: 2}
   m_fontSharedMaterials:
   - {fileID: -3288237565920160978, guid: a15069c581da9a64eac4575fe775d5ef, type: 2}
+  - {fileID: 0}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -2071,6 +2148,7 @@ GameObject:
   - component: {fileID: 1657825621265545093}
   - component: {fileID: 120227621316530985}
   - component: {fileID: 7919323863977651198}
+  - component: {fileID: 7174310936927826378}
   m_Layer: 5
   m_Name: pointText (6)
   m_TagString: Untagged
@@ -2125,7 +2203,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "234,567 \uC6D0"
+  m_text: "0 \uC6D0"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a15069c581da9a64eac4575fe775d5ef, type: 2}
   m_sharedMaterial: {fileID: -3288237565920160978, guid: a15069c581da9a64eac4575fe775d5ef, type: 2}
@@ -2230,6 +2308,21 @@ MonoBehaviour:
   baked: 0
   modifiedFromInspector: 0
   bakedShadows: []
+--- !u!114 &7174310936927826378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7007543676284867002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2655b36d9c58449abcdeb602547b8863, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UI.SimpleNumberText
+  number: 0
+  textComponent: {fileID: 120227621316530985}
+  <FormatString>k__BackingField: "{0:#,##0} \uC6D0"
 --- !u!1 &7094081978371476372
 GameObject:
   m_ObjectHideFlags: 0
@@ -2242,13 +2335,14 @@ GameObject:
   - component: {fileID: 8856671929505977683}
   - component: {fileID: 8016356585721494429}
   - component: {fileID: 7316195749206277849}
+  - component: {fileID: 8200408746099070127}
   m_Layer: 5
   m_Name: ResultBanner_Success
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3712331518908977436
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2339,6 +2433,18 @@ MonoBehaviour:
   baked: 0
   modifiedFromInspector: 0
   bakedShadows: []
+--- !u!225 &8200408746099070127
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7094081978371476372}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &7395751978694756563
 GameObject:
   m_ObjectHideFlags: 0
@@ -2693,6 +2799,7 @@ GameObject:
   - component: {fileID: 7243211161860694430}
   - component: {fileID: 8730866558273274973}
   - component: {fileID: 2814700811055661847}
+  - component: {fileID: 8928779626803486526}
   m_Layer: 5
   m_Name: pointText (3)
   m_TagString: Untagged
@@ -2747,7 +2854,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "123,456 \uC6D0"
+  m_text: "0 \uC6D0"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a15069c581da9a64eac4575fe775d5ef, type: 2}
   m_sharedMaterial: {fileID: -3288237565920160978, guid: a15069c581da9a64eac4575fe775d5ef, type: 2}
@@ -2852,6 +2959,21 @@ MonoBehaviour:
   baked: 0
   modifiedFromInspector: 0
   bakedShadows: []
+--- !u!114 &8928779626803486526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7649436348426982534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2655b36d9c58449abcdeb602547b8863, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UI.SimpleNumberText
+  number: 0
+  textComponent: {fileID: 8730866558273274973}
+  <FormatString>k__BackingField: "{0:#,##0} \uC6D0"
 --- !u!1 &7804239985738210326
 GameObject:
   m_ObjectHideFlags: 0
@@ -2957,6 +3079,7 @@ GameObject:
   - component: {fileID: 5410845534487260596}
   - component: {fileID: 6621551483160314415}
   - component: {fileID: 4405885407408857586}
+  - component: {fileID: 2097691097588337927}
   m_Layer: 5
   m_Name: ResultBanner_Fail
   m_TagString: Untagged
@@ -3054,6 +3177,18 @@ MonoBehaviour:
   baked: 0
   modifiedFromInspector: 0
   bakedShadows: []
+--- !u!225 &2097691097588337927
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7859648433492881863}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &8077986818516028421
 GameObject:
   m_ObjectHideFlags: 0
