@@ -160,6 +160,8 @@ namespace Game
             
             await UIManager.Instance.BillingUI.WaitForSkip(cancellationToken);
             
+            await UIManager.Instance.BillingUI.HideAsync(cancellationToken);
+            
             await UIManager.Instance.RewardUI.ShowAsync(CurrentStageInfo,cancellationToken);
 
             if(CurrentStageInfo.Stage % 3 == 0)

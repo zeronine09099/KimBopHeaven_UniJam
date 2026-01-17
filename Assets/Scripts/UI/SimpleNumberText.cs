@@ -48,19 +48,15 @@ namespace UI
             UpdateText();
         }
 
-        public Tween CountTo(int i, int remained, float f)
+        public Tween CountTo(int start, int end, float duration)
         {
-            return DOTween.To(() => Number, x => Number = x, i, f).SetEase(Ease.Linear)
-                .OnUpdate(() =>
-                {
-                    int value = Number;
-                    if (remained > 0)
-                    {
-                        int step = (i - value) / remained;
-                        if (step <= 0) step = 1;
-                        Number += step;
-                    }
-                }).OnComplete(() => Number = i);
+            number = start;
+            UpdateText();
+            return DOTween.To(() => number, x =>
+            {
+                number = x;
+                UpdateText();
+            }, end, duration);
         }
     }
 }

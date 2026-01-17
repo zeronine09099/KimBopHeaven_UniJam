@@ -1,4 +1,5 @@
 ﻿using System.Threading;
+using System.Threading.Tasks;
 using Core;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
@@ -62,7 +63,7 @@ namespace UI
             billingContent.gameObject.SetActive(true);
             gameObject.SetActive(true);
 
-            isSkipRequested = false;
+            _isSkipRequested = false;
             successPanel.alpha = 1f;
             successBackground.alpha = 0f;
             billingContent.alpha = 1f;
@@ -90,17 +91,27 @@ namespace UI
             await seq.Play().ToUniTask(cancellationToken: cancellationToken,tweenCancelBehaviour: TweenCancelBehaviour.Kill);
             
         }
-        
-        bool isSkipRequested = false;
+        public async UniTask HideAsync(CancellationToken cancellationToken)
+        {
+            // 아래로 사라지는 애니메이션
+            RectTransform billingRect = billingContent.GetComponent<RectTransform>();
+            Sequence seq = DOTween.Sequence();
+            seq.Append(billingRect.DOAnchorPosY(-Screen.height, 0.5f).SetEase(Ease.InCubic));
+            seq.Append(successBackground.DOFade(0f, 0.5f));
+            await seq.Play().ToUniTask(cancellationToken: cancellationToken,tweenCancelBehaviour: TweenCancelBehaviour.Kill);
+            gameObject.SetActive(false);
+        }
+
+        private bool _isSkipRequested = false;
         
         public void RequestSkip()
         {
-            isSkipRequested = true;
+            _isSkipRequested = true;
         }
         
         public async UniTask WaitForSkip(CancellationToken cancellationToken = default)
         {
-            while (!isSkipRequested)
+            while (!_isSkipRequested)
             {
                 await UniTask.Yield(cancellationToken);
             }
@@ -110,5 +121,7 @@ namespace UI
         {
             gameObject.SetActive(false);
         }
+
+
     }
 }

@@ -32,7 +32,7 @@ namespace Game
         {
             foreach (var kvp in reinforcementValues)
             {
-                if (tag.IsParentOf(kvp.Key) || kvp.Key == tag)
+                if (tag.IsChildOf(kvp.Key) || kvp.Key == tag)
                 {
                     baseValue += kvp.Value;
                 }
