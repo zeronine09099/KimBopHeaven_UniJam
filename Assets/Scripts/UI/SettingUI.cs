@@ -12,6 +12,7 @@ namespace UI
         [SerializeField] private Slider sfxSlider;
         [SerializeField] private Toggle toggle;
 
+        [SerializeField] private Button titleButton;
         [SerializeField] private Button closeButton;
 
         private void Awake()
@@ -24,6 +25,13 @@ namespace UI
             {
                 SoundManager.Instance.PlaySfx(SoundReference.ButtonClickSFX);
                 Hide();
+            });
+
+            titleButton.onClick.RemoveAllListeners();
+            titleButton.onClick.AddListener(() =>
+            {
+                SoundManager.Instance.PlaySfx(SoundReference.ButtonClickSFX);
+                GameManager.Instance.CancelGameAndReturnToTitle();
             });
         }
 

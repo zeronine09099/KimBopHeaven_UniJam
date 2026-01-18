@@ -10,6 +10,8 @@ namespace UI.Title
 {
     public class TitleUI : MonoBehaviour
     {
+        [SerializeField] private GameObject tutorialPanel;
+
 
         private void Awake()
         {
@@ -37,10 +39,18 @@ namespace UI.Title
         public void OnTutorialButtonClicked()
         {
             LogEx.Log("Tutorial Button Clicked");
+            tutorialPanel.SetActive(true);
             SoundManager.Instance.PlaySfx(SoundReference.ButtonClickSFX);
             // GameManager.Instance.StartTutorial();
         }
-        
+
+        public void OnCloseTutorialButtonClicked()
+        {
+            LogEx.Log("Close Tutorial Button Clicked");
+            tutorialPanel.SetActive(false);
+            SoundManager.Instance.PlaySfx(SoundReference.ButtonClickSFX);
+        }
+
         public void OnSettingsButtonClicked()
         {
             LogEx.Log("Settings Button Clicked");
