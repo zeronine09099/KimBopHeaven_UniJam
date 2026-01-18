@@ -88,6 +88,14 @@ namespace Interaction
                     pressedTile = interactable;
                     // OnTilePressed?.Invoke(interactable);
                 }
+                else
+                {
+                    pressedTile = null;
+                }
+            }
+            else
+            {
+                pressedTile = null;
             }
         }
 
