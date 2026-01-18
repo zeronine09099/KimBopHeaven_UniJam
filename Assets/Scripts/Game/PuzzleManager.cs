@@ -849,6 +849,7 @@ namespace Game
                             }
                         }
                     }
+                    tile.BOOOOM = false; // 초기화
                 }
             }
             

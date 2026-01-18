@@ -40,7 +40,7 @@ namespace Player
         
         public void AddIngredient(IngredientSO ingredient, int count = 1)
         {
-            if (ingredientCountMap.ContainsKey(airIngredientSO))
+            if (ingredientCountMap.ContainsKey(airIngredientSO) && ingredientCountMap[airIngredientSO] > 0)
             {
                 ingredientCountMap[airIngredientSO] -= 1;
             }
