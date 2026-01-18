@@ -1,11 +1,9 @@
 ﻿using BandoWare.GameplayTags;
 using Core;
 using Database;
-using Database.Generated;
-using Interaction;
 using TMPro;
-using UI.Encounter;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DeliveryEncounterResult : MonoBehaviour
 {
@@ -13,13 +11,15 @@ public class DeliveryEncounterResult : MonoBehaviour
     private GameplayTag targetTag;
     private string koreanName ="";
     private int upgradeValue;
-    [SerializeField] TextMeshProUGUI deliveryResultDescription;
+    [SerializeField] private TextMeshProUGUI deliveryResultDescription;
+    [SerializeField] private Image displayImage; 
 
-    public void Initialize(int upgradeValue, GameplayTag targetTag)
+    public void Initialize(int upgradeValue, GameplayTag targetTag, Sprite imageToDisplay)
     {
         Debug.Log("delivery 결과창 초기화 진입");
         this.targetTag = targetTag;
         this.upgradeValue = upgradeValue;
+        displayImage.sprite = imageToDisplay;
         foreach (var encounterReward in DatabaseManager.Instance.Database.EncounterRewardList)
         {
             if(encounterReward.target == targetTag)

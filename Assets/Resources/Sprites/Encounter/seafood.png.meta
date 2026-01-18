@@ -1,0 +1,572 @@
+fileFormatVersion: 2
+guid: 8f5b7f1919ebe74478565d61291549d7
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -1623285070395876084
+    second: seafood_0
+  - first:
+      213: 4351406325459900658
+    second: seafood_1
+  - first:
+      213: 5513190689434258055
+    second: seafood_2
+  - first:
+      213: -3270663513739474907
+    second: seafood_3
+  - first:
+      213: 3524101865615730159
+    second: seafood_4
+  - first:
+      213: 8887799982493521679
+    second: seafood_5
+  - first:
+      213: 4864415302657706370
+    second: seafood_6
+  - first:
+      213: 3766220338275944285
+    second: seafood_7
+  - first:
+      213: 2363129905002685784
+    second: seafood_8
+  - first:
+      213: -5183004496262413406
+    second: seafood_9
+  - first:
+      213: -5939148760510870072
+    second: seafood_10
+  - first:
+      213: 2061590298094970601
+    second: seafood_11
+  - first:
+      213: 5302017924785097994
+    second: seafood_12
+  - first:
+      213: -7067184989364773604
+    second: seafood_13
+  - first:
+      213: 7842085522116446495
+    second: seafood_14
+  - first:
+      213: -4225699003090324252
+    second: seafood_15
+  - first:
+      213: -5871878838892687518
+    second: seafood_16
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: seafood_0
+      rect:
+        serializedVersion: 2
+        x: 273
+        y: 2212
+        width: 488
+        height: 603
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c0ddbd934dee879e0800000000000000
+      internalID: -1623285070395876084
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: seafood_1
+      rect:
+        serializedVersion: 2
+        x: 683
+        y: 2278
+        width: 216
+        height: 262
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2f8dc6e8ffc436c30800000000000000
+      internalID: 4351406325459900658
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: seafood_2
+      rect:
+        serializedVersion: 2
+        x: 1637
+        y: 2306
+        width: 214
+        height: 196
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 78a48bec8b9c28c40800000000000000
+      internalID: 5513190689434258055
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: seafood_3
+      rect:
+        serializedVersion: 2
+        x: 2327
+        y: 2447
+        width: 161
+        height: 167
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5284abbecd44c92d0800000000000000
+      internalID: -3270663513739474907
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: seafood_4
+      rect:
+        serializedVersion: 2
+        x: 1057
+        y: 2320
+        width: 70
+        height: 117
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fe5215ca9ff18e030800000000000000
+      internalID: 3524101865615730159
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: seafood_5
+      rect:
+        serializedVersion: 2
+        x: 1129
+        y: 2330
+        width: 57
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f07df379efec75b70800000000000000
+      internalID: 8887799982493521679
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: seafood_6
+      rect:
+        serializedVersion: 2
+        x: 258
+        y: 1939
+        width: 83
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 28903eae1ffd18340800000000000000
+      internalID: 4864415302657706370
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: seafood_7
+      rect:
+        serializedVersion: 2
+        x: 479
+        y: 758
+        width: 1937
+        height: 1461
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d570ac0817d444430800000000000000
+      internalID: 3766220338275944285
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: seafood_8
+      rect:
+        serializedVersion: 2
+        x: 2488
+        y: 1854
+        width: 80
+        height: 78
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 855a9c1d0268bc020800000000000000
+      internalID: 2363129905002685784
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: seafood_9
+      rect:
+        serializedVersion: 2
+        x: 2503
+        y: 932
+        width: 108
+        height: 118
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a3c6031fd44218b0800000000000000
+      internalID: -5183004496262413406
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: seafood_10
+      rect:
+        serializedVersion: 2
+        x: 395
+        y: 583
+        width: 148
+        height: 153
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8cd4c855ba7e39da0800000000000000
+      internalID: -5939148760510870072
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: seafood_11
+      rect:
+        serializedVersion: 2
+        x: 837
+        y: 353
+        width: 233
+        height: 244
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9e6a75e047d3c9c10800000000000000
+      internalID: 2061590298094970601
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: seafood_12
+      rect:
+        serializedVersion: 2
+        x: 1398
+        y: 585
+        width: 112
+        height: 111
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a0dc197163d849940800000000000000
+      internalID: 5302017924785097994
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: seafood_13
+      rect:
+        serializedVersion: 2
+        x: 2159
+        y: 268
+        width: 488
+        height: 603
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c1d90fa12b05ced90800000000000000
+      internalID: -7067184989364773604
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: seafood_14
+      rect:
+        serializedVersion: 2
+        x: 2569
+        y: 334
+        width: 216
+        height: 262
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f190cf3bb3fa4dc60800000000000000
+      internalID: 7842085522116446495
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: seafood_15
+      rect:
+        serializedVersion: 2
+        x: 442
+        y: 409
+        width: 78
+        height: 78
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4e43419352d4b55c0800000000000000
+      internalID: -4225699003090324252
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: seafood_16
+      rect:
+        serializedVersion: 2
+        x: 582
+        y: 432
+        width: 63
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 26f0bab7e45e28ea0800000000000000
+      internalID: -5871878838892687518
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      seafood_0: -1623285070395876084
+      seafood_1: 4351406325459900658
+      seafood_10: -5939148760510870072
+      seafood_11: 2061590298094970601
+      seafood_12: 5302017924785097994
+      seafood_13: -7067184989364773604
+      seafood_14: 7842085522116446495
+      seafood_15: -4225699003090324252
+      seafood_16: -5871878838892687518
+      seafood_2: 5513190689434258055
+      seafood_3: -3270663513739474907
+      seafood_4: 3524101865615730159
+      seafood_5: 8887799982493521679
+      seafood_6: 4864415302657706370
+      seafood_7: 3766220338275944285
+      seafood_8: 2363129905002685784
+      seafood_9: -5183004496262413406
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

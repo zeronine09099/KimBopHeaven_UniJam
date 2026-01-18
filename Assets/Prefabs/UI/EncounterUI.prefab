@@ -268,7 +268,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: -200, y: -200}
-  m_SizeDelta: {x: 300, y: 500}
+  m_SizeDelta: {x: 500, y: 500}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &2598190002326779902
 CanvasRenderer:
@@ -298,9 +298,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: e6038db1e2e2f7543bc9d5c216a65f01, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -623,7 +623,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 200, y: -200}
-  m_SizeDelta: {x: 300, y: 500}
+  m_SizeDelta: {x: 500, y: 500}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &6091390154835788783
 CanvasRenderer:
@@ -653,9 +653,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: af854d20c288285419dae292c08c1298, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -832,7 +832,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 600, y: 800}
+  m_SizeDelta: {x: 800, y: 800}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &1624917267283523225
 CanvasRenderer:
@@ -862,9 +862,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 8e5d4d3311ba55a44a4fa51a25d13fab, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -1509,6 +1509,9 @@ MonoBehaviour:
   meatShopImage: {fileID: 0}
   fishShopImage: {fileID: 0}
   vegetableShopImage: {fileID: 0}
+  meatResultImage: {fileID: 0}
+  fishResultImage: {fileID: 0}
+  vegetableResultImage: {fileID: 0}
   upgradeTargetTag:
     m_Name: 
   deliveryEncounterResult: {fileID: 0}
@@ -1606,9 +1609,12 @@ MonoBehaviour:
   displayImage2: {fileID: 8224170304000069666}
   leftButtonText: {fileID: 7564914738357727671}
   rightButtonText: {fileID: 8746007107550189285}
-  meatShopImage: {fileID: 0}
-  fishShopImage: {fileID: 0}
-  vegetableShopImage: {fileID: 0}
+  meatShopImage: {fileID: 21300000, guid: af854d20c288285419dae292c08c1298, type: 3}
+  fishShopImage: {fileID: 21300000, guid: e6038db1e2e2f7543bc9d5c216a65f01, type: 3}
+  vegetableShopImage: {fileID: 21300000, guid: 46957947248b4a84f804126c4c997f62, type: 3}
+  meatResultImage: {fileID: 21300000, guid: d10ab589264ae5342bb4a9c694155862, type: 3}
+  fishResultImage: {fileID: 21300000, guid: 8f5b7f1919ebe74478565d61291549d7, type: 3}
+  vegetableResultImage: {fileID: 21300000, guid: 1327ea07e79fccb42a48b508e2bad4a2, type: 3}
   upgradeTargetTag:
     m_Name: 
   deliveryEncounterResult: {fileID: 7768900085604924690}
@@ -2086,9 +2092,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: d10ab589264ae5342bb4a9c694155862, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -2456,3 +2462,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DelliveryEncounterResult
   deliveryResultDescription: {fileID: 7860754960163358984}
+  displayImage: {fileID: 5778246105773067891}
