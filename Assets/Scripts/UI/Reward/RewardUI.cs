@@ -77,7 +77,6 @@ namespace UI.Reward
             if (entry == selectedRewardUIEntry)
             {
                 selectedRewardUIEntry = null;
-                rewardSelectEnded = true;
                 return;
             }
 
