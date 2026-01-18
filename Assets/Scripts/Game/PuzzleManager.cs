@@ -825,6 +825,37 @@ namespace Game
                 PlayerState.Current.CurrentTempMultiplier *= 1.5f;
                 await UniTask.Delay(TimeSpan.FromSeconds(matchInterval), cancellationToken: cancellationToken);
             }
+
+            
+            HashSet<Tile> boomTiles = new ();
+            foreach (var tile in toExplodeTiles)
+            {
+                if (tile.BOOOOM)
+                {
+                    var targetIngredient = tile.CurrentIngredient;
+
+                    if (targetIngredient == null) 
+                        continue;
+                    
+                    // 3*3 폭발
+                    for (int dx = -1; dx <= 1; dx++)
+                    {
+                        for (int dy = -1; dy <= 1; dy++)
+                        {
+                            Tile targetTile = field.GetTileByDelta(tile, new TileVector(dx, dy));
+                            if (targetTile != null)
+                            {
+                                boomTiles.Add(targetTile);
+                            }
+                        }
+                    }
+                }
+            }
+            
+            foreach (var tile in boomTiles)
+            {
+                toExplodeTiles.Add(tile);
+            }
             
             List<UniTask> explodeTasks = new(toExplodeTiles.Count);
 

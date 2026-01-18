@@ -24,15 +24,18 @@ namespace Game.Ingredients
 
         public override async UniTask OnTrigger(TriggerArguments args)
         {
-            // 인접한 타일이 단무지인지 확인
-            bool hasAdjacentPickledRadish = args.CountAdjacentExactTag(AllGameplayTags.Ingredient.Essential.PickledRadish.Get()) > 0;
 
             PlayerState.Current.CurrentTempScore += (int)(ReinforcedBaseScore * PlayerState.Current.CurrentTempMultiplier);
             await DefaultTriggerEffect(args, 1, (int)(ReinforcedBaseScore * PlayerState.Current.CurrentTempMultiplier));
+            
+            // 인접한 타일이 단무지인지 확인
+            bool hasAdjacentPickledRadish = args.CountAdjacentExactTag(AllGameplayTags.Ingredient.Essential.Rice.Get()) > 0;
+
             if (hasAdjacentPickledRadish)
             {
-                PlayerState.Current.CurrentTempScore += (int)(variable01 * PlayerState.Current.CurrentTempMultiplier);
-                await DefaultTriggerEffect(args, 2, (int)(variable01 * PlayerState.Current.CurrentTempMultiplier));
+                args.Tile.BOOOOM = true;
+                // PlayerState.Current.CurrentTempScore += (int)(variable01 * PlayerState.Current.CurrentTempMultiplier);
+                // await DefaultTriggerEffect(args, 2, (int)(variable01 * PlayerState.Current.CurrentTempMultiplier));
             }
         }
     }

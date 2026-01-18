@@ -25,41 +25,52 @@ namespace Game.Ingredients
         {
             PlayerState.Current.CurrentTempScore += (int)(ReinforcedBaseScore * PlayerState.Current.CurrentTempMultiplier);
             await DefaultTriggerEffect(args, 1, (int)(ReinforcedBaseScore * PlayerState.Current.CurrentTempMultiplier));
+            // 인접한 타일이 단무지인지 확인
+            bool hasAdjacentPickledRadish = args.CountAdjacentExactTag(AllGameplayTags.Ingredient.Essential.Rice.Get()) > 0;
 
-            async UniTask ConvertToShrimp(Tile tile)
+            PlayerState.Current.CurrentTempScore += (int)(ReinforcedBaseScore * PlayerState.Current.CurrentTempMultiplier);
+            await DefaultTriggerEffect(args, 1, (int)(ReinforcedBaseScore * PlayerState.Current.CurrentTempMultiplier));
+            if (hasAdjacentPickledRadish)
             {
-                if (tile?.CurrentIngredient?.Data != null)
-                {
-                    PlayerState.Current.GameDeck.RemoveIngredient(tile.CurrentIngredient.Data);
-                    tile.CurrentIngredient.Initialize(this);
-                    PlayerState.Current.GameDeck.AddIngredient(this);
-                }
+                args.Tile.BOOOOM = true;
+                // PlayerState.Current.CurrentTempScore += (int)(variable01 * PlayerState.Current.CurrentTempMultiplier);
+                // await DefaultTriggerEffect(args, 2, (int)(variable01 * PlayerState.Current.CurrentTempMultiplier));
             }
             
-            bool IsMeat(Tile tile)
-            {
-                if (tile?.CurrentIngredient?.Data != null)
-                {
-                    var Data = tile.CurrentIngredient.Data;
-                    return Data.Tag.IsChildOf(AllGameplayTags.Ingredient.Meat.Get());
-                }
-                return false;
-            }
-
-            bool triggerTwice = false;
-            if (IsMeat(args.PreviousTile)){
-                triggerTwice = true;
-                args.AfterMatchActions.Add((args.Tile, async () => await ConvertToShrimp(args.PreviousTile)));
-            }   
-            if (IsMeat(args.NextTile)){
-                triggerTwice = true;
-                args.AfterMatchActions.Add((args.Tile, async () => await ConvertToShrimp(args.NextTile)));
-            }
-            
-            if (triggerTwice)
-            {
-                args.AfterMatchActions.Add((args.Tile, async () => await DefaultTriggerEffect(args, 2)));
-            }
+            // async UniTask ConvertToShrimp(Tile tile)
+            // {
+            //     if (tile?.CurrentIngredient?.Data != null)
+            //     {
+            //         PlayerState.Current.GameDeck.RemoveIngredient(tile.CurrentIngredient.Data);
+            //         tile.CurrentIngredient.Initialize(this);
+            //         PlayerState.Current.GameDeck.AddIngredient(this);
+            //     }
+            // }
+            //
+            // bool IsMeat(Tile tile)
+            // {
+            //     if (tile?.CurrentIngredient?.Data != null)
+            //     {
+            //         var Data = tile.CurrentIngredient.Data;
+            //         return Data.Tag.IsChildOf(AllGameplayTags.Ingredient.Meat.Get());
+            //     }
+            //     return false;
+            // }
+            //
+            // bool triggerTwice = false;
+            // if (IsMeat(args.PreviousTile)){
+            //     triggerTwice = true;
+            //     args.AfterMatchActions.Add((args.Tile, async () => await ConvertToShrimp(args.PreviousTile)));
+            // }   
+            // if (IsMeat(args.NextTile)){
+            //     triggerTwice = true;
+            //     args.AfterMatchActions.Add((args.Tile, async () => await ConvertToShrimp(args.NextTile)));
+            // }
+            //
+            // if (triggerTwice)
+            // {
+            //     args.AfterMatchActions.Add((args.Tile, async () => await DefaultTriggerEffect(args, 2)));
+            // }
 
         }
     }

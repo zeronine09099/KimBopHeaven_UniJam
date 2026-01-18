@@ -21,7 +21,9 @@ namespace Game.Field
         [SerializeField] FloatingBonusScore scoreTextPrefab;
         [field:SerializeField, VisibleOnly(EditableIn.EditMode)]
         public FloatingBonusScore scoreText { get; private set; }
-[SerializeField] private Transform scoreTextAnchor;
+        [SerializeField] private Transform scoreTextAnchor;
+
+        public bool BOOOOM = false;
         public void Initialize(Field field, TileVector tileVector)
         {
             this.field = field;
