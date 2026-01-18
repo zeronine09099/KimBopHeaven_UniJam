@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using Common.Singleton;
+using Cysharp.Threading.Tasks;
 using UI;
 using UI.Encounter;
 using UI.Game;
@@ -30,9 +31,15 @@ namespace Core
         [field:SerializeField] public BillingUI BillingUI { get; set; }
         [field:SerializeField] public GameoverUI GameoverUI { get; set; }
 
-
         public void GoToTitleUI()
         {
+            GoToTitleUI_Task().Forget();
+        }
+
+        private async UniTask GoToTitleUI_Task()
+        {
+            Debug.Log("Go To Title UI");
+            await TransitionController.Instance.PlayTransition(1);
             TitleUI.Show();
             InGameUI.Hide();
             RewardUI.Hide();
@@ -41,10 +48,12 @@ namespace Core
             SettingUI.Hide();
             BillingUI.Hide();
             GameoverUI.Hide();
+            await TransitionController.Instance.PlayTransition(0);
         }
         
-        public void GoToInGameUI()
+        public async UniTask GoToInGameUI()
         {
+            await TransitionController.Instance.PlayTransition(1);
             TitleUI.Hide();
             InGameUI.Show();
             RewardUI.Hide();
@@ -53,10 +62,12 @@ namespace Core
             SettingUI.Hide();
             BillingUI.Hide();
             GameoverUI.Hide();
+            await TransitionController.Instance.PlayTransition(0);
         }
 
-        public void HideAll()
+        public async UniTask HideAll()
         {
+            await TransitionController.Instance.PlayTransition(1);
             TitleUI.Hide();
             InGameUI.Hide();
             RewardUI.Hide();
@@ -65,6 +76,7 @@ namespace Core
             SettingUI.Hide();
             BillingUI.Hide();
             GameoverUI.Hide();
+            await TransitionController.Instance.PlayTransition(0);
         }
     }
     

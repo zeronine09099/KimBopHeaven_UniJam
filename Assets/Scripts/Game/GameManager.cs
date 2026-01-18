@@ -62,6 +62,7 @@ namespace Core
         
         public void CancelGameAndReturnToTitle()
         {
+            Debug.Log("Cancel Settings UI");
             CancelGame();
             Field.DestroyIngredients();
             UIManager.Instance.GoToTitleUI();

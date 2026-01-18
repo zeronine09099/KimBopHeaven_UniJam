@@ -86,6 +86,7 @@ namespace UI
 
         public void Hide()
         {
+            Debug.Log("Hide Settings UI");
             gameObject.SetActive(false);
         }
 
