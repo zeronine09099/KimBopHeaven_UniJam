@@ -115,6 +115,7 @@ namespace UI.Encounter
             void Callback()
             {
                 encounterEnded = true;
+                blackCookEncounterPanel.gameObject.SetActive(false);
                 Hide();
             }
             return;
