@@ -46,8 +46,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Game.PuzzleManager
   shuffleInitials: 1
   shuffleSummons: 1
-  MinimumGimCount: 4
-  MinimumRiceCount: 2
+  MinimumGimCount: 5
+  MinimumRiceCount: 3
   GimCount: 0
   RiceCount: 0
   swapDuration: 0.3
