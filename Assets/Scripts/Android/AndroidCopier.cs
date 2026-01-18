@@ -50,7 +50,7 @@
             else
             {
                 // PC/Editor 등은 그냥 파일 복사
-                File.Copy(srcPath, destPath, true);
+                //File.Copy(srcPath, destPath, true);
             }
 
             IsReady = true;

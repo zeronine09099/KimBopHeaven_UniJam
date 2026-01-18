@@ -30,6 +30,8 @@ namespace Core
         [field:SerializeField] public SettingUI SettingUI { get; set; }
         [field:SerializeField] public BillingUI BillingUI { get; set; }
         [field:SerializeField] public GameoverUI GameoverUI { get; set; }
+        [field: SerializeField] public TutorialUI TutorialUI { get; set; }
+
 
         public void GoToTitleUI()
         {
@@ -48,6 +50,7 @@ namespace Core
             SettingUI.Hide();
             BillingUI.Hide();
             GameoverUI.Hide();
+            TutorialUI.Hide();
             await TransitionController.Instance.PlayTransition(0);
         }
         
@@ -62,6 +65,7 @@ namespace Core
             SettingUI.Hide();
             BillingUI.Hide();
             GameoverUI.Hide();
+            TutorialUI.Show();
             await TransitionController.Instance.PlayTransition(0);
         }
 
@@ -76,6 +80,7 @@ namespace Core
             SettingUI.Hide();
             BillingUI.Hide();
             GameoverUI.Hide();
+            TutorialUI.Hide();
             await TransitionController.Instance.PlayTransition(0);
         }
     }
