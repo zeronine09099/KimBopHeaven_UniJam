@@ -1,8 +1,7 @@
 ﻿
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using BandoWare.GameplayTags;
+
 using Common;
 using Common.Collections;
 using Common.Singleton;
@@ -11,6 +10,8 @@ using Database;
 using Machamy.Attributes;
 using Machamy.Utils;
 using UnityEngine;
+
+
 
 
 namespace Game
@@ -73,7 +74,7 @@ namespace Game
             int order = 0;
             foreach (var entry in ingredientDBEntries)
             {
-                GameplayTag tag = GameplayTagManager.RequestTag(entry.tag);
+                GameplayTag tag = entry.tag;
                 if (ingredientDictionary.ContainsKey(tag))
                 {
                     ingredientDictionary[tag].InitByData(entry);

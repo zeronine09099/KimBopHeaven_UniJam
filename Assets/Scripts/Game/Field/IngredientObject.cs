@@ -19,7 +19,6 @@ public class IngredientObject : MonoBehaviour
     [field:SerializeField,VisibleOnly]public IngredientSO Data { get; private set; }
     
     public GameplayTag IngredientTag => Data != null ? Data.Tag : GameplayTag.None;
-    public GameplayTagContainer TagContainer = new GameplayTagContainer();
 
     private Vector2 worldScale;
     private void Awake()

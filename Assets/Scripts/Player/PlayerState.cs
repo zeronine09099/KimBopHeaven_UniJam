@@ -525,7 +525,7 @@ namespace Player
         public void SetUpNewGame()
         {
             Reset();
-            gameDeck.Clear();
+            gameDeck.Initialize();
             reinforcementContainer.Initialize();
             CurrentStageInfo = StageLibrary.Instance.GetStageInfo(1);
             foreach (var item in IngredientLibrary.Instance.AllIngredientList)
