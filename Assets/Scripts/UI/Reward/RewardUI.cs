@@ -4,11 +4,9 @@ using Cysharp.Threading.Tasks;
 using Database.Generated;
 using Game;
 using Player;
-using System;
 using System.Threading;
 using TMPro;
 using UnityEngine;
-using static UnityEngine.EventSystems.EventTrigger;
 
 namespace UI.Reward
 {

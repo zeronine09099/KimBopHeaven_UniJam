@@ -58,7 +58,7 @@ namespace UI
             Sequence seq = DOTween.Sequence();
             successBackground.transform.localScale = Vector3.zero;
             failPanel.transform.position = startRect.position;
-            seq.Append(failPanel.GetComponent<RectTransform>().DOAnchorPosX(endRect.position.x, showDuration).SetEase(showEase));
+            seq.Append(failPanel.GetComponent<RectTransform>().DOAnchorPosX(endRect.anchoredPosition.x, showDuration).SetEase(showEase));
             seq.Append(successBackground.transform.DOScale(Vector3.one, showDuration).SetEase(showEase));
             await seq.Play().ToUniTask(cancellationToken: cancellationToken,tweenCancelBehaviour: TweenCancelBehaviour.Kill);
             
@@ -83,7 +83,7 @@ namespace UI
             Sequence seq = DOTween.Sequence();
             //successPanel.transform.localScale = Vector3.zero;
             successPanel.transform.position = startRect.position;   
-            seq.Append(successPanel.GetComponent<RectTransform>().DOAnchorPosX(endRect.position.x, showDuration).SetEase(showEase));
+            seq.Append(successPanel.GetComponent<RectTransform>().DOAnchorPosX(endRect.anchoredPosition.x, showDuration).SetEase(showEase));
             seq.AppendInterval(1f);
 
             //seq.Append(successPanel.transform.DOScale(Vector3.one, 0.5f).SetEase(Ease.OutBack));

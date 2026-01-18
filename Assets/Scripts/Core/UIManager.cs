@@ -55,7 +55,7 @@ namespace Core
             GameoverUI.Hide();
         }
 
-        public void GoToGameoverUI()
+        public void HideAll()
         {
             TitleUI.Hide();
             InGameUI.Hide();
@@ -64,7 +64,7 @@ namespace Core
             DeckUI.Hide();
             SettingUI.Hide();
             BillingUI.Hide();
-            GameoverUI.Show();
+            GameoverUI.Hide();
         }
     }
     

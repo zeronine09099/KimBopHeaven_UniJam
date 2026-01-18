@@ -1,11 +1,10 @@
-﻿using System;
+﻿
 using Core;
 using Database.Generated;
 using Machamy.Attributes;
 using Machamy.Utils;
 using Sound;
 using TMPro;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
 

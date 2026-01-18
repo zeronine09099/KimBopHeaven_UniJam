@@ -60,163 +60,243 @@ namespace Player
             Variables = new VariableContainer();
             foreach (VariableKey key in Enum.GetValues(typeof(VariableKey)))
             {
-                Variables.SetInteger(key.ToString(), 0);
+                // Multiplier는 실수형이므로 제외하거나 1.0f로 초기화, 나머지는 0
+                if (key == VariableKey.CurrentTempMultiplier)
+                    Variables.SetFloat(key.ToString(), 1.0f);
+                else
+                    Variables.SetInteger(key.ToString(), 0);
             }
             CurrentStageInfo = null;
         }
 
         public enum VariableKey
         {
-            BestScore, // 1번의 스와이프로 얻은 최고 점수
-            BestStageScore, // 해당 게임 중 기록된 최고 스테이지 점수
-            BestStageKimbapCount, // 해당 게임에서 기록한 최고 김밥 횟수
-            
-            TotalScore, // 해당 게임 진행 중 누적된 총 점수
-            TotalClearedElements, // 해당 게임 진행 중 누적된 총 지운 수
-            TotalSwipe , // 해당 게임 진행 중 누적된 총 스와이프 횟수
-            TotalKimbapCount, // 해당 게임 진행 중 누적된 김밥 횟수
-            
-            CurrentRemainingSwipes, // 현재 남은 스와이프 횟수
-            CurrentStageScore, // 현재 스테이지 점수
-            CurrentTempScore, // 현재 임시 점수 (스와이프 중간에 변동되는 점수)
-            CurrentTempMultiplier, // 현재 임시 멀티플라이어 (스와이프 중간에 변동되는 멀티플라이어)
-            
-        }
-        
-        // for 문 사용 편의성
-        public static readonly VariableKey BestStart = VariableKey.BestScore;
-        public static readonly VariableKey BestEnd = VariableKey.BestStageKimbapCount;
-        public static readonly VariableKey TotalStart = VariableKey.TotalScore;
-        public static readonly VariableKey TotalEnd = VariableKey.TotalKimbapCount;
-        // public static readonly VariableKey StageStart = VariableKey.StageBestPlacement;
-        // public static readonly VariableKey StageEnd = VariableKey.StageTempScore;
-        public static readonly VariableKey CurrentStart = VariableKey.CurrentRemainingSwipes;
-        public static readonly VariableKey CurrentEnd = VariableKey.CurrentTempScore;
-        
-        
-        // --- PlayerStatus Properties (VariableKey에 매핑된 프로퍼티들) ---
+            None,
+            // 1. 김밥 개수 (Kimbap Count)
+            TotalKimbapCount,         // 게임 전체 누적 김밥
+            BestStageKimbapCount,     // 한 스테이지에서 만든 최대 김밥 기록
+            CurrentStageKimbapCount,  // 현재 스테이지 김밥 개수
+            BestSwipeKimbapCount,     // 한 스와이프로 만든 김밥 개수 최고 기록
 
-        // --- Best prefix ---
+            // 2. 점수 (Score)
+            TotalScore,               // 게임 전체 누적 점수
+            BestStageScore,           // 한 스테이지 최고 점수 기록
+            CurrentStageScore,        // 현재 스테이지 점수
+            CurrentTempScore,         // 스와이프 중 임시 점수
 
-        /// <summary>
-        /// 1번의 스와이프로 얻은 최고 점수입니다. (Prefix: Best)
-        /// </summary>
-        public int BestScore
-        {
-            get { return Variables.GetVariable(nameof(VariableKey.BestScore)).IntValue; }
-            set { Variables.SetInteger(nameof(VariableKey.BestScore), value); }
+            // 3. 스와이프 수 (Swipe Count)
+            TotalSwipeCount,          // 게임 전체 누적 스와이프
+            BestStageSwipeCount,      // 한 스테이지에서 기록한 스와이프 (오래 버티기 기록 등)
+            CurrentStageSwipeCount,   // 현재 스테이지에서 사용한 스와이프 수
+            CurrentRemainingSwipes,   // 현재 남은 스와이프 횟수
+
+            // 4. 지운 재료 수 (Cleared Elements)
+            TotalClearedCount,        // 게임 전체 누적 지운 개수
+            BestStageClearedCount,    // 한 스테이지 최다 지운 개수 기록
+            CurrentStageClearedCount, // 현재 스테이지 지운 개수
+
+            // 5. 기타 및 제안 (Misc & Suggestions)
+            CurrentTempMultiplier,    // 현재 임시 멀티플라이어 (float)
+            BestSingleSwipeScore,     // 한 번의 스와이프로 얻은 역대 최고 점수
+            MaxComboCount,            // 한 번의 스와이프에서 터진 최대 연쇄 횟수
         }
 
-        /// <summary>
-        /// 해당 게임 중 기록된 최고 스테이지 점수입니다. (Prefix: BestStage)
-        /// </summary>
-        public int BestStageScore
-        {
-            get { return Variables.GetVariable(nameof(VariableKey.BestStageScore)).IntValue; }
-            set { Variables.SetInteger(nameof(VariableKey.BestStageScore), value); }
-        }
+        // --- PlayerStatus Properties ---
 
+        #region 1. Kimbap Count
         /// <summary>
-        /// 해당 게임에서 기록한 최고 김밥 횟수입니다. (Prefix: BestStage)
-        /// </summary>
-        public int BestStageKimbapCount
-        {
-            get { return Variables.GetVariable(nameof(VariableKey.BestStageKimbapCount)).IntValue; }
-            set { Variables.SetInteger(nameof(VariableKey.BestStageKimbapCount), value); }
-        }
-
-        // --- Total prefix ---
-
-        /// <summary>
-        /// 해당 게임 진행 중 누적된 총 점수입니다. (Prefix: Total)
-        /// </summary>
-        public int TotalScore
-        {
-            get { return Variables.GetVariable(nameof(VariableKey.TotalScore)).IntValue; }
-            set { Variables.SetInteger(nameof(VariableKey.TotalScore), value); }
-        }
-
-        /// <summary>
-        /// 해당 게임 진행 중 누적된 총 지운 수입니다. (Prefix: Total)
-        /// </summary>
-        public int TotalClearedElements
-        {
-            get { return Variables.GetVariable(nameof(VariableKey.TotalClearedElements)).IntValue; }
-            set { Variables.SetInteger(nameof(VariableKey.TotalClearedElements), value); }
-        }
-
-        /// <summary>
-        /// 해당 게임 진행 중 누적된 총 스와이프 횟수입니다. (Prefix: Total)
-        /// </summary>
-        public int TotalSwipe
-        {
-            get { return Variables.GetVariable(nameof(VariableKey.TotalSwipe)).IntValue; }
-            set { Variables.SetInteger(nameof(VariableKey.TotalSwipe), value); }
-        }
-
-        /// <summary>
-        /// 해당 게임 진행 중 누적된 김밥 횟수입니다. (Prefix: Total)
+        /// 게임 진행 중 누적된 총 김밥 횟수
         /// </summary>
         public int TotalKimbapCount
         {
-            get { return Variables.GetVariable(nameof(VariableKey.TotalKimbapCount)).IntValue; }
-            set { Variables.SetInteger(nameof(VariableKey.TotalKimbapCount), value); }
+            get => Variables.GetVariable(nameof(VariableKey.TotalKimbapCount)).IntValue;
+            set => Variables.SetInteger(nameof(VariableKey.TotalKimbapCount), value);
         }
 
-        // --- Current prefix ---
-
         /// <summary>
-        /// 현재 남은 스와이프 횟수입니다. (Prefix: Current)
+        /// 단일 스테이지에서 기록한 최고 김밥 횟수
         /// </summary>
-        public int CurrentRemainingSwipes
+        public int BestStageKimbapCount
         {
-            get { return Variables.GetVariable(nameof(VariableKey.CurrentRemainingSwipes)).IntValue; }
-            set
-            {
-                Variables.SetInteger(nameof(VariableKey.CurrentRemainingSwipes), value);
-                UIManager.Instance.InGameUI.OnRemainingMovesChanged(value);
-            }
+            get => Variables.GetVariable(nameof(VariableKey.BestStageKimbapCount)).IntValue;
+            set => Variables.SetInteger(nameof(VariableKey.BestStageKimbapCount), value);
         }
 
         /// <summary>
-        /// 현재 스테이지 점수입니다. (Prefix: Current)
+        /// 현재 스테이지에서 만든 김밥 횟수
+        /// </summary>
+        public int CurrentStageKimbapCount
+        {
+            get => Variables.GetVariable(nameof(VariableKey.CurrentStageKimbapCount)).IntValue;
+            set => Variables.SetInteger(nameof(VariableKey.CurrentStageKimbapCount), value);
+        }
+
+        public int BestSwipeKimbapCount
+        {
+            get => Variables.GetVariable(nameof(VariableKey.BestSwipeKimbapCount)).IntValue;
+            set => Variables.SetInteger(nameof(VariableKey.BestSwipeKimbapCount), value);
+        }
+        
+        
+        
+        #endregion
+
+        #region 2. Score
+        /// <summary>
+        /// 게임 진행 중 누적된 총 점수
+        /// </summary>
+        public int TotalScore
+        {
+            get => Variables.GetVariable(nameof(VariableKey.TotalScore)).IntValue;
+            set => Variables.SetInteger(nameof(VariableKey.TotalScore), value);
+        }
+
+        /// <summary>
+        /// 단일 스테이지 최고 점수
+        /// </summary>
+        public int BestStageScore
+        {
+            get => Variables.GetVariable(nameof(VariableKey.BestStageScore)).IntValue;
+            set => Variables.SetInteger(nameof(VariableKey.BestStageScore), value);
+        }
+
+        /// <summary>
+        /// 현재 스테이지 점수 (UI 갱신 포함)
         /// </summary>
         public int CurrentStageScore
         {
-            get { return Variables.GetVariable(nameof(VariableKey.CurrentStageScore)).IntValue; }
+            get => Variables.GetVariable(nameof(VariableKey.CurrentStageScore)).IntValue;
             set
             {
                 Variables.SetInteger(nameof(VariableKey.CurrentStageScore), value);
-                UIManager.Instance.InGameUI.ScoreUI.CurrentValue = value;
+                // UI 갱신 로직
+                if (UIManager.Instance?.InGameUI?.ScoreUI != null)
+                    UIManager.Instance.InGameUI.ScoreUI.CurrentValue = value;
             }
         }
-        
+
         /// <summary>
-        /// 현재 임시 점수입니다. (Prefix: Current)
+        /// 현재 계산 중인 임시 점수 (UI 갱신 및 효과음 포함)
         /// </summary>
         public int CurrentTempScore
         {
-            get { return Variables.GetVariable(nameof(VariableKey.CurrentTempScore)).IntValue; }
+            get => Variables.GetVariable(nameof(VariableKey.CurrentTempScore)).IntValue;
             set
             {
                 bool isIncreased = value > CurrentTempScore;
                 Variables.SetInteger(nameof(VariableKey.CurrentTempScore), value);
-                UIManager.Instance.InGameUI.ScoreUI.TempValue = value;
+                
+                if (UIManager.Instance?.InGameUI?.ScoreUI != null)
+                    UIManager.Instance.InGameUI.ScoreUI.TempValue = value;
+
                 if (isIncreased)
                 {
                     SoundManager.Instance.PlayScoreSfx();
                 }
             }
         }
-        
-        public float CurrentTempMultiplier
+        #endregion
+
+        #region 3. Swipe Count
+        /// <summary>
+        /// 게임 진행 중 누적된 총 스와이프 횟수
+        /// </summary>
+        public int TotalSwipeCount
         {
-            get { return Variables.GetVariable(nameof(VariableKey.CurrentTempMultiplier)).FloatValue; }
+            get => Variables.GetVariable(nameof(VariableKey.TotalSwipeCount)).IntValue;
+            set => Variables.SetInteger(nameof(VariableKey.TotalSwipeCount), value);
+        }
+
+        /// <summary>
+        /// 단일 스테이지 최다 스와이프 기록
+        /// </summary>
+        public int BestStageSwipeCount
+        {
+            get => Variables.GetVariable(nameof(VariableKey.BestStageSwipeCount)).IntValue;
+            set => Variables.SetInteger(nameof(VariableKey.BestStageSwipeCount), value);
+        }
+
+        /// <summary>
+        /// 현재 스테이지에서 사용한 스와이프 횟수
+        /// </summary>
+        public int CurrentStageSwipeCount
+        {
+            get => Variables.GetVariable(nameof(VariableKey.CurrentStageSwipeCount)).IntValue;
+            set => Variables.SetInteger(nameof(VariableKey.CurrentStageSwipeCount), value);
+        }
+
+        /// <summary>
+        /// 현재 남은 스와이프 횟수 (UI 갱신 포함)
+        /// </summary>
+        public int CurrentRemainingSwipes
+        {
+            get => Variables.GetVariable(nameof(VariableKey.CurrentRemainingSwipes)).IntValue;
             set
             {
-                Variables.SetFloat(nameof(VariableKey.CurrentTempMultiplier), value);
+                Variables.SetInteger(nameof(VariableKey.CurrentRemainingSwipes), value);
+                if (UIManager.Instance?.InGameUI != null)
+                    UIManager.Instance.InGameUI.OnRemainingMovesChanged(value);
             }
         }
+        #endregion
+
+        #region 4. Cleared Elements
+        /// <summary>
+        /// 게임 진행 중 누적된 총 삭제 재료 수
+        /// </summary>
+        public int TotalClearedCount
+        {
+            get => Variables.GetVariable(nameof(VariableKey.TotalClearedCount)).IntValue;
+            set => Variables.SetInteger(nameof(VariableKey.TotalClearedCount), value);
+        }
+
+        /// <summary>
+        /// 단일 스테이지 최다 삭제 재료 기록
+        /// </summary>
+        public int BestStageClearedCount
+        {
+            get => Variables.GetVariable(nameof(VariableKey.BestStageClearedCount)).IntValue;
+            set => Variables.SetInteger(nameof(VariableKey.BestStageClearedCount), value);
+        }
+
+        /// <summary>
+        /// 현재 스테이지에서 삭제한 재료 수
+        /// </summary>
+        public int CurrentStageClearedCount
+        {
+            get => Variables.GetVariable(nameof(VariableKey.CurrentStageClearedCount)).IntValue;
+            set => Variables.SetInteger(nameof(VariableKey.CurrentStageClearedCount), value);
+        }
+        #endregion
+
+        #region 5. Misc & Suggestions
+        /// <summary>
+        /// 현재 임시 멀티플라이어 (Float)
+        /// </summary>
+        public float CurrentTempMultiplier
+        {
+            get => Variables.GetVariable(nameof(VariableKey.CurrentTempMultiplier)).FloatValue;
+            set => Variables.SetFloat(nameof(VariableKey.CurrentTempMultiplier), value);
+        }
+
+        /// <summary>
+        /// [제안] 한 번의 스와이프로 얻은 역대 최고 점수 (소위 '대박' 기록)
+        /// </summary>
+        public int BestSingleSwipeScore
+        {
+            get => Variables.GetVariable(nameof(VariableKey.BestSingleSwipeScore)).IntValue;
+            set => Variables.SetInteger(nameof(VariableKey.BestSingleSwipeScore), value);
+        }
+
+        /// <summary>
+        /// [제안] 한 번의 움직임에 발생한 최대 연쇄(콤보) 횟수
+        /// </summary>
+        public int MaxComboCount
+        {
+            get => Variables.GetVariable(nameof(VariableKey.MaxComboCount)).IntValue;
+            set => Variables.SetInteger(nameof(VariableKey.MaxComboCount), value);
+        }
+        #endregion
 
         // --- Current prefix (실시간 값) ---
 
@@ -225,6 +305,42 @@ namespace Player
 
         // public StageModel CurrentStageTarget { get; set; }
 
+
+        /// <summary>
+        /// 특정 접두사(Best, Total, Current 등)를 가진 변수들만 초기화합니다.
+        /// </summary>
+        public void ResetByPrefix(string prefix)
+        {
+            foreach (VariableKey key in Enum.GetValues(typeof(VariableKey)))
+            {
+                // 키 이름이 해당 prefix로 시작하는지 확인 (예: "Current")
+                if (key.ToString().StartsWith(prefix))
+                {
+                    // Multiplier는 1로, 나머지는 0으로 초기화
+                    if (key == VariableKey.CurrentTempMultiplier)
+                        Variables.SetFloat(key.ToString(), 1.0f);
+                    else
+                        Variables.SetInteger(key.ToString(), 0);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 모든 변수 초기화
+        /// </summary>
+        public void ResetAll()
+        {
+            Variables = new VariableContainer();
+            foreach (VariableKey key in Enum.GetValues(typeof(VariableKey)))
+            {
+                if (key == VariableKey.CurrentTempMultiplier)
+                    Variables.SetFloat(key.ToString(), 1.0f);
+                else
+                    Variables.SetInteger(key.ToString(), 0);
+            }
+            CurrentStageInfo = null;
+        }
+        
 
         public PlayerState()
         {
@@ -285,6 +401,7 @@ namespace Player
             }
             McConsole.MessageSuccess("-- End of PlayerStatus --");
         }
+        
 
         [ConsoleCommandClass]
         public class ModifyVariableCommand : IConsoleCommand

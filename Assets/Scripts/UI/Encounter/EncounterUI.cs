@@ -5,7 +5,6 @@ using BandoWare.GameplayTags;
 using Core;
 using Cysharp.Threading.Tasks;
 using Database.Generated;
-using Machamy.Editor.Attributes;
 using Player;
 using UnityEngine;
 

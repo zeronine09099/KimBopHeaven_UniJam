@@ -69,13 +69,8 @@ namespace Game
             var um = UIManager.Instance;
             var gameUI = um.InGameUI;
             
-            // 플레이어 현재 스테이지 정보 초기화
-            for(PlayerState.VariableKey key = PlayerState.CurrentStart; key <= PlayerState.CurrentEnd; key++)
-            {
-                var variable = PlayerState.Current.Variables[key.ToString()];
-                variable.IntValue = 0;
-                variable.FloatValue = 0f;
-            }
+            // 플레이어 스테이트 초기화
+            PlayerState.Current.ResetByPrefix("Current");
             // 플레이어 스테이지 정보 세팅(이벤트 호출용)
             PlayerState.Current.CurrentRemainingSwipes = stage.moveCount;
             PlayerState.Current.CurrentStageScore = 0;
@@ -104,6 +99,7 @@ namespace Game
         {
             while (true)
             {
+                int scoreSnapshot = PlayerState.Current.CurrentStageScore;
                 // 각 턴마다 처리할 로직 작성
                 PuzzleManager.Instance.ThisTurnCompletedKimbapCount = 0;
                 LogEx.Log($"Starting new turn. Remaining Swipes: {PlayerState.Current.CurrentRemainingSwipes}");
@@ -130,6 +126,14 @@ namespace Game
                     matches = PuzzleManager.Instance.FindWrapperMatches();
                     LogEx.Log($"New matches found: {matches.Count}");
                 }
+                // 턴 종료 후 점수 갱신
+                PlayerState.Current.BestSwipeKimbapCount = Mathf.Max(PlayerState.Current.BestSwipeKimbapCount, PuzzleManager.Instance.ThisTurnCompletedKimbapCount);
+                
+                PlayerState.Current.CurrentStageSwipeCount += 1;
+                PlayerState.Current.TotalSwipeCount += 1;
+                
+                PlayerState.Current.BestSingleSwipeScore = Mathf.Max(PlayerState.Current.BestSingleSwipeScore, scoreSnapshot);
+                
                 // 클리어 체크
                 if(PlayerState.Current.CurrentStageScore >= PlayerState.Current.CurrentStageInfo.goalScore)
                 {
@@ -154,6 +158,12 @@ namespace Game
             // 스테이지 성공 처리, 리워드로
             LogEx.Log("Stage Cleared!");
             await UniTask.Yield();
+            
+            // 통계 처리
+            PlayerState ps = PlayerState.Current;
+
+            CheckBestScores();
+            
             PlayerState pl = PlayerState.Current;
             pl.TotalScore += pl.CurrentStageScore;
             
@@ -183,12 +193,30 @@ namespace Game
             LogEx.Log("Stage Failed!");
             await UIManager.Instance.BillingUI.ShowFailAsync(cancellationToken);
 
+            // TODO : 실패한 스테이지는 경신하나??
+            CheckBestScores();
+            PlayerState pl = PlayerState.Current;
+            
+            pl.TotalScore += pl.CurrentStageScore;
 
             //GameManager.Instance.CancelGameAndReturnToTitle();
-            UIManager.Instance.GoToGameoverUI();
-
+            UIManager.Instance.HideAll();
+            await UIManager.Instance.GameoverUI.ShowAsync(cancellationToken);
+            await UIManager.Instance.GameoverUI.WaitForHide(cancellationToken);
+            
         }
-        
+
+
+        private void CheckBestScores()
+        {
+            PlayerState pl = PlayerState.Current;
+            
+            pl.BestStageKimbapCount = Mathf.Max(pl.BestStageKimbapCount, pl.CurrentStageKimbapCount);
+            pl.BestStageScore = Mathf.Max(pl.BestStageScore, pl.CurrentStageScore);
+            pl.BestStageSwipeCount = Mathf.Max(pl.BestStageSwipeCount, pl.CurrentStageInfo.moveCount - pl.CurrentRemainingSwipes);
+            //pl.BestSingleSwipeScore 는 턴이 끝날 때마다 갱신
+            pl.BestStageClearedCount = Mathf.Max(pl.BestStageClearedCount, pl.CurrentStageClearedCount);
+        }
         
 
         

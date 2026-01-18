@@ -757,7 +757,11 @@ namespace Game
                     await UniTask.Delay(TimeSpan.FromSeconds(triggerInterval), cancellationToken: cancellationToken);
                     // 임시 점수를 실제 점수에 반영
                     CurrentMatches.Add(match);
+                    
                     ThisTurnCompletedKimbapCount++;
+                    PlayerState.Current.CurrentStageKimbapCount++;
+                    PlayerState.Current.TotalKimbapCount++;
+
                     PlayerState.Current.CurrentStageScore = PlayerState.Current.CurrentTempScore;
 
                     foreach (var (t,f) in args.AfterMatchActions)

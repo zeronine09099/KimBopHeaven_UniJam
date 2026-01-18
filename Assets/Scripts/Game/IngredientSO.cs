@@ -83,6 +83,12 @@ namespace Game
             return seq;
         }
         
+        
+        protected async UniTask DefaultExplodeEffect(TriggerArguments args, int oddSize)
+        {
+            // size * size에 해당하는 부분의 재료를 폭파시킴
+        }
+        
         public static void AddIngredientToPlayer(IngredientSO ingredient, int amount)
         {
             if (ingredient == null) return;

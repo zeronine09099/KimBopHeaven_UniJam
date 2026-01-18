@@ -106,7 +106,7 @@ namespace Core
                 SceneLoader.LoadSceneLocal(Scenes.MainScene);
             }
 #else 
-            SceneLoader.LoadSceneLocal(Scenes.MainTitle);
+            SceneLoader.LoadSceneLocal(Scenes.MainScene);
 #endif
             
             
