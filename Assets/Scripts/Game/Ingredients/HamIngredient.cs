@@ -2,6 +2,7 @@ using System.Collections;
 using BandoWare.GameplayTags;
 using Game.Field;
 using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using Game;
 using Player;
 
@@ -37,6 +38,22 @@ namespace Game.Ingredients
                 // PlayerState.Current.CurrentTempScore += (int)(variable01 * PlayerState.Current.CurrentTempMultiplier);
                 // await DefaultTriggerEffect(args, 2, (int)(variable01 * PlayerState.Current.CurrentTempMultiplier));
             }
+        }
+
+        public override async UniTask OnExplode(Tile tile)
+        {
+            // if (tile.BOOOOM)
+            // {
+            //     // 크기가 커지면서 fadeout. 중간에 await끝
+            //     var Ingredient = tile.CurrentIngredient;
+            //     var transform = Ingredient.transform;
+            //     Sequence seq = DOTween.Sequence();
+            //     seq.Append(transform.DOScale(transform.localScale * 1.5f, 0.3f));
+            //     seq.Join(tile.CurrentIngredient.SpriteRenderer.DOFade(0, 0.3f));
+            //
+            //     await seq.ToUniTask();
+            // }
+            await base.OnExplode(tile);
         }
     }
 }

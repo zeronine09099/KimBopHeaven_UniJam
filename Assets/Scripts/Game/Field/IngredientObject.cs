@@ -18,6 +18,7 @@ public class IngredientObject : MonoBehaviour
     /// </summary>
     [field:SerializeField,VisibleOnly]public IngredientSO Data { get; private set; }
     
+    public SpriteRenderer SpriteRenderer => spriteRenderer;
     public GameplayTag IngredientTag => Data != null ? Data.Tag : GameplayTag.None;
 
     private Vector2 worldScale;
