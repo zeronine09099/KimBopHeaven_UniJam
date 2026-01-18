@@ -769,33 +769,41 @@ namespace Sound
 
         public void Vibe()
         {
+#if !PLATFORM_STANDALONE_WIN
             if (UseVibration)
             {
                 Handheld.Vibrate();   
-            }
+            }       
+#endif
         }
         public void VibePop()
         {
+#if !PLATFORM_STANDALONE_WIN
             if (UseVibration)
             {
                 Vibration.VibratePop();
             }
+#endif
         }
 
         public void VibePeek()
         {
+#if !PLATFORM_STANDALONE_WIN
             if (UseVibration)
             {
                 Vibration.VibratePeek();
             }
+#endif
         }
 
         public void VibeNope()
         {
+#if !PLATFORM_STANDALONE_WIN
             if (UseVibration)
             {
                 Vibration.VibrateNope();
             }
+#endif
         }
         
         

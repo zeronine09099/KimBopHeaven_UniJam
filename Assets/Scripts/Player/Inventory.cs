@@ -16,6 +16,8 @@ namespace Player
     {
         [SerializeField] SerializableDictionary<IngredientSO, int> ingredientCountMap = new SerializableDictionary<IngredientSO, int>();
         // public IReadOnlyList<IngredientSO> IngredientList => ingredientList;
+        
+        [SerializeField] IngredientSO airIngredientSO;
 
         public Inventory()
         {
@@ -32,10 +34,16 @@ namespace Player
             {
                 ingredientCountMap[ingredient] = 0;
             }
+
+            airIngredientSO = IngredientLibrary.Instance.GetIngredientSO(AllGameplayTags.Ingredient.Etc.Air.Get());
         }
         
         public void AddIngredient(IngredientSO ingredient, int count = 1)
         {
+            if (ingredientCountMap.ContainsKey(airIngredientSO))
+            {
+                ingredientCountMap[airIngredientSO] -= 1;
+            }
             if (ingredientCountMap.TryGetValue(ingredient, out var existingCount))
             {
                 ingredientCountMap[ingredient] = existingCount + count;

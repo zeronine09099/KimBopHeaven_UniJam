@@ -84,9 +84,15 @@ namespace Game
         }
         
         
-        protected async UniTask DefaultExplodeEffect(TriggerArguments args, int oddSize)
+        protected async UniTask DefaultBoomEffect(TriggerArguments args, int oddSize)
         {
-            // size * size에 해당하는 부분의 재료를 폭파시킴
+            var obj = args.Ingredient;
+            float explodeScale = 1.0f + oddSize * 0.1f;
+            Sequence seq = DOTween.Sequence();
+            seq.Append(obj.transform.DOScale(Vector3.one * explodeScale, 0.1f).SetEase(Ease.OutQuad));
+            seq.Append(obj.transform.DOScale(Vector3.zero, 0.1f).SetEase(Ease.InQuad));
+            await seq.Play().ToUniTask();
+            
         }
         
         public static void AddIngredientToPlayer(IngredientSO ingredient, int amount)

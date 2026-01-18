@@ -45,9 +45,700 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Database.DatabaseManager
   mcDatabase:
-    TestIngredientDataList: []
-  isInitialized: 0
-  googleSheetUrl: URL_HERE
+    EncounterRewardList:
+    - tag: Encounter.MeatSelect
+      target: Ingredient.Meat
+      value: 10
+      koreanName: "\uACE0\uAE30"
+    - tag: Encounter.VegetableSelect
+      target: Ingredient.Vegetable
+      value: 10
+      koreanName: "\uCC44\uC18C"
+    - tag: Encounter.SeafoodSelect
+      target: Ingredient.Seafood
+      value: 10
+      koreanName: "\uD574\uC0B0\uBB3C"
+    StageInfoList:
+    - Stage: 1
+      goalScore: 100
+      moveCount: 15
+      normalPercentage: 70
+      rarePercentage: 25
+      epicPercentage: 5
+    - Stage: 2
+      goalScore: 150
+      moveCount: 15
+      normalPercentage: 70
+      rarePercentage: 25
+      epicPercentage: 5
+    - Stage: 3
+      goalScore: 200
+      moveCount: 20
+      normalPercentage: 70
+      rarePercentage: 25
+      epicPercentage: 5
+    - Stage: 4
+      goalScore: 300
+      moveCount: 20
+      normalPercentage: 70
+      rarePercentage: 25
+      epicPercentage: 5
+    - Stage: 5
+      goalScore: 400
+      moveCount: 30
+      normalPercentage: 65
+      rarePercentage: 25
+      epicPercentage: 10
+    - Stage: 6
+      goalScore: 500
+      moveCount: 30
+      normalPercentage: 65
+      rarePercentage: 25
+      epicPercentage: 10
+    - Stage: 7
+      goalScore: 600
+      moveCount: 30
+      normalPercentage: 65
+      rarePercentage: 25
+      epicPercentage: 10
+    - Stage: 8
+      goalScore: 700
+      moveCount: 30
+      normalPercentage: 60
+      rarePercentage: 25
+      epicPercentage: 15
+    - Stage: 9
+      goalScore: 900
+      moveCount: 35
+      normalPercentage: 60
+      rarePercentage: 25
+      epicPercentage: 15
+    - Stage: 10
+      goalScore: 1200
+      moveCount: 35
+      normalPercentage: 60
+      rarePercentage: 25
+      epicPercentage: 15
+    - Stage: 11
+      goalScore: 1500
+      moveCount: 35
+      normalPercentage: 60
+      rarePercentage: 25
+      epicPercentage: 15
+    - Stage: 12
+      goalScore: 1800
+      moveCount: 40
+      normalPercentage: 60
+      rarePercentage: 25
+      epicPercentage: 15
+    - Stage: 13
+      goalScore: 2000
+      moveCount: 40
+      normalPercentage: 55
+      rarePercentage: 30
+      epicPercentage: 15
+    - Stage: 14
+      goalScore: 2500
+      moveCount: 40
+      normalPercentage: 55
+      rarePercentage: 30
+      epicPercentage: 15
+    - Stage: 15
+      goalScore: 3000
+      moveCount: 40
+      normalPercentage: 55
+      rarePercentage: 30
+      epicPercentage: 15
+    - Stage: 16
+      goalScore: 3500
+      moveCount: 50
+      normalPercentage: 55
+      rarePercentage: 30
+      epicPercentage: 15
+    - Stage: 17
+      goalScore: 4000
+      moveCount: 50
+      normalPercentage: 50
+      rarePercentage: 30
+      epicPercentage: 20
+    - Stage: 18
+      goalScore: 4500
+      moveCount: 50
+      normalPercentage: 50
+      rarePercentage: 30
+      epicPercentage: 20
+    - Stage: 19
+      goalScore: 5000
+      moveCount: 60
+      normalPercentage: 50
+      rarePercentage: 30
+      epicPercentage: 20
+    - Stage: 20
+      goalScore: 10000
+      moveCount: 60
+      normalPercentage: 50
+      rarePercentage: 30
+      epicPercentage: 20
+    IngredientDataList:
+    - tag: Ingredient.Essential.Gim
+      name: Gim
+      koreanName: "\uAE40"
+      baseScore: 10
+      description: "\uB9DB\uC788\uB294 \uAE40"
+      rarity: 0
+      startAmount: 6
+      variable01: 0
+      variable02: 0
+      additionalVariables: []
+    - tag: Ingredient.Essential.Rice
+      name: Rice
+      koreanName: "\uBC25"
+      baseScore: 10
+      description: "\uC798 \uC9C0\uC740 \uBC25"
+      rarity: 0
+      startAmount: 6
+      variable01: 0
+      variable02: 0
+      additionalVariables: []
+    - tag: Ingredient.Essential.PickledRadish
+      name: PickledRadish
+      koreanName: "\uB2E8\uBB34\uC9C0"
+      baseScore: 10
+      description: "\uBC25\uC774 \uC778\uC811\uD574 \uC788\uC73C\uBA74 \uC810\uC218
+        \uB450\uBC30"
+      rarity: 3
+      startAmount: 6
+      variable01: 2
+      variable02: 0
+      additionalVariables: []
+    - tag: Ingredient.Essential.Ham
+      name: Ham
+      koreanName: "\uD584"
+      baseScore: 20
+      description: "\uBC25\uC774 \uC778\uC811\uD574 \uC788\uC73C\uBA74 3*3 \uD3ED\uBC1C"
+      rarity: 1
+      startAmount: 6
+      variable01: 20
+      variable02: 0
+      additionalVariables: []
+    - tag: Ingredient.Seafood.CrabStick
+      name: CrapStick
+      koreanName: "\uAC8C\uB9DB\uC0B4"
+      baseScore: 10
+      description: "\uAE40\uBC25\uC758 \uD574\uC0B0\uBB3C \uD558\uB098\uB2F9 \uC810\uC218
+        10 \uCD94\uAC00"
+      rarity: 1
+      startAmount: 6
+      variable01: 10
+      variable02: 0
+      additionalVariables: []
+    - tag: Ingredient.Etc.Egg
+      name: Egg
+      koreanName: "\uACC4\uB780"
+      baseScore: 40
+      description: "\uC798 \uC0B6\uC740 \uACC4\uB780"
+      rarity: 3
+      startAmount: 0
+      variable01: 0
+      variable02: 0
+      additionalVariables: []
+    - tag: Ingredient.Meat.PorkBelly
+      name: PorkBelly
+      koreanName: "\uC0BC\uACB9\uC0B4"
+      baseScore: 10
+      description: "\uC778\uC811\uD55C \uCC44\uC18C\uB958 \uD558\uB098\uB9C8\uB2E4
+        \uC810\uC218 + 20"
+      rarity: 3
+      startAmount: 0
+      variable01: 20
+      variable02: 0
+      additionalVariables: []
+    - tag: Ingredient.Meat.Chicken
+      name: Chicken
+      koreanName: "\uCE58\uD0A8"
+      baseScore: 10
+      description: "\uB2E4\uB978 \uC885\uB958\uC758 \uACE0\uAE30\uB958\uAC00 \uC5C6\uB2E4\uBA74
+        \uAE30\uBCF8 \uC810\uC218 + 10"
+      rarity: 1
+      startAmount: 0
+      variable01: 10
+      variable02: 0
+      additionalVariables: []
+    - tag: Ingredient.Meat.PorkCutlet
+      name: PorkCullet
+      koreanName: "\uB3C8\uAC00\uC2A4"
+      baseScore: 20
+      description: "\uBC25\uC774 \uC778\uC811\uD574\uC788\uB2E4\uBA74 \uC810\uC218
+        20 \uCD94\uAC00"
+      rarity: 2
+      startAmount: 0
+      variable01: 20
+      variable02: 0
+      additionalVariables: []
+    - tag: Ingredient.Meat.Bacon
+      name: Bacon
+      koreanName: "\uBCA0\uC774\uCEE8"
+      baseScore: 0
+      description: "\uB2E4\uB978 \uC885\uB958\uC758 \uACE0\uAE30\uB958\uAC00 \uC5C6\uB2E4\uBA74
+        \uC810\uC218 +50"
+      rarity: 2
+      startAmount: 0
+      variable01: 50
+      variable02: 0
+      additionalVariables: []
+    - tag: Ingredient.Meat.Duck
+      name: Duck
+      koreanName: "\uC624\uB9AC\uACE0\uAE30"
+      baseScore: 20
+      description: "\uC778\uC811\uD55C \uC7AC\uB8CC\uAC00 \uBAA8\uB450 \uCC44\uC18C\uB958\uB77C\uBA74
+        \uC810\uC218 + 40"
+      rarity: 1
+      startAmount: 0
+      variable01: 40
+      variable02: 0
+      additionalVariables: []
+    - tag: Ingredient.Seafood.Salmon
+      name: Salmon
+      koreanName: "\uC5F0\uC5B4"
+      baseScore: 30
+      description: "\uD55C \uD134\uC5D0 \uB2E4\uB978 \uAE40\uBC25\uC774 \uC644\uC131\uB418\uC5C8\uB2E4\uBA74
+        \uB371\uC5D0 \uC5F0\uC5B4 \uCD94\uAC00"
+      rarity: 2
+      startAmount: 0
+      variable01: 0
+      variable02: 0
+      additionalVariables: []
+    - tag: Ingredient.Seafood.Octopus
+      name: Octopus
+      koreanName: "\uBB38\uC5B4"
+      baseScore: 10
+      description: "\uC778\uC811\uD55C \uBB38\uC5B4\uB9C8\uB2E4 \uC810\uC218 +10,\uAE40\uACFC
+        \uBC25\uC744 \uC81C\uC678\uD55C \uC778\uC811\uD55C \uC7AC\uB8CC\uB97C \uD30C\uAD34
+        \uD6C4 \uBB38\uC5B4 \uCD94\uAC00"
+      rarity: 2
+      startAmount: 0
+      variable01: 10
+      variable02: 0
+      additionalVariables: []
+    - tag: Ingredient.Seafood.Shrimp
+      name: Shrimp
+      koreanName: "\uC0C8\uC6B0"
+      baseScore: 20
+      description: "\uD574\uC0B0\uBB3C\uC774 \uC778\uC811\uD574 \uC788\uC73C\uBA74
+        3*3 \uD3ED\uBC1C"
+      rarity: 1
+      startAmount: 0
+      variable01: 0
+      variable02: 1
+      additionalVariables: []
+    - tag: Ingredient.Seafood.FishCake
+      name: FishCake
+      koreanName: "\uC5B4\uBB35"
+      baseScore: 10
+      description: "\uD574\uC0B0\uBB3C\uC774 \uC778\uC811\uD574 \uC788\uC73C\uBA74
+        \uC810\uC218 * 2"
+      rarity: 3
+      startAmount: 0
+      variable01: 2
+      variable02: 0
+      additionalVariables: []
+    - tag: Ingredient.Etc.Tofu
+      name: Tofu
+      koreanName: "\uB450\uBD80"
+      baseScore: 10
+      description: "\uC778\uC811\uD55C \uC18C\uC2A4\uAC00 \uC788\uB2E4\uBA74 \uC810\uC218
+        * 2"
+      rarity: 2
+      startAmount: 0
+      variable01: 2
+      variable02: 0
+      additionalVariables: []
+    - tag: Ingredient.Vegetable.Burdock
+      name: Burdock
+      koreanName: "\uC6B0\uC5C9"
+      baseScore: 20
+      description: "\uAE40\uBC25\uC758 \uCC44\uC18C\uB9C8\uB2E4 \uC810\uC218 10 \uCD94\uAC00"
+      rarity: 1
+      startAmount: 0
+      variable01: 10
+      variable02: 0
+      additionalVariables: []
+    - tag: Ingredient.Vegetable.Carrot
+      name: Carrot
+      koreanName: "\uB2F9\uADFC"
+      baseScore: 10
+      description: "\uAE40 \uC81C\uC678 \uACB9\uCE58\uB294 \uC7AC\uB8CC\uAC00 \uC5C6\uC73C\uBA74
+        \uC810\uC218 30 \uCD94\uAC00"
+      rarity: 2
+      startAmount: 6
+      variable01: 30
+      variable02: 0
+      additionalVariables: []
+    - tag: Ingredient.Vegetable.Spinach
+      name: Spinach
+      koreanName: "\uC2DC\uAE08\uCE58"
+      baseScore: 10
+      description: "\uC778\uC811\uD55C \uC7AC\uB8CC\uAC00 \uBAA8\uB450 \uCC44\uC18C\uB77C\uBA74
+        \uC120\uD0DD\uC9C0 \uB9AC\uB864 1\uAC1C \uC9C0\uAE09"
+      rarity: 2
+      startAmount: 0
+      variable01: 1
+      variable02: 0
+      additionalVariables: []
+    - tag: Ingredient.Vegetable.Kimchi
+      name: Kimchi
+      koreanName: "\uAE40\uCE58"
+      baseScore: 10
+      description: "\uAE40\uBC25 \uC7AC\uB8CC\uC5D0 \uBD88 \uD558\uB098\uB9C8\uB2E4
+        \uC810\uC218 20 \uCD94\uAC00"
+      rarity: 1
+      startAmount: 0
+      variable01: 20
+      variable02: 0
+      additionalVariables: []
+    - tag: Ingredient.Vegetable.Mushroom
+      name: Mushroom
+      koreanName: "\uBC84\uC12F"
+      baseScore: 10
+      description: "\uAD6C\uC6B0\uBA74 \uB9DB\uC788\uC5B4\uC9C8\uC9C0\uB3C4?"
+      rarity: 1
+      startAmount: 0
+      variable01: 0
+      variable02: 1
+      additionalVariables: []
+    - tag: Ingredient.Vegetable.GrilledMushroom
+      name: GrilledMushroom
+      koreanName: "\uAD6C\uC6B4\uBC84\uC12F"
+      baseScore: 50
+      description: "\uC798 \uAD6C\uC6B4 \uBC84\uC12F \uD558\uB098."
+      rarity: 0
+      startAmount: 0
+      variable01: 0
+      variable02: 0
+      additionalVariables: []
+    - tag: Ingredient.Vegetable.ChiliPepper
+      name: ChiliPepper
+      koreanName: "\uACE0\uCD94"
+      baseScore: 40
+      description: "\uC810\uC218 0\uC778 \uBD88\uC744 \uB371\uC5D0 2\uAC1C \uCD94\uAC00"
+      rarity: 2
+      startAmount: 0
+      variable01: 0
+      variable02: 2
+      additionalVariables: []
+    - tag: Ingredient.Vegetable.Garlic
+      name: Garlic
+      koreanName: "\uB9C8\uB298"
+      baseScore: 20
+      description: "\uACE0\uAE30\uB958\uAC00 \uC778\uC811\uD574 \uC788\uB2E4\uBA74
+        \uC810\uC218 20 \uCD94\uAC00"
+      rarity: 2
+      startAmount: 0
+      variable01: 20
+      variable02: 0
+      additionalVariables: []
+    - tag: Ingredient.Vegetable.GrilledGarlic
+      name: GrilledGarlic
+      koreanName: "\uAD6C\uC6B4\uB9C8\uB298"
+      baseScore: 40
+      description: "\uACE0\uAE30\uB958\uAC00 \uC778\uC811\uD574 \uC788\uB2E4\uBA74
+        \uC810\uC218 20 \uCD94\uAC00"
+      rarity: 0
+      startAmount: 0
+      variable01: 20
+      variable02: 0
+      additionalVariables: []
+    - tag: Ingredient.Vegetable.PerillaLeaf
+      name: PerillaLeaf
+      koreanName: "\uAE7B\uC78E"
+      baseScore: 10
+      description: "\uACE0\uAE30\uB958\uAC00 \uC778\uC811\uD574 \uC788\uB2E4\uBA74
+        \uAE30\uBCF8\uC810\uC218 10 \uCD94\uAC00"
+      rarity: 1
+      startAmount: 0
+      variable01: 10
+      variable02: 0
+      additionalVariables: []
+    - tag: Ingredient.Vegetable.Cucumber
+      name: Cucumber
+      koreanName: "\uC624\uC774"
+      baseScore: 20
+      description: "\uAE40\uBC25\uC5D0 \uB2E4\uB978 \uCC44\uC18C\uB958\uAC00 \uC5C6\uB2E4\uBA74
+        \uC810\uC218 30 \uCD94\uAC00"
+      rarity: 2
+      startAmount: 0
+      variable01: 30
+      variable02: 0
+      additionalVariables: []
+    - tag: Ingredient.Sauce.Mayonnaise
+      name: Mayonnaise
+      koreanName: "\uB9C8\uC694\uB124\uC988"
+      baseScore: 10
+      description: "\uBC25 \uB610\uB294 \uACE0\uAE30\uB958\uC5D0 \uC778\uC811\uD574
+        \uC788\uB2E4\uBA74 \uC810\uC218 20 \uCD94\uAC00"
+      rarity: 1
+      startAmount: 0
+      variable01: 20
+      variable02: 0
+      additionalVariables: []
+    - tag: Ingredient.Sauce.SoySauce
+      name: SoySauce
+      koreanName: "\uAC04\uC7A5"
+      baseScore: 10
+      description: "\uBC25\uC774 \uC778\uC811\uD574\uC788\uACE0 \uB2E4\uB978 \uC18C\uC2A4\uAC00
+        \uC5C6\uB2E4\uBA74 \uC810\uC218 30 \uCD94\uAC00"
+      rarity: 1
+      startAmount: 0
+      variable01: 30
+      variable02: 0
+      additionalVariables: []
+    - tag: Ingredient.Sauce.SesameOil
+      name: SesameOil
+      koreanName: "\uCC38\uAE30\uB984"
+      baseScore: 10
+      description: "\uBC25\uC774 \uC778\uC811\uD574\uC788\uB2E4\uBA74 \uC810\uC218
+        25 \uCD94\uAC00"
+      rarity: 1
+      startAmount: 6
+      variable01: 25
+      variable02: 0
+      additionalVariables: []
+    - tag: Ingredient.Sauce.HotSauce
+      name: HotSauce
+      koreanName: "\uD56B\uC18C\uC2A4"
+      baseScore: 20
+      description: "\uACE0\uAE30\uB958\uAC00 \uC778\uC811\uD574 \uC788\uB2E4\uBA74
+        \uC810\uC218 30 \uCD94\uAC00"
+      rarity: 1
+      startAmount: 0
+      variable01: 30
+      variable02: 0
+      additionalVariables: []
+    - tag: Ingredient.Etc.Cheese
+      name: Cheese
+      koreanName: "\uCE58\uC988"
+      baseScore: 10
+      description: "\uB371\uC5D0 \uCE58\uC988 \uCD94\uAC00, \uC774\uC804 \uAE40\uBC25\uC5D0
+        \uCE58\uC988\uAC00 \uC5C6\uC5C8\uB2E4\uBA74 \uC810\uC218 25 \uCD94\uAC00"
+      rarity: 2
+      startAmount: 0
+      variable01: 25
+      variable02: 0
+      additionalVariables: []
+    - tag: Ingredient.Etc.Fire
+      name: Fire
+      koreanName: "\uBD88"
+      baseScore: 0
+      description: 
+      rarity: 0
+      startAmount: 0
+      variable01: 0
+      variable02: 0
+      additionalVariables: []
+    - tag: Ingredient.Seafood.Tuna
+      name: Tuna
+      koreanName: "\uCC38\uCE58"
+      baseScore: 15
+      description: "\uC18C\uC2A4\uAC00 \uC778\uC811\uD574 \uC788\uB2E4\uBA74 \uAE30\uBCF8
+        \uC810\uC218 + 15"
+      rarity: 3
+      startAmount: 0
+      variable01: 15
+      variable02: 0
+      additionalVariables: []
+    - tag: Ingredient.Etc.Air
+      name: Air
+      koreanName: "\uACF5\uAE30"
+      baseScore: 0
+      description: "\uBE44\uC5B4\uC788\uC2B5\uB2C8\uB2E4. \uC7AC\uB8CC\uAC00 \uCC44\uC6CC\uC9C0\uBA74
+        \uC7AC\uB8CC\uB85C \uB300\uCCB4"
+      rarity: 0
+      startAmount: 0
+      variable01: 0
+      variable02: 0
+      additionalVariables: []
+    - tag: 
+      name: 
+      koreanName: 
+      baseScore: 0
+      description: 
+      rarity: 0
+      startAmount: 0
+      variable01: 0
+      variable02: 0
+      additionalVariables: []
+    - tag: 
+      name: 
+      koreanName: 
+      baseScore: 0
+      description: 
+      rarity: 0
+      startAmount: 0
+      variable01: 0
+      variable02: 0
+      additionalVariables: []
+    - tag: 
+      name: 
+      koreanName: 
+      baseScore: 0
+      description: 
+      rarity: 0
+      startAmount: 0
+      variable01: 0
+      variable02: 0
+      additionalVariables: []
+    - tag: 
+      name: 
+      koreanName: 
+      baseScore: 0
+      description: 
+      rarity: 0
+      startAmount: 0
+      variable01: 0
+      variable02: 0
+      additionalVariables: []
+    - tag: 
+      name: 
+      koreanName: 
+      baseScore: 0
+      description: 
+      rarity: 0
+      startAmount: 0
+      variable01: 0
+      variable02: 0
+      additionalVariables: []
+    - tag: 
+      name: 
+      koreanName: 
+      baseScore: 0
+      description: 
+      rarity: 0
+      startAmount: 0
+      variable01: 0
+      variable02: 0
+      additionalVariables: []
+    - tag: 
+      name: 
+      koreanName: 
+      baseScore: 0
+      description: 
+      rarity: 0
+      startAmount: 0
+      variable01: 0
+      variable02: 0
+      additionalVariables: []
+    - tag: 
+      name: 
+      koreanName: 
+      baseScore: 0
+      description: 
+      rarity: 0
+      startAmount: 0
+      variable01: 0
+      variable02: 0
+      additionalVariables: []
+    - tag: 
+      name: 
+      koreanName: 
+      baseScore: 0
+      description: 
+      rarity: 0
+      startAmount: 0
+      variable01: 0
+      variable02: 0
+      additionalVariables: []
+    - tag: 
+      name: 
+      koreanName: 
+      baseScore: 0
+      description: 
+      rarity: 0
+      startAmount: 0
+      variable01: 0
+      variable02: 0
+      additionalVariables: []
+    - tag: 
+      name: 
+      koreanName: 
+      baseScore: 0
+      description: 
+      rarity: 0
+      startAmount: 0
+      variable01: 0
+      variable02: 0
+      additionalVariables: []
+    - tag: 
+      name: 
+      koreanName: 
+      baseScore: 0
+      description: 
+      rarity: 0
+      startAmount: 0
+      variable01: 0
+      variable02: 0
+      additionalVariables: []
+    - tag: 
+      name: 
+      koreanName: 
+      baseScore: 0
+      description: 
+      rarity: 0
+      startAmount: 0
+      variable01: 0
+      variable02: 0
+      additionalVariables: []
+    - tag: 
+      name: 
+      koreanName: 
+      baseScore: 0
+      description: 
+      rarity: 0
+      startAmount: 0
+      variable01: 0
+      variable02: 0
+      additionalVariables: []
+    - tag: 
+      name: 
+      koreanName: 
+      baseScore: 0
+      description: 
+      rarity: 0
+      startAmount: 0
+      variable01: 0
+      variable02: 0
+      additionalVariables: []
+    - tag: 
+      name: 
+      koreanName: 
+      baseScore: 0
+      description: 
+      rarity: 0
+      startAmount: 0
+      variable01: 0
+      variable02: 0
+      additionalVariables: []
+    - tag: 
+      name: 
+      koreanName: 
+      baseScore: 0
+      description: 
+      rarity: 0
+      startAmount: 0
+      variable01: 0
+      variable02: 0
+      additionalVariables: []
+    - tag: 
+      name: 
+      koreanName: 
+      baseScore: 0
+      description: 
+      rarity: 0
+      startAmount: 0
+      variable01: 0
+      variable02: 0
+      additionalVariables: []
+  isInitialized: 1
+  googleSheetUrl: 
   localJsonPath: Database/
   streamingAssetPath: Json/
   forceUseStreamingAsset: 1

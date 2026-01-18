@@ -1,4 +1,5 @@
 ﻿using System;
+using Android;
 using Common.Singleton;
 using Cysharp.Threading.Tasks;
 using Database;
@@ -54,6 +55,9 @@ namespace Core
         
         private async UniTaskVoid Initialize()
         {
+            Debug.Log("Wainting for GameplayTagCopier to be ready...");
+            await UniTask.WaitUntil(() => GameplayTagCopier.IsReady);
+            
             LogEx.Log("Initializing Bootstrapper...");
             await InitializeCore();
             await InitializeScene();
