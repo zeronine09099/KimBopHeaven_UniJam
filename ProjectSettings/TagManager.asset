@@ -44,5 +44,8 @@ TagManager:
   - name: Ingredient
     uniqueID: 2945473061
     locked: 0
+  - name: roller
+    uniqueID: 3340157537
+    locked: 0
   m_RenderingLayers:
   - Default

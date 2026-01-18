@@ -51,6 +51,7 @@ MonoBehaviour:
   GimCount: 0
   RiceCount: 0
   swapDuration: 0.3
+  rollEffectPrefab: {fileID: 8870503503348162452, guid: 95cba33e2bda2c74e8b1d4d1f946ee2f, type: 3}
   fallDuration: 0.4
   triggerInterval: 0.4
   matchInterval: 0.3

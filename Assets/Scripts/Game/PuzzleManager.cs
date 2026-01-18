@@ -123,15 +123,20 @@ namespace Game
         [Header("제한 설정")]
         [SerializeField, Label("초기 재료 섞기"), Tooltip("게임 시작 시 필드에 배치되는 재료들을 섞어서 배치합니다. 제한설정과 관련있습니다.")] 
         private bool shuffleInitials = true;
+
         [SerializeField, Label("소환된 재료 섞기"), Tooltip("낙하하는 재료들을 섞어서 배치합니다. 제한설정과 관련있습니다.")] 
         private bool shuffleSummons = true;
+
         [SerializeField, Label("최소 김 개수")] private int MinimumGimCount = 2;
         [SerializeField, Label("최소 밥 개수")] private int MinimumRiceCount = 1;
         [SerializeField,VisibleOnly] private int GimCount = 0;
         [SerializeField,VisibleOnly] private int RiceCount = 0;
+
         [Header("애니메이션 설정")]
         [Tooltip("타일이 교체되는 애니메이션 시간")]
         [SerializeField] private float swapDuration = 0.3f;
+
+        [SerializeField] private GameObject rollEffectPrefab;
 
         [Tooltip("재료가 낙하하는 애니메이션 시간")]
         [SerializeField] private float fallDuration = 0.4f;
@@ -740,11 +745,41 @@ namespace Game
         {
             // 트리거
             HashSet<Tile> toExplodeTiles = new ();
-            
+
             SoundManager.Instance.ResetScoreSfxPitchIndex();
             PlayerState.Current.CurrentTempMultiplier = 1;
             foreach (var match in matchGroups)
             {
+                // 김밥말이 등장
+                GameObject roller = Instantiate(rollEffectPrefab, match[0].gameObject.transform.position, Quaternion.identity);
+                
+                Vector2 dir = (match[match.Count - 1].transform.position - match[0].transform.position).normalized;
+                if(dir.x > 0 && Mathf.Abs(dir.x) >= Mathf.Abs(dir.y))
+                {
+                    // 오른쪽
+                    Debug.Log("오른쪽 롤 이펙트");
+                    roller.GetComponent<RollEffectController>().SetInfo(match[match.Count - 1].transform, 3);
+                }
+                else if(dir.x < 0 && Mathf.Abs(dir.x) >= Mathf.Abs(dir.y))
+                {
+                    // 왼쪽
+                    Debug.Log("왼쪽 롤 이펙트");
+                    roller.GetComponent<RollEffectController>().SetInfo(match[match.Count - 1].transform, 2);
+                }
+                else if(dir.y > 0 && Mathf.Abs(dir.y) >= Mathf.Abs(dir.x))
+                {
+                    // 위
+                    Debug.Log("위쪽 롤 이펙트");
+                    roller.GetComponent<RollEffectController>().SetInfo(match[match.Count - 1].transform, 0);
+                }
+                else if(dir.y < 0 && Mathf.Abs(dir.y) >=Mathf.Abs(dir.x))
+                {
+                    // 아래
+                    Debug.Log("아래쪽 롤 이펙트");
+                    roller.GetComponent<RollEffectController>().SetInfo(match[match.Count - 1].transform, 1);
+                }
+
+
                 foreach (var tile in match)
                 {
                     var args = new TriggerArguments
