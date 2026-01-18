@@ -97,7 +97,7 @@ namespace UI
             seq.AppendInterval(0.2f);
             int target = PlayerState.Current.CurrentStageInfo.goalScore;
             int achieved = PlayerState.Current.CurrentStageScore;
-            int remained = Mathf.Max(0, target - achieved);
+            int remained = Mathf.Max(0, achieved - target);
             seq.Append(targetScore.CountTo(0, target, 1f));
             seq.Append(achievedScore.CountTo(0, achieved, 1f));
             seq.Append(remainedScore.CountTo(0, remained, 1f));
