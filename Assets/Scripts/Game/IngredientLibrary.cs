@@ -81,7 +81,7 @@ namespace Game
                 }
                 else
                 {
-                    LogEx.LogError($"IngredientSO not found for tag: {entry.tag}");
+                    LogEx.LogError($"IngredientSO not found for tag: {entry.tag} ({entry.name} , {entry.koreanName})");
                 }
                 order++;
             }

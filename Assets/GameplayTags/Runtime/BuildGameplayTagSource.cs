@@ -1,76 +1,74 @@
-﻿﻿using System;
+﻿using System;
 using System.IO;
+using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
 
 namespace BandoWare.GameplayTags
 {
-   internal class BuildGameplayTagSource : IGameplayTagSource
-   {
-      public string Name => "Build";
+    internal class BuildGameplayTagSource : IGameplayTagSource
+    {
+        public string Name => "Build";
 
-      public void RegisterTags(GameplayTagRegistrationContext context)
-      {
-         try
-         {
-            string path = Path.Combine(Application.streamingAssetsPath, "GameplayTags");
-            byte[] data = LoadData(path);
-
-            using MemoryStream memoryStream = new(data);
-            using BinaryReader reader = new(memoryStream);
-
-            while (reader.BaseStream.Position != reader.BaseStream.Length)
+        public void RegisterTags(GameplayTagRegistrationContext context)
+        {
+            try
             {
-               string tagName = reader.ReadString();
-               context.RegisterTag(tagName, string.Empty, GameplayTagFlags.None, this);
+                string src = Path.Combine(Application.streamingAssetsPath, "GameplayTags");
+
+                byte[] data = LoadStreamingAssetBytes(src);
+
+                MemoryStream ms = new MemoryStream(data);
+                BinaryReader reader = new BinaryReader(ms, Encoding.UTF8, false);
+
+                while (ms.Position < ms.Length)
+                {
+                    string tagName = reader.ReadString();
+                    context.RegisterTag(tagName, string.Empty, GameplayTagFlags.None, this);
+                }
+
+                reader.Dispose();
+                ms.Dispose();
             }
-         }
-         catch (Exception e)
-         {
-            Debug.LogError($"Failed to load gameplay tags from StreamingAssets: {e.Message}");
-         }
-      }
+            catch (Exception e)
+            {
+                Debug.LogError($"Failed to load gameplay tags from StreamingAssets: {e.Message}");
+            }
+        }
 
-      private byte[] LoadData(string dataPath)
-      {
-         return Application.platform switch
-         {
-            RuntimePlatform.Android => LoadDataFromAndroidPackage(dataPath),
-            _ => LoadDataFromFile(dataPath),
-         };
-      }
-
-      private byte[] LoadDataFromAndroidPackage(string dataPath)
-      {
-         using UnityWebRequest request = UnityWebRequest.Get(dataPath);
-         UnityWebRequestAsyncOperation operation = request.SendWebRequest();
-         while (!operation.isDone) { }
+        private static byte[] LoadStreamingAssetBytes(string absolutePath)
+        {
+            if (absolutePath.Contains("://") || absolutePath.StartsWith("jar:", StringComparison.OrdinalIgnoreCase))
+            {
+                UnityWebRequest req = UnityWebRequest.Get(absolutePath);
+                UnityWebRequestAsyncOperation op = req.SendWebRequest();
+                while (!op.isDone) { }
 
 #if UNITY_2020_2_OR_NEWER
-         if (request.result != UnityWebRequest.Result.Success)
+                if (req.result != UnityWebRequest.Result.Success)
 #else
-         if (request.isNetworkError || request.isHttpError)
+                if (req.isNetworkError || req.isHttpError)
 #endif
-         {
-            if (request.responseCode == 404)
-               Debug.LogError($"GameplayTags file not found at path: {dataPath}");
+                {
+                    string err = req.error;
+                    req.Dispose();
+                    throw new IOException($"StreamingAssets load failed: {err} | {absolutePath}");
+                }
+
+                byte[] bytes = req.downloadHandler.data;
+                req.Dispose();
+
+                if (bytes == null || bytes.Length == 0)
+                    throw new IOException($"Empty data from StreamingAssets: {absolutePath}");
+
+                return bytes;
+            }
             else
-               Debug.LogError($"Failed to load gameplay tags from StreamingAssets: {request.error}");
-
-            return Array.Empty<byte>();
-         }
-
-         return request.downloadHandler.data;
-      }
-
-      private byte[] LoadDataFromFile(string path)
-      {
-         if (!File.Exists(path))
-         {
-            Debug.LogError($"GameplayTags file not found at path: {path}");
-            return Array.Empty<byte>();
-         }
-         return File.ReadAllBytes(path);
-      }
-   }
+            {
+                if (!File.Exists(absolutePath))
+                    throw new FileNotFoundException($"File not found in StreamingAssets: {absolutePath}");
+                return File.ReadAllBytes(absolutePath);
+            }
+        }
+    }
 }
