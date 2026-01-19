@@ -64,8 +64,13 @@ namespace UI
             
         }
 
+        private CancellationTokenSource _skipCts = new CancellationTokenSource();
         public async UniTask ShowSuccessAsync(CancellationToken cancellationToken = default)
         {
+            _skipCts.Cancel();
+            _skipCts.Dispose();
+            _skipCts = new CancellationTokenSource();
+            cancellationToken = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, _skipCts.Token).Token;
             failPanel.gameObject.SetActive(false);
             successPanel.gameObject.SetActive(true);
             successBackground. gameObject.SetActive(true);
@@ -75,7 +80,7 @@ namespace UI
             _isSkipRequested = false;
             successPanel.alpha = 1f;
             successBackground.alpha = 0f;
-            billingContent.alpha = 1f;
+            billingContent.alpha = 0f;
             
             RectTransform billingRect = billingContent.GetComponent<RectTransform>();
             
@@ -91,7 +96,12 @@ namespace UI
             seq.Join(successBackground.DOFade(1f, 0.75f));
             // succesPanel 끝난후, (0.3초 뒤) 빌링 컨텐츠 아래에서 올라옴
             seq.AppendInterval(0.4f);
-            billingRect.anchoredPosition = new Vector2(0, -Screen.height);
+            billingRect.anchoredPosition = new Vector2(0, -Screen.height*1.5f);
+            seq.AppendCallback(() =>
+            {
+                Sound.SoundManager.Instance.PlaySfx(Sound.SoundReference.BillSFX);
+                billingContent.alpha = 1f;
+            });
             seq.Append(billingRect.DOAnchorPosY(0, 0.5f).SetEase(Ease.OutCubic));
             // 이후 점수 증가
             seq.AppendInterval(0.2f);
@@ -101,7 +111,7 @@ namespace UI
             seq.Append(targetScore.CountTo(0, target, 1f));
             seq.Append(achievedScore.CountTo(0, achieved, 1f));
             seq.Append(remainedScore.CountTo(0, remained, 1f));
-            await seq.Play().ToUniTask(cancellationToken: cancellationToken,tweenCancelBehaviour: TweenCancelBehaviour.Kill);
+            await seq.Play().ToUniTask(cancellationToken: cancellationToken,tweenCancelBehaviour: TweenCancelBehaviour.Complete);
             
         }
         public async UniTask HideAsync(CancellationToken cancellationToken)
@@ -109,7 +119,7 @@ namespace UI
             // 아래로 사라지는 애니메이션
             RectTransform billingRect = billingContent.GetComponent<RectTransform>();
             Sequence seq = DOTween.Sequence();
-            seq.Append(billingRect.DOAnchorPosY(-Screen.height, 0.5f).SetEase(Ease.InCubic));
+            seq.Append(billingRect.DOAnchorPosY(-Screen.height*1.5f, 0.5f).SetEase(Ease.InCubic));
             seq.Append(successBackground.DOFade(0f, 0.5f));
             await seq.Play().ToUniTask(cancellationToken: cancellationToken,tweenCancelBehaviour: TweenCancelBehaviour.Kill);
             gameObject.SetActive(false);
@@ -119,7 +129,11 @@ namespace UI
         
         public void RequestSkip()
         {
-            _isSkipRequested = true;
+            if (_skipCts.IsCancellationRequested)
+            {
+                _isSkipRequested = true;
+            }
+            _skipCts.Cancel();
         }
         
         public async UniTask WaitForSkip(CancellationToken cancellationToken = default)

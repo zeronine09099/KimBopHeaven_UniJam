@@ -2,6 +2,7 @@
 using DG.Tweening;
 using Cysharp.Threading.Tasks;
 using Core;
+using Sound;
 
 public class TransitionController : MonoBehaviour
 {
@@ -35,6 +36,7 @@ public class TransitionController : MonoBehaviour
     {
         this.state = state;
         Debug.Log($"Transition State: {state}");
+        SoundManager.Instance.PlaySfx(SoundReference.BamBoo);
 
         switch (state)
         {

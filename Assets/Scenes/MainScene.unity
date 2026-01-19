@@ -778,6 +778,10 @@ PrefabInstance:
       propertyPath: m_Color.a
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 815827977120532754, guid: 3d11df694e066ff4695be54814c329ed, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.012451172
+      objectReference: {fileID: 0}
     - target: {fileID: 872102164153792698, guid: 3d11df694e066ff4695be54814c329ed, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1583,9 +1587,9 @@ RectTransform:
   - {fileID: 682264396}
   - {fileID: 164927559}
   - {fileID: 569245133}
-  - {fileID: 1183365157434243180}
   - {fileID: 1346449170}
   - {fileID: 1276544157}
+  - {fileID: 1183365157434243180}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
