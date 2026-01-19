@@ -200,7 +200,7 @@ namespace Game
             pl.TotalScore += pl.CurrentStageScore;
 
             //GameManager.Instance.CancelGameAndReturnToTitle();
-            UIManager.Instance.HideAll();
+            await UIManager.Instance.HideAll();
             await UIManager.Instance.GameoverUI.ShowAsync(cancellationToken);
             await UIManager.Instance.GameoverUI.WaitForHide(cancellationToken);
             
