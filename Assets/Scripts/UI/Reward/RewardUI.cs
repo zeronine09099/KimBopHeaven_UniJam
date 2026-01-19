@@ -1,4 +1,5 @@
-﻿using Common;
+﻿using System.Collections.Generic;
+using Common;
 using Core;
 using Cysharp.Threading.Tasks;
 using Database.Generated;
@@ -45,10 +46,22 @@ namespace UI.Reward
                 return rarities[idx];
             }
 
+            Dictionary<GameplayTag, int> counts = new Dictionary<GameplayTag, int>();
             for (int i = 0; i < 3; i++)
             {
                 var rarity = GetRarity();
                 var ingredient = IngredientLibrary.Instance.GetRandomIngredientSOByRarity(rarity);
+                // 2개 이미 있으면 다시 뽑기
+                while(counts.ContainsKey(ingredient.Tag) && counts[ingredient.Tag] >= 2)
+                {
+                    ingredient = IngredientLibrary.Instance.GetRandomIngredientSOByRarity(rarity);
+                }
+
+                if (!counts.ContainsKey(ingredient.Tag))
+                {
+                    counts[ingredient.Tag] = 0;
+                }
+                counts[ingredient.Tag]++;
                 entries[i].Initialize(this, ingredient);
             }
         }
